@@ -1,0 +1,64 @@
+body{
+    background-image: url("../Image/main_bg.jpg");
+}
+
+.row-border {
+    border-top: #5a6268 2px solid;
+    border-bottom: #5a6268 2px solid;
+}
+
+.f-size-title, .f-size-total{
+    font-size: 20px;
+}
+
+.f-size-name{
+    font-size: 18px;
+}
+
+.f-size-total{
+    font-weight: bold;
+}
+
+dl {
+    line-height: 24px;
+    margin-bottom: 0;
+    margin-top: 0;
+}
+
+dt {
+    font-weight: bold;
+}
+
+.dt-dotted {
+    overflow-x: hidden;
+    position: relative;
+    width: 200px;
+}
+
+.dt-dotted > span {
+    position: relative;
+}
+
+.dt-dotted > span:after {
+    color: #000;
+    content: '..............................................................';
+    left: 100%;
+    position: absolute;
+    top: 0;
+}
+
+dd {
+    margin-left: 0;
+    position: relative;
+}
+
+.dl-inline > dt {
+    clear: left;
+    float: left;
+    margin-right: 3px;
+}
+
+.dl-inline > dd {
+    display: inline-block;
+    margin-left: 0;
+}
