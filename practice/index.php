@@ -1,7 +1,7 @@
 <?php
 
     require_once 'Router/index.php';
-    $obj = new Redirect();
+    $obj = new Route();
     $obj->Routing($_SERVER['REQUEST_URI']);
 
     //show_product

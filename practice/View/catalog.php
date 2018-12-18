@@ -7,7 +7,7 @@
 </head>
 <body>
     <?php
-    require_once 'header.html';
+        require_once 'header.html';
     ?>
     <div class="container-fluid">
         <div class="container">
@@ -21,7 +21,7 @@
         </div>
         <div class="container">
             <div class="row">
-                <div class="col-3 mt-5">
+                <div class="col-3 mt-2">
                     <div class="card bg-light mb-3">
                         <div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-list"></i>Категории</div>
                         <ul class="list-group category_block">
@@ -43,9 +43,9 @@
                         foreach ($data as $value){
                             ?>
                             <div class="col-xl-4 col-lg-4 col-md-6">
-                                <a href="Product.php?id=<?php echo $value["id"];?>"><img class="card-img-top" src="/View/Image/<?php echo $value["image"]?>" alt="Card image cap"></a>
+                                <a href="http://practice/product/show_product/<?php echo $value["id"];?>"><img class="card-img-top" src="/View/Image/<?php echo $value["image"]?>" alt="Card image cap"></a>
                                 <div class="card-body">
-                                    <a class="card-text f-size-name" href="Product.php?id=<?php echo $value["id"];?>"><?php echo $value["name"]?></a>
+                                    <a class="card-text f-size-name" href="http://practice/product/show_product/<?php echo $value["id"];?>"><?php echo $value["name"]?></a>
                                     <p class="card-text f-size-title f-size-total mt-2"><?php echo $value["price"]?></p>
                                     <input class="btn btn-success btn-block mt-2" type="submit" name="btn_login" value="Купить">
                                 </div>
@@ -84,7 +84,7 @@
         </div>
     </div>
     <?php
-    require_once 'footer.html';
+        require_once 'footer.html';
     ?>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>

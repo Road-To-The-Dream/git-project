@@ -65,9 +65,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>NIX</title>
-  <link rel="stylesheet" href="CSS/font-awesome.min.css">
-  <link rel="stylesheet" href="CSS/bootstrap.css">
-  <link rel="stylesheet" href="CSS/style.css">
+  <link rel="stylesheet" href="/View/CSS/font-awesome.min.css">
+  <link rel="stylesheet" href="/View/CSS/bootstrap.css">
+  <link rel="stylesheet" href="/View/CSS/style.css">
 </head>
 <body id="home">
   <form action="" method="post">

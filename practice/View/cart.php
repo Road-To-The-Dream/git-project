@@ -12,7 +12,7 @@
     <div class="container">
         <div class="row mt-5 border-bottom border-top border-dark">
             <div class="col-2">
-                <img src="Image/Product3.jpg" alt="" class="img-fluid">
+                <img src="/View/Image/Product3.jpg" alt="" class="img-fluid">
             </div>
             <div class="col-4 align-self-center">
                 <p class="f-size-title">Ноутбук Prestigio SmartBook 141C (PSB141C01BFP_BK_CIS) Black</p>
@@ -24,7 +24,7 @@
                     </div>
                     <div class="col-5">
                         <div class="row">
-                            <input type="text" class="form-control text-center" id="exampleInputEmail1" aria-describedby="emailHelp">
+                            <input type="text" class="form-control text-center" id="exampleInputEmail1" aria-describedby="emailHelp"  value="1">
                         </div>
                     </div>
                     <div class="col-3 ml-1">
@@ -45,7 +45,7 @@
     <div class="container">
         <div class="row mt-5 border-bottom border-top border-dark">
             <div class="col-2">
-                <img src="Image/Product2.jpg" alt="" class="img-fluid">
+                <img src="/View/Image/Product2.jpg" alt="" class="img-fluid">
             </div>
             <div class="col-4 align-self-center">
                 <p class="f-size-title">Ноутбук Prestigio SmartBook 141C (PSB141C01BFP_BK_CIS) Black</p>
@@ -57,7 +57,7 @@
                     </div>
                     <div class="col-5">
                         <div class="row">
-                            <input type="text" class="form-control text-center" id="exampleInputEmail1" aria-describedby="emailHelp">
+                            <input type="text" class="form-control text-center" id="exampleInputEmail1" aria-describedby="emailHelp" value="1">
                         </div>
                     </div>
                     <div class="col-3 ml-1">
@@ -78,7 +78,7 @@
     <div class="container">
         <div class="row mt-5 border-bottom border-top border-dark">
             <div class="col-2">
-                <img src="Image/Product1.jpg" alt="" class="img-fluid">
+                <img src="/View/Image/Product1.jpg" alt="" class="img-fluid">
             </div>
             <div class="col-4 align-self-center">
                 <p class="f-size-title">Ноутбук Prestigio SmartBook 141C (PSB141C01BFP_BK_CIS) Black</p>
@@ -90,7 +90,7 @@
                     </div>
                     <div class="col-5">
                         <div class="row">
-                            <input type="text" class="form-control text-center" id="exampleInputEmail1" aria-describedby="emailHelp">
+                            <input type="text" class="form-control text-center" id="exampleInputEmail1" aria-describedby="emailHelp"  value="1">
                         </div>
                     </div>
                     <div class="col-3 ml-1">
