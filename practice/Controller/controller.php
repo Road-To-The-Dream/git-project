@@ -42,4 +42,10 @@
             $obj2 = new View();
             $obj2->generate($view_name.'.php', $this->data);
         }
+
+        public function show_main($view_name)
+        {
+            $obj2 = new View();
+            $obj2->generate($view_name.'.php', $this->data);
+        }
     }

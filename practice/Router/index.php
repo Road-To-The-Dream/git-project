@@ -1,23 +1,23 @@
 <?php
     class Route
     {
-        public function myAutoload($className)
-        {
-            $class_pieces = explode('/', $className);
-            switch ($className[0])
-            {
-                case 'Model':
-                    require_once __DIR__.'/Model'.implode(DIRECTORY_SEPARATOR, $class_pieces).'.php';
-                    break;
-                case 'Controller':
-                    require_once __DIR__.'/Controller'.implode(DIRECTORY_SEPARATOR, $class_pieces).'.php';
-                    break;
-            }
-        }
+//        public function myAutoload($className)
+//        {
+//            $class_pieces = explode('/', $className);
+//            switch ($className[0])
+//            {
+//                case 'Model':
+//                    require_once __DIR__.'/Model'.implode(DIRECTORY_SEPARATOR, $class_pieces).'.php';
+//                    break;
+//                case 'Controller':
+//                    require_once __DIR__.'/Controller'.implode(DIRECTORY_SEPARATOR, $class_pieces).'.php';
+//                    break;
+//            }
+//        }
 
         public function Routing($url)
         {
-            spl_autoload_register($this->myAutoload(), true);
+            //spl_autoload_register($this->myAutoload(), true);
 
             $action_name = '';
             $view_name= '';
