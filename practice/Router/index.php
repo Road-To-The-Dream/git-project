@@ -16,7 +16,7 @@
             }
 
             // get name action
-            if ( !empty($routes[2]) )                       //show_all
+            if ( !empty($routes[2]) )                        //show_all
             {
                 $action_name = strtolower($routes[2]);
             }
