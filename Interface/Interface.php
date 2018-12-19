@@ -1,7 +1,7 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Sergey
- * Date: 19.12.2018
- * Time: 10:28
- */
+
+    interface iTemplate
+    {
+        public function Configuration($setFrom, $setTo, $setBody);
+        public function Send();
+    }
