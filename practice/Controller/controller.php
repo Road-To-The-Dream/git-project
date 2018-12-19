@@ -1,7 +1,6 @@
 <?php
 
-    require_once 'Model/pull_items.php';
-    require_once 'Controller/View.php';
+    require_once 'Autoload.php';
 
     class Controller
     {
@@ -10,7 +9,7 @@
 
         public function __construct()
         {
-            $this->obj = new ProductModel();
+            $this->obj = new Model();
         }
 
         public function show_all($view_name)

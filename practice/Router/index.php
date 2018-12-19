@@ -1,24 +1,11 @@
 <?php
+
+    require_once 'Autoload.php';
+
     class Route
     {
-//        public function myAutoload($className)
-//        {
-//            $class_pieces = explode('/', $className);
-//            switch ($className[0])
-//            {
-//                case 'Model':
-//                    require_once __DIR__.'/Model'.implode(DIRECTORY_SEPARATOR, $class_pieces).'.php';
-//                    break;
-//                case 'Controller':
-//                    require_once __DIR__.'/Controller'.implode(DIRECTORY_SEPARATOR, $class_pieces).'.php';
-//                    break;
-//            }
-//        }
-
         public function Routing($url)
         {
-            //spl_autoload_register($this->myAutoload(), true);
-
             $action_name = '';
             $view_name= '';
             $id = 1;
@@ -42,8 +29,6 @@
                 $id = $routes[3];
             }
 
-            require_once 'Controller/controller.php';
-
             $controller = new Controller;
 
             if(method_exists($controller, $action_name))
@@ -53,7 +38,7 @@
             }
             else
             {
-                header('Location: View/404.html');
+                header('Location: view/404.html');
             }
         }
     }
