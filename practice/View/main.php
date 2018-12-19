@@ -35,7 +35,76 @@
                 <span class="sr-only">Next</span>
             </a>
         </div>
-
+        <div class="container">
+            <div class="row text-center justify-content-center mt-3 ml-4">
+                <div class="col-3">
+                    <div class="card h-100" style="width: 12rem;">
+                        <a href=""><img class="card-img-top" src="/View/Image/main/Card_image1.jpg" alt="Card image cap"></a>
+                        <div class="card-body">
+                            <a href=""> <h6>Универсальные</h6></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="card h-100" style="width: 12rem;">
+                        <a href=""><img class="card-img-top" src="/View/Image/main/Card_image2.jpg" alt="Card image cap"></a>
+                        <div class="card-body">
+                            <a href=""><h6>Для бизнеса</h6></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="card h-100" style="width: 12rem;">
+                        <a href=""><img class="card-img-top" src="/View/Image/main/Card_image3.jpg" alt="Card image cap"></a>
+                        <div class="card-body">
+                            <a href=""><h6>Тонкие и лёгкие</h6></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="card h-100" style="width: 12rem;">
+                        <a href=""><img class="card-img-top" src="/View/Image/main/Card_image4.jpg" alt="Card image cap"></a>
+                        <div class="card-body">
+                            <a href=""><h6>Геймерские ноутбуки</h6></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row text-center justify-content-center mt-3 ml-4">
+                <div class="col-3">
+                    <div class="card h-100" style="width: 12rem;">
+                        <a href=""><img class="card-img-top" src="/View/Image/main/Card_image5.jpg" alt="Card image cap"></a>
+                        <div class="card-body">
+                            <a href=""><h6>Ноутбуки с SSD</h6></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="card h-100" style="width: 12rem;">
+                        <a href=""><img class="card-img-top" src="/View/Image/main/Card_image6.jpg" alt="Card image cap"></a>
+                        <div class="card-body">
+                            <a href=""><h6>Ноутбуки Windows</h6></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="card h-100" style="width: 12rem;">
+                        <a href=""><img class="card-img-top" src="/View/Image/main/Card_image7.jpg" alt="Card image cap"></a>
+                        <div class="card-body">
+                            <a href=""><h6>Трансформеры</h6></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="card h-100" style="width: 12rem;">
+                        <a href=""><img class="card-img-top" src="/View/Image/main/Card_image8.jpg" alt="Card image cap"></a>
+                        <div class="card-body">
+                            <a href=""><h6>Для несложных задач</h6></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <?php
         require_once 'footer.html';

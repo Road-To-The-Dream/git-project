@@ -9,7 +9,7 @@
         ],
         "2"=>[
             "id"=>2,
-            "name"=>'Ноутбук Apple',
+            "name"=>'Ноутбук AppleНоутбук AppleНоутбук AppleНоутбук Apple',
             "image"=>'Product2.jpg',
             "price"=>'2 994 грн'
         ],

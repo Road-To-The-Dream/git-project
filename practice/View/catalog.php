@@ -44,8 +44,8 @@
                             ?>
                             <div class="col-xl-4 col-lg-4 col-md-6">
                                 <a href="http://practice/product/show_product/<?php echo $value["id"];?>"><img class="card-img-top" src="/View/Image/<?php echo $value["image"]?>" alt="Card image cap"></a>
-                                <div class="card-body">
-                                    <a class="card-text f-size-name" href="http://practice/product/show_product/<?php echo $value["id"];?>"><?php echo $value["name"]?></a>
+                                <div class="card-body h-100">
+                                    <a class="card-text f-size-name h-100" href="http://practice/product/show_product/<?php echo $value["id"];?>"><?php echo $value["name"]?></a>
                                     <p class="card-text f-size-title f-size-total mt-2"><?php echo $value["price"]?></p>
                                     <input class="btn btn-success btn-block mt-2" type="submit" name="btn_login" value="Купить">
                                 </div>
