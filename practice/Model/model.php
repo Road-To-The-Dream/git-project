@@ -13,19 +13,18 @@
         {
             if($sorting == 1)
             {
-                uasort($this->items, function($a, $b)
+                uasort($this->items, function($a, $b) // sort ascending
                 {
                     return ($a['price'] - $b['price']);
                 });
             }
             else if($sorting == 2)
             {
-                uasort($this->items, function($a, $b)
+                uasort($this->items, function($a, $b) // sort descending
                 {
                     return ($b['price'] - $a['price']);
                 });
             }
-
             return $this->items;
         }
 
