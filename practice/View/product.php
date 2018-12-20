@@ -20,10 +20,10 @@
     </div>
     <div class="container mt-4">
         <div class="row mb-3" style="border-bottom: #090909 1px solid">
-            <div class="col-4 text-align-bottom f-size-total">
+            <div class="col-md-6 col-lg-7 text-align-bottom f-size-total">
                 <p class="f-size-title"><?php echo $data['name']?></p>
             </div>
-            <div class="col-xs-12 col-sm-4 col-md-8 col-lg-8 text-right">
+            <div class="col-md-6 col-lg-5 text-right">
                 <p>Поделится с друзьями
                     <a href="#"><img src="/View/Image/Instagram_icons.png" alt="Instagram"></a>
                     <a href="#"><img src="/View/Image/VK.com_icons.png" alt="VK"></a>

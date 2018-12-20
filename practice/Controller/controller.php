@@ -12,9 +12,9 @@
             $this->obj = new Model();
         }
 
-        public function show_all($view_name)
+        public function show_all($view_name, $sorting = 0)
         {
-            $this->data = $this->obj->get_all_info();
+            $this->data = $this->obj->get_all_info($sorting);
 
             $obj2 = new View();
             $obj2->generate($view_name.'.php', $this->data);
@@ -47,4 +47,14 @@
             $obj2 = new View();
             $obj2->generate($view_name.'.php', $this->data);
         }
+
+//        public function sort_cheap()
+//        {
+//            $this->data = $this->obj->get_all_info();
+//        }
+//
+//        public function sort_expensive()
+//        {
+//            $this->data = $this->obj->get_products_cart();
+//        }
     }

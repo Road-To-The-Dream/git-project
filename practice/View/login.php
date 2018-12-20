@@ -85,7 +85,8 @@
                       <li class="nav-item">
                           <fieldset disabled>
                               <div class="input-group">
-                                  <input type="text" class="form-control"  placeholder="@Username" value="<?php
+                                  <span class="input-group-addon">@</span>
+                                  <input type="text" class="form-control"  placeholder="Username" value="<?php
                                       if(isset($_SESSION['isAuth']))
                                       {
                                           echo $auth->getlogin();

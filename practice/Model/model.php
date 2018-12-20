@@ -9,8 +9,23 @@
             $this->items = require_once 'list_items.php';
         }
 
-        public function get_all_info()
+        public function get_all_info($sorting = 0)
         {
+            if($sorting == 1)
+            {
+                uasort($this->items, function($a, $b)
+                {
+                    return ($a['price'] - $b['price']);
+                });
+            }
+            else if($sorting == 2)
+            {
+                uasort($this->items, function($a, $b)
+                {
+                    return ($b['price'] - $a['price']);
+                });
+            }
+
             return $this->items;
         }
 

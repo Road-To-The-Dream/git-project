@@ -8,7 +8,7 @@
         {
             $action_name = '';
             $view_name= '';
-            $id = 1;
+            $id = 0;
 
             $routes = explode('/', $url);
 
