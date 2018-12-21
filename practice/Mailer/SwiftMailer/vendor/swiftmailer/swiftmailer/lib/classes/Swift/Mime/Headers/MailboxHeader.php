@@ -12,7 +12,7 @@ use Egulias\EmailValidator\EmailValidator;
 use Egulias\EmailValidator\Validation\RFCValidation;
 
 /**
- * A Mailbox Address MIME Header for something like From or Sender.
+ * A Mailbox Address MIME Header for something like From or Mailer.
  *
  * @author Chris Corbyn
  */

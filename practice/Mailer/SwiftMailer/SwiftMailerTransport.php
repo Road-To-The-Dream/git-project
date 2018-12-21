@@ -1,7 +1,7 @@
 <?php
 
     require_once 'TransportInterface.php';
-    require_once 'Render.php';
+    require_once 'Generate.php';
     require_once 'vendor/autoload.php';
 
     class SwiftMailerTransport implements iTransport
@@ -52,10 +52,10 @@
         }
 
         public function createMessage(){
-            $params = new Render();
+            $params = new Generate();
             $params = $params->getSendingData();
 
-            $page = new Render();
+            $page = new Generate();
             $page = $page->loadFile();
             $message = (new Swift_Message($params['subject']))
                 ->setFrom([$params['fromEmail'] => $params['fromName']])

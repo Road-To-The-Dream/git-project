@@ -5,8 +5,3 @@
 
     $ob = new Sender();
     $ob->send();
-
-
-
-
-

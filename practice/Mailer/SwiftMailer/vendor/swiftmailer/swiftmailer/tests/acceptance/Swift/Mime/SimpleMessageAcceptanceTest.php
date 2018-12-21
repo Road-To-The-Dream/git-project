@@ -274,7 +274,7 @@ class Swift_Mime_SimpleMessageAcceptanceTest extends \PHPUnit\Framework\TestCase
         $id = $message->getId();
         $date = $message->getDate();
         $this->assertEquals(
-            'Sender: chris.corbyn@swiftmailer.org'."\r\n".
+            'Mailer: chris.corbyn@swiftmailer.org'."\r\n".
             'Message-ID: <'.$id.'>'."\r\n".
             'Date: '.$date->format('r')."\r\n".
             'Subject: just a test subject'."\r\n".
@@ -294,7 +294,7 @@ class Swift_Mime_SimpleMessageAcceptanceTest extends \PHPUnit\Framework\TestCase
         $id = $message->getId();
         $date = $message->getDate();
         $this->assertEquals(
-            'Sender: Chris <chris.corbyn@swiftmailer.org>'."\r\n".
+            'Mailer: Chris <chris.corbyn@swiftmailer.org>'."\r\n".
             'Message-ID: <'.$id.'>'."\r\n".
             'Date: '.$date->format('r')."\r\n".
             'Subject: just a test subject'."\r\n".

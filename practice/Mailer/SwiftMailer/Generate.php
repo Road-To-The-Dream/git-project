@@ -1,6 +1,6 @@
 <?php
 
-    class Render
+    class Generate
     {
         public function getSendingData()
         {

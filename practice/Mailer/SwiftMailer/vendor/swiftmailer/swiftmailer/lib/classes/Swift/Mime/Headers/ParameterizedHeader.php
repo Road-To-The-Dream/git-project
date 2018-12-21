@@ -166,7 +166,7 @@ class Swift_Mime_Headers_ParameterizedHeader extends Swift_Mime_Headers_Unstruct
     }
 
     /**
-     * Render a RFC 2047 compliant header parameter from the $name and $value.
+     * Generate a RFC 2047 compliant header parameter from the $name and $value.
      *
      * @param string $name
      * @param string $value
