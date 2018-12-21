@@ -1,2 +1,3 @@
-<p> Hello <?php echo $firstName; ?> </p>
-<p>You successfully registered at our site!</p>
+    <p>
+        Hello <?php echo $firstName; ?>
+    </p>

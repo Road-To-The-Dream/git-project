@@ -4,7 +4,7 @@
     require_once 'Render.php';
     require_once 'vendor/autoload.php';
 
-    class SwiftMailerTransport implements TransportInterface
+    class SwiftMailerTransport implements iTransport
     {
         private $config;
         private $mailer;
@@ -12,35 +12,23 @@
 
         public function __construct()
         {
-            $this->config = $this->getConfig();
-        }
-
-        protected function getConfig()
-        {
             $this->config = require_once 'config.php';
-            return $this->config;
         }
 
         public function createTransport()
         {
-            $config = $this->getConfig();
+            $config = $this->config;
 
             $transport = (new Swift_SmtpTransport($config['host'], $config['port']))
                 ->setUsername($config['username'])
                 ->setPassword($config['password'])
-                -> setEncryption($config['encryption']);;
+                ->setEncryption($config['encryption']);
             return $transport;
         }
 
-        public function getTransport()
+        public function createMailer()
         {
             $transport = $this->createTransport();
-            return $transport;
-        }
-
-        protected function createMailer()
-        {
-            $transport = $this->getTransport();
             $mailer = new Swift_Mailer($transport);
             return $mailer;
         }
@@ -65,11 +53,10 @@
 
         public function createMessage(){
             $params = new Render();
-            $params = $params->getParameters();
+            $params = $params->getSendingData();
 
             $page = new Render();
-            $page = $page->renderPhpFile();
-            // var_dump($page);
+            $page = $page->loadFile();
             $message = (new Swift_Message($params['subject']))
                 ->setFrom([$params['fromEmail'] => $params['fromName']])
                 ->setTo([$params['email'], $params['email'] =>$params['firstName']])

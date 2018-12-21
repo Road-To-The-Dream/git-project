@@ -11,6 +11,7 @@
             $message = new SwiftMailerTransport();
             $message = $message->getMessage();
             $result = $mailer->send($message);
+            return $result;
         }
     }
 

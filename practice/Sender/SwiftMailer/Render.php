@@ -1,28 +1,19 @@
 <?php
 
-    require_once 'SwiftMailerTransport.php';
-
     class Render
     {
-        public function createParameters()
+        public function getSendingData()
         {
             $params = require_once('sendingData.php');
             return $params;
         }
 
-        public function getParameters()
+        public function loadFile()
         {
-            $params = $this->createParameters();
-
-             return $params;
-        }
-
-        public function renderPhpFile()
-        {
-            $params = $this->getParameters();
+            $params = $this->getSendingData();
             $path = $params['path'];
 
-            if( file_exists('sender/'.$path))
+            if( file_exists($path) )
             {
                 ob_start();
                 extract($params, EXTR_OVERWRITE);

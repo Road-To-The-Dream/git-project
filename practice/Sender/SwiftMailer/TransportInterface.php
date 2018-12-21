@@ -1,6 +1,6 @@
 <?php
 
-    interface TransportInterface
+    interface iTransport
     {
         public function createTransport();
     }
