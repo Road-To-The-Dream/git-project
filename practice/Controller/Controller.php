@@ -1,6 +1,6 @@
 <?php
 
-    require_once 'Autoload.php';
+    namespace Controller;
 
     class Controller
     {
@@ -9,7 +9,7 @@
 
         public function __construct()
         {
-            $this->obj = new Model();
+            $this->obj = new \Model\Model();
         }
 
         public function show_all($view_name, $sorting = 0)
@@ -47,14 +47,4 @@
             $obj2 = new View();
             $obj2->generate($view_name.'.php', $this->data);
         }
-
-//        public function sort_cheap()
-//        {
-//            $this->data = $this->obj->get_all_info();
-//        }
-//
-//        public function sort_expensive()
-//        {
-//            $this->data = $this->obj->get_products_cart();
-//        }
     }

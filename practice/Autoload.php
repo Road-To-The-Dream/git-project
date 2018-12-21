@@ -1,19 +1,23 @@
 <?php
 
-        function myAutoload($className)
-        {
-            switch ($className)
-            {
-                case 'Model':
-                    require_once 'Model/'.$className.'.php';
-                    break;
-                case 'Controller':
-                    require_once 'Controller/'.$className.'.php';
-                    break;
-                case 'View':
-                    require_once 'Controller/'.$className.'.php';
-                    break;
-            }
-        }
+    function myAutoload($className)
+    {
+        $class_pieces = explode('\\', $className);
 
-        spl_autoload_register('myAutoload', true);
+        switch ($class_pieces[0]) {
+            case 'Model':
+                //echo '<br>'.__DIR__.'\\'.implode(DIRECTORY_SEPARATOR, $class_pieces).'.php';
+                require_once __DIR__.'\\'.implode(DIRECTORY_SEPARATOR, $class_pieces).'.php';
+                break;
+            case 'Controller':
+                //echo __DIR__.'\\'.implode(DIRECTORY_SEPARATOR, $class_pieces).'.php'.'<br>';
+                require_once __DIR__.'\\'.implode(DIRECTORY_SEPARATOR, $class_pieces).'.php';
+                break;
+            case 'View':
+                //echo '<br>'.__DIR__.'\\'.implode(DIRECTORY_SEPARATOR, $class_pieces).'.php';
+                require_once __DIR__.'\\'.implode(DIRECTORY_SEPARATOR, $class_pieces).'.php';
+                break;
+        }
+    }
+
+    spl_autoload_register('myAutoload', true);

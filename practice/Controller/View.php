@@ -1,5 +1,7 @@
 <?php
 
+    namespace Controller;
+
     class View
     {
         function generate($content_view, $data = null)

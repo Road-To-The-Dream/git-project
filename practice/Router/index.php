@@ -1,7 +1,5 @@
 <?php
 
-    require_once 'Autoload.php';
-
     class Route
     {
         public function Routing($url)
@@ -12,7 +10,7 @@
 
             $routes = explode('/', $url);
 
-            // get name view
+            // get name views
             if ( !empty($routes[1]) )                       //catalog
             {
                 $view_name = strtolower($routes[1]);
@@ -29,7 +27,7 @@
                 $id = $routes[3];
             }
 
-            $controller = new Controller;
+            $controller = new \Controller\Controller();
 
             if(method_exists($controller, $action_name))
             {
