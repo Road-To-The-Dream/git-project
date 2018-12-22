@@ -37,6 +37,7 @@
             else
             {
                 header('Location: view/404.html');
+                echo "df";
             }
         }
     }
