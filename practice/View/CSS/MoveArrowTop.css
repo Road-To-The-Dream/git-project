@@ -1,0 +1,11 @@
+.scrollup{
+    width:40px;
+    height:40px;
+    opacity:0.5;
+    position:fixed;
+    bottom:70px;
+    left:100px;
+    display:none;
+    text-indent:-9999px;
+    background: url('../Image/Arrow_Top.png') no-repeat;
+}
