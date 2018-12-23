@@ -47,4 +47,10 @@
             $obj2 = new View();
             $obj2->generate($view_name.'.php', $this->data);
         }
+
+        public function show_404($view_name)
+        {
+            $obj2 = new View();
+            $obj2->generate($view_name.'.html', $this->data);
+        }
     }

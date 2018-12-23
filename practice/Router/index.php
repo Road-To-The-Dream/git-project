@@ -36,8 +36,9 @@
             }
             else
             {
-                header('Location: view/404.html');
-                echo "df";
+                header('Location: http://practice/404/show_404');
+                //header('Location: view/404.html');
+                //echo "df";
             }
         }
     }

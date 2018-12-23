@@ -47,7 +47,7 @@
                 </div>
                 <div class="col-3">
                     <div class="card h-100" style="width: 12rem;">
-                        <a href=""><img class="card-img-top" src="/View/Image/main/Card_image2.jpg" alt="Card image cap"></a>
+                        <a href="dfg"><img class="card-img-top" src="/View/Image/main/Card_image2.jpg" alt="Card image cap"></a>
                         <div class="card-body">
                             <a href=""><h6>Для бизнеса</h6></a>
                         </div>
