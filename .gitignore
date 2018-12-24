@@ -2,4 +2,4 @@ localhost/
 work/
 .idea/
 vendor/
-composer.phar/
+composer.phar
