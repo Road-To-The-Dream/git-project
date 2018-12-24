@@ -1,3 +1,11 @@
+<?php
+    session_start();
+    if(!$_SESSION['isAuth'])
+    {
+        header('Location: http://practice/login/show_login');
+        exit();
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +20,7 @@
 </head>
 <body>
     <?php
-        require_once 'header.html';
+        require_once 'header.php';
     ?>
     <div class="container">
         <nav aria-label="breadcrumb">
@@ -39,7 +47,7 @@
         </div>
         <div class="row">
             <div class="col-xl-4 col-lg-5 col-md-5 align-self-start text-center" >
-                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="2000">
                     <ol class="carousel-indicators">
                         <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
                         <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>

@@ -1,0 +1,18 @@
+{
+    "name": "sergey/practice",
+    "description": "TestSite",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Sergey Sushko",
+            "email": "fhlbc2012@gmail.com"
+        }
+    ],
+    "require": {
+        "monolog/monolog": "^1.24",
+        "phpunit/phpunit": "^7.5"
+    },
+    "autoload": {
+        "psr-4": {"practice\\": ""}
+    }
+}

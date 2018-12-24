@@ -1,6 +1,6 @@
 <?php
 
-    namespace Controller;
+    namespace practice\Controller;
 
     class Controller
     {
@@ -9,7 +9,7 @@
 
         public function __construct()
         {
-            $this->obj = new \Model\Model();
+            $this->obj = new \practice\Model\Model();
         }
 
         public function show_all($view_name, $sorting = 0)

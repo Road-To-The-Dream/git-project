@@ -9,7 +9,8 @@
         {
             if ($this->login == $login && $this->password == $password) {
                 session_start();
-                $_SESSION['isAuth'] = true;
+                $_SESSION['isAuth'] = 'fhlbc2012@gmail.com';
+                header('Location: http://practice/main/show_main');
             }
             else
             {

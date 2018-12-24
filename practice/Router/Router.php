@@ -1,11 +1,13 @@
 <?php
 
-    class Route
+    namespace practice\Router;
+
+    class Router
     {
         public function Routing($url)
         {
-            $action_name = '';
-            $view_name= '';
+            $action_name = 'main';
+            $view_name= 'show_main';
             $id = 0;
 
             $routes = explode('/', $url);
@@ -27,7 +29,7 @@
                 $id = $routes[3];
             }
 
-            $controller = new \Controller\Controller();
+            $controller = new \practice\Controller\Controller();
 
             if(method_exists($controller, $action_name))
             {
@@ -37,8 +39,6 @@
             else
             {
                 header('Location: http://practice/404/show_404');
-                //header('Location: view/404.html');
-                //echo "df";
             }
         }
     }

@@ -33,7 +33,6 @@
 
        // echo __DIR__.'\\'.implode(DIRECTORY_SEPARATOR, $pieces_class2).'.php';
         //C:\OSPanel\domains\practice\Sergey\Sushko.php
-
         require_once __DIR__.'\\'.implode(DIRECTORY_SEPARATOR, $pieces_class).'.php';
     }
 

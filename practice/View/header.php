@@ -33,7 +33,7 @@
                     </li>
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="text" placeholder="Search">
+                    <input class="form-control mr-sm-2" type="text" placeholder="Search" value=<?php echo $_SESSION['isAuth']; ?>>
                     <button type="button" class="btn btn-warning">Search</button>
                 </form>
             </div>
