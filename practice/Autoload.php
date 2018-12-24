@@ -2,7 +2,7 @@
 
     function myAutoload($className)
     {
-        $className = 'Hel_lo\wo_rld\Sergey_SUshko';
+        //$className = 'Hel_lo\wo_rld\Sergey_SUshko';
 
         $pieces_class = explode('\\', $className);
 //        Hel_lo
@@ -31,10 +31,10 @@
 //        Sergey
 //        Sushko
 
-        echo __DIR__.'\\'.implode(DIRECTORY_SEPARATOR, $pieces_class2).'.php';
+       // echo __DIR__.'\\'.implode(DIRECTORY_SEPARATOR, $pieces_class2).'.php';
         //C:\OSPanel\domains\practice\Sergey\Sushko.php
 
-        //require_once __DIR__.'\\'.implode(DIRECTORY_SEPARATOR, $pieces_class).'.php';
+        require_once __DIR__.'\\'.implode(DIRECTORY_SEPARATOR, $pieces_class).'.php';
     }
 
     spl_autoload_register('myAutoload', true);

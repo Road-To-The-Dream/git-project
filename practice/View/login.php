@@ -61,13 +61,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>NIX</title>
-  <link rel="stylesheet" href="/View/CSS/font-awesome.min.css">
-  <link rel="stylesheet" href="/View/CSS/bootstrap.css">
-  <link rel="stylesheet" href="/View/CSS/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>NIX</title>
+    <link rel="stylesheet" href="/View/CSS/font-awesome.min.css">
+    <link rel="stylesheet" href="/View/CSS/bootstrap.css">
+    <link rel="stylesheet" href="/View/CSS/style.css">
 </head>
 <body id="home">
   <form action="" method="post">
@@ -76,7 +76,7 @@
               <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                   <span class="navbar-toggler-icon"></span>
               </button>
-              <a href="#" class="navbar-brand">NIX</a>
+              <img src="/View/Image/sdf.png" alt="logo">
               <div class="collapse navbar-collapse" id="navbarCollapse">
                   <ul class="navbar-nav ml-auto">
                       <li class="nav-item active">
@@ -168,8 +168,5 @@
           </div>
       </header>
   </form>
-  <script src="js/jquery.min.js"></script>
-  <script src="js/popper.min.js"></script>
-  <script src="js/bootstrap.min.js"></script>
 </body>
 </html>
