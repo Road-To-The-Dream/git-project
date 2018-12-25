@@ -1,8 +1,8 @@
 body {
-  background: #333;
   color: #fff;
   background: url("../Image/bg-image.jpg") no-repeat;
-  background-size: 100%;
+  background-size: cover;
+  background-attachment: fixed;
 }
 
 .navbar {
@@ -20,7 +20,7 @@ body {
 }
 
 #home-section .home-inner {
-    padding-top: 250px;
+    padding-top: 245px;
 }
 
 #home-section .card-form {

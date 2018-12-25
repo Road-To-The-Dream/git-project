@@ -28,7 +28,7 @@
             {
                 $id = $routes[3];
             }
-
+//echo $routes[1].' '.$routes[2];
             $controller = new \practice\Controller\Controller();
 
             if(method_exists($controller, $action_name))

@@ -3,39 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link rel="stylesheet" href="/View/CSS/cart.css">
     <link rel="stylesheet" href="/View/CSS/MoveArrowTop.css">
     <script type="text/javascript" src="//web-ptica.ru/VRV-files/jquery-2.1.3.min.js "></script>
     <script type="text/javascript" src="/View/JS/MoveArrowTop.js"></script>
 </head>
 <body>
     <a href="#" class="scrollup">Наверх</a>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
         <div class="container">
-            <a href="" class="navbar-brand">
-                <img src="/View/Image/sdf.png" alt="logo">
-            </a>
+            <img src="/View/Image/sdf.png" alt="logo">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-
-            <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
-                <ul class="navbar-nav m-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="http://practice/cart/show_product_cart">Cart</a>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link">Welcome, </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="http://practice/catalog/show_all">Categories</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="http://practice/login/show_login">Log in</a>
-                    </li>
+                    <?php
+                    if($_SESSION['id'] == 1) {
+                        ?>
+                        <li class="nav-item">
+                            <a href="" class="nav-link"><img src="https://raw.githubusercontent.com/iconic/open-iconic/master/png/account-login-2x.png"> выйти</a>
+                            <button type="button" class="btn btn-dark ml-5 pl-3"><img src="/View/Image/header/Cart.png"></button>
+                        </li>
+                        <?php
+                    }
+                    else
+                    {
+                        ?>
+                        <li class="nav-item">
+                            <a href="" class="nav-link"><img class="mb-1" src="/View/Image/header/Login.png"> регистрация</a>
+                        </li>
+                        <?php
+                    }
+                    ?>
                 </ul>
-                <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="text" placeholder="Search" value=<?php echo $_SESSION['isAuth']; ?>>
-                    <button type="button" class="btn btn-warning">Search</button>
-                </form>
             </div>
         </div>
     </nav>
