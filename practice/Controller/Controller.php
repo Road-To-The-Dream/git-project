@@ -9,37 +9,52 @@
         private $login = "fhlbc2012@gmail.com";
         private $password = 123;
 
-        public function __construct()
+        public function __construct($view_name)
         {
             //$this->CheckAuth();
-            $this->obj = new \practice\Model\Model();
+            if($view_name != 'main') {
+                $this->obj = new \practice\Model\Model();
+            }
         }
 
         public function CheckAuth()
         {
-            $obj2 = new View();
-            if(isset($_POST['btn_login']))
-            {
-                if(!empty($_POST['email']) && !empty($_POST['password'])) {
-                    $auth = new Authentication();
-                    if($auth->Auth($_POST['email'], $_POST['password']) == 1) {
-                        $errors = 'Invalid password or login';
-                    }
-                    else
-                    {
-                        $auth->Auth($_POST['email'], $_POST['password']);
-                        $obj2->generate('\View\sign_in'.'.php', $this->data);
-                    }
-                }
-                if (empty($_POST['email'])) {
-                    $errror_email = 'Please enter email !';
-                }
-                if (empty($_POST['password'])) {
-                    $error_pass = 'Please enter password !';
-                }
-                //$obj2->generate('sign_in'.'.php', $this->data);
-                include 'View\login.php';
-            }
+           session_start();
+           if(!isset($_SESSION['isAuth'])) {
+               $errors = array("", "", "");
+               if(empty($_POST['email']) && empty($_POST['password'])) {
+                   $errors[2] = 'Empty fields form';
+               }
+               else{
+                   if (empty($_POST['email'])) {
+                       $errors[0] = 'Please enter email !';
+                   }
+                   if (empty($_POST['password'])) {
+                       $errors[1] = 'Please enter password !';
+                   }
+               }
+
+
+               if(!empty($_POST['email']) && !empty($_POST['password'])) {
+                   $auth = new Authentication();
+                   if($auth->Auth($_POST['email'], $_POST['password']) == 1) {
+                       $errors[2] = 'Invalid password or login';
+                   }
+               }
+
+               echo json_encode($errors);
+           }
+           else
+           {
+               $auth = new Authentication();
+               $auth->logout();
+               header('Location: http://practice/main/show_main');
+           }
+        }
+
+        public function sign_in()
+        {
+            include '';
         }
 
         public function show_all($view_name, $sorting = 0)
@@ -74,6 +89,14 @@
 
         public function show_main($view_name)
         {
+            session_start();
+            if(isset($_SESSION['isAuth'])) {
+                include "View\Template\header_logout.php";
+            }
+            else {
+                include "View\Template\header_login.php";
+            }
+
             $obj2 = new View();
             $obj2->generate($view_name.'.php', $this->data);
         }

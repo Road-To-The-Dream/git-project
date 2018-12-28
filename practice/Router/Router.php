@@ -12,7 +12,7 @@
 
             $routes = explode('/', $url);
 
-            // get name views
+            // get name viewsы
             if ( !empty($routes[1]) )                       //catalog
             {
                 $view_name = strtolower($routes[1]);
@@ -29,7 +29,7 @@
                 $id = $routes[3];
             }
 //echo $routes[1].' '.$routes[2];
-            $controller = new \practice\Controller\Controller();
+            $controller = new \practice\Controller\Controller($view_name);
 
             if(method_exists($controller, $action_name))
             {

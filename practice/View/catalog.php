@@ -1,3 +1,6 @@
+<?php
+    require_once 'header.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,9 +13,6 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <?php
-        require_once 'header.php';
-    ?>
     <div class="container-fluid">
         <div class="container">
             <nav aria-label="breadcrumb">
