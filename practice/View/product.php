@@ -1,11 +1,3 @@
-<?php
-    session_start();
-    if(!$_SESSION['isAuth'])
-    {
-        header('Location: http://practice/login/show_login');
-        exit();
-    }
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,9 +11,6 @@
     <script src="/View/JS/script.js"></script>
 </head>
 <body>
-    <?php
-        require_once 'header.php';
-    ?>
     <div class="container">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
@@ -245,8 +234,7 @@
         <!--Tabs-->
     </div>
     <?php
-        require_once 'footer.html';
+        require_once 'Template/footer.html';
     ?>
-
 </body>
 </html>

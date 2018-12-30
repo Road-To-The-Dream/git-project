@@ -1,6 +1,3 @@
-<?php
-    require_once 'header.php';
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -119,7 +116,7 @@
         </div>
     </div>
     <?php
-        require_once 'footer.html';
+        require_once 'Template/footer.html';
     ?>
 </body>
 </html>

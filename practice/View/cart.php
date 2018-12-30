@@ -3,14 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <?php
-        require_once 'header.php';
-    ?>
     <div class="container">
         <?php
             foreach ($data as $value){
@@ -62,7 +56,7 @@
         </div>
     </div>
     <?php
-        require_once 'footer.html';
+        require_once 'Template/footer.html';
     ?>
 </body>
 </html>
