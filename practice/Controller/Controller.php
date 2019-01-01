@@ -7,6 +7,7 @@
         private $dataModel;
         private $objModel;
         private $objectGenerateView;
+        private $errors_login = array("", "", "");
         private $login = "fhlbc2012@gmail.com";
         private $password = 123;
 
@@ -51,37 +52,60 @@
             $this->objectGenerateView->generate($view_name, $this->dataModel);
         }
 
-        public function CheckAuth()
+        public function Logout()
         {
-            session_start();
-            if(!isset($_SESSION['isAuth'])) {
-                $errors = array("", "", "");
-                if(empty($_POST['email']) && empty($_POST['password'])) {
-                    $errors[2] = 'Empty fields form';
-                }
-                else{
-                    if (empty($_POST['email'])) {
-                        $errors[0] = 'Please enter email !';
-                    }
-                    if (empty($_POST['password'])) {
-                        $errors[1] = 'Please enter password !';
-                    }
-                }
+            $auth = new Authentication();
+            $auth->logout();
+            header('Location: http://practice/main/show_main');
+        }
 
-                if(!empty($_POST['email']) && !empty($_POST['password'])) {
+        public function CheckLogin()
+        {
+            $this->CheckEmptyFields();
+
+            if(!empty($_POST['email']) && !empty($_POST['password'])) {
+                $this->CheckEmail($_POST['email']);
+                $this->CheckPassword($_POST['password']);
+                if($this->errors_login[0] == '' && $this->errors_login[1] == '') {
                     $auth = new Authentication();
-                    if($auth->Auth($_POST['email'], $_POST['password']) == 1) {
-                        $errors[2] = 'Invalid password or login';
+                    if($auth->Authentication($_POST['email'], $_POST['password']) == 1) {
+                        $this->errors_login[2] = 'Invalid password or login';
                     }
                 }
-
-                echo json_encode($errors);
             }
-            else
-            {
-                $auth = new Authentication();
-                $auth->logout();
-                header('Location: http://practice/main/show_main');
+            echo json_encode($this->errors_login);
+        }
+
+        private function CheckEmptyFields() {
+            if(empty($_POST['email']) && empty($_POST['password'])) {
+                $this->errors_login[2] = 'Empty fields form';
+            }
+            else {
+                if (empty($_POST['email'])) {
+                    $this->errors_login[0] = 'Please enter email !';
+                }
+                if (empty($_POST['password'])) {
+                    $this->errors_login[1] = 'Please enter password !';
+                }
+            }
+        }
+
+        private function CheckEmail($email)
+        {
+            if(!preg_match("/^([a-z0-9_\.-]+)@([a-z0-9_\.-]+)\.([a-z\.]{2,6})$/", $email)) {
+                $this->errors_login[0] = 'Адрес электронной почты был введен неверно. Email может содержать только буквы латинского алфавита и цифры, от 3 до 14 символов.
+                Также допускается использование символов @ - _';
+            }
+        }
+
+        private function CheckPassword($password)
+        {
+            if(!preg_match("/^[a-z0-9_-]{6,18}$/",$password)) {
+                $this->errors_login[1] = 'Пароль должен состоять из букв английского алфавита и цифр. Также допускается использование символов - _';
+            }
+
+            if(strlen($password) < 3 or strlen($password) > 16) {
+                $this->errors_login[1] .= ' Длина должна быть не меньше 3-х символов и не больше 16';
             }
         }
 

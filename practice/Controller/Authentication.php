@@ -5,25 +5,16 @@
     class Authentication
     {
         private $login = "fhlbc2012@gmail.com";
-        private $password = 123;
+        private $password = 'fhlbc2012';
 
-        function Auth($login, $password)
+        function Authentication($login, $password)
         {
             if ($this->login == $login && $this->password == $password) {
                 session_start();
                 $_SESSION['isAuth'] = 'fhlbc2012@gmail.com';
-                //header('Location: http://practice/main/show_main');
+                return 0;
             }
-            else
-            {
-                return 1;
-            }
-            return 0;
-        }
-
-        function getlogin()
-        {
-            return $this->login;
+            return 1;
         }
 
         function logout()

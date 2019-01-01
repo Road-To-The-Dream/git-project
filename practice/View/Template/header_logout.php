@@ -69,7 +69,7 @@
                     <a class="nav-link">Hello, <?php echo $_SESSION['isAuth'] ?></a>
                 </li>
                 <li class="nav-item">
-                    <a href="http://practice/login/CheckAuth" class="nav-link mr-1" data-target="#exampleModalCenter"><img class="mb-2" src="/View/Image/header/Login.png"> выйти</a>
+                    <a href="http://practice/login/Logout" class="nav-link mr-1" data-target="#exampleModalCenter"><img class="mb-2" src="/View/Image/header/Login.png"> выйти</a>
                 </li>
             </ul>
         </div>

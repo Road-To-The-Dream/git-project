@@ -1,6 +1,6 @@
 function AjaxFormRegister(message1, message2, message3) {
     $.ajax({
-        url:     'http://practice//CheckAuth',
+        url:     'http://practice//Logout',
         type:     "POST",
         dataType: "json",
         data: $("#formMain2").serialize(),
@@ -24,10 +24,4 @@ function AjaxFormRegister(message1, message2, message3) {
             document.getElementById(message3).innerHTML = "Возникла ошибка при отправке формы. Попробуйте еще раз";
         }
     });
-
-    // $(':input','#formMain')
-    //     .not(':button, :submit, :reset, :hidden')
-    //     .val('')
-    //     .removeAttr('checked')
-    //     .removeAttr('selected');
 }
