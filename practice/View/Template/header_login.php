@@ -70,7 +70,7 @@
                         <a class="nav-link">Hello, <?php echo $_SESSION['isAuth'] ?></a>
                     </li>
                     <li class="nav-item">
-                        <a href="" class="nav-link mr-1" data-toggle="modal" data-target="#exampleModalCenter1"><img class="mb-2" src="/View/Image/header/Login.png"> войти</a>
+                        <a href="" class="nav-link mr-1" data-toggle="modal" data-target="#exampleModalCenter1"><img class="mb-2" src="/View/Image/header/Login.png"> войти в аккаунт</a>
                     </li>
                     <div class="modal fade" id="exampleModalCenter1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -90,11 +90,11 @@
                                                 <div class="row justify-content-center">
                                                     <div class="col-9">
                                                         <div class="form-group">
-                                                            <input type="email" class="form-control form-control-lg" name="email" placeholder="Email" value="">
+                                                            <input type="email" class="form-control form-control-lg" name="email_login" placeholder="Email" value="">
                                                             <p class="text-danger ml-2" id="massageEmail1"></p>
                                                         </div>
                                                         <div class="form-group">
-                                                            <input type="password" class="form-control form-control-lg reset" name="password" placeholder="Password" value="">
+                                                            <input type="password" class="form-control form-control-lg reset" name="password_login" placeholder="Password" value="">
                                                             <p class="text-danger ml-2" id="massagePass1"></p>
                                                         </div>
                                                         <div class="form-group ml-2">
@@ -118,20 +118,20 @@
                                                 <div class="row justify-content-center">
                                                     <div class="col-9">
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control form-control-lg" name="user" placeholder="User Name" value="">
-                                                            <p class="text-danger ml-2" id="massagePass2"></p>
+                                                            <input type="text" class="form-control form-control-lg" name="user_name" placeholder="User Name" value="">
+                                                            <p class="text-danger ml-2" id="massageUser"></p>
                                                         </div>
                                                         <div class="form-group">
-                                                            <input type="email" class="form-control form-control-lg" name="email" placeholder="Email" value="">
-                                                            <p class="text-danger ml-2" id="massageEmail2"></p>
+                                                            <input type="email" class="form-control form-control-lg" name="email_register" placeholder="Email" value="">
+                                                            <p class="text-danger ml-2" id="massageEmailRegister"></p>
                                                         </div>
                                                         <div class="form-group">
-                                                            <input type="password" class="form-control form-control-lg reset" name="password" placeholder="Password" value="">
-                                                            <p class="text-danger ml-2" id="massagePass2"></p>
+                                                            <input type="password" class="form-control form-control-lg reset" name="password_register" placeholder="Password" value="">
+                                                            <p class="text-danger ml-2" id="massagePassRegister"></p>
                                                         </div>
                                                         <div class="form-group">
-                                                            <input type="password" class="form-control form-control-lg reset" name="confirm" placeholder="Confirm password" value="">
-                                                            <p class="text-danger ml-2" id="massagePass2"></p>
+                                                            <input type="password" class="form-control form-control-lg reset" name="confirm_password" placeholder="Confirm password" value="">
+                                                            <p class="text-danger ml-2" id="massageConfirmPass"></p>
                                                         </div>
                                                         <div class="form-group ml-2">
                                                             <p class="text-danger" id="massageAll2"></p>
@@ -139,7 +139,7 @@
                                                         <div class="row">
                                                             <div class="col-3"></div>
                                                             <div class="col-6">
-                                                                <input class="btn btn-success btn-lg btn-block" type="button" name="btn_login" value="Register" onclick="AjaxFormRegister('massageEmail2', 'massagePass2', 'massageAll2')">
+                                                                <input class="btn btn-success btn-lg btn-block" type="button" name="btn_register" value="Register" onclick="AjaxFormRegister('massageUser', 'massageEmailRegister', 'massagePassRegister', 'massageConfirmPass', 'massageAll2')">
                                                             </div>
                                                             <div class="col-3"></div>
                                                         </div>
