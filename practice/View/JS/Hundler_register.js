@@ -16,10 +16,11 @@ function AjaxFormRegister(message1, message2, message3, message4, message5) {
             document.getElementById(message5).innerHTML = response[4];
             $('.reset').val('');
             if(response[0] == "" && response[1] == "" && response[2] == "" && response[3] == "" && response[4] == "") {
-                $('#exampleModalCenter1').modal('toggle');
-                setTimeout(function() {
-                    location.href = "http://practice/main/show_main"
-                }, 500);
+                document.getElementById(message5).innerHTML = "Регистрация прошла успешно. Теперь войдите в аккаунт !";
+                // $('#exampleModalCenter1').modal('toggle');
+                // setTimeout(function() {
+                //     location.href = "http://practice/main/show_main"
+                // }, 500);
             }
         },
         error: function(response) {

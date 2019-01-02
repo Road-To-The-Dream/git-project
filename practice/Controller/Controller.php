@@ -68,10 +68,28 @@
                 $this->CheckValidateUserName($user_name);
                 $this->CheckValidateEmail($email);
                 $this->CheckValidatePassword($password, $confirm_pass);
-
-                //call function register
             }
             echo json_encode($this->errors_register);
+        }
+
+        private function CheckEmptyFieldsRegister() {
+            if(empty($_POST['user_name']) && empty($_POST['email_register']) && empty($_POST['password_register']) && empty($_POST['confirm_password']) ) {
+                $this->errors_register[4] = 'Empty fields form';
+            }
+            else {
+                if (empty($_POST['user_name'])) {
+                    $this->errors_register[0] = 'Please enter user name !';
+                }
+                if (empty($_POST['email_register'])) {
+                    $this->errors_register[1] = 'Please enter email !';
+                }
+                if (empty($_POST['password_register'])) {
+                    $this->errors_register[2] = 'Please enter password !';
+                }
+                if (empty($_POST['confirm_password'])) {
+                    $this->errors_register[3] = 'Please enter confirm password !';
+                }
+            }
         }
 
         private function CheckValidateUserName($user_name)
@@ -92,7 +110,7 @@
         private function CheckValidatePassword($password, $confirm_pass)
         {
             if(!preg_match("/^[a-z0-9_-]{6,18}$/",$password)) {
-                $this->errors_register[2] = 'Пароль должен состоять из букв английского алфавита и цифр. Также допускается использование символов - _';
+                $this->errors_register[2] = 'Пароль должен состоять из букв английского алфавита и цифр. Также допускается использование символов - _.';
             }
 
             if(strlen($password) < 3 or strlen($password) > 16) {
@@ -102,26 +120,6 @@
             if($this->errors_register[2] == "") {
                 if($confirm_pass != $password) {
                     $this->errors_register[3] .= 'Пароли не совпадают !';
-                }
-            }
-        }
-
-        private function CheckEmptyFieldsRegister() {
-            if(empty($_POST['user_name']) && empty($_POST['email_register']) && empty($_POST['password_register']) && empty($_POST['confirm_password']) ) {
-                $this->errors_login[4] = 'Empty fields form';
-            }
-            else {
-                if (empty($_POST['user_name'])) {
-                    $this->errors_login[0] = 'Please enter user name !';
-                }
-                if (empty($_POST['email_register'])) {
-                    $this->errors_login[1] = 'Please enter email !';
-                }
-                if (empty($_POST['password_register'])) {
-                    $this->errors_login[2] = 'Please enter password !';
-                }
-                if (empty($_POST['confirm_password'])) {
-                    $this->errors_login[3] = 'Please enter confirm password !';
                 }
             }
         }
