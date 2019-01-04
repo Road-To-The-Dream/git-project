@@ -75,17 +75,17 @@
                 <div class="row">
                     <ul class="nav nav-tabs mt-4" id="myTab" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Доставка</a>
+                            <a class="nav-link active" id="delivery-tab" data-toggle="tab" href="#delivery" role="tab" aria-controls="delivery" aria-selected="true">Доставка</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Оплата</a>
+                            <a class="nav-link" id="payment-tab" data-toggle="tab" href="#payment" role="tab" aria-controls="payment" aria-selected="false">Оплата</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="garant-tab" data-toggle="tab" href="#garant" role="tab" aria-controls="garant" aria-selected="false">Гарантия</a>
+                            <a class="nav-link" id="guarantee-tab" data-toggle="tab" href="#guarantee" role="tab" aria-controls="guarantee" aria-selected="false">Гарантия</a>
                         </li>
                     </ul>
                     <div class="tab-content pt-3" id="myTabContent">
-                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <div class="tab-pane fade show active" id="delivery" role="tabpanel" aria-labelledby="delivery-tab">
                             <ol>
                                 <li>
                                     Курьером по Киеву. Стоимость доставки оборудования - 50 грн. Обычно, если вы разместили заказ до 12:00 — мы доставим его в тот же день. В любом случае, во время заказа наши менеджеры сразу согласуют с вами время доставки.
@@ -98,7 +98,7 @@
                                 </li>
                             </ol>
                         </div>
-                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        <div class="tab-pane fade" id="payment" role="tabpanel" aria-labelledby="payment-tab">
                             <ol>
                                 <li>
                                     Наличная оплата возможна только при доставке в Киеве или заказе услуги Мультитест в Киеве и Харькове. Оплата производится исключительно в национальной валюте. В подтверждение оплаты мы выдаем вам наряд.
@@ -111,7 +111,7 @@
                                 </li>
                             </ol>
                         </div>
-                        <div class="tab-pane fade" id="garant" role="tabpanel" aria-labelledby="garant-tab">
+                        <div class="tab-pane fade" id="guarantee" role="tabpanel" aria-labelledby="guarantee-tab">
                             <p style="text-indent: 25px;">
                                 На товары предоставляется гарантия, подтверждающая обязательства по отсутствию в товаре заводских дефектов. Гарантия предоставляется на срок от 2-х недель до 36 месяцев в зависимости <br> от сервисной политики производителя. Срок гарантии указан в описании каждого товара на нашем сайте. Подтверждением гарантийных обязательств служит гарантийный талон производителя, или наряд нашей компании.
                             </p>
@@ -138,97 +138,40 @@
                     Игровая и перспективная серия ноутбуков Nitro 5 от Acer способна выполнять роль не только великолепной игровой машины, но и достаточно яркого и сдержанного ноутбука для повседневных производительных задач. Его идеально сбалансированная конфигурация компонентов, великолепная система охлаждения, которая быстро и тихо справляется даже со сложными заданиями и невероятно интересный дизайн способны расположить к себе практически любого. А если учесть, что ноутбук Nitro 5 обладает внушительным игровым потенциалом, оснащаясь качественными комплектующими, то практически не найдется человека, который бы остался к нему равнодушен.
                 </p>
             </div>
-            <div class="tab-pane fade pl-4" id="specifications" role="tabpanel" aria-labelledby="specifications-tab">
-                <dl class="dl-inline">
-                    <dt class="dt-dotted">
-                        <span>Вес</span>
-                    </dt>
-                    <dd>36 шт</dd>
-                </dl>
-                <dl class="dl-inline">
-                    <dt class="dt-dotted">
-                        <span>Количество на поддоне</span>
-                    </dt>
-                    <dd>48 шт</dd>
-                </dl>
-                <dl class="dl-inline">
-                    <dt class="dt-dotted">
-                        <span>Прочность на сжатие</span>
-                    </dt>
-                    <dd>200-400 кгс/см</dd>
-                </dl>
-                <dl class="dl-inline">
-                    <dt class="dt-dotted">
-                        <span>Вес</span>
-                    </dt>
-                    <dd>36 шт</dd>
-                </dl>
-                <dl class="dl-inline">
-                    <dt class="dt-dotted">
-                        <span>Количество на поддоне</span>
-                    </dt>
-                    <dd>48 шт</dd>
-                </dl>
-                <dl class="dl-inline">
-                    <dt class="dt-dotted">
-                        <span>Прочность на сжатие</span>
-                    </dt>
-                    <dd>200-400 кгс/см</dd>
-                </dl>
-                <dl class="dl-inline">
-                    <dt class="dt-dotted">
-                        <span>Вес</span>
-                    </dt>
-                    <dd>36 шт</dd>
-                </dl>
-                <dl class="dl-inline">
-                    <dt class="dt-dotted">
-                        <span>Количество на поддоне</span>
-                    </dt>
-                    <dd>48 шт</dd>
-                </dl>
-                <dl class="dl-inline">
-                    <dt class="dt-dotted">
-                        <span>Прочность на сжатие</span>
-                    </dt>
-                    <dd>200-400 кгс/см</dd>
-                </dl>
-                <dl class="dl-inline">
-                    <dt class="dt-dotted">
-                        <span>Вес</span>
-                    </dt>
-                    <dd>36 шт</dd>
-                </dl>
-                <dl class="dl-inline">
-                    <dt class="dt-dotted">
-                        <span>Количество на поддоне</span>
-                    </dt>
-                    <dd>48 шт</dd>
-                </dl>
-                <dl class="dl-inline">
-                    <dt class="dt-dotted">
-                        <span>Прочность на сжатие</span>
-                    </dt>
-                    <dd>200-400 кгс/см</dd>
-                </dl>
-                <dl class="dl-inline">
-                    <dt class="dt-dotted">
-                        <span>Вес</span>
-                    </dt>
-                    <dd>36 шт</dd>
-                </dl>
-                <dl class="dl-inline">
-                    <dt class="dt-dotted">
-                        <span>Количество на поддоне</span>
-                    </dt>
-                    <dd>48 шт</dd>
-                </dl>
-                <dl class="dl-inline">
-                    <dt class="dt-dotted">
-                        <span>Прочность на сжатие</span>
-                    </dt>
-                    <dd>200-400 кгс/см</dd>
-                </dl>
+            <div class="tab-pane fade" id="specifications" role="tabpanel" aria-labelledby="specifications-tab">
+                <p class="text-secondary f-size-name ml-1 mb-2">Система</p>
+                <div class="container f-size-character">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="row">
+                                <div class="shadow-lg mb-5 bg-white rounded" style="width: 100%">
+                                    <div>
+                                        <ul class="list-group">
+                                            <li class="list-group-item list-group-item-action">
+                                                <div class="row">
+                                                    <div class="col-5 font-weight-bold">Тип</div>
+                                                    <div class="col-7 text-right">ноутбук</div>
+                                                </div>
+                                            </li>
+                                            <li class="list-group-item list-group-item-action">
+                                                <div class="row">
+                                                    <div class="col-5 font-weight-bold">Тип.конфиг.</div>
+                                                    <div class="col-7 text-right">AMD A8 / 2 ГГц / 4 Гб / 500 Гб / DVD</div>
+                                                </div>
+                                            </li>
+                                            <li class="list-group-item list-group-item-action">
+                                                <div class="row">
+                                                    <div class="col-5 font-weight-bold">Макс. объем оперативной памяти</div>
+                                                    <div class="col-7 text-right">16 Гб</div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <!--Tabs-->
