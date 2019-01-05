@@ -9,3 +9,11 @@
     text-indent:-9999px;
     background: url('../Image/Arrow_Top.png') no-repeat;
 }
+
+.swal-overlay {
+    background-color: rgba(43, 165, 137, 0.30);
+}
+
+.swal-modal {
+    border: 2px solid black;
+}

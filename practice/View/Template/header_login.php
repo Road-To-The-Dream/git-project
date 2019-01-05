@@ -13,6 +13,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-formhelpers/2.3.0/js/bootstrap-formhelpers.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <body>
 <div id="blockajax"></div>
@@ -118,23 +120,27 @@
                                                 <div class="row justify-content-center">
                                                     <div class="col-9">
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control form-control-lg" name="user_name" placeholder="User Name" value="">
+                                                            <input type="text" class="form-control form-control-md" name="user_name" placeholder="User Name" value="">
                                                             <p class="text-danger ml-2" id="massageUser"></p>
                                                         </div>
                                                         <div class="form-group">
-                                                            <input type="email" class="form-control form-control-lg" name="email_register" placeholder="Email" value="">
+                                                            <input type="email" class="form-control form-control-md" name="email_register" placeholder="Email" value="">
                                                             <p class="text-danger ml-2" id="massageEmailRegister"></p>
                                                         </div>
                                                         <div class="form-group">
-                                                            <input type="password" class="form-control form-control-lg reset" name="password_register" placeholder="Password" value="">
+                                                            <input type="text" class="form-control form-control-md bfh-phone" data-format="+380 (dd) dd-dd-ddd">
+                                                            <p class="text-danger ml-2" id="massageEmailRegister"></p>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <input type="password" class="form-control form-control-md reset" name="password_register" placeholder="Password" value="">
                                                             <p class="text-danger ml-2" id="massagePassRegister"></p>
                                                         </div>
                                                         <div class="form-group">
-                                                            <input type="password" class="form-control form-control-lg reset" name="confirm_password" placeholder="Confirm password" value="">
+                                                            <input type="password" class="form-control form-control-md reset" name="confirm_password" placeholder="Confirm password" value="">
                                                             <p class="text-danger ml-2" id="massageConfirmPass"></p>
                                                         </div>
                                                         <div class="form-group ml-2">
-                                                            <p class="text-danger" id="massageAll2"></p>
+                                                            <p class="text-success" id="massageAll2"></p>
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-3"></div>

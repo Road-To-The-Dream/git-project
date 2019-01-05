@@ -1,6 +1,6 @@
 function AjaxFormLogin(message1, message2, message3) {
     $.ajax({
-        url:     'http://practice//CheckLogin',
+        url:     'http://practice//ValidateIsLogin',
         type:     "POST",
         dataType: "json",
         data: $("#formMain1").serialize(),
@@ -15,9 +15,16 @@ function AjaxFormLogin(message1, message2, message3) {
             $('.reset').val('');
             if(response[0] == "" && response[1] == "" && response[2] == "") {
                 $('#exampleModalCenter1').modal('toggle');
-                setTimeout(function() {
-                    location.href = "http://practice/main/show_main"
-                }, 500);
+                swal({
+                    title: "Вход в аккаунт выполнен !",
+                    text: "Приятных покупок.",
+                    icon: "success",
+                    button: "OK"
+                }).then(function() {
+                    setTimeout(function() {
+                        location.href = "http://practice/main/show_main"
+                    }, 200);
+                });
             }
         },
         error: function(response) {
