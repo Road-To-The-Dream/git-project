@@ -1,6 +1,6 @@
 <?php
 
-    namespace practice\Controller;
+    namespace practice\Model;
 
     class Authentication
     {

@@ -131,6 +131,9 @@
             <li class="nav-item">
                 <a class="nav-link" id="specifications-tab" data-toggle="tab" href="#specifications" role="tab" aria-controls="specifications" aria-selected="false">Характеристики</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" id="comment-tab" data-toggle="tab" href="#comment" role="tab" aria-controls="comment" aria-selected="false">Комментарии (3)</a>
+            </li>
         </ul>
         <div class="tab-content pt-3" id="myTabContent">
             <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
@@ -311,6 +314,43 @@
                             </div>
                         </div>
                         <!--RIGHT COL-->
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="comment" role="tabpanel" aria-labelledby="comment-tab">
+                <div class="container">
+                    <div class="card bg-border mb-4">
+                        <div class="card-header bg">
+                            <div class="author font-comment-name">Дима</div>
+                            <div class="metadata">
+                                <span class="date font-comment-date">16 ноября 2015, 13:43</span>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text ">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos eius eos, explicabo id illum, in ipsum libero maxime neque nihil officiis omnis quae quas qui quis quisquam reiciendis tempora temporibus veniam vitae. A aspernatur debitis, deleniti dolore dolorem doloremque eligendi quas. Culpa, fugit in nihil non placeat praesentium quas repellat..</p>
+                        </div>
+                    </div>
+                    <div class="card bg-border mb-4">
+                        <div class="card-header bg">
+                            <div class="author font-comment-name">Дима</div>
+                            <div class="metadata">
+                                <span class="date font-comment-date">16 ноября 2015, 13:43</span>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text ">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos eius eos, explicabo id illum, in ipsum libero maxime neque nihil officiis omnis quae quas qui quis quisquam reiciendis tempora temporibus veniam vitae. A aspernatur debitis, deleniti dolore dolorem doloremque eligendi quas. Culpa, fugit in nihil non placeat praesentium quas repellat..</p>
+                        </div>
+                    </div>
+                    <div class="card bg-border mb-4">
+                        <div class="card-header bg">
+                            <div class="author font-comment-name">Дима</div>
+                            <div class="metadata">
+                                <span class="date font-comment-date">16 ноября 2015, 13:43</span>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text ">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos eius eos, explicabo id illum, in ipsum libero maxime neque nihil officiis omnis quae quas qui quis quisquam reiciendis tempora temporibus veniam vitae. A aspernatur debitis, deleniti dolore dolorem doloremque eligendi quas. Culpa, fugit in nihil non placeat praesentium quas repellat..</p>
+                        </div>
                     </div>
                 </div>
             </div>

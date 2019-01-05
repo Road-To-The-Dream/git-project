@@ -23,17 +23,49 @@
         <div class="container">
             <div class="row">
                 <div class="col-3 mt-2">
+                    <p>Подбор по параметрам</p>
                     <div class="card bg-light mb-3">
-                        <div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-list"></i>Категории</div>
-                        <ul class="list-group category_block">
-                            <li class="list-group-item"><a href="catalog.php">Для несложных задач</a></li>
-                            <li class="list-group-item"><a href="Katalog.php">Универсальные</a></li>
-                            <li class="list-group-item"><a href="Katalog.php">Для бизнеса</a></li>
-                            <li class="list-group-item"><a href="Katalog.php">Тонкие и лёгкие</a></li>
-                            <li class="list-group-item"><a href="Katalog.php">Геймерские ноутбуки</a></li>
-                            <li class="list-group-item"><a href="Katalog.php">Ноутбуки с SSD</a></li>
-                            <li class="list-group-item"><a href="Katalog.php">Геймерские c Windows</a></li>
-                            <li class="list-group-item"><a href="Katalog.php">Трансформеры 2 в 1</a></li>
+                        <div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-list"></i>Оперативная память</div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadio1">4 Гб</label>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadio2">8 Гб</label>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="customRadio3" name="customRadio" class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadio3">16 Гб</label>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-list"></i>Оперативная память</div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadio1">4 Гб</label>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadio2">8 Гб</label>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="customRadio3" name="customRadio" class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadio3">16 Гб</label>
+                                </div>
+                            </li>
                         </ul>
                     </div>
                 </div>
