@@ -29,7 +29,14 @@
                     return ($a['price'] - $b['price']);
                 });
             }
-            return $this->items_catalog;
+
+            $config = require_once 'config.php';
+            $db = new ShowProduct($config);
+            $query = $db->query('SELECT * FROM products');
+
+            return $query;
+
+            //return $this->items_catalog;
         }
 
         public function get_product_id($id)

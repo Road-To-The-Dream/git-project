@@ -6,12 +6,10 @@
  * Time: 16:11
  */
     return [
-        'db' => [
-            'host' => 'localhost',
-            'dbname' => 'Sample',
-            'user' => 'root',
-            'password' => '',
-            'charset' => 'utf8'
-        ]
+        'host' => 'localhost',
+        'dbname' => 'Sample',
+        'user' => 'root',
+        'password' => '',
+        'charset' => 'utf8'
     ];
 

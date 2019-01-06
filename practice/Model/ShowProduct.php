@@ -33,7 +33,7 @@ class ShowProduct
             $this->pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
             $this->pdo->setAttribute(\PDO::ATTR_EMULATE_PREPARES, false);
             $this->isConnected = true;
-            $this->init('Select name From client');
+
         } catch (\PDOException $e) {
             exit($e->getMessage());
         }
@@ -51,23 +51,40 @@ class ShowProduct
         }
 
         try {
-            $this->statement = $this->pdo->prepare($query);
-
+            #Prepare query
+            $this->statement = $this->pdo->query($query);
             //$this->bind($parameters);
+
         } catch (\PDOException $ex) {
             exit($ex->getMessage());
         }
     }
 
-//    private function bind($parameters)
+//    private function bind(array $parameters)
 //    {
 //        if(!empty($parameters) and is_array($parameters)) {
 //            $columns = array_keys($parameters);
 //
-//            foreach ($columns as $i)
+//            foreach ($columns as $i => &$columns) {
+//
+//            }
 //        }
 //    }
+
+    public function query($query, array $parameters = [], $mode = \PDO::FETCH_ASSOC)
+    {
+        $query = trim(str_replace('\r', '', $query));
+        $this->init($query, $parameters);
+        $rawStatement = explode(' ', preg_replace("/\s+|\t+|\n+/", " ", $query));
+        $statement = strtolower($rawStatement[0]);
+
+        if ($statement === 'select' || $statement === 'show') {
+            return $this->statement->fetchAll($mode);
+        } elseif ($statement === 'insert' || $statement === 'update' || $statement === 'delete') {
+            return $this->statement->rowCount();
+        } else {
+            return null;
+        }
+    }
 }
-$config = require_once 'config.php';
- $obj = new ShowProduct($config['db']);
 
