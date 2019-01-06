@@ -22,6 +22,12 @@
             $this->objectGenerateView->generate($view_name, $this->dataModel);
         }
 
+        public function correct()
+        {
+            $arr = array('Acer', 'Apple', 'Lenovo', 'Prestigio');
+            echo json_encode($arr);
+        }
+
         public function show_product($view_name, $id = 1)
         {
             $this->check_session();

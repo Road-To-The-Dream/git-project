@@ -24,7 +24,7 @@ function AjaxFormRegister(message1, message2, message3, message4, message5) {
                     button: "OK"
                 }).then(function() {
                     setTimeout(function() {
-                        location.href = "'http://practice//check_session"
+                        location.href = "http://practice//check_session"
                     }, 200);
                 });
             }

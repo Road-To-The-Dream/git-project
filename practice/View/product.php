@@ -317,13 +317,14 @@
                     </div>
                 </div>
             </div>
+            <!--COMMENT-->
             <div class="tab-pane fade" id="comment" role="tabpanel" aria-labelledby="comment-tab">
                 <div class="container">
                     <div class="card bg-border mb-4">
                         <div class="card-header bg">
-                            <div class="author font-comment-name">Дима</div>
+                            <div class="author font-comment-name">Сергей</div>
                             <div class="metadata">
-                                <span class="date font-comment-date">16 ноября 2015, 13:43</span>
+                                <span class="date font-comment-date">05 января 2019, 13:43</span>
                             </div>
                         </div>
                         <div class="card-body">
@@ -332,9 +333,9 @@
                     </div>
                     <div class="card bg-border mb-4">
                         <div class="card-header bg">
-                            <div class="author font-comment-name">Дима</div>
+                            <div class="author font-comment-name">Сергей</div>
                             <div class="metadata">
-                                <span class="date font-comment-date">16 ноября 2015, 13:43</span>
+                                <span class="date font-comment-date">05 января 2019, 13:43</span>
                             </div>
                         </div>
                         <div class="card-body">
@@ -343,9 +344,9 @@
                     </div>
                     <div class="card bg-border mb-4">
                         <div class="card-header bg">
-                            <div class="author font-comment-name">Дима</div>
+                            <div class="author font-comment-name">Сергей</div>
                             <div class="metadata">
-                                <span class="date font-comment-date">16 ноября 2015, 13:43</span>
+                                <span class="date font-comment-date">05 января 2019, 13:43</span>
                             </div>
                         </div>
                         <div class="card-body">
@@ -354,6 +355,7 @@
                     </div>
                 </div>
             </div>
+            <!--COMMENT-->
         </div>
         <!--Tabs-->
     </div>

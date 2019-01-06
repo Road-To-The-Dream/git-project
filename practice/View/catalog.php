@@ -5,6 +5,7 @@
     <title>Title</title>
     <link rel="stylesheet" href="/View/CSS/cart.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="/View/JS/Show_filtration_products.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
@@ -24,50 +25,31 @@
             <div class="row">
                 <div class="col-3 mt-2">
                     <p>Подбор по параметрам</p>
-                    <div class="card bg-light mb-3">
-                        <div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-list"></i>Оперативная память</div>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">
-                                <div class="custom-control custom-radio">
-                                    <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
-                                    <label class="custom-control-label" for="customRadio1">4 Гб</label>
-                                </div>
-                            </li>
-                            <li class="list-group-item">
-                                <div class="custom-control custom-radio">
-                                    <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
-                                    <label class="custom-control-label" for="customRadio2">8 Гб</label>
-                                </div>
-                            </li>
-                            <li class="list-group-item">
-                                <div class="custom-control custom-radio">
-                                    <input type="radio" id="customRadio3" name="customRadio" class="custom-control-input">
-                                    <label class="custom-control-label" for="customRadio3">16 Гб</label>
-                                </div>
-                            </li>
-                        </ul>
-                        <div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-list"></i>Оперативная память</div>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">
-                                <div class="custom-control custom-radio">
-                                    <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
-                                    <label class="custom-control-label" for="customRadio1">4 Гб</label>
-                                </div>
-                            </li>
-                            <li class="list-group-item">
-                                <div class="custom-control custom-radio">
-                                    <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
-                                    <label class="custom-control-label" for="customRadio2">8 Гб</label>
-                                </div>
-                            </li>
-                            <li class="list-group-item">
-                                <div class="custom-control custom-radio">
-                                    <input type="radio" id="customRadio3" name="customRadio" class="custom-control-input">
-                                    <label class="custom-control-label" for="customRadio3">16 Гб</label>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
+                    <form method="post" action="" id="formFiltration" name="formFiltration">
+                        <div class="card bg-light mb-3">
+                            <div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-list"></i>
+                                Производитель
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <?php
+                                $arr = array('Acer', 'Apple', 'Lenovo', 'Prestigio');
+                                foreach ($arr as $a) {
+                                    ?>
+                                    <li class="list-group-item">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="<?php echo $a; ?>" name="vendor[]" value="<?php echo $a; ?>">
+                                            <label class="custom-control-label" id="message1" for="<?php echo $a; ?>"><?php echo $a; ?></label>
+                                        </div>
+                                    </li>
+                                    <?php
+                                }
+                                ?>
+                                <li class="list-group-item text-center p-1">
+                                    <input class="btn btn-outline-success btn-sm" type="button" name="btn_login" value="Show" onclick="AjaxFiltrationProducts('message1')">
+                                </li>
+                            </ul>
+                        </div>
+                    </form>
                 </div>
                 <div class="col-9">
                     <div class="row">

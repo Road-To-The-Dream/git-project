@@ -35,12 +35,14 @@
         <div class="container">
             <div class="row text-center justify-content-center mt-3 ml-4">
                 <div class="col-3">
-                    <div class="card h-100" style="width: 12rem;">
-                        <a href=""><img class="card-img-top" src="/View/Image/main/Card_image1.jpg" alt="Card image cap"></a>
-                        <div class="card-body">
-                            <a href=""><h6>Универсальные</h6></a>
+                    <a href="http://practice/catalog/show_all">
+                        <div class="card h-100" style="width: 12rem;">
+                            <img class="card-img-top" src="/View/Image/main/Card_image1.jpg" alt="Card image cap">
+                            <div class="card-body">
+                                <h6>Универсальные</h6>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 <div class="col-3">
                     <div class="card h-100" style="width: 12rem;">
