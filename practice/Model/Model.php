@@ -4,54 +4,36 @@
 
     class Model
     {
-        private $items_catalog = [];
-        private $items_cart = [];
+        private $config;
 
         public function __construct()
         {
-            $this->items_catalog = require_once 'list_items.php';
-            $this->items_cart = require_once 'list_items_cart.php';
+            $this->config = require_once 'DBconfiguration.php';
         }
 
         public function get_all_info($sorting = 0)
         {
-            if($sorting == 1)
-            {
-                uasort($this->items_catalog, function($a, $b) // sort descending
-                {
-                    return ($b['price'] - $a['price']);
-                });
-            }
-            else if($sorting == 2)
-            {
-                uasort($this->items_catalog, function($a, $b) // sort ascending
-                {
-                    return ($a['price'] - $b['price']);
-                });
-            }
+            $db = new ShowProduct($this->config);
 
-            $config = require_once 'config.php';
-            $db = new ShowProduct($config);
             $query = $db->query('SELECT * FROM products');
 
-            return $query;
+            if($sorting == 1) {
+                $query = $db->query('SELECT * FROM products ORDER BY price DESC');
+            }
+            elseif($sorting == 2) {
+                $query = $db->query('SELECT * FROM products ORDER BY price ASC');
+            }
 
-            //return $this->items_catalog;
+            return $query;
         }
 
         public function get_product_id($id)
         {
-            foreach ($this->items_catalog as $value)
-            {
-                if($value["id"] == $id)
-                {
-                    return array(
-                        'name' => $value['name'],
-                        'image' => $value['image'],
-                        'price' => $value['price'],
-                    );
-                }
-            }
+            $db = new ShowProduct($this->config);
+
+            $query = $db->query('SELECT * FROM products WHERE id = '.$id);
+
+            return $query;
         }
 
         public function get_products_cart()

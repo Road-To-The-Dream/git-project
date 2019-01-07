@@ -23,14 +23,11 @@
     <div class="container mt-4">
         <div class="row mb-3" style="border-bottom: #090909 1px solid">
             <div class="col-md-6 col-lg-7 text-align-bottom f-size-total">
-                <p class="f-size-title"><?php echo $data['name']?></p>
+                <p class="f-size-title"><?= $data[0]['name']?></p>
             </div>
             <div class="col-md-6 col-lg-5 text-right">
-                <p>Поделится с друзьями
-                    <a href="#"><img src="/View/Image/Instagram_icons.png" alt="Instagram"></a>
-                    <a href="#"><img src="/View/Image/VK.com_icons.png" alt="VK"></a>
-                    <a href="#"><img src="/View/Image/Twitter_icons.png" alt="Twitter"></a>
-                    <a href="#"><img src="/View/Image/Facebook_icons.png" alt="Facebook"></a>
+                <p class="mt-1">
+                    Код товара: <span style="font-weight: bold"><?= $data[0]['id']?></span>
                 </p>
             </div>
         </div>
@@ -44,7 +41,7 @@
                     </ol>
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img class="d-block w-100" src="/View/Image/<?php echo $data['image']?>" alt="First slide">
+                            <img class="d-block w-100" src="/View/Image/<?=$data[0]['image']?>" alt="First slide">
                         </div>
                         <div class="carousel-item">
                             <img class="d-block w-100" src="/View/Image/Product3.jpg" alt="Second slide">
@@ -66,7 +63,7 @@
             <div class="col">
                 <div class="row">
                     <div class="col-md-7 col-lg-8 col-xl-9 text-align-bottom f-size-total">
-                       <p class="f-size-title f-size-total">Цена: <?php echo $data['price']?>.</p>
+                       <p class="f-size-title f-size-total">Цена: <?=$data[0]['price'].' '.$data[0]['unit']?>.</p>
                     </div>
                     <div class="col-md-5 col-lg-4 col-xl-3">
                         <input class="btn btn-success btn-lg btn-block" type="button" name="btn_logout" value="Купить">

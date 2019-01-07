@@ -80,12 +80,16 @@
                                 <div class="card-deck h-100">
                                     <div class="card p-3">
                                         <div class="card-body p-0">
-                                            <a href="http://practice/product/show_product/<?php echo $value["id"];?>"><img class="card-img-top" src="/View/Image/<?php echo $value["image"]?>" alt="Card image cap"></a>
+                                            <a href="http://practice/product/show_product/<?=$value["id"];?>"><img class="card-img-top" src="/View/Image/<?=$value["image"]?>" alt="Card image cap"></a>
                                             <div class="row justify-content-center mt-3">
-                                                <a class="card-text f-size-name h-100" href="http://practice/product/show_product/<?php echo $value["id"];?>"><?php echo $value["name"]?></a>
+                                                <a class="card-text f-size-name h-100" href="http://practice/product/show_product/<?=$value["id"];?>"><?=$value["name"]?></a>
                                             </div>
                                         </div>
-                                        <p class="card-text f-size-title f-size-total mt-2"><?php echo $value["price"]?></p>
+                                        <div class="row mt-3">
+                                            <div class="col-3 p-0 mt-2" style="font-size: 18px">Цена:</div>
+                                            <div class="col-6 text-center"><p style="font-weight: bold; font-size: 25px"><?=$value["price"]?></p></div>
+                                            <div class="col-3 p-0 mt-2" style="font-size: 18px"><?=$value["unit"]?>.</div>
+                                        </div>
                                         <div class="row">
                                             <div class="col-2"></div>
                                             <div class="col-8">
