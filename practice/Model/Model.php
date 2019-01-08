@@ -4,47 +4,32 @@
 
     class Model
     {
-        private $config = [];
-
-        public function __construct()
+        public function add_user($patronymic, $last_name, $first_name, $phone, $email, $password)
         {
-            $this->config = require 'DBconfiguration.php';
-        }
+            $client = new Client();
 
-        public function add_user()
-        {
-            $db = new ShowProduct($this->config);
+            $client->last_name = $last_name;
+            $client->first_name = $first_name;
+            $client->patronymic = $patronymic;
+            $client->phone = $phone;
+            $client->email = $email;
+            $client->password = $password;
 
-            $db->query("INSERT INTO products(name,image,price,unit) VALUES ('qwe','Image',12.999,'грн')");
+            $client->insert();
         }
 
         public function get_all_info($sorting = 0)
         {
-            $db = new ShowProduct($this->config);
-
-            $query = $db->query('SELECT * FROM products');
-
-            if($sorting == 1) {
-                $query = $db->query('SELECT * FROM products ORDER BY price DESC');
-            }
-            elseif($sorting == 2) {
-                $query = $db->query('SELECT * FROM products ORDER BY price ASC');
-            }
-
-            return $query;
+            $client = new Product();
+            return $client->select($sorting);
         }
 
         public function get_product_id($id)
         {
-            $db = new ShowProduct($this->config);
-
-            $query = $db->query('SELECT * FROM products WHERE id = '.$id);
-
-            return $query;
+            $client = new Product();
+            $client->id = $id;
+            return $client->select();
         }
 
-        public function get_products_cart()
-        {
-            return $this->items_cart;
-        }
+        public function get_products_cart(){}
     }

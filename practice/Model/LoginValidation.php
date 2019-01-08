@@ -29,8 +29,6 @@
                     $this->errors_login[2] = 'Invalid password or login';
                 }
             }
-            $objModel = new \practice\Model\Model();
-            $objModel->add_user();
             return json_encode($this->errors_login);
         }
 

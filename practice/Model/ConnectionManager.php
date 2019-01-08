@@ -7,9 +7,8 @@
  */
 
 namespace practice\Model;
-use PDO;
 
-class ShowProduct
+class ConnectionManager
 {
     private $pdo;
     private $isConnected;
@@ -20,10 +19,10 @@ class ShowProduct
     public function __construct(array $settings)
     {
         $this->settings = $settings;
-        $this->connect();
+        $this->Connect();
     }
 
-    private function connect()
+    private function Connect()
     {
         $dsn = 'mysql:dbname=' . $this->settings['dbname'] . ';host=' . $this->settings['host'];
         try {
@@ -33,57 +32,37 @@ class ShowProduct
             $this->pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
             $this->pdo->setAttribute(\PDO::ATTR_EMULATE_PREPARES, false);
             $this->isConnected = true;
-
         } catch (\PDOException $e) {
             exit($e->getMessage());
         }
     }
 
-    public function closeConnection()
+    public function ExecutionQuery($query, array $parameters = [], $mode = \PDO::FETCH_ASSOC)
     {
-        $this->pdo = null;
-    }
-
-    private function init($query, array $parameters = [])
-    {
-        if(!$this->isConnected) {
-            $this->connect();
-        }
-
         try {
             #Prepare query
             $this->statement = $this->pdo->query($query);
-
+            return $this->statement->fetchAll($mode);
         } catch (\PDOException $ex) {
             exit($ex->getMessage());
         }
+//        $query = trim(str_replace('\r', '', $query));
+//        $this->init($query, $parameters);
+//        $rawStatement = explode(' ', preg_replace("/\s+|\t+|\n+/", " ", $query));
+//        $statement = strtolower($rawStatement[0]);
+//
+//        if ($statement === 'select' || $statement === 'show') {
+//            return $this->statement->fetchAll($mode);
+//        } elseif ($statement === 'insert' || $statement === 'update' || $statement === 'delete') {
+//            //return $this->statement->execute();
+//        } else {
+//            return null;
+//        }
     }
 
-//    private function bind(array $parameters)
-//    {
-//        if(!empty($parameters) and is_array($parameters)) {
-//            $columns = array_keys($parameters);
-//
-//            foreach ($columns as $i => &$columns) {
-//
-//            }
-//        }
-//    }
-
-    public function query($query, array $parameters = [], $mode = \PDO::FETCH_ASSOC)
+    public function closeConnection()
     {
-        $query = trim(str_replace('\r', '', $query));
-        $this->init($query, $parameters);
-        $rawStatement = explode(' ', preg_replace("/\s+|\t+|\n+/", " ", $query));
-        $statement = strtolower($rawStatement[0]);
-
-        if ($statement === 'select' || $statement === 'show') {
-            return $this->statement->fetchAll($mode);
-        } elseif ($statement === 'insert' || $statement === 'update' || $statement === 'delete') {
-            //return $this->statement->execute();
-        } else {
-            return null;
-        }
+        $this->pdo = null;
     }
 }
 

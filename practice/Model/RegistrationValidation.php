@@ -8,10 +8,9 @@
 
     namespace practice\Model;
 
-
     class RegistrationValidation
     {
-        private $errors_register = array("", "", "", "", "");
+        private $errors_register = array("", "", "", "", "", "", "", "");
 
         public function CheckRegistration()
         {
@@ -23,42 +22,75 @@
                     $count_empty_errors++;
 
             if($count_empty_errors == 0) {
-                $user_name = $this->CleanFields($_POST['user_name']);
+                $patronymic = $this->CleanFields($_POST['last_name']);
+                $last_name = $this->CleanFields($_POST['first_name']);
+                $first_name = $this->CleanFields($_POST['patronymic']);
                 $email = $this->CleanFields($_POST['email_register']);
+                $phone = $this->CleanFields($_POST['phone']);
                 $password = $this->CleanFields($_POST['password_register']);
                 $confirm_pass = $this->CleanFields($_POST['confirm_password']);
-                $this->CheckValidateUserName($user_name);
+
+                $this->CheckValidateFirstNameLastNamePatronymic($last_name, 'имени');
+                $this->CheckValidateFirstNameLastNamePatronymic($first_name, 'фамилии');
+                $this->CheckValidateFirstNameLastNamePatronymic($patronymic, 'отчества');
                 $this->CheckValidateEmail($email);
+                $this->CheckValidatePhone($phone);
                 $this->CheckValidatePassword($password, $confirm_pass);
+
+                $this->CheckErrorsAndAddNewUser($patronymic, $last_name, $first_name, $email, $phone, $password);
             }
             return json_encode($this->errors_register);
         }
 
-        private function CheckEmptyFieldsRegister()
+        private function CheckErrorsAndAddNewUser($patronymic, $last_name, $first_name, $email, $phone, $password)
         {
-            if(empty($_POST['user_name']) && empty($_POST['email_register']) && empty($_POST['password_register']) && empty($_POST['confirm_password']) ) {
-                $this->errors_register[4] = 'Empty fields form';
-            }
-            else {
-                if (empty($_POST['user_name'])) {
-                    $this->errors_register[0] = 'Please enter user name !';
-                }
-                if (empty($_POST['email_register'])) {
-                    $this->errors_register[1] = 'Please enter email !';
-                }
-                if (empty($_POST['password_register'])) {
-                    $this->errors_register[2] = 'Please enter password !';
-                }
-                if (empty($_POST['confirm_password'])) {
-                    $this->errors_register[3] = 'Please enter confirm password !';
-                }
+            $count_empty_errors = 0;
+            foreach ($this->errors_register as $value)
+                if($value != "")
+                    $count_empty_errors++;
+            if($count_empty_errors == 0) {
+                $objModel = new \practice\Model\Model();
+                $objModel->add_user($patronymic, $last_name, $first_name, $email, $phone, $password);
             }
         }
 
-        private function CheckValidateUserName($user_name)
+        private function CheckEmptyFieldsRegister()
         {
-            if(!preg_match("/^[a-z0-9_-]{3,16}$/", $user_name)) {
-                $this->errors_register[0] = 'Имя пользователя введено неверно. В имени пользователя допускаются буквы, цифры, дефисы и подчёркивания, от 3 до 16 символов.';
+            foreach ($_POST as $value)
+            {
+                if($value == '' || $value == '+380 ')
+                {
+                    $this->errors_register[7] = 'Empty fields form';
+                }
+                else
+                {
+                    $this->errors_register[7] = '';
+                    break;
+                }
+            }
+
+            if($this->errors_register[7] == '') {
+                if (empty($_POST['last_name'])) {
+                    $this->errors_register[0] = 'Please enter user name !';
+                }
+                if (empty($_POST['first_name'])) {
+                    $this->errors_register[1] = 'Please enter user name !';
+                }
+                if (empty($_POST['patronymic'])) {
+                    $this->errors_register[2] = 'Please enter user name !';
+                }
+                if (empty($_POST['email_register'])) {
+                    $this->errors_register[3] = 'Please enter email !';
+                }
+                if ($_POST['phone'] == '+380 ') {
+                    $this->errors_register[4] = 'Please enter user name !';
+                }
+                if (empty($_POST['password_register'])) {
+                    $this->errors_register[5] = 'Please enter password !';
+                }
+                if (empty($_POST['confirm_password'])) {
+                    $this->errors_register[6] = 'Please enter confirm password !';
+                }
             }
         }
 
@@ -84,6 +116,20 @@
                 if($confirm_pass != $password) {
                     $this->errors_register[3] .= 'Пароли не совпадают !';
                 }
+            }
+        }
+
+        private function CheckValidateFirstNameLastNamePatronymic($value, $piece)
+        {
+            if(strlen($value) > 50) {
+                $this->errors_register[0] = ' Длина '.$piece.' должна быть не больше 50 символов';
+            }
+        }
+
+        private function CheckValidatePhone($phone)
+        {
+            if(strlen($phone) != 19) {
+                $this->errors_register[4] = 'Заполните поле телефона корректно.';
             }
         }
 

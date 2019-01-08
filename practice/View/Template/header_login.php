@@ -6,15 +6,14 @@
     <link rel="shortcut icon" href="/View/Image/header/tab_icon.png" type="image/png">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <link rel="stylesheet" href="/View/CSS/MoveArrowTop.css">
-    <script type="text/javascript" src="//web-ptica.ru/VRV-files/jquery-2.1.3.min.js "></script>
     <script type="text/javascript" src="/View/JS/MoveArrowTop.js"></script>
+    <script type="text/javascript" src="//web-ptica.ru/VRV-files/jquery-2.1.3.min.js "></script>
     <script src="/View/JS/Hundler_login.js"></script>
     <script src="/View/JS/Hundler_register.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-formhelpers/2.3.0/js/bootstrap-formhelpers.js"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <body>
 <div id="blockajax"></div>
@@ -92,11 +91,11 @@
                                                 <div class="row justify-content-center">
                                                     <div class="col-9">
                                                         <div class="form-group">
-                                                            <input type="email" class="form-control form-control-lg" name="email_login" placeholder="Email" value="">
+                                                            <input type="email" class="form-control form-control-md" name="email_login" placeholder="Email" value="">
                                                             <p class="text-danger ml-2" id="massageEmail1"></p>
                                                         </div>
                                                         <div class="form-group">
-                                                            <input type="password" class="form-control form-control-lg reset" name="password_login" placeholder="Password" value="">
+                                                            <input type="password" class="form-control form-control-md reset" name="password_login" placeholder="Password" value="">
                                                             <p class="text-danger ml-2" id="massagePass1"></p>
                                                         </div>
                                                         <div class="form-group ml-2">
@@ -105,7 +104,7 @@
                                                         <div class="row">
                                                             <div class="col-3"></div>
                                                             <div class="col-6">
-                                                                <input class="btn btn-success btn-lg btn-block" type="button" name="btn_login" value="Login" onclick="AjaxFormLogin('massageEmail1', 'massagePass1', 'massageAll1')">
+                                                                <input class="btn btn-success btn-md btn-block" type="button" name="btn_login" value="Login" onclick="AjaxFormLogin('massageEmail1', 'massagePass1', 'massageAll1')">
                                                             </div>
                                                             <div class="col-3"></div>
                                                         </div>
@@ -120,32 +119,50 @@
                                                 <div class="row justify-content-center">
                                                     <div class="col-9">
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control form-control-md" name="user_name" placeholder="User Name" value="">
-                                                            <p class="text-danger ml-2" id="massageUser"></p>
+                                                            <input type="text" class="form-control form-control-md" name="last_name" id="qwe" placeholder="Фамилия" value="" autofocus>
+                                                            <p class="text-danger ml-2" id="messageLastName"></p>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <input type="text" class="form-control form-control-md" name="first_name" placeholder="Имя" value="">
+                                                            <p class="text-danger ml-2" id="messageFirstName"></p>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <input type="text" class="form-control form-control-md" name="patronymic" placeholder="Отчество" value="">
+                                                            <p class="text-danger ml-2" id="messagePatronymic"></p>
                                                         </div>
                                                         <div class="form-group">
                                                             <input type="email" class="form-control form-control-md" name="email_register" placeholder="Email" value="">
-                                                            <p class="text-danger ml-2" id="massageEmailRegister"></p>
+                                                            <p class="text-danger ml-2" id="messageEmailRegister"></p>
                                                         </div>
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control form-control-md bfh-phone" data-format="+380 (dd) dd-dd-ddd">
-                                                            <p class="text-danger ml-2" id="massageEmailRegister"></p>
+                                                            <input type="text" class="form-control form-control-md bfh-phone" name="phone" data-format="+380 (dd) dd-dd-ddd">
+                                                            <p class="text-danger ml-2" id="messagePhone"></p>
                                                         </div>
                                                         <div class="form-group">
                                                             <input type="password" class="form-control form-control-md reset" name="password_register" placeholder="Password" value="">
-                                                            <p class="text-danger ml-2" id="massagePassRegister"></p>
+                                                            <p class="text-danger ml-2" id="messagePassRegister"></p>
                                                         </div>
                                                         <div class="form-group">
                                                             <input type="password" class="form-control form-control-md reset" name="confirm_password" placeholder="Confirm password" value="">
-                                                            <p class="text-danger ml-2" id="massageConfirmPass"></p>
+                                                            <p class="text-danger ml-2" id="messageConfirmPass"></p>
                                                         </div>
                                                         <div class="form-group ml-2">
-                                                            <p class="text-success" id="massageAll2"></p>
+                                                            <p class="text-danger" id="messageAllRegister"></p>
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-3"></div>
                                                             <div class="col-6">
-                                                                <input class="btn btn-success btn-lg btn-block" type="button" name="btn_register" value="Register" onclick="AjaxFormRegister('massageUser', 'massageEmailRegister', 'massagePassRegister', 'massageConfirmPass', 'massageAll2')">
+                                                                <input class="btn btn-success btn-md btn-block" type="button" name="btn_register" value="Register" onclick="
+                                                                AjaxFormRegister(
+                                                                    'messageLastName',
+                                                                    'messageFirstName',
+                                                                    'messagePatronymic',
+                                                                    'messageEmailRegister',
+                                                                    'messagePhone',
+                                                                    'messagePassRegister',
+                                                                    'messageConfirmPass',
+                                                                    'messageAllRegister'
+                                                                    )">
                                                             </div>
                                                             <div class="col-3"></div>
                                                         </div>
