@@ -14,7 +14,6 @@ class ConnectionManager
     private $isConnected;
     private $statement;
     protected $settings = [];
-    private $parameters = [];
 
     public function __construct(array $settings)
     {
@@ -37,10 +36,9 @@ class ConnectionManager
         }
     }
 
-    public function ExecutionQuery($query, array $parameters = [], $mode = \PDO::FETCH_ASSOC)
+    public function ExecutionQuery($query, $mode = \PDO::FETCH_ASSOC)
     {
         try {
-            #Prepare query
             $this->statement = $this->pdo->query($query);
             return $this->statement->fetchAll($mode);
         } catch (\PDOException $ex) {

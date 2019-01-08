@@ -21,14 +21,28 @@
         public function get_all_info($sorting = 0)
         {
             $client = new Product();
-            return $client->select($sorting);
+
+            $DBdata = $client->select($sorting);
+            $i = 0;
+            foreach ($DBdata as $price) { #change the price of 30,000 to 30 000
+                $DBdata[$i]['price'] = str_replace('.', ' ', $price['price']);
+                $i++;
+            }
+
+            return $DBdata;
         }
 
         public function get_product_id($id)
         {
             $client = new Product();
             $client->id = $id;
-            return $client->select();
+
+            $DBdata = $client->select();
+
+            #change the price of 30,000 to 30 000
+            $DBdata[0]['price'] = str_replace('.', ' ', $DBdata[0]['price']);
+
+            return $DBdata;
         }
 
         public function get_products_cart(){}
