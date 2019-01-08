@@ -4,11 +4,18 @@
 
     class Model
     {
-        private $config;
+        private $config = [];
 
         public function __construct()
         {
-            $this->config = require_once 'DBconfiguration.php';
+            $this->config = require 'DBconfiguration.php';
+        }
+
+        public function add_user()
+        {
+            $db = new ShowProduct($this->config);
+
+            $db->query("INSERT INTO products(name,image,price,unit) VALUES ('qwe','Image',12.999,'грн')");
         }
 
         public function get_all_info($sorting = 0)

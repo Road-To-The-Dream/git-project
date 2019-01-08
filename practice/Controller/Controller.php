@@ -32,7 +32,6 @@
         {
             $this->check_session();
             $this->dataModel = $this->objModel->get_product_id($id);
-
             $this->objectGenerateView->generate($view_name, $this->dataModel);
         }
 

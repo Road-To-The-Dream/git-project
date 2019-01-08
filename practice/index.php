@@ -4,4 +4,3 @@
 
     $obj = new practice\Router\Router();
     $obj->Routing($_SERVER['REQUEST_URI']);
-

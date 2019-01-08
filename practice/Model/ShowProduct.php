@@ -53,7 +53,6 @@ class ShowProduct
         try {
             #Prepare query
             $this->statement = $this->pdo->query($query);
-            //$this->bind($parameters);
 
         } catch (\PDOException $ex) {
             exit($ex->getMessage());
@@ -81,7 +80,7 @@ class ShowProduct
         if ($statement === 'select' || $statement === 'show') {
             return $this->statement->fetchAll($mode);
         } elseif ($statement === 'insert' || $statement === 'update' || $statement === 'delete') {
-            return $this->statement->rowCount();
+            //return $this->statement->execute();
         } else {
             return null;
         }
