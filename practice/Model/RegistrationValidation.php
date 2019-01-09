@@ -11,50 +11,19 @@
     class RegistrationValidation
     {
         private $errors_register = array("", "", "", "", "", "", "", "");
+        private $amount_empty_errors = 0;
 
-        public function CheckRegistration()
+        private function CheckErrorsAndAddNewUser($last_name, $first_name, $patronymic, $email, $phone, $password)
         {
-            $count_empty_errors = 0;
-            $this->CheckEmptyFieldsRegister();
+            $this->CountingTheAmountOfErrorsAndWrite();
 
-            foreach ($this->errors_register as $value)
-                if($value != "")
-                    $count_empty_errors++;
-
-            if($count_empty_errors == 0) {
-                $patronymic = $this->CleanFields($_POST['last_name']);
-                $last_name = $this->CleanFields($_POST['first_name']);
-                $first_name = $this->CleanFields($_POST['patronymic']);
-                $email = $this->CleanFields($_POST['email_register']);
-                $phone = $this->CleanFields($_POST['phone']);
-                $password = $this->CleanFields($_POST['password_register']);
-                $confirm_pass = $this->CleanFields($_POST['confirm_password']);
-
-                $this->CheckValidateFirstNameLastNamePatronymic($last_name, 'имени');
-                $this->CheckValidateFirstNameLastNamePatronymic($first_name, 'фамилии');
-                $this->CheckValidateFirstNameLastNamePatronymic($patronymic, 'отчества');
-                $this->CheckValidateEmail($email);
-                $this->CheckValidatePhone($phone);
-                $this->CheckValidatePassword($password, $confirm_pass);
-
-                $this->CheckErrorsAndAddNewUser($patronymic, $last_name, $first_name, $email, $phone, $password);
-            }
-            return json_encode($this->errors_register);
-        }
-
-        private function CheckErrorsAndAddNewUser($patronymic, $last_name, $first_name, $email, $phone, $password)
-        {
-            $count_empty_errors = 0;
-            foreach ($this->errors_register as $value)
-                if($value != "")
-                    $count_empty_errors++;
-            if($count_empty_errors == 0) {
+            if($this->amount_empty_errors == 0) {
                 $objModel = new \practice\Model\Model();
-                $objModel->add_user($patronymic, $last_name, $first_name, $email, $phone, $password);
+                $objModel->add_user($last_name, $first_name, $patronymic, $email, $phone, $password);
             }
         }
 
-        private function CheckEmptyFieldsRegister()
+        private function CheckFieldsForEmptinessAndWriteErrors()
         {
             foreach ($_POST as $value)
             {
@@ -97,7 +66,7 @@
         private function CheckValidateEmail($email)
         {
             if(!preg_match("/^([a-z0-9_\.-]+)@([a-z0-9_\.-]+)\.([a-z\.]{2,6})$/", $email)) {
-                $this->errors_register[1] = 'Адрес электронной почты был введен неверно. Email может содержать только буквы латинского алфавита и цифры, от 3 до 14 символов.
+                $this->errors_register[3] = 'Адрес электронной почты был введен неверно. Email может содержать только буквы латинского алфавита и цифры, от 3 до 14 символов.
                     Также допускается использование символов @ - _';
             }
         }
@@ -105,16 +74,16 @@
         private function CheckValidatePassword($password, $confirm_pass)
         {
             if(!preg_match("/^[a-z0-9_-]{6,18}$/",$password)) {
-                $this->errors_register[2] = 'Пароль должен состоять из букв английского алфавита и цифр. Также допускается использование символов - _.';
+                $this->errors_register[5] = 'Пароль должен состоять из букв английского алфавита и цифр. Также допускается использование символов - _.';
             }
 
             if(strlen($password) < 3 or strlen($password) > 16) {
-                $this->errors_register[2] .= ' Длина должна быть не меньше 3-х символов и не больше 16';
+                $this->errors_register[5] .= ' Длина должна быть не меньше 3-х символов и не больше 16';
             }
 
-            if($this->errors_register[2] == "") {
+            if($this->errors_register[5] == "") {
                 if($confirm_pass != $password) {
-                    $this->errors_register[3] .= 'Пароли не совпадают !';
+                    $this->errors_register[6] .= 'Пароли не совпадают !';
                 }
             }
         }
@@ -140,5 +109,41 @@
             $value_field = htmlspecialchars($value_field);
 
             return $value_field;
+        }
+
+        private function CountingTheAmountOfErrorsAndWrite()
+        {
+            $this->amount_empty_errors = 0;
+
+            foreach ($this->errors_register as $value)
+                if($value != "")
+                    $this->amount_empty_errors++;
+        }
+
+        public function CheckRegistration()
+        {
+            $this->CheckFieldsForEmptinessAndWriteErrors();
+
+            $this->CountingTheAmountOfErrorsAndWrite();
+
+            if($this->amount_empty_errors == 0) {
+                $last_name = $this->CleanFields($_POST['last_name']);
+                $first_name = $this->CleanFields($_POST['first_name']);
+                $patronymic = $this->CleanFields($_POST['patronymic']);
+                $email = $this->CleanFields($_POST['email_register']);
+                $phone = $this->CleanFields($_POST['phone']);
+                $password = $this->CleanFields($_POST['password_register']);
+                $confirm_pass = $this->CleanFields($_POST['confirm_password']);
+
+                $this->CheckValidateFirstNameLastNamePatronymic($last_name, 'имени');
+                $this->CheckValidateFirstNameLastNamePatronymic($first_name, 'фамилии');
+                $this->CheckValidateFirstNameLastNamePatronymic($patronymic, 'отчества');
+                $this->CheckValidateEmail($email);
+                $this->CheckValidatePhone($phone);
+                $this->CheckValidatePassword($password, $confirm_pass);
+
+                $this->CheckErrorsAndAddNewUser($last_name, $first_name, $patronymic, $email, $phone, $password);
+            }
+            return json_encode($this->errors_register);
         }
     }

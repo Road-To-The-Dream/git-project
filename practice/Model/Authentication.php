@@ -7,17 +7,17 @@
         private $login = "fhlbc2012@gmail.com";
         private $password = 'fhlbc2012';
 
-        function Authentication($login, $password)
+        function CheckPasswordAndLoginAndStartSession($login, $password)
         {
             if ($this->login == $login && $this->password == $password) {
                 session_start();
                 $_SESSION['isAuth'] = 'fhlbc2012@gmail.com';
-                return 0;
+                return 1;
             }
-            return 1;
+            return 0;
         }
 
-        function logout()
+        function CleanAndDestroySession()
         {
             session_start();
             session_unset();

@@ -40,7 +40,8 @@ class ConnectionManager
     {
         try {
             $this->statement = $this->pdo->query($query);
-            return $this->statement->fetchAll($mode);
+            //return $this->statement->execute();
+            //return $this->statement->fetchAll($mode);
         } catch (\PDOException $ex) {
             exit($ex->getMessage());
         }

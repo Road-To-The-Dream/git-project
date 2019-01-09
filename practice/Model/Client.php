@@ -19,7 +19,7 @@ class Client
     public $phone;
     public $email;
     public $password;
-    public $role;
+    public $role = '\''.'user'.'\'';
 
     public function __construct()
     {
@@ -31,7 +31,8 @@ class Client
 
     public function insert()
     {
-        $this->db->ExecutionQuery("INSERT INTO products(name,image,price,unit) VALUES ('qwe','Image',12.999,'грн')");
+        $query = "INSERT INTO client(last_name,first_name,patronymic,email,phone,password,role) VALUES ($this->last_name,$this->first_name,$this->patronymic,$this->email,$this->phone,$this->password,$this->role)";
+        $this->db->ExecutionQuery($query);
     }
 
     public function update(){}

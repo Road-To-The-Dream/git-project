@@ -16,7 +16,7 @@
 
         public function show_all($view_name, $sorting = 0)
         {
-            $this->check_session();
+            $this->checkSessionAndStart();
             $this->dataModel = $this->objModel->get_all_info($sorting);
 
             $this->objectGenerateView->generate($view_name, $this->dataModel);
@@ -30,14 +30,14 @@
 
         public function show_product($view_name, $id = 1)
         {
-            $this->check_session();
+            $this->checkSessionAndStart();
             $this->dataModel = $this->objModel->get_product_id($id);
             $this->objectGenerateView->generate($view_name, $this->dataModel);
         }
 
         public function show_product_cart($view_name)
         {
-            $this->check_session();
+            $this->checkSessionAndStart();
             $this->dataModel = $this->objModel->get_products_cart();
 
             $this->objectGenerateView->generate($view_name, $this->dataModel);
@@ -45,7 +45,7 @@
 
         public function show_main($view_name)
         {
-            $this->check_session();
+            $this->checkSessionAndStart();
             $this->objectGenerateView->generate($view_name, $this->dataModel);
         }
 
@@ -69,11 +69,11 @@
         public function Logout()
         {
             $auth = new \practice\Model\Authentication();
-            $auth->logout();
+            $auth->CleanAndDestroySession();
             header('Location: http://practice/main/show_main');
         }
 
-        private function check_session()
+        private function checkSessionAndStart()
         {
             session_start();
             if(isset($_SESSION['isAuth'])) {

@@ -15,7 +15,7 @@
         public function CheckLogin()
         {
             $count_empty_errors = 0;
-            $this->CheckEmptyFieldsLogin();
+            $this->CheckFieldsForEmptinessAndWriteErrors();
 
             foreach ($this->errors_login as $value)
                 if($value != "")
@@ -25,14 +25,14 @@
                 $email = $this->CleanFields($_POST['email_login']);
                 $password = $this->CleanFields($_POST['password_login']);
                 $auth = new Authentication();
-                if($auth->Authentication($email, $password) == 1) {
+                if($auth->CheckPasswordAndLoginAndStartSession($email, $password) == 0) {
                     $this->errors_login[2] = 'Invalid password or login';
                 }
             }
             return json_encode($this->errors_login);
         }
 
-        private function CheckEmptyFieldsLogin() {
+        private function CheckFieldsForEmptinessAndWriteErrors() {
             if(empty($_POST['email_login']) && empty($_POST['password_login'])) {
                 $this->errors_login[2] = 'Empty fields form';
             }

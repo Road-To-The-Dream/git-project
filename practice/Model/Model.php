@@ -4,16 +4,16 @@
 
     class Model
     {
-        public function add_user($patronymic, $last_name, $first_name, $phone, $email, $password)
+        public function add_user($last_name, $first_name, $patronymic, $email, $phone, $password)
         {
             $client = new Client();
 
-            $client->last_name = $last_name;
-            $client->first_name = $first_name;
-            $client->patronymic = $patronymic;
-            $client->phone = $phone;
-            $client->email = $email;
-            $client->password = $password;
+            $client->last_name = '\''.$last_name.'\'';
+            $client->first_name = '\''.$first_name.'\'';
+            $client->patronymic = '\''.$patronymic.'\'';
+            $client->email = '\''.$email.'\'';
+            $client->phone = '\''.$phone.'\'';
+            $client->password = '\''.$password.'\'';
 
             $client->insert();
         }

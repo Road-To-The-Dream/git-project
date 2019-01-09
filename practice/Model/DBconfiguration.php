@@ -7,7 +7,7 @@
  */
     return [
         'host' => 'localhost',
-        'dbname' => 'Sample',
+        'dbname' => 'NixShop',
         'user' => 'root',
         'password' => '',
         'charset' => 'utf8'
