@@ -4,17 +4,35 @@
 
     class Authentication
     {
-        private $login = "fhlbc2012@gmail.com";
-        private $password = 'fhlbc2012';
+        private $client;
 
-        function CheckPasswordAndLoginAndStartSession($login, $password)
+        public function __construct()
         {
-            if ($this->login == $login && $this->password == $password) {
-                session_start();
-                $_SESSION['isAuth'] = 'fhlbc2012@gmail.com';
-                return 1;
+            $this->client = new Client();
+        }
+
+        function CheckPasswordAndLoginAndStartSession($email, $password)
+        {
+            if($this->CheckExistenceEmail($email)) {
+                $obj_pass = new Password($email);
+                if($obj_pass->VerifyPasswords($password, $email)) {
+                    $first_name = $this->client->selectFirstNameUser($email);
+                    session_start();
+                    $_SESSION['isAuth'] = $first_name[0]['first_name'];
+                    return 1;
+                }
             }
             return 0;
+        }
+
+        private function CheckExistenceEmail($email)
+        {
+            $data_select = $this->client->selectEmailUser($email);
+            if(!empty($data_select)) {
+                return 1;
+            } else {
+                return 0;
+            }
         }
 
         function CleanAndDestroySession()

@@ -27,7 +27,6 @@ class ConnectionManager
         try {
             $this->pdo = new \PDO($dsn, $this->settings['user'], $this->settings['password'], [\PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES ' .$this->settings['charset']]);
 
-            # Disable emulations and we can now log
             $this->pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
             $this->pdo->setAttribute(\PDO::ATTR_EMULATE_PREPARES, false);
             $this->isConnected = true;
@@ -39,24 +38,22 @@ class ConnectionManager
     public function ExecutionQuery($query, $mode = \PDO::FETCH_ASSOC)
     {
         try {
-            $this->statement = $this->pdo->query($query);
-            //return $this->statement->execute();
-            //return $this->statement->fetchAll($mode);
+            $query = trim(str_replace('\r', '', $query));
+            $rawStatement = explode(' ', preg_replace("/\s+|\t+|\n+/", " ", $query));
+            $statement = strtolower($rawStatement[0]);
+
+            if ($statement === 'select') {
+                $this->statement = $this->pdo->query($query);
+                return $this->statement->fetchAll($mode);
+            } else if ($statement === 'insert' || $statement === 'update' || $statement === 'delete') {
+                return $this->statement = $this->pdo->query($query);
+
+            } else {
+                return null;
+            }
         } catch (\PDOException $ex) {
             exit($ex->getMessage());
         }
-//        $query = trim(str_replace('\r', '', $query));
-//        $this->init($query, $parameters);
-//        $rawStatement = explode(' ', preg_replace("/\s+|\t+|\n+/", " ", $query));
-//        $statement = strtolower($rawStatement[0]);
-//
-//        if ($statement === 'select' || $statement === 'show') {
-//            return $this->statement->fetchAll($mode);
-//        } elseif ($statement === 'insert' || $statement === 'update' || $statement === 'delete') {
-//            //return $this->statement->execute();
-//        } else {
-//            return null;
-//        }
     }
 
     public function closeConnection()

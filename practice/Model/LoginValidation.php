@@ -24,12 +24,18 @@
             if($count_empty_errors == 0) {
                 $email = $this->CleanFields($_POST['email_login']);
                 $password = $this->CleanFields($_POST['password_login']);
-                $auth = new Authentication();
-                if($auth->CheckPasswordAndLoginAndStartSession($email, $password) == 0) {
-                    $this->errors_login[2] = 'Invalid password or login';
-                }
+
+                $this->CheckLoginAndPasswordInDatabase($email, $password);
             }
             return json_encode($this->errors_login);
+        }
+
+        private function CheckLoginAndPasswordInDatabase($email, $password)
+        {
+            $auth = new Authentication();
+            if(!$auth->CheckPasswordAndLoginAndStartSession($email, $password)) {
+                $this->errors_login[2] = 'Invalid password or login';
+            }
         }
 
         private function CheckFieldsForEmptinessAndWriteErrors() {

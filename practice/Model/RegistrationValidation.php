@@ -13,13 +13,24 @@
         private $errors_register = array("", "", "", "", "", "", "", "");
         private $amount_empty_errors = 0;
 
+        private function CheckExistenceEmailAndAddUser($last_name, $first_name, $patronymic, $email, $phone, $password)
+        {
+            $client = new Client();
+            $data_select = $client->selectEmailUser($email);
+            if(empty($data_select)) {
+                $objModel = new \practice\Model\Model();
+                $objModel->add_user($last_name, $first_name, $patronymic, $email, $phone, $password);
+            } else {
+                $this->errors_register[7] = 'User with this email exists!';
+            }
+        }
+
         private function CheckErrorsAndAddNewUser($last_name, $first_name, $patronymic, $email, $phone, $password)
         {
             $this->CountingTheAmountOfErrorsAndWrite();
 
             if($this->amount_empty_errors == 0) {
-                $objModel = new \practice\Model\Model();
-                $objModel->add_user($last_name, $first_name, $patronymic, $email, $phone, $password);
+                $this->CheckExistenceEmailAndAddUser($last_name, $first_name, $patronymic, $email, $phone, $password);
             }
         }
 

@@ -25,21 +25,21 @@ class Product
     {
         if($this->id == 0) {
             if($sorting == 1) {
-                return $this->db->ExecutionQuery('SELECT * FROM products ORDER BY price DESC');
+                return $this->db->ExecutionQuery('SELECT * FROM prod ORDER BY price DESC');
             }
             else if($sorting == 2) {
-                return $this->db->ExecutionQuery('SELECT * FROM products ORDER BY price ASC');
+                return $this->db->ExecutionQuery('SELECT * FROM prod ORDER BY price ASC');
             }
-            return $this->db->ExecutionQuery("SELECT * FROM products");
         }
         else {
-            return $this->db->ExecutionQuery("SELECT * FROM products WHERE id = ".$this->id);
+            return $this->db->ExecutionQuery("SELECT * FROM prod WHERE id = ".$this->id);
         }
+        return $this->db->ExecutionQuery("SELECT * FROM prod");
     }
 
     public function insert()
     {
-        $this->db->ExecutionQuery("INSERT INTO products(name,image,price,unit) VALUES ('qwe','Image',12.999,'грн')");
+        $this->db->ExecutionQuery("INSERT INTO product(name,image,price,unit) VALUES ('qwe','Image',12.999,'грн')");
     }
 
     public function update(){}
