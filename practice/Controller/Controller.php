@@ -17,7 +17,7 @@
         public function show_all($view_name, $sorting = 0)
         {
             $this->checkSessionAndStart();
-            $this->dataModel = $this->objModel->get_all_info($sorting);
+            $this->dataModel = $this->objModel->GetAllProduct($sorting);
 
             $this->objectGenerateView->generate($view_name, $this->dataModel);
         }
@@ -31,14 +31,14 @@
         public function show_product($view_name, $id = 1)
         {
             $this->checkSessionAndStart();
-            $this->dataModel = $this->objModel->get_product_id($id);
+            $this->dataModel = $this->objModel->GetProductId($id);
             $this->objectGenerateView->generate($view_name, $this->dataModel);
         }
 
         public function show_product_cart($view_name)
         {
             $this->checkSessionAndStart();
-            $this->dataModel = $this->objModel->get_products_cart();
+            $this->dataModel = $this->objModel->GetProductCart($_SESSION['product_id']);
 
             $this->objectGenerateView->generate($view_name, $this->dataModel);
         }
@@ -66,16 +66,9 @@
             echo $objLoginValidation->CheckLogin();
         }
 
-        public function CHeckSessionAndAddProductInCart()
+        public function CheckSessionAndAddingProductInCart()
         {
-            session_start();
-            if(isset($_SESSION['product_id'])) {
-                $this->objModel->AddProductInCart();
-                echo 'succes';
-            } else {
-                session_destroy();
-                echo 'error';
-            }
+            $this->objModel->CheckExistArrayProductInSession();
         }
 
         public function Logout()

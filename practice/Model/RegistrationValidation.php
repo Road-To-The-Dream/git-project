@@ -19,7 +19,7 @@
             $data_select = $client->selectEmailUser($email);
             if(empty($data_select)) {
                 $objModel = new \practice\Model\Model();
-                $objModel->add_user($last_name, $first_name, $patronymic, $email, $phone, $password);
+                $objModel->AddingNewUser($last_name, $first_name, $patronymic, $email, $phone, $password);
             } else {
                 $this->errors_register[7] = 'User with this email exists!';
             }

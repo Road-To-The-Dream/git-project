@@ -1,0 +1,13 @@
+.cart {
+    background-color: #343A40;
+}
+
+.amount {
+    background: red; /* Цвет фона */
+    border-radius: 100px; /* Радиус скругления */
+    padding: 0 5px 0 4px;
+    color: #000;
+    position: absolute;
+    right: 20px;
+    top: -2px;
+}
