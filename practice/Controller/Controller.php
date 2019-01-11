@@ -71,9 +71,10 @@
             session_start();
             if(isset($_SESSION['product_id'])) {
                 $this->objModel->AddProductInCart();
-            }
-            else {
-                return 0;
+                echo 'succes';
+            } else {
+                session_destroy();
+                echo 'error';
             }
         }
 
@@ -88,7 +89,9 @@
         {
             session_start();
             if(isset($_SESSION['isAuth'])) {
-                $_SESSION['product_id'] = [];
+                if(!isset($_SESSION['product_id'])) {
+                    $_SESSION['product_id'] = [];
+                }
                 include "View\Template\header_logout.php";
             }
             else {

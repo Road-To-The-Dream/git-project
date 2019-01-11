@@ -6,7 +6,7 @@
     {
         public function AddProductInCart()
         {
-
+            array_push($_SESSION['product_id'], $_POST['IDProduct']);
         }
 
         public function add_user($last_name, $first_name, $patronymic, $email, $phone, $password)

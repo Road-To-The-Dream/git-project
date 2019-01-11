@@ -1,19 +1,27 @@
-function AjaxAddInCart() {
+function AjaxAddInCart(id) {
     $.ajax({
         url:     'http://practice//CHeckSessionAndAddProductInCart',
         type:     "POST",
+        data: "IDProduct=" + id,
         dataType: "html",
         cache: false,
         success: function(response) {
-            if(!response) {
+            alert(response);
+            if(response == 'error') {
                 swal({
-                    title: "Вход в аккаунт выполнен !",
-                    text: "Приятных покупок.",
-                    icon: "success",
+                    title: "Для добавления в корзину требуется войти в аккаунт!",
+                    icon: "error",
                     button: "OK"
-                }).then(function() {
-                    location.href = "http://practice/main/show_main"
                 });
+            } else {
+                if(response == 'succes') {
+                    alert(response);
+                    swal({
+                        title: "Товар добавлен в корзину !",
+                        icon: "success",
+                        button: "OK"
+                    });
+                }
             }
         }
     });

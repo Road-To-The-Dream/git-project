@@ -6,8 +6,8 @@
     <link rel="shortcut icon" href="/View/Image/header/tab_icon.png" type="image/png">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <link rel="stylesheet" href="/View/CSS/MoveArrowTop.css">
-    <script type="text/javascript" src="/View/JS/MoveArrowTop.js"></script>
     <script type="text/javascript" src="//web-ptica.ru/VRV-files/jquery-2.1.3.min.js "></script>
+    <script type="text/javascript" src="/View/JS/MoveArrowTop.js"></script>
     <script src="/View/JS/Hundler_login.js"></script>
     <script src="/View/JS/Hundler_register.js"></script>
     <script src="/View/JS/ShowTab.js"></script>
@@ -15,6 +15,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-formhelpers/2.3.0/js/bootstrap-formhelpers.js"></script>
+
 </head>
 <body>
 <div id="blockajax"></div>

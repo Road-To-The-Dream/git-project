@@ -96,7 +96,7 @@
                                                 <input class="btn btn-success btn-block mt-2" type="submit" name="btn_login" value="Купить">
                                             </div>
                                             <div class="col-6 p-0">
-                                                <a class='btn btn-warning text-white pl-1 mt-2'  onclick="AjaxAddInCart()"><img class="mr-2" src='/View/Image/add_cart.png'>Добавить</a>
+                                                <a class='btn btn-warning text-white pl-1 mt-2'  onclick="AjaxAddInCart(<?=$value["id"];?>)"><img class="mr-2" src='/View/Image/add_cart.png'>Добавить</a>
                                             </div>
                                         </div>
                                     </div>
