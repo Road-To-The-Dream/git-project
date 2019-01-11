@@ -66,6 +66,17 @@
             echo $objLoginValidation->CheckLogin();
         }
 
+        public function CHeckSessionAndAddProductInCart()
+        {
+            session_start();
+            if(isset($_SESSION['product_id'])) {
+                $this->objModel->AddProductInCart();
+            }
+            else {
+                return 0;
+            }
+        }
+
         public function Logout()
         {
             $auth = new \practice\Model\Authentication();
@@ -77,6 +88,7 @@
         {
             session_start();
             if(isset($_SESSION['isAuth'])) {
+                $_SESSION['product_id'] = [];
                 include "View\Template\header_logout.php";
             }
             else {

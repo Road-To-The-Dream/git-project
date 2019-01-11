@@ -21,9 +21,7 @@ function AjaxFormLogin(message1, message2, message3) {
                     icon: "success",
                     button: "OK"
                 }).then(function() {
-                    setTimeout(function() {
-                        location.href = "http://practice/main/show_main"
-                    }, 200);
+                    location.href = "http://practice/main/show_main"
                 });
             }
         },

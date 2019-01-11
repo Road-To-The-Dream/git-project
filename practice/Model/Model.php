@@ -4,16 +4,16 @@
 
     class Model
     {
-        private function HashingPassword($password)
+        public function AddProductInCart()
         {
-            $password =  password_hash($password, PASSWORD_DEFAULT);
 
-            return $password;
         }
 
         public function add_user($last_name, $first_name, $patronymic, $email, $phone, $password)
         {
-            $password = $this->HashingPassword($password);
+            $obj_pass = new Password($email);
+            $password = $obj_pass->HashingPassword($password);
+
             $client = new Client();
 
             $client->last_name = '\''.$last_name.'\'';

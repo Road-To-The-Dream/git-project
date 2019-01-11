@@ -22,7 +22,7 @@
     <div class="container mt-4">
         <div class="row mb-3" style="border-bottom: #090909 1px solid">
             <div class="col-md-6 col-lg-7 text-align-bottom f-size-total">
-                <p class="f-size-title"><?= $data[0]['Name']?></p>
+                <p class="f-size-title"><?= $data[0]['name']?></p>
             </div>
             <div class="col-md-6 col-lg-5 text-right">
                 <p class="mt-1">
