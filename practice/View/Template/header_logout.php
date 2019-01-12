@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <link rel="shortcut icon" href="/View/Image/header/tab_icon.png" type="image/png">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <link rel="stylesheet" href="/View/CSS/header_cart.css">
     <link rel="stylesheet" href="/View/CSS/MoveArrowTop.css">
@@ -82,7 +82,7 @@
                     <a href="http://practice/cart/show_product_cart">
                         <button type="button" class="btn btn-dark mb-1 p-1">
                             <img src="/View/Image/header/Cart.png" alt="Image cart">
-                            <span class="amount" id="c"><?php echo count($_SESSION['product_id']) ?></span>
+                            <span class="amount rounded-circle pl-2 pr-2" style="background: red" id="c"><?php echo count($_SESSION['product_id']) ?></span>
                         </button>
                     </a>
                 </div>

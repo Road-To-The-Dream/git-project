@@ -71,6 +71,11 @@
             $this->objModel->CheckExistArrayProductInSession();
         }
 
+        public function CountTotalPriceProduct()
+        {
+            $this->objModel->CountTotalPriceProduct();
+        }
+
         public function Logout()
         {
             $auth = new \practice\Model\Authentication();

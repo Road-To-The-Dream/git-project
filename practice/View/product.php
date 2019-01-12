@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Product</title>
+    <title>LAPTOP | Product</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <link rel="stylesheet" href="/View/CSS/cart.css">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="/View/JS/AddProductInCart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 </head>
@@ -20,7 +20,7 @@
         </nav>
     </div>
     <div class="container mt-4">
-        <div class="row mb-3" style="border-bottom: #090909 1px solid">
+        <div class="row mb-3">
             <div class="col-md-6 col-lg-7 text-align-bottom f-size-total">
                 <p class="f-size-title"><?= $data[0]['name']?></p>
             </div>
@@ -28,6 +28,14 @@
                 <p class="mt-1">
                     Код товара: <span style="font-weight: bold"><?= $data[0]['id']?></span>
                 </p>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="container">
+                        <div class="col-12" style="border-bottom: #090909 1px solid">
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="row">
@@ -66,6 +74,7 @@
                     </div>
                     <div class="col-md-5 col-lg-4 col-xl-3">
                         <input class="btn btn-success btn-lg btn-block" type="button" name="btn_logout" value="Купить">
+                        <a class='btn btn-warning btn-lg text-white btn-block pl-1 mt-2' onclick="AjaxAddInCart(<?=$data[0]['id'];?>, 'c')"><img class="mr-2" src='/View/Image/add_cart.png'>Добавить</a>
                     </div>
                 </div>
                 <div class="row">

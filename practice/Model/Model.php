@@ -6,6 +6,31 @@
     {
         private $information_in_window = array("", "", "");
 
+        public function CountTotalPriceProduct()
+        {
+            $price = array("", "", "");
+            $amount_units = $_POST['amount_units'];
+            $price_product = $_POST['price_product'];
+            $total_price_product = $_POST['total_price_product'];
+            $total_price_products = $_POST['total_price_products'];
+
+            if($_POST['btn_value'] == '+') {
+                $amount_units++;
+                $total_price_product = $amount_units * 5097;
+                $total_price_products = $amount_units * 5097;
+            } else {
+                $amount_units--;
+                $total_price_product = 3;
+                $total_price_products = 3;
+            }
+
+            $price[0] = $amount_units;
+            $price[1] = $total_price_product;
+            $price[2] = $total_price_products;
+
+            echo json_encode($price);
+        }
+
         public function CheckExistArrayProductInSession()
         {
             session_start();
@@ -28,7 +53,7 @@
                 $this->information_in_window[1] = "success";
                 $this->information_in_window[2] = count($_SESSION['product_id']);
             } else {
-                $this->information_in_window[0] = "Товар уже имеется в корзине !";
+                $this->information_in_window[0] = "Товар уже имеется в корзине ! Перейдите в корзину для покупки.";
                 $this->information_in_window[1] = "error";
             }
         }

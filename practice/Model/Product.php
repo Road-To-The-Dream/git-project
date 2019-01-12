@@ -38,12 +38,11 @@ class Product
 
     public function SelectProductsForCart($arr_products)
     {
-        $amount = count($arr_products);
-        if($amount > 1) {
+        $amount_products = count($arr_products);
+        if($amount_products > 1) {
             $query = "Select * From prod Where id IN (";
             $query .= "'".$arr_products[0]."'";
-            for($i=1; $i < $amount; $i++)
-            {
+            for($i=1; $i < $amount_products; $i++) {
                 $query .= ", '".$arr_products[$i]."'";
             }
             $query .= ")";
