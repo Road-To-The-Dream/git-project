@@ -36,22 +36,25 @@ class Product
         return $this->db->ExecutionQuery("SELECT * FROM prod");
     }
 
-    public function SelectProductsForCart($arr_products)
+    public function SelectProductsForCart($array_products)
     {
-        $amount_products = count($arr_products);
+        $amount_products = count($array_products);
         if($amount_products > 1) {
-            $query = "Select * From prod Where id IN (";
-            $query .= "'".$arr_products[0]."'";
-            for($i=1; $i < $amount_products; $i++) {
-                $query .= ", '".$arr_products[$i]."'";
-            }
-            $query .= ")";
+            $query = "Select * From prod Where id IN (".implode(",", $array_products).")";
         }
         else{
-            $query = "Select * From prod Where id = ".$arr_products[0];
+            $query = "Select * From prod Where id = ".array_shift($array_products);
         }
+        $d = $this->db->ExecutionQuery($query);
 
-        return $this->db->ExecutionQuery($query);
+        return $d;
+    }
+
+    public function SelectTotalPriceProducts($array_products)
+    {
+        $query = "Select SUM(price) AS total_price FROM prod where id IN(3,2,4)";
+        $d = $this->db->ExecutionQuery($query);
+        return $d;
     }
 
     public function insert()

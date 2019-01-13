@@ -102,11 +102,32 @@
             return $DBdata;
         }
 
-        public function GetProductCart($arr_products)
+        public function GetProductCart($array_products)
         {
             $product = new Product();
-            $DBdata = $product->SelectProductsForCart($arr_products);
+            $DBdata = $product->SelectProductsForCart($array_products);
 
+            if($DBdata == "")
+            {
+                echo "fd";
+            }
             return $DBdata;
+        }
+
+        public function GetTotalPriceProducts($array_products)
+        {
+            $product = new Product();
+            $DBdata = $product->SelectTotalPriceProducts($array_products);
+            $d = $DBdata[0]['total_price'];
+
+            echo $d;
+        }
+
+        public function RemoveProductForCart($id)
+        {
+            session_start();
+            if (($key = array_search($id, $_SESSION['product_id'])) !== false) {
+                unset($_SESSION['product_id'][$key]);
+            }
         }
     }

@@ -76,6 +76,16 @@
             $this->objModel->CountTotalPriceProduct();
         }
 
+        public function GetTotalPriceProducts()
+        {
+            $this->objModel->GetTotalPriceProducts($_SESSION['product_id']);
+        }
+
+        public function RemoveProductForCart()
+        {
+            $this->objModel->RemoveProductForCart($_POST['IDProduct']);
+        }
+
         public function Logout()
         {
             $auth = new \practice\Model\Authentication();

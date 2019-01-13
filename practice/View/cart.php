@@ -5,8 +5,10 @@
     <title>Cart - LAPTOP</title>
     <link rel="stylesheet" href="/View/CSS/cart.css">
     <script src="/View/JS/ShowTotalPriceProduct.js"></script>
+    <script src="/View/JS/ShowTotalPriceProducts.js"></script>
+    <script src="/View/JS/RemoveProductFromCart.js"></script>
 </head>
-<body>
+<body onload="TotalPriceProducts('total_price_products')">
     <div class="container">
         <?php
             foreach ($data as $value){
@@ -52,7 +54,7 @@
                                     <p class="f-size-name" id="price_product"><?php echo $value["price"]?> грн</p>
                                 </div>
                                 <div class="col-2 align-self-center text-right">
-                                    <button type="button" class="btn btn-danger">Удалить</button>
+                                    <button type="button" class="btn btn-danger" onclick="RemoveProduct(<?php echo $value["id"]?>)">Удалить</button>
                                 </div>
                             </div>
                             <div class="row">
@@ -79,7 +81,7 @@
                 Итого:
             </div>
             <div class="col-2 text-right f-size-title">
-                <p class="m-0" id="total_price_products">41 499</p>
+                <p class="m-0" id="total_price_products"></p>
             </div>
             <div class="col-1 text-right f-size-title m-0">
                 <p class="m-0"> грн</p>
