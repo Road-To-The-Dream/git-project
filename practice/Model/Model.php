@@ -9,24 +9,25 @@
         public function CountTotalPriceProduct()
         {
             $price = array("", "", "");
+            
             $amount_units = $_POST['amount_units'];
             $price_product = $_POST['price_product'];
             $total_price_product = $_POST['total_price_product'];
-            $total_price_products = $_POST['total_price_products'];
+            $price_all_products = $_POST['price_all_products'];
 
             if($_POST['btn_value'] == '+') {
                 $amount_units++;
-                $total_price_products += $total_price_product;
+                $price_all_products += $total_price_product;
                 $total_price_product = $amount_units * $price_product;
             } else {
                 $amount_units--;
                 $total_price_product = 3;
-                $total_price_products = 3;
+                $price_all_products = 3;
             }
 
             $price[0] = $amount_units;
             $price[1] = $total_price_product;
-            $price[2] = $total_price_products;
+            $price[2] = $price_all_products;
 
             echo json_encode($price);
         }
@@ -119,7 +120,7 @@
             echo $d;
         }
 
-        public function RemoveProductForCart($id)
+        public function RemoveProductInCart($id)
         {
             session_start();
             if (($key = array_search($id, $_SESSION['product_id'])) !== false) {

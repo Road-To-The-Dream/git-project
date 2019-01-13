@@ -84,7 +84,7 @@
 
         public function RemoveProductForCart()
         {
-            $this->objModel->RemoveProductForCart($_POST['IDProduct']);
+            $this->objModel->RemoveProductInCart($_POST['IDProduct']);
         }
 
         public function Logout()

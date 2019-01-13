@@ -17,7 +17,7 @@
     <a href="#" class="scrollup">Наверх</a>
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark pb-0">
         <div class="container">
-            <a href="http://practice/main/show_main"><img src="/View/Image/sdf.png" alt="logo"></a>
+            <a href="http://practice/main/show_main"><img src="/View/Image/header/logo_head.png" alt="logo_head"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -82,7 +82,7 @@
                     <a href="http://practice/cart/show_product_cart">
                         <button type="button" class="btn btn-dark mb-1 p-1">
                             <img src="/View/Image/header/Cart.png" alt="Image cart">
-                            <span class="amount rounded-circle pl-2 pr-2" style="background: red" id="c"><?php echo count($_SESSION['product_id']) ?></span>
+                            <span class="amount rounded-circle pl-2 pr-2" style="background: red" id="amount_products_in_cart"><?php echo count($_SESSION['product_id']) ?></span>
                         </button>
                     </a>
                 </div>

@@ -8,14 +8,14 @@
     <script src="/View/JS/ShowTotalPriceProducts.js"></script>
     <script src="/View/JS/RemoveProductFromCart.js"></script>
 </head>
-<body onload="TotalPriceProducts('total_price_products')">
+<body onload="TotalPriceProducts('price_all_products')">
     <div class="container mt-4 mb-5">
         <div class="row">
             <div class="col-auto f-size-total">
                 Товаров в корзине на сумму:
             </div>
             <div class="col-auto p-0 f-size-title">
-                <p class="m-0" id="total_price_products"></p>
+                <p class="m-0" id="price_all_products"></p>
             </div>
             <div class="col-auto pl-2 f-size-title m-0">
                 <p class="m-0">грн</p>
@@ -41,6 +41,11 @@
                                     <div class="col-2 text-center text-muted">
                                         Цена
                                     </div>
+                                    <div class="col-2 text-right p-0">
+                                        <a data-toggle="tooltip" title="Удалить товар" onclick="RemoveProduct(<?php echo $value["id"]?>)" style="cursor: pointer">
+                                            <img class="pb-2" src="/View/Image/Cart/Delete_product.png" alt="Delete product">
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                             <div class="row justify-content-center">
@@ -52,22 +57,31 @@
                                 </div>
                                 <div class="col-2 align-self-center">
                                     <div class="row justify-content-center">
-                                        <div class="col-3 p-0">
-                                            <button type="button" class="btn btn-secondary" data-toggle="tooltip" title="Уменьшить" onclick="AjaxCountTotalPriceProduct('-','amount', 'total_price_product', 'total_price_products')">–</button>
+                                        <div class="col-auto mr-1 p-0">
+                                            <a class='btn btn-secondary' data-toggle="tooltip" title="Уменьшить" onclick="AjaxCountTotalPriceProduct('-',
+                                                                                                            'amount<?php echo $value["id"]?>',
+                                                                                                            'price_product<?php echo $value["id"]?>',
+                                                                                                            'total_price_product<?php echo $value["id"]?>',
+                                                                                                            'price_all_products')">
+                                                <img src='/View/Image/Cart/Minus.png'></a>
                                         </div>
                                         <div class="col-4 p-0">
                                             <input type="text" class="form-control text-center" id="amount<?php echo $value["id"]?>" aria-describedby="emailHelp" oninput="this.value = this.value.replace(/\D/g,'').substr(0,2)" disabled value="1">
                                         </div>
-                                        <div class="col-3 p-0 text-right">
-                                            <button type="button" class="btn btn-secondary" data-toggle="tooltip" title="Увеличить" onclick="AjaxCountTotalPriceProduct('+','amount<?php echo $value["id"]?>', 'price_product<?php echo $value["id"]?>', 'total_price_product<?php echo $value["id"]?>', 'total_price_products')">+</button>
+                                        <div class="col-auto ml-1 p-0 text-right">
+                                            <a class='btn btn-secondary' data-toggle="tooltip" title="Увеличить" onclick="AjaxCountTotalPriceProduct('+',
+                                                                                                            'amount<?php echo $value["id"]?>',
+                                                                                                            'price_product<?php echo $value["id"]?>',
+                                                                                                            'total_price_product<?php echo $value["id"]?>',
+                                                                                                            'price_all_products')">
+                                                <img src='/View/Image/Cart/Added.png'></a>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-2 align-self-center text-center">
                                     <p class="f-size-name" id="price_product<?php echo $value["id"]?>"><?php echo $value["price"]?> грн</p>
                                 </div>
-                                <div class="col-2 align-self-center text-right">
-                                    <button type="button" class="btn btn-danger" onclick="RemoveProduct(<?php echo $value["id"]?>)">Удалить</button>
+                                <div class="col-2">
                                 </div>
                             </div>
                             <div class="row">

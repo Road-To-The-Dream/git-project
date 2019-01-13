@@ -5,7 +5,7 @@ function RemoveProduct(id) {
         data: "IDProduct=" + id,
         cache: false,
         success: function(response) {
-            location.href = "http://practice/cart/show_product_cart";
+            location.reload();
         }
     });
 }
