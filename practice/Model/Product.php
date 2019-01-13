@@ -52,7 +52,7 @@ class Product
 
     public function SelectTotalPriceProducts($array_products)
     {
-        $query = "Select SUM(price) AS total_price FROM prod where id IN(3,2,4)";
+        $query = "Select SUM(price) AS total_price FROM prod where id IN(".implode(",", $array_products).")";
         $d = $this->db->ExecutionQuery($query);
         return $d;
     }

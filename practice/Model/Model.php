@@ -16,8 +16,8 @@
 
             if($_POST['btn_value'] == '+') {
                 $amount_units++;
-                $total_price_product = $amount_units * 5097;
-                $total_price_products = $amount_units * 5097;
+                $total_price_products += $total_price_product;
+                $total_price_product = $amount_units * $price_product;
             } else {
                 $amount_units--;
                 $total_price_product = 3;
@@ -107,10 +107,6 @@
             $product = new Product();
             $DBdata = $product->SelectProductsForCart($array_products);
 
-            if($DBdata == "")
-            {
-                echo "fd";
-            }
             return $DBdata;
         }
 

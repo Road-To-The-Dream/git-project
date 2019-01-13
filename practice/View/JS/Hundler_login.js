@@ -21,7 +21,7 @@ function AjaxFormLogin(message1, message2, message3) {
                     icon: "success",
                     button: "OK"
                 }).then(function() {
-                    location.href = "http://practice/main/show_main"
+                    location.reload();
                 });
             }
         },

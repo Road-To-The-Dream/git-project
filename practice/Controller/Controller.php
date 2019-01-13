@@ -78,6 +78,7 @@
 
         public function GetTotalPriceProducts()
         {
+            session_start();
             $this->objModel->GetTotalPriceProducts($_SESSION['product_id']);
         }
 
