@@ -21,8 +21,8 @@
                 $total_price_product = $amount_units * $price_product;
             } else {
                 $amount_units--;
-                $total_price_product = 3;
-                $price_all_products = 3;
+                $price_all_products -= $total_price_product;
+                $total_price_product = $amount_units - $price_product;
             }
 
             $price[0] = $amount_units;
@@ -81,11 +81,8 @@
             $product = new Product();
 
             $DBdata = $product->select($sorting);
-            $i = 0;
-            foreach ($DBdata as $price) { #change the price of 30,000 to 30 000
-                $DBdata[$i]['price'] = str_replace('.', ' ', $price['price']);
-                $i++;
-            }
+
+            $DBdata = $this->ChangePriceProduct($DBdata, 'price');
 
             return $DBdata;
         }
@@ -97,16 +94,33 @@
 
             $DBdata = $product->select();
 
-            #change the price of 30.000 to 30 000
-            $DBdata[0]['price'] = str_replace('.', ' ', $DBdata[0]['price']);
+            $DBdata = $this->ChangePriceProduct($DBdata, 'price');
 
             return $DBdata;
+        }
+
+        private function ChangePriceProduct($data_select, $name_column)
+        {
+            for($i = 0; $i < count($data_select); $i++) {
+                switch (strlen($data_select[$i][$name_column])) {
+                    case 4:
+                        $data_select[$i][$name_column] = substr($data_select[$i][$name_column], 0, 1) . " " . substr($data_select[$i][$name_column], 1);
+                        break;
+                    case 5:
+                        $data_select[$i][$name_column] = substr($data_select[$i][$name_column], 0, 2) . " " . substr($data_select[$i][$name_column], 2);
+                        break;
+                }
+            }
+
+            return $data_select;
         }
 
         public function GetProductCart($array_products)
         {
             $product = new Product();
             $DBdata = $product->SelectProductsForCart($array_products);
+
+            $DBdata = $this->ChangePriceProduct($DBdata, 'price');
 
             return $DBdata;
         }
@@ -115,9 +129,9 @@
         {
             $product = new Product();
             $DBdata = $product->SelectTotalPriceProducts($array_products);
-            $d = $DBdata[0]['total_price'];
-
-            echo $d;
+            $total_price_products = $this->ChangePriceProduct($DBdata, 'total_price');
+            $total_price_products = $total_price_products[0]['total_price'];
+            echo $total_price_products;
         }
 
         public function RemoveProductInCart($id)
