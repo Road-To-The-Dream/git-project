@@ -6,25 +6,31 @@
     {
         private $information_in_window = array("", "", "");
 
+        private function RemoveSpacesInPrice($price)
+        {
+            return str_replace(' ', '', $price);
+        }
+
         public function CountTotalPriceProduct()
         {
             $price = array("", "", "");
             
             $amount_units = $_POST['amount_units'];
-            $price_product = $_POST['price_product'];
-            $total_price_product = $_POST['total_price_product'];
-            $price_all_products = $_POST['price_all_products'];
+            $price_product = $this->RemoveSpacesInPrice($_POST['price_product']);
+            $total_price_product = $this->RemoveSpacesInPrice($_POST['total_price_product']);
+            $price_all_products = $this->RemoveSpacesInPrice($_POST['price_all_products']);
 
             if($_POST['btn_value'] == '+') {
                 $amount_units++;
                 $price_all_products += $total_price_product;
                 $total_price_product = $amount_units * $price_product;
             } else {
-                $amount_units--;
-                $price_all_products -= $total_price_product;
-                $total_price_product = $amount_units - $price_product;
+                if($amount_units > 1) {
+                    $amount_units--;
+                    $total_price_product = $amount_units * $price_product;
+                    $price_all_products -= $total_price_product;
+                }
             }
-
             $price[0] = $amount_units;
             $price[1] = $total_price_product;
             $price[2] = $price_all_products;
@@ -32,13 +38,22 @@
             echo json_encode($price);
         }
 
-        public function CheckExistArrayProductInSession()
+        private function CheckArrayProductsInSession()
         {
             session_start();
             if(isset($_SESSION['product_id'])) {
-                $this->CheckExistProductInCartAndAdding();
+                return 1;
             } else {
                 session_destroy();
+                return 0;
+            }
+        }
+
+        public function AddingProductsInCart()
+        {
+            if($this->CheckArrayProductsInSession()) {
+                $this->CheckExistProductInCartAndAdding();
+            } else {
                 $this->information_in_window[0] = "Для добавления товара в корзину требуется войти в аккаунт!";
                 $this->information_in_window[1] = "error";
             }
@@ -83,6 +98,8 @@
             $DBdata = $product->select($sorting);
 
             $DBdata = $this->ChangePriceProduct($DBdata, 'price');
+
+            $d = $DBdata[0]['image'];
 
             return $DBdata;
         }

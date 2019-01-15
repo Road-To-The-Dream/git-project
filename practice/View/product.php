@@ -13,9 +13,9 @@
     <div class="container">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Ноутбуки, планшеты, компьютеры</a></li>
-                <li class="breadcrumb-item"><a href="#">Ноутбуки, компьютеры, аксессуары</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Ноутбуки</li>
+                <li class="breadcrumb-item"><a href="http://practice/main/show_main">Главная</a></li>
+                <li class="breadcrumb-item"><a href="http://practice/catalog/show_all">Ноутбуки</a></li>
+                <li class="breadcrumb-item active" aria-current="page"><?= $data[0]['name']?></li>
             </ol>
         </nav>
     </div>
@@ -69,8 +69,18 @@
             </div>
             <div class="col">
                 <div class="row">
-                    <div class="col-md-7 col-lg-8 col-xl-9 text-align-bottom f-size-total">
-                       <p class="f-size-title f-size-total">Цена: <?=$data[0]['price'].' '.$data[0]['unit']?>.</p>
+                    <div class="col-md-7 col-lg-8 col-xl-9 text-align-bottom">
+                        <div class="row">
+                            <div class="col-auto align-self-end pb-1" style="font-size: 18px">
+                                Цена :
+                            </div>
+                            <div class="col-auto p-0 m-0 text-primary align-self-end">
+                                <p class="m-0" id="total_price_product" style="font-weight: bold; font-size: 30px"><?=$data[0]['price']?></p>
+                            </div>
+                            <div class="col-auto text-primary m-0 pl-1 pt-1 align-self-start">
+                                <p class="m-0"><?=$data[0]['unit']?></p>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-md-5 col-lg-4 col-xl-3">
                         <input class="btn btn-success btn-lg btn-block" type="button" name="btn_logout" value="Купить">
@@ -143,7 +153,7 @@
         <div class="tab-content pt-3" id="myTabContent">
             <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
                 <p style="text-indent: 25px;">
-                    Игровая и перспективная серия ноутбуков Nitro 5 от Acer способна выполнять роль не только великолепной игровой машины, но и достаточно яркого и сдержанного ноутбука для повседневных производительных задач. Его идеально сбалансированная конфигурация компонентов, великолепная система охлаждения, которая быстро и тихо справляется даже со сложными заданиями и невероятно интересный дизайн способны расположить к себе практически любого. А если учесть, что ноутбук Nitro 5 обладает внушительным игровым потенциалом, оснащаясь качественными комплектующими, то практически не найдется человека, который бы остался к нему равнодушен.
+                    <?=$data[0]['description']?>
                 </p>
             </div>
             <div class="tab-pane fade" id="specifications" role="tabpanel" aria-labelledby="specifications-tab">

@@ -1,6 +1,6 @@
 function AjaxAddInCart(id, amount_product) {
     $.ajax({
-        url:  'http://practice//CheckSessionAndAddingProductInCart',
+        url:  'http://practice//AddingProductsInCart',
         type: "POST",
         data: "IDProduct=" + id,
         dataType: "json",

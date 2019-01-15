@@ -13,8 +13,7 @@
         <div class="container">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#">Ноутбуки, планшеты, компьютеры</a></li>
-                    <li class="breadcrumb-item"><a href="#">Ноутбуки, компьютеры, аксессуары</a></li>
+                    <li class="breadcrumb-item"><a href="http://practice/main/show_main">Главная</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Ноутбуки</li>
                 </ol>
             </nav>
@@ -80,13 +79,13 @@
                                         <div class="card-body p-0">
                                             <a href="http://practice/product/show_product/<?=$value["id"];?>"><img class="card-img-top" src="/View/Image/<?=$value["image"]?>" alt="Card image cap"></a>
                                             <div class="row justify-content-center mt-3">
-                                                <a class="card-text f-size-name h-100" href="http://practice/product/show_product/<?=$value["id"];?>"><?=$value["name"]?></a>
+                                                <a class="card-text f-size-name h-100 text-dark" href="http://practice/product/show_product/<?=$value["id"];?>"><?=$value["name"]?></a>
                                             </div>
                                         </div>
                                         <div class="row mt-3">
                                             <div class="col-3 p-0 mt-2" style="font-size: 18px">Цена:</div>
-                                            <div class="col-6 text-center"><p style="font-weight: bold; font-size: 25px"><?=$value["price"]?></p></div>
-                                            <div class="col-3 p-0 mt-2" style="font-size: 18px"><?=$value["unit"]?>.</div>
+                                            <div class="col-6 text-center text-primary"><p style="font-weight: bold; font-size: 25px"><?=$value["price"]?></p></div>
+                                            <div class="col-3 p-0 mt-2" style="font-size: 18px"><?=$value["unit"]?></div>
                                         </div>
                                         <div class="row justify-content-center">
                                             <div class="col-4 p-0 mr-2">

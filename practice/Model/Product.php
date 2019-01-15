@@ -24,26 +24,27 @@ class Product
     {
         if($this->id_product == 0) {
             if($sorting == 1) {
-                return $this->db->ExecutionQuery('SELECT * FROM prod ORDER BY price DESC');
+                return $this->db->ExecutionQuery('SELECT * FROM product ORDER BY price DESC');
             }
             else if($sorting == 2) {
-                return $this->db->ExecutionQuery('SELECT * FROM prod ORDER BY price ASC');
+                return $this->db->ExecutionQuery('SELECT * FROM product ORDER BY price ASC');
             }
         }
         else {
-            return $this->db->ExecutionQuery("SELECT * FROM prod WHERE id = ".$this->id_product);
+            return $this->db->ExecutionQuery("SELECT * FROM product WHERE id = ".$this->id_product);
         }
-        return $this->db->ExecutionQuery("SELECT * FROM prod");
+        return $this->db->ExecutionQuery("SELECT p.id, p.name, p.description, p.price, p.unit, p.amount, (SELECT img FROM images i JOIN images_in_product ip ON ip.images_id = i.id WHERE ip.product_id = p.id LIMIT 1) as image FROM product p");
     }
 
     public function SelectProductsForCart($array_products)
     {
         $amount_products = count($array_products);
         if($amount_products > 1) {
-            $query = "Select * From prod Where id IN (".implode(",", $array_products).")";
-        }
-        else{
-            $query = "Select * From prod Where id = ".array_shift($array_products);
+            $query = "Select * From product Where id IN (".implode(",", $array_products).")";
+        } else if($amount_products == 1) {
+            $query = "Select * From product Where id = ".array_shift($array_products);
+        } else {
+            return "";
         }
         $d = $this->db->ExecutionQuery($query);
 
@@ -52,7 +53,7 @@ class Product
 
     public function SelectTotalPriceProducts($array_products)
     {
-        $query = "Select SUM(price) AS total_price FROM prod where id IN(".implode(",", $array_products).")";
+        $query = "Select SUM(price) AS total_price FROM product where id IN(".implode(",", $array_products).")";
         $d = $this->db->ExecutionQuery($query);
         return $d;
     }

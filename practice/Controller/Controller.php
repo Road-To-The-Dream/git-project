@@ -66,9 +66,9 @@
             echo $objLoginValidation->CheckLogin();
         }
 
-        public function CheckSessionAndAddingProductInCart()
+        public function AddingProductsInCart()
         {
-            $this->objModel->CheckExistArrayProductInSession();
+            $this->objModel->AddingProductsInCart();
         }
 
         public function CountTotalPriceProduct()
