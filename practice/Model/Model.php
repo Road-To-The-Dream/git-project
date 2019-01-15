@@ -158,4 +158,9 @@
                 unset($_SESSION['product_id'][$key]);
             }
         }
+
+        public function AddingComments($id_client, $description, $id_product)
+        {
+
+        }
     }

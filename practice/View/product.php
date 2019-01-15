@@ -335,6 +335,18 @@
             <!--COMMENT-->
             <div class="tab-pane fade" id="comment" role="tabpanel" aria-labelledby="comment-tab">
                 <div class="container">
+                    <!--ADDED COMMENT-->
+                    <div class="row mb-5">
+                        <div class="col-12">
+                            <textarea class="form-control" rows="4" placeholder="Добавьте Ваш комментарий"></textarea>
+                            <div class="row d-flex justify-content-end">
+                                <div class="col-auto">
+                                    <a class='btn btn-primary mt-2 text-white' onclick=""><img class="mr-2" src='/View/Image/add_comment.png'>Добавить</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--ADDED COMMENT-->
                     <div class="card bg-border mb-4">
                         <div class="card-header bg">
                             <div class="author font-comment-name">Сергей</div>

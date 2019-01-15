@@ -87,6 +87,11 @@
             $this->objModel->RemoveProductInCart($_POST['IDProduct']);
         }
 
+        public function AddingComments()
+        {
+            $this->objModel->AddingComments($_POST['IdCliend'], $_POST['text_comment'], $_POST['IdProduct']);
+        }
+
         public function Logout()
         {
             $auth = new \practice\Model\Authentication();

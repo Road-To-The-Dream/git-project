@@ -61,9 +61,9 @@ class Client
         return $this->db->ExecutionQuery($sql);
     }
 
-    public function selectFirstNameUser($email)
+    public function selectIdAndFirstNameUser($email)
     {
-        $sql = "SELECT first_name FROM client WHERE email = ".'\''.$email.'\'';
+        $sql = "SELECT id, first_name FROM client WHERE email = ".'\''.$email.'\'';
         return $this->db->ExecutionQuery($sql);
     }
 }
