@@ -15,18 +15,18 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="http://practice/main/show_main">Главная</a></li>
                 <li class="breadcrumb-item"><a href="http://practice/catalog/show_all">Ноутбуки</a></li>
-                <li class="breadcrumb-item active" aria-current="page"><?= $data[0]['name']?></li>
+                <li class="breadcrumb-item active" aria-current="page"><?= $data[1]['name']?></li>
             </ol>
         </nav>
     </div>
     <div class="container mt-4">
         <div class="row mb-3">
             <div class="col-md-6 col-lg-7 text-align-bottom f-size-total">
-                <p class="f-size-title"><?= $data[0]['name']?></p>
+                <p class="f-size-title"><?= $data[1]['name']?></p>
             </div>
             <div class="col-md-6 col-lg-5 text-right">
                 <p class="mt-1">
-                    Код товара: <span style="font-weight: bold"><?= $data[0]['id']?></span>
+                    Код товара: <span style="font-weight: bold"><?= $data[1]['id']?></span>
                 </p>
             </div>
             <div class="container">
@@ -48,13 +48,13 @@
                     </ol>
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img class="d-block w-100" src="/View/Image/<?=$data[0]['image']?>" alt="First slide">
+                            <img class="d-block w-100" src="/View/Image/Apple%20MacBook%20Pro%2015%20Space%20Gray%20(MR942)%202018%20(1).jpg" alt="First slide">
                         </div>
                         <div class="carousel-item">
-                            <img class="d-block w-100" src="/View/Image/Product3.jpg" alt="Second slide">
+                            <img class="d-block w-100" src="/View/Image/Apple%20MacBook%20Pro%2015%20Space%20Gray%20(MR942)%202018%20(1).jpg" alt="Second slide">
                         </div>
                         <div class="carousel-item">
-                            <img class="d-block w-100" src="/View/Image/Product2.jpg" alt="Third slide">
+                            <img class="d-block w-100" src="/View/Image/Apple%20MacBook%20Pro%2015%20Space%20Gray%20(MR942)%202018%20(1).jpg" alt="Third slide">
                         </div>
                     </div>
                     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -75,10 +75,10 @@
                                 Цена :
                             </div>
                             <div class="col-auto p-0 m-0 text-primary align-self-end">
-                                <p class="m-0" id="total_price_product" style="font-weight: bold; font-size: 30px"><?=$data[0]['price']?></p>
+                                <p class="m-0" id="total_price_product" style="font-weight: bold; font-size: 30px"><?=$data[1]['price']?></p>
                             </div>
                             <div class="col-auto text-primary m-0 pl-1 pt-1 align-self-start">
-                                <p class="m-0"><?=$data[0]['unit']?></p>
+                                <p class="m-0"><?=$data[1]['unit']?></p>
                             </div>
                         </div>
                     </div>
@@ -336,7 +336,7 @@
             <div class="tab-pane fade" id="comment" role="tabpanel" aria-labelledby="comment-tab">
                 <div class="container">
                     <!--ADDED COMMENT-->
-                    <div class="row mb-5">
+                    <div class="row mb-3">
                         <div class="col-12">
                             <textarea class="form-control" rows="4" placeholder="Добавьте Ваш комментарий"></textarea>
                             <div class="row d-flex justify-content-end">
@@ -347,39 +347,25 @@
                         </div>
                     </div>
                     <!--ADDED COMMENT-->
-                    <div class="card bg-border mb-4">
-                        <div class="card-header bg">
-                            <div class="author font-comment-name">Сергей</div>
-                            <div class="metadata">
-                                <span class="date font-comment-date">05 января 2019, 13:43</span>
+                    <?php
+                    for($i = 0; $i < count($data) - 1; $i++) {
+                            ?>
+                        <div class="shadow mb-5 bg-white rounded">
+                            <div class="card bg-border mb-4">
+                                <div class="card-header bg">
+                                    <div class="author font-comment-name"><?= $data[$i]['first_name']?></div>
+                                    <div class="metadata">
+                                        <span class="date font-comment-date">Дата добавления: <?= $data[$i]['date_added']?></span>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <p class="card-text "><?= $data[$i]['content']?></p>
+                                </div>
                             </div>
                         </div>
-                        <div class="card-body">
-                            <p class="card-text ">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos eius eos, explicabo id illum, in ipsum libero maxime neque nihil officiis omnis quae quas qui quis quisquam reiciendis tempora temporibus veniam vitae. A aspernatur debitis, deleniti dolore dolorem doloremque eligendi quas. Culpa, fugit in nihil non placeat praesentium quas repellat..</p>
-                        </div>
-                    </div>
-                    <div class="card bg-border mb-4">
-                        <div class="card-header bg">
-                            <div class="author font-comment-name">Сергей</div>
-                            <div class="metadata">
-                                <span class="date font-comment-date">05 января 2019, 13:43</span>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <p class="card-text ">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos eius eos, explicabo id illum, in ipsum libero maxime neque nihil officiis omnis quae quas qui quis quisquam reiciendis tempora temporibus veniam vitae. A aspernatur debitis, deleniti dolore dolorem doloremque eligendi quas. Culpa, fugit in nihil non placeat praesentium quas repellat..</p>
-                        </div>
-                    </div>
-                    <div class="card bg-border mb-4">
-                        <div class="card-header bg">
-                            <div class="author font-comment-name">Сергей</div>
-                            <div class="metadata">
-                                <span class="date font-comment-date">05 января 2019, 13:43</span>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <p class="card-text ">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos eius eos, explicabo id illum, in ipsum libero maxime neque nihil officiis omnis quae quas qui quis quisquam reiciendis tempora temporibus veniam vitae. A aspernatur debitis, deleniti dolore dolorem doloremque eligendi quas. Culpa, fugit in nihil non placeat praesentium quas repellat..</p>
-                        </div>
-                    </div>
+                    <?php
+                        }
+                    ?>
                 </div>
             </div>
             <!--COMMENT-->

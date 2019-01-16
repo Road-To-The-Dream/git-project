@@ -31,7 +31,12 @@ class Product
             }
         }
         else {
-            return $this->db->ExecutionQuery("SELECT * FROM product WHERE id = ".$this->id_product);
+            $q = $this->db->ExecutionQuery("SELECT cl.first_name, com.content, date_added FROM comments com JOIN client cl ON cl.id = com.client_id JOIN product pr ON pr.id = com.product_id WHERE pr.id = ".$this->id_product);
+            $w = $this->db->ExecutionQuery("SELECT * FROM product WHERE id = ".$this->id_product);
+
+            $result = array_merge((array)$q, (array)$w);
+
+            return $result;
         }
         return $this->db->ExecutionQuery("SELECT p.id, p.name, p.description, p.price, p.unit, p.amount, (SELECT img FROM images i JOIN images_in_product ip ON ip.images_id = i.id WHERE ip.product_id = p.id LIMIT 1) as image FROM product p");
     }
