@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <link rel="stylesheet" href="/View/CSS/cart.css">
     <script src="/View/JS/AddProductInCart.js"></script>
+    <script src="/View/JS/Adding_comments.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 </head>
@@ -15,18 +16,18 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="http://practice/main/show_main">Главная</a></li>
                 <li class="breadcrumb-item"><a href="http://practice/catalog/show_all">Ноутбуки</a></li>
-                <li class="breadcrumb-item active" aria-current="page"><?= $data[1]['name']?></li>
+                <li class="breadcrumb-item active" aria-current="page"><?= $data[count($data) - 1]['name']?></li>
             </ol>
         </nav>
     </div>
     <div class="container mt-4">
         <div class="row mb-3">
             <div class="col-md-6 col-lg-7 text-align-bottom f-size-total">
-                <p class="f-size-title"><?= $data[1]['name']?></p>
+                <p class="f-size-title"><?= $data[count($data) - 1]['name']?></p>
             </div>
             <div class="col-md-6 col-lg-5 text-right">
                 <p class="mt-1">
-                    Код товара: <span style="font-weight: bold"><?= $data[1]['id']?></span>
+                    Код товара: <span style="font-weight: bold"><?= $data[count($data) - 1]['id']?></span>
                 </p>
             </div>
             <div class="container">
@@ -75,16 +76,16 @@
                                 Цена :
                             </div>
                             <div class="col-auto p-0 m-0 text-primary align-self-end">
-                                <p class="m-0" id="total_price_product" style="font-weight: bold; font-size: 30px"><?=$data[1]['price']?></p>
+                                <p class="m-0" id="total_price_product" style="font-weight: bold; font-size: 30px"><?=$data[count($data) - 1]['price']?></p>
                             </div>
                             <div class="col-auto text-primary m-0 pl-1 pt-1 align-self-start">
-                                <p class="m-0"><?=$data[1]['unit']?></p>
+                                <p class="m-0"><?=$data[count($data) - 1]['unit']?></p>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-5 col-lg-4 col-xl-3">
                         <input class="btn btn-success btn-lg btn-block" type="button" name="btn_logout" value="Купить">
-                        <a class='btn btn-warning btn-lg text-white btn-block pl-1 mt-2' onclick="AjaxAddInCart(<?=$data[0]['id'];?>, 'c')"><img class="mr-2" src='/View/Image/add_cart.png'>Добавить</a>
+                        <a class='btn btn-warning btn-lg text-white btn-block pl-1 mt-2' onclick="AjaxAddInCart(<?=$data[1]['id'];?>, 'amount_products_in_cart')"><img class="mr-2" src='/View/Image/add_cart.png'>Добавить</a>
                     </div>
                 </div>
                 <div class="row">
@@ -147,13 +148,15 @@
                 <a class="nav-link" id="specifications-tab" data-toggle="tab" href="#specifications" role="tab" aria-controls="specifications" aria-selected="false">Характеристики</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="comment-tab" data-toggle="tab" href="#comment" role="tab" aria-controls="comment" aria-selected="false">Комментарии (3)</a>
+                <a class="nav-link" id="comment-tab" data-toggle="tab" href="#comment" role="tab" aria-controls="comment" aria-selected="false">
+                    Комментарии (<?php echo count($data) - 1;?>)
+                </a>
             </li>
         </ul>
         <div class="tab-content pt-3" id="myTabContent">
             <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
                 <p style="text-indent: 25px;">
-                    <?=$data[0]['description']?>
+                    <?=$data[count($data) - 1]['description']?>
                 </p>
             </div>
             <div class="tab-pane fade" id="specifications" role="tabpanel" aria-labelledby="specifications-tab">
@@ -338,10 +341,10 @@
                     <!--ADDED COMMENT-->
                     <div class="row mb-3">
                         <div class="col-12">
-                            <textarea class="form-control" rows="4" placeholder="Добавьте Ваш комментарий"></textarea>
+                            <textarea class="form-control" id="text_comment" rows="4" placeholder="Добавьте Ваш комментарий"></textarea>
                             <div class="row d-flex justify-content-end">
                                 <div class="col-auto">
-                                    <a class='btn btn-primary mt-2 text-white' onclick=""><img class="mr-2" src='/View/Image/add_comment.png'>Добавить</a>
+                                    <a class='btn btn-primary mt-2 text-white' onclick="AjaxAddComment(<?= $_SESSION['user_id']?>, 'text_comment', <?= $data[count($data) - 1]['id']?>)"><img class="mr-2" src='/View/Image/add_comment.png'>Добавить</a>
                                 </div>
                             </div>
                         </div>

@@ -161,6 +161,14 @@
 
         public function AddingComments($id_client, $description, $id_product)
         {
+            $comment = new Comment();
 
+            $comment->content = '\''.$description.'\'';
+            $comment->date_added = '\''.date("Y-m-d H:i:s").'\'';
+            $comment->create_at = '\''.date("Y-m-d H:i:s").'\'';
+            $comment->client_id = $id_client;
+            $comment->product_id = $id_product;
+
+            $comment->insert();
         }
     }

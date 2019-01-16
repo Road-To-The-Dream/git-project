@@ -47,7 +47,11 @@ class Client
         $this->db->ExecutionQuery($sql);
     }
 
-    public function delete(){}
+    public function delete($id)
+    {
+        $sql = "DELETE FROM client WHERE id = ".$id;
+        $this->db->ExecutionQuery($sql);
+    }
 
     public function selectEmailUser($email)
     {

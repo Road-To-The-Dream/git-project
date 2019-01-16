@@ -51,13 +51,13 @@
 
             if($this->errors_register[7] == '') {
                 if (empty($_POST['last_name'])) {
-                    $this->errors_register[0] = 'Please enter user name !';
+                    $this->errors_register[0] = 'Please enter last name name !';
                 }
                 if (empty($_POST['first_name'])) {
-                    $this->errors_register[1] = 'Please enter user name !';
+                    $this->errors_register[1] = 'Please enter first name name !';
                 }
                 if (empty($_POST['patronymic'])) {
-                    $this->errors_register[2] = 'Please enter user name !';
+                    $this->errors_register[2] = 'Please enter patronymic name !';
                 }
                 if (empty($_POST['email_register'])) {
                     $this->errors_register[3] = 'Please enter email !';
@@ -101,8 +101,12 @@
 
         private function CheckValidateFirstNameLastNamePatronymic($value, $piece)
         {
-            if(strlen($value) > 50) {
-                $this->errors_register[0] = ' Длина '.$piece.' должна быть не больше 50 символов';
+            if (preg_match('/[0-9]/', $value)) {
+                $this->errors_register[7] = ' В имени, фамилии и отчестве не допускаются цифры';
+            } else {
+                if(strlen($value) > 50) {
+                    $this->errors_register[0] = ' Длина '.$piece.' должна быть не больше 50 символов';
+                }
             }
         }
 

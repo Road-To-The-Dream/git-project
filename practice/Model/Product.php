@@ -31,8 +31,8 @@ class Product
             }
         }
         else {
-            $q = $this->db->ExecutionQuery("SELECT cl.first_name, com.content, date_added FROM comments com JOIN client cl ON cl.id = com.client_id JOIN product pr ON pr.id = com.product_id WHERE pr.id = ".$this->id_product);
-            $w = $this->db->ExecutionQuery("SELECT * FROM product WHERE id = ".$this->id_product);
+            $q = $this->db->ExecutionQuery("SELECT cl.first_name, com.content, date_added, com.client_id FROM comments com JOIN client cl ON cl.id = com.client_id JOIN product pr ON pr.id = com.product_id WHERE pr.id = ".$this->id_product." ORDER BY com.date_added DESC");
+            $w = $this->db->ExecutionQuery("SELECT id, name, description, price, unit, amount FROM product WHERE id = ".$this->id_product);
 
             $result = array_merge((array)$q, (array)$w);
 

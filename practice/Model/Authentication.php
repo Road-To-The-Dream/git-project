@@ -19,7 +19,7 @@
                     $first_name = $this->client->selectIdAndFirstNameUser($email);
                     session_start();
                     $_SESSION['isAuth'] = $first_name[0]['first_name'];
-                    $_SESSION['id'] = $first_name[0]['id'];
+                    $_SESSION['user_id'] = $first_name[0]['id'];
                     return 1;
                 }
             }

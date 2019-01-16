@@ -89,7 +89,7 @@
 
         public function AddingComments()
         {
-            $this->objModel->AddingComments($_POST['IdCliend'], $_POST['text_comment'], $_POST['IdProduct']);
+            $this->objModel->AddingComments($_POST['IDUser'], $_POST['TextComment'], $_POST['IDProduct']);
         }
 
         public function Logout()
