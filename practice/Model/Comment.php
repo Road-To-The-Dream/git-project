@@ -34,7 +34,6 @@ class Comment
     {
         $sql = "INSERT INTO comments (content, date_added, create_at, client_id, product_id) VALUES ($this->content, $this->date_added, $this->create_at, $this->client_id, $this->product_id)";
         $this->db->ExecutionQuery($sql);
-        echo "sds";
     }
 
     public function update(){}

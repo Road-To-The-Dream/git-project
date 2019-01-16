@@ -57,7 +57,7 @@
             $value_field = stripslashes($value_field);
             $value_field = strip_tags($value_field);
             $value_field = htmlspecialchars($value_field);
-$q = $value_field;
+
             return $value_field;
         }
     }

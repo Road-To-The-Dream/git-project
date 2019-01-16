@@ -4,22 +4,21 @@
 
     class Controller
     {
-        private $dataModel;
-        private $objModel;
         private $objectGenerateView;
 
         public function __construct()
         {
-            $this->objModel = new \practice\Model\Model();
             $this->objectGenerateView = new View();
         }
 
         public function show_all($view_name, $sorting = 0)
         {
             $this->checkSessionAndStart();
-            $this->dataModel = $this->objModel->GetAllProduct($sorting);
 
-            $this->objectGenerateView->generate($view_name, $this->dataModel);
+            $product = new \practice\Model\Product();
+            $DBdata = $product->select($sorting);
+
+            $this->objectGenerateView->generate($view_name, $DBdata);
         }
 
         public function correct()
@@ -31,27 +30,33 @@
         public function show_product($view_name, $id = 1)
         {
             $this->checkSessionAndStart();
-            $this->dataModel = $this->objModel->GetProductId($id);
-            $this->objectGenerateView->generate($view_name, $this->dataModel);
+
+            $product = new \practice\Model\Product();
+            $product->id_product = $id;
+            $DBdata = $product->select();
+
+            $this->objectGenerateView->generate($view_name, $DBdata);
         }
 
         public function show_product_cart($view_name)
         {
             $this->checkSessionAndStart();
-            $this->dataModel = $this->objModel->GetProductCart($_SESSION['product_id']);
 
-            $this->objectGenerateView->generate($view_name, $this->dataModel);
+            $product = new \practice\Model\Product();
+            $DBdata = $product->SelectProductsForCart($_SESSION['product_id']);
+
+            $this->objectGenerateView->generate($view_name, $DBdata);
         }
 
         public function show_main($view_name)
         {
             $this->checkSessionAndStart();
-            $this->objectGenerateView->generate($view_name, $this->dataModel);
+            $this->objectGenerateView->generate($view_name);
         }
 
         public function show_404($view_name)
         {
-            $this->objectGenerateView->generate($view_name, $this->dataModel);
+            $this->objectGenerateView->generate($view_name);
         }
 
         public function ValidateIsRegister()
@@ -68,28 +73,33 @@
 
         public function AddingProductsInCart()
         {
-            $this->objModel->AddingProductsInCart();
+            $cart = new \practice\Model\Cart();
+            $cart->CheckExistArrayProductsAndAddingProductsInCart();
         }
 
         public function CountTotalPriceProduct()
         {
-            $this->objModel->CountTotalPriceProduct();
+            $cart = new \practice\Model\Cart();
+            $cart->CountTotalPriceProduct();
         }
 
         public function GetTotalPriceProducts()
         {
             session_start();
-            $this->objModel->GetTotalPriceProducts($_SESSION['product_id']);
+            $cart = new \practice\Model\Cart();
+            $cart->GetTotalPriceProducts($_SESSION['product_id']);
         }
 
         public function RemoveProductForCart()
         {
-            $this->objModel->RemoveProductInCart($_POST['IDProduct']);
+            $cart = new \practice\Model\Cart();
+            $cart->RemoveProductInCart($_POST['IDProduct']);
         }
 
         public function AddingComments()
         {
-            $this->objModel->AddingComments($_POST['IDUser'], $_POST['TextComment'], $_POST['IDProduct']);
+            $validate_comment = new \practice\Model\ValidateComment();
+            echo $validate_comment->ValidateTextComment($_POST['TextComment']);
         }
 
         public function Logout()

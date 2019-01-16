@@ -3,12 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>LAPTOP | Product</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <link rel="stylesheet" href="/View/CSS/cart.css">
     <script src="/View/JS/AddProductInCart.js"></script>
     <script src="/View/JS/Adding_comments.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 </head>
 <body>
     <div class="container">
@@ -85,7 +82,7 @@
                     </div>
                     <div class="col-md-5 col-lg-4 col-xl-3">
                         <input class="btn btn-success btn-lg btn-block" type="button" name="btn_logout" value="Купить">
-                        <a class='btn btn-warning btn-lg text-white btn-block pl-1 mt-2' onclick="AjaxAddInCart(<?=$data[1]['id'];?>, 'amount_products_in_cart')"><img class="mr-2" src='/View/Image/add_cart.png'>Добавить</a>
+                        <a class='btn btn-warning btn-lg text-white btn-block pl-1 mt-2' onclick="AjaxAddInCart(<?=$data[count($data) - 1]['id'];?>, 'amount_products_in_cart')"><img class="mr-2" src='/View/Image/add_cart.png'>Добавить</a>
                     </div>
                 </div>
                 <div class="row">
@@ -344,7 +341,7 @@
                             <textarea class="form-control" id="text_comment" rows="4" placeholder="Добавьте Ваш комментарий"></textarea>
                             <div class="row d-flex justify-content-end">
                                 <div class="col-auto">
-                                    <a class='btn btn-primary mt-2 text-white' onclick="AjaxAddComment(<?= $_SESSION['user_id']?>, 'text_comment', <?= $data[count($data) - 1]['id']?>)"><img class="mr-2" src='/View/Image/add_comment.png'>Добавить</a>
+                                    <a class='btn btn-primary mt-2 text-white' onclick="AjaxAddComment('text_comment', <?= $data[count($data) - 1]['id']?>)"><img class="mr-2" src='/View/Image/add_comment.png'>Добавить</a>
                                 </div>
                             </div>
                         </div>

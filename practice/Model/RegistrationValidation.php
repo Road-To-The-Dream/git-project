@@ -13,25 +13,60 @@
         private $errors_register = array("", "", "", "", "", "", "", "");
         private $amount_empty_errors = 0;
 
+        public function CheckRegistration()
+        {
+            $this->CheckFieldsForEmptinessAndWriteErrors();
+
+            $this->CountingTheAmountOfErrors();
+
+            if($this->amount_empty_errors == 0) {
+                $this->CheckValidateFirstNameLastNamePatronymic($_POST['last_name'], 'имени');
+                $this->CheckValidateFirstNameLastNamePatronymic($_POST['first_name'], 'фамилии');
+                $this->CheckValidateFirstNameLastNamePatronymic($_POST['patronymic'], 'отчества');
+                $this->CheckValidateEmail($_POST['email_register']);
+                $this->CheckValidatePhone($_POST['phone']);
+                $this->CheckValidatePassword($_POST['password_register'], $_POST['confirm_password']);
+
+                $this->CheckErrorsAndAddNewUser($_POST['last_name'], $_POST['first_name'], $_POST['patronymic'], $_POST['email_register'], $_POST['phone'], $_POST['password_register']);
+            }
+            return json_encode($this->errors_register);
+        }
+
+        private function CheckErrorsAndAddNewUser($last_name, $first_name, $patronymic, $email, $phone, $password)
+        {
+            $this->CountingTheAmountOfErrors();
+
+            if($this->amount_empty_errors == 0) {
+                $this->CheckExistenceEmailAndAddUser($last_name, $first_name, $patronymic, $email, $phone, $password);
+            }
+        }
+
         private function CheckExistenceEmailAndAddUser($last_name, $first_name, $patronymic, $email, $phone, $password)
         {
             $client = new Client();
             $data_select = $client->selectEmailUser($email);
             if(empty($data_select)) {
-                $objModel = new \practice\Model\Model();
-                $objModel->AddingNewUser($last_name, $first_name, $patronymic, $email, $phone, $password);
+                $this->AddingNewUser($last_name, $first_name, $patronymic, $email, $phone, $password);
             } else {
                 $this->errors_register[7] = 'User with this email exists!';
             }
         }
 
-        private function CheckErrorsAndAddNewUser($last_name, $first_name, $patronymic, $email, $phone, $password)
+        public function AddingNewUser($last_name, $first_name, $patronymic, $email, $phone, $password)
         {
-            $this->CountingTheAmountOfErrorsAndWrite();
+            $obj_pass = new Password($email);
+            $password = $obj_pass->HashingPassword($password);
 
-            if($this->amount_empty_errors == 0) {
-                $this->CheckExistenceEmailAndAddUser($last_name, $first_name, $patronymic, $email, $phone, $password);
-            }
+            $client = new Client();
+
+            $client->last_name = '\''.$last_name.'\'';
+            $client->first_name = '\''.$first_name.'\'';
+            $client->patronymic = '\''.$patronymic.'\'';
+            $client->email = '\''.$email.'\'';
+            $client->phone = '\''.$phone.'\'';
+            $client->password = '\''.$password.'\'';
+
+            $client->insert();
         }
 
         private function CheckFieldsForEmptinessAndWriteErrors()
@@ -74,11 +109,29 @@
             }
         }
 
+        private function CheckValidateFirstNameLastNamePatronymic($value, $piece)
+        {
+            if (preg_match('/[0-9]/', $value)) {
+                $this->errors_register[7] = ' В имени, фамилии и отчестве не допускаются цифры';
+            } else {
+                if(strlen($value) > 50) {
+                    $this->errors_register[0] = ' Длина '.$piece.' должна быть не больше 50 символов';
+                }
+            }
+        }
+
         private function CheckValidateEmail($email)
         {
             if(!preg_match("/^([a-z0-9_\.-]+)@([a-z0-9_\.-]+)\.([a-z\.]{2,6})$/", $email)) {
                 $this->errors_register[3] = 'Адрес электронной почты был введен неверно. Email может содержать только буквы латинского алфавита и цифры, от 3 до 14 символов.
                     Также допускается использование символов @ - _';
+            }
+        }
+
+        private function CheckValidatePhone($phone)
+        {
+            if(strlen($phone) != 19) {
+                $this->errors_register[4] = 'Заполните поле телефона корректно.';
             }
         }
 
@@ -99,66 +152,12 @@
             }
         }
 
-        private function CheckValidateFirstNameLastNamePatronymic($value, $piece)
-        {
-            if (preg_match('/[0-9]/', $value)) {
-                $this->errors_register[7] = ' В имени, фамилии и отчестве не допускаются цифры';
-            } else {
-                if(strlen($value) > 50) {
-                    $this->errors_register[0] = ' Длина '.$piece.' должна быть не больше 50 символов';
-                }
-            }
-        }
-
-        private function CheckValidatePhone($phone)
-        {
-            if(strlen($phone) != 19) {
-                $this->errors_register[4] = 'Заполните поле телефона корректно.';
-            }
-        }
-
-        function CleanFields($value_field = "") {
-            $value_field = trim($value_field);
-            $value_field = stripslashes($value_field);
-            $value_field = strip_tags($value_field);
-            $value_field = htmlspecialchars($value_field);
-
-            return $value_field;
-        }
-
-        private function CountingTheAmountOfErrorsAndWrite()
+        private function CountingTheAmountOfErrors()
         {
             $this->amount_empty_errors = 0;
 
             foreach ($this->errors_register as $value)
                 if($value != "")
                     $this->amount_empty_errors++;
-        }
-
-        public function CheckRegistration()
-        {
-            $this->CheckFieldsForEmptinessAndWriteErrors();
-
-            $this->CountingTheAmountOfErrorsAndWrite();
-
-            if($this->amount_empty_errors == 0) {
-                $last_name = $this->CleanFields($_POST['last_name']);
-                $first_name = $this->CleanFields($_POST['first_name']);
-                $patronymic = $this->CleanFields($_POST['patronymic']);
-                $email = $this->CleanFields($_POST['email_register']);
-                $phone = $this->CleanFields($_POST['phone']);
-                $password = $this->CleanFields($_POST['password_register']);
-                $confirm_pass = $this->CleanFields($_POST['confirm_password']);
-
-                $this->CheckValidateFirstNameLastNamePatronymic($last_name, 'имени');
-                $this->CheckValidateFirstNameLastNamePatronymic($first_name, 'фамилии');
-                $this->CheckValidateFirstNameLastNamePatronymic($patronymic, 'отчества');
-                $this->CheckValidateEmail($email);
-                $this->CheckValidatePhone($phone);
-                $this->CheckValidatePassword($password, $confirm_pass);
-
-                $this->CheckErrorsAndAddNewUser($last_name, $first_name, $patronymic, $email, $phone, $password);
-            }
-            return json_encode($this->errors_register);
         }
     }
