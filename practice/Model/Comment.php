@@ -38,5 +38,9 @@ class Comment
 
     public function update(){}
 
-    public function delete(){}
+    public function delete($id)
+    {
+        $sql = "DELETE FROM comments WHERE id = ".$id;
+        $this->db->ExecutionQuery($sql);
+    }
 }

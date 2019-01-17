@@ -5,7 +5,8 @@
     <title>LAPTOP | Product</title>
     <link rel="stylesheet" href="/View/CSS/cart.css">
     <script src="/View/JS/AddProductInCart.js"></script>
-    <script src="/View/JS/Adding_comments.js"></script>
+    <script src="/View/JS/AddingComments.js"></script>
+    <script src="/View/JS/RemoveComments.js"></script>
 </head>
 <body>
     <div class="container">
@@ -353,9 +354,22 @@
                         <div class="shadow mb-5 bg-white rounded">
                             <div class="card bg-border mb-4">
                                 <div class="card-header bg">
-                                    <div class="author font-comment-name"><?= $data[$i]['first_name']?></div>
-                                    <div class="metadata">
-                                        <span class="date font-comment-date">Дата добавления: <?= $data[$i]['date_added']?></span>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="font-comment-name"><?= $data[$i]['first_name']?></div>
+                                            <span class="font-comment-date">Дата добавления: <?= $data[$i]['date_added']?></span>
+                                        </div>
+                                        <div class="row d-flex justify-content-end">
+                                            <?php
+                                                if($_SESSION['user_id'] == $data[$i]['client_id']) {
+                                                    ?>
+                                                <div class="col-auto">
+                                                    <a href="javascript:AjaxRemoveComment(<?= $data[$i]['id']?>)" class="badge badge-warning">Delete own comment</a>
+                                                </div>
+                                            <?php
+                                                }
+                                            ?>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="card-body">

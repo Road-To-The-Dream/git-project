@@ -42,8 +42,8 @@
         {
             $this->checkSessionAndStart();
 
-            $product = new \practice\Model\Product();
-            $DBdata = $product->SelectProductsForCart($_SESSION['product_id']);
+            $cart = new \practice\Model\Cart();
+            $DBdata = $cart->select($_SESSION['product_id']);
 
             $this->objectGenerateView->generate($view_name, $DBdata);
         }
@@ -93,13 +93,19 @@
         public function RemoveProductForCart()
         {
             $cart = new \practice\Model\Cart();
-            $cart->RemoveProductInCart($_POST['IDProduct']);
+            $cart->delete($_POST['IDProduct']);
         }
 
         public function AddingComments()
         {
             $validate_comment = new \practice\Model\ValidateComment();
             echo $validate_comment->ValidateTextComment($_POST['TextComment']);
+        }
+
+        public function RemoveComments()
+        {
+            $comment = new \practice\Model\Comment();
+            $comment->delete($_POST['id_comment']);
         }
 
         public function Logout()
