@@ -4,6 +4,13 @@
 
     class Model
     {
+
+        protected function ConnectionDB()
+        {
+            $config = require 'DBconfiguration.php';
+            return $db = new ConnectionManager($config);
+        }
+
         protected function ChangePriceProduct($data_select, $name_column)
         {
             for($i = 0; $i < count($data_select); $i++) {

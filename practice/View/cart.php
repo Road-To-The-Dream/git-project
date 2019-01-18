@@ -7,8 +7,18 @@
     <script src="/View/JS/ShowTotalPriceProduct.js"></script>
     <script src="/View/JS/ShowTotalPriceProducts.js"></script>
     <script src="/View/JS/RemoveProductFromCart.js"></script>
+    <script src="/View/JS/ShowBuy.js"></script>
 </head>
 <body onload="TotalPriceProducts('price_all_products')">
+<div class="container">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="http://practice/main/show_main">Главная</a></li>
+            <li class="breadcrumb-item"><a href="http://practice/catalog/show_all">Ноутбуки</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Корзина</li>
+        </ol>
+    </nav>
+</div>
 <div class="container mt-4 mb-5">
     <div class="row">
         <div class="col-auto f-size-total align-self-end">
@@ -108,7 +118,7 @@
                             <p class="m-0"> грн</p>
                         </div>
                         <div class="col-auto align-self-end">
-                            <a class='btn btn-primary text-white pl-1 mt-2' onclick="AjaxAddInCart(<?=$value["id"];?>, 'amount_products_in_cart')"><img class="mr-2" src='/View/Image/Cart/Buy.png'>Купить</a>
+                            <a class='btn btn-primary text-white pl-1 mt-2' onclick="AjaxShowBuy()"><img class="mr-2" src='/View/Image/Cart/Buy.png'>Купить</a>
                         </div>
                     </div>
                 </div>

@@ -40,7 +40,7 @@ class ValidateComment
     private function AddingComment()
     {
         $comment = new \practice\Model\Comment();
-        $comment->content = '\''.$_POST['TextComment'].'\'';
+        $comment->content = $_POST['TextComment'];
         $comment->date_added = '\''.date("Y-m-d H:i:s").'\'';
         $comment->create_at = '\''.date("Y-m-d H:i:s").'\'';
         $comment->client_id = $_SESSION['user_id'];

@@ -59,12 +59,12 @@
 
             $client = new Client();
 
-            $client->last_name = '\''.$last_name.'\'';
-            $client->first_name = '\''.$first_name.'\'';
-            $client->patronymic = '\''.$patronymic.'\'';
-            $client->email = '\''.$email.'\'';
-            $client->phone = '\''.$phone.'\'';
-            $client->password = '\''.$password.'\'';
+            $client->last_name = $last_name;
+            $client->first_name = $first_name;
+            $client->patronymic = $patronymic;
+            $client->email = $email;
+            $client->phone = $phone;
+            $client->password = $password;
 
             $client->insert();
         }

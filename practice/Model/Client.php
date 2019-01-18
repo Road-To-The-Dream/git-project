@@ -8,9 +8,8 @@
 
 namespace practice\Model;
 
-class Client
+class Client extends Model
 {
-    private $config = [];
     private $db;
 
     public $last_name;
@@ -23,8 +22,7 @@ class Client
 
     public function __construct()
     {
-        $this->config = require 'DBconfiguration.php';
-        $this->db = new ConnectionManager($this->config);
+        $this->db = $this->ConnectionDB();
     }
 
     public function select()
@@ -36,8 +34,16 @@ class Client
     public function insert()
     {
         $date_added = '\''.date("Y-m-d H:i:s").'\'';
-        $sql = "INSERT INTO client(last_name,first_name,patronymic,email,phone,password,role,create_at) VALUES ($this->last_name,$this->first_name,$this->patronymic,$this->email,$this->phone,$this->password,$this->role,$date_added)";
-        $this->db->ExecutionQuery($sql);
+        $sql = "INSERT INTO client (last_name,first_name,patronymic,email,phone,password,role,create_at) VALUES (:last_name,:first_name,:patronymic,:email,:phone,:password,$this->role,$date_added)";
+        $parameters = array(
+            ':last_name' => $this->last_name,
+            ':first_name' => $this->first_name,
+            ':patronymic' => $this->patronymic,
+            ':email' => $this->email,
+            ':phone' => $this->phone,
+            ':password' => $this->password
+        );
+        $this->db->ExecutionQuery($sql, $parameters);
     }
 
     public function updatePassword($password, $email)

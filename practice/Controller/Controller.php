@@ -54,6 +54,19 @@
             $this->objectGenerateView->generate($view_name);
         }
 
+        public function show_buy($view_name, $id)
+        {
+            $this->checkSessionAndStart();
+
+            $order = new \practice\Model\Order();
+            $order->insert();
+
+            $product = new \practice\Model\Product();
+            $DBdata = $product->select();
+
+            $this->objectGenerateView->generate($view_name, $DBdata);
+        }
+
         public function show_404($view_name)
         {
             $this->objectGenerateView->generate($view_name);
@@ -106,6 +119,11 @@
         {
             $comment = new \practice\Model\Comment();
             $comment->delete($_POST['id_comment']);
+        }
+
+        public function AddingOrder()
+        {
+
         }
 
         public function Logout()

@@ -8,16 +8,14 @@
 
 namespace practice\Model;
 
-class Product
+class Product extends Model
 {
-    private $config = [];
     private $db;
     public $id_product = 0;
 
     public function __construct()
     {
-        $this->config = require 'DBconfiguration.php';
-        $this->db = new ConnectionManager($this->config);
+        $this->db = $this->ConnectionDB();
     }
 
     public function select($sorting = 0)

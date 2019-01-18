@@ -11,14 +11,12 @@ namespace practice\Model;
 
 class Cart extends Model
 {
-    private $config = [];
     private $db;
     private $message_about_adding_product = array("", "", "");
 
     public function __construct()
     {
-        $this->config = require 'DBconfiguration.php';
-        $this->db = new ConnectionManager($this->config);
+        $this->db = $this->ConnectionDB();
     }
 
     private function RemoveSpacesInPrice($price)
@@ -34,6 +32,24 @@ class Cart extends Model
         echo $total_price_products;
     }
 
+    public function select($array_products)
+    {
+        $amount_products = count($array_products);
+        if($amount_products > 1) {
+            $query = "Select id, name, price, unit, (SELECT img FROM images i JOIN images_in_product ip ON ip.images_id = i.id WHERE ip.product_id = p.id LIMIT 1) as image From product p Where id IN (".implode(",", $array_products).")";
+        } else if($amount_products == 1) {
+            $query = "Select id, name, price, unit, (SELECT img FROM images i JOIN images_in_product ip ON ip.images_id = i.id WHERE ip.product_id = p.id LIMIT 1) as image From product p Where id = ".array_shift($array_products);
+        } else {
+            return "";
+        }
+        $d = $this->db->ExecutionQuery($query);
+
+        return $d;
+    }
+
+    public function insert(){}
+
+    public function update(){}
 
     public function delete($id)
     {
@@ -43,31 +59,12 @@ class Cart extends Model
         }
     }
 
-    public function select($array_products)
-    {
-        $amount_products = count($array_products);
-        if($amount_products > 1) {
-            $query = "Select id, name, price, unit, (SELECT img FROM images i JOIN images_in_product ip ON ip.images_id = i.id WHERE ip.product_id = p.id LIMIT 1) as image From product p Where id IN (".implode(",", $array_products).")";
-        } else if($amount_products == 1) {
-            $query = "Select id, name, price, unit  From product Where id = ".array_shift($array_products);
-        } else {
-            return "";
-        }
-        $d = $this->db->ExecutionQuery($query);
-
-        return $d;
-    }
-
     public function SelectTotalPriceProducts($array_products)
     {
         $query = "Select SUM(price) AS total_price FROM product where id IN(".implode(",", $array_products).")";
         $d = $this->db->ExecutionQuery($query);
         return $d;
     }
-
-    public function insert(){}
-
-    public function update(){}
 
     private function CheckExistProductInCartAndAdding()
     {

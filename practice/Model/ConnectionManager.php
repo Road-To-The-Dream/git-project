@@ -35,7 +35,19 @@ class ConnectionManager
         }
     }
 
-    public function ExecutionQuery($query, $mode = \PDO::FETCH_ASSOC)
+//    private function init($sql, $parameters)
+//    {
+//        if(!$this->isConnected()) {
+//            $this->Connect();
+//        }
+//
+//        try {
+//            $this->statement = $this->pdo->prepare($sql);
+//
+//        }
+//    }
+
+    public function ExecutionQuery($query, $parameters = [], $mode = \PDO::FETCH_ASSOC)
     {
         try {
             $query = trim(str_replace('\r', '', $query));
@@ -46,8 +58,8 @@ class ConnectionManager
                 $this->statement = $this->pdo->query($query);
                 return $this->statement->fetchAll($mode);
             } else if ($statement === 'insert' || $statement === 'update' || $statement === 'delete') {
-                return $this->statement = $this->pdo->query($query);
-
+                $this->statement = $this->pdo->prepare($query);
+                $this->statement->execute($parameters);
             } else {
                 return null;
             }

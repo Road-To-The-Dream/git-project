@@ -8,9 +8,8 @@
 
 namespace practice\Model;
 
-class Comment
+class Comment extends Model
 {
-    private $config = [];
     private $db;
 
     public $content;
@@ -22,8 +21,7 @@ class Comment
 
     public function __construct()
     {
-        $this->config = require 'DBconfiguration.php';
-        $this->db = new ConnectionManager($this->config);
+        $this->db = $this->ConnectionDB();
     }
 
     public function select()
@@ -32,8 +30,11 @@ class Comment
 
     public function insert()
     {
-        $sql = "INSERT INTO comments (content, date_added, create_at, client_id, product_id) VALUES ($this->content, $this->date_added, $this->create_at, $this->client_id, $this->product_id)";
-        $this->db->ExecutionQuery($sql);
+        $sql = "INSERT INTO comments (content, date_added, create_at, client_id, product_id) VALUES (:content,$this->date_added,$this->create_at, $this->client_id, $this->product_id)";
+        $parameters = array(
+            ':content' => $this->content
+        );
+        $this->db->ExecutionQuery($sql, $parameters);
     }
 
     public function update(){}
