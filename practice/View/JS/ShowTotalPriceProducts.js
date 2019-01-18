@@ -1,11 +1,14 @@
-function TotalPriceProducts(price_all_products) {
+function TotalPriceProducts() {
     $.ajax({
         url:  'http://practice//GetTotalPriceProducts',
         type: "POST",
         dataType: "html",
         cache: false,
         success: function(response) {
-            document.getElementById(price_all_products).innerHTML = response;
+            $('#price_all_products').html(response);
+            $('.cart-container').show();
         }
     });
 }
+
+TotalPriceProducts();

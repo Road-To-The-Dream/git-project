@@ -26,6 +26,7 @@ class Comment extends Model
 
     public function select()
     {
+
     }
 
     public function insert()

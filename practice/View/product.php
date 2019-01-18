@@ -14,18 +14,18 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="http://practice/main/show_main">Главная</a></li>
                 <li class="breadcrumb-item"><a href="http://practice/catalog/show_all">Ноутбуки</a></li>
-                <li class="breadcrumb-item active" aria-current="page"><?= $data[count($data) - 1]['name']?></li>
+                <li class="breadcrumb-item active" aria-current="page"><?= $data['info_product'][0]['name']?></li>
             </ol>
         </nav>
     </div>
     <div class="container mt-4">
         <div class="row mb-3">
             <div class="col-md-6 col-lg-7 text-align-bottom f-size-total">
-                <p class="f-size-title"><?= $data[count($data) - 1]['name']?></p>
+                <p class="f-size-title"><?= $data['info_product'][0]['name']?></p>
             </div>
             <div class="col-md-6 col-lg-5 text-right">
                 <p class="mt-1">
-                    Код товара: <span style="font-weight: bold"><?= $data[count($data) - 1]['id']?></span>
+                    Код товара: <span style="font-weight: bold"><?= $data['info_product'][0]['id']?></span>
                 </p>
             </div>
             <div class="container">
@@ -40,21 +40,12 @@
         <div class="row">
             <div class="col-xl-4 col-lg-5 col-md-5 align-self-start text-center" >
                 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="2000">
-                    <ol class="carousel-indicators">
-                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                    </ol>
                     <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img class="d-block w-100" src="/View/Image/Apple%20MacBook%20Pro%2015%20Space%20Gray%20(MR942)%202018%20(1).jpg" alt="First slide">
-                        </div>
-                        <div class="carousel-item">
-                            <img class="d-block w-100" src="/View/Image/Apple%20MacBook%20Pro%2015%20Space%20Gray%20(MR942)%202018%20(1).jpg" alt="Second slide">
-                        </div>
-                        <div class="carousel-item">
-                            <img class="d-block w-100" src="/View/Image/Apple%20MacBook%20Pro%2015%20Space%20Gray%20(MR942)%202018%20(1).jpg" alt="Third slide">
-                        </div>
+                        <?php for($i = 0; $i < count($data['images']); $i++) { ?>
+                            <div class="carousel-item <?php if($i==0) { ?> active <?php } ?> ">
+                                <img class="d-block w-100" src="/View/Image/<?=$data['images'][$i]['img'];?>" alt="First slide">
+                            </div>
+                        <?php } ?>
                     </div>
                     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -74,16 +65,16 @@
                                 Цена :
                             </div>
                             <div class="col-auto p-0 m-0 text-primary align-self-end">
-                                <p class="m-0" id="total_price_product" style="font-weight: bold; font-size: 30px"><?=$data[count($data) - 1]['price']?></p>
+                                <p class="m-0" id="total_price_product" style="font-weight: bold; font-size: 30px"><?=$data['info_product'][0]['price']?></p>
                             </div>
                             <div class="col-auto text-primary m-0 pl-1 pt-1 align-self-start">
-                                <p class="m-0"><?=$data[count($data) - 1]['unit']?></p>
+                                <p class="m-0"><?=$data['info_product'][0]['unit']?></p>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-5 col-lg-4 col-xl-3">
                         <input class="btn btn-success btn-lg btn-block" type="button" name="btn_logout" value="Купить">
-                        <a class='btn btn-warning btn-lg text-white btn-block pl-1 mt-2' onclick="AjaxAddInCart(<?=$data[count($data) - 1]['id'];?>, 'amount_products_in_cart')"><img class="mr-2" src='/View/Image/add_cart.png'>Добавить</a>
+                        <a class='btn btn-warning btn-lg text-white btn-block pl-1 mt-2' onclick="AjaxAddInCart(<?=$data['info_product'][0]['id'];?>, 'amount_products_in_cart')"><img class="mr-2" src='/View/Image/add_cart.png'>Добавить</a>
                     </div>
                 </div>
                 <div class="row">
@@ -147,14 +138,14 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" id="comment-tab" data-toggle="tab" href="#comment" role="tab" aria-controls="comment" aria-selected="false">
-                    Комментарии (<?php echo count($data) - 1;?>)
+                    Комментарии (<?php echo count($data['comments']);?>)
                 </a>
             </li>
         </ul>
         <div class="tab-content pt-3" id="myTabContent">
             <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
                 <p style="text-indent: 25px;">
-                    <?=$data[count($data) - 1]['description']?>
+                    <?=$data['info_product'][0]['description']?>
                 </p>
             </div>
             <div class="tab-pane fade" id="specifications" role="tabpanel" aria-labelledby="specifications-tab">
@@ -342,29 +333,29 @@
                             <textarea class="form-control" id="text_comment" rows="4" placeholder="Добавьте Ваш комментарий"></textarea>
                             <div class="row d-flex justify-content-end">
                                 <div class="col-auto">
-                                    <a class='btn btn-primary mt-2 text-white' onclick="AjaxAddComment('text_comment', <?= $data[count($data) - 1]['id']?>)"><img class="mr-2" src='/View/Image/add_comment.png'>Добавить</a>
+                                    <a class='btn btn-primary mt-2 text-white' onclick="AjaxAddComment('text_comment', <?= $data['info_product'][0]['id']?>)"><img class="mr-2" src='/View/Image/add_comment.png'>Добавить</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <!--ADDED COMMENT-->
                     <?php
-                    for($i = 0; $i < count($data) - 1; $i++) {
+                    for($i = 0; $i < count($data['comments']); $i++) {
                             ?>
                         <div class="shadow mb-5 bg-white rounded">
                             <div class="card bg-border mb-4">
                                 <div class="card-header bg">
                                     <div class="row">
                                         <div class="col">
-                                            <div class="font-comment-name"><?= $data[$i]['first_name']?></div>
-                                            <span class="font-comment-date">Дата добавления: <?= $data[$i]['date_added']?></span>
+                                            <div class="font-comment-name"><?= $data['comments'][$i]['first_name']?></div>
+                                            <span class="font-comment-date">Дата добавления: <?= $data['comments'][$i]['date_added']?></span>
                                         </div>
                                         <div class="row d-flex justify-content-end">
                                             <?php
-                                                if($_SESSION['user_id'] == $data[$i]['client_id']) {
+                                                if($_SESSION['user_id'] == $data['comments'][$i]['client_id']) {
                                                     ?>
                                                 <div class="col-auto">
-                                                    <a href="javascript:AjaxRemoveComment(<?= $data[$i]['id']?>)" class="badge badge-warning">Delete own comment</a>
+                                                    <a href="javascript:AjaxRemoveComment(<?= $data['comments'][$i]['id']?>)" class="badge badge-warning">Delete own comment</a>
                                                 </div>
                                             <?php
                                                 }
@@ -373,7 +364,7 @@
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <p class="card-text "><?= $data[$i]['content']?></p>
+                                    <p class="card-text "><?= $data['comments'][$i]['content']?></p>
                                 </div>
                             </div>
                         </div>

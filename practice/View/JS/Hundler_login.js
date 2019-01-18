@@ -25,7 +25,7 @@ function AjaxFormLogin(message1, message2, message3) {
                 });
             }
         },
-        error: function(response) {
+        error: function() {
             document.getElementById(message3).innerHTML = "Возникла ошибка при отправке формы. Попробуйте еще раз";
         }
     });

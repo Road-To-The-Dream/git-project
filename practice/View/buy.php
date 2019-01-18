@@ -38,14 +38,14 @@
                                 <div class="form-group row">
                                     <label for="last_name" class="col-3 col-form-label">Last Name</label>
                                     <div class="col">
-                                        <input type="text" class="form-control form-control-md" name="last_name" id="last_name" placeholder="Фамилия" value="" autofocus>
+                                        <input type="text" class="form-control form-control-md" name="last_name" id="last_name" placeholder="Фамилия" value="<?=$data[1]["last_name"];?>" autofocus>
                                         <p class="text-danger ml-2" id="messageLastName"></p>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="first_name" class="col-3 col-form-label">First Name</label>
                                     <div class="col">
-                                        <input type="text" class="form-control form-control-md" name="first_name" id="first_name" placeholder="Имя" value="">
+                                        <input type="text" class="form-control form-control-md" name="first_name" id="first_name" placeholder="Имя" value="<?=$data[1]["first_name"];?>">
                                         <p class="text-danger ml-2" id="messageFirstName"></p>
                                     </div>
                                 </div>
@@ -56,7 +56,7 @@
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text">@</div>
                                             </div>
-                                            <input type="email" class="form-control form-control-md" name="email_register" id="email" placeholder="Email" value="">
+                                            <input type="email" class="form-control form-control-md" name="email_register" id="email" placeholder="Email" value="<?=$data[1]["email"];?>">
                                         </div>
                                         <p class="text-danger ml-2" id="messageEmail"></p>
                                     </div>
@@ -64,7 +64,7 @@
                                 <div class="form-group row">
                                     <label for="phone" class="col-3 col-form-label">Phone</label>
                                     <div class="col">
-                                        <input type="text" class="form-control form-control-md bfh-phone" name="phone" id="phone" data-format="+380 (dd) dd-dd-ddd">
+                                        <input type="text" class="form-control form-control-md bfh-phone" name="phone" id="phone" data-format="+380 (dd) dd-dd-ddd" value="<?=$data[1]["phone"];?>">
                                         <p class="text-danger ml-2" id="messagePhone"></p>
                                     </div>
                                 </div>
@@ -85,20 +85,20 @@
                                 <div class="shadow mb-4 bg-white rounded border border-primary p-2">
                                     <div class="row">
                                         <div class="col-3">
-                                            <a href="http://practice/product/show_product/<?=$value["id"];?>"><img class="card-img-top" src="/View/Image/HP%20EliteBook%20830%20G5%20(3ZG02ES)%20(1).jpg" alt="Card image cap"></a>
+                                            <a href="http://practice/product/show_product/<?=$data[0]["id"];?>"><img class="card-img-top" src="/View/Image/HP%20EliteBook%20830%20G5%20(3ZG02ES)%20(1).jpg" alt="Card image cap"></a>
                                         </div>
                                         <div class="col-8">
                                             <div class="row">
                                                 <div class="col">
-                                                    <a href="http://practice/product/show_product/<?=$value["id"];?>" class="text-dark"><p class="f-size-name">HP EliteBook 830 G5 (3ZG02ES)</p></a>
+                                                    <a href="http://practice/product/show_product/<?=$data[0]["id"];?>" class="text-dark"><p class="f-size-name"></p><?=$data[0]["name"];?></a>
                                                 </div>
                                             </div>
                                             <div class="row f-size-name mt-2">
                                                 <div class="col-6">
-                                                    <p>1 шт.</p>
+                                                    <p><?=$data[0]["amount"];?> шт.</p>
                                                 </div>
                                                 <div class="col-6">
-                                                    <p>20998 грн</p>
+                                                    <p><?=$data[0]["price"];?> грн</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -109,7 +109,7 @@
                                                 Итого:
                                             </div>
                                             <div class="col-auto p-0 text-primary font-weight-bold f-size-title align-self-end">
-                                                <p class="m-0" id="total_price_product">20999</p>
+                                                <p class="m-0" id="total_price_product"><?=$data[0]["total_price"];?></p>
                                             </div>
                                             <div class="col-auto text-right font-weight-bold f-size-title m-0 align-self-end">
                                                 <p class="m-0"> грн</p>
