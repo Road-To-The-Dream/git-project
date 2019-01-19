@@ -5,15 +5,15 @@ function AjaxRemoveComment(id_comment) {
         data: "id_comment=" + id_comment,
         cache: false,
         success: function(response) {
-            ShowWindow('Комментарий успешно удалён !', 'success');
+            ShowWindowRemoveComment('Комментарий успешно удалён !', 'success');
         },
         error: function(response) {
-            ShowWindow('Произошла ошибка !', 'error');
+            ShowWindowRemoveComment('Произошла ошибка !', 'error');
         }
     });
 }
 
-function ShowWindow(title, icon) {
+function ShowWindowRemoveComment(title, icon) {
     swal({
         title: title,
         icon: icon

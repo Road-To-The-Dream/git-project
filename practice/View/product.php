@@ -71,11 +71,37 @@
                                 <p class="m-0"><?=$data['info_product'][0]['unit']?></p>
                             </div>
                         </div>
+                        <?php
+                            if($data['info_product'][0]['amount'] == 0) {
+                                ?>
+                                <div class="row mt-4" style="font-size: 18px">
+                                    <div class="col-auto">
+                                        <img src="/View/Image/No.png" alt="no">
+                                    </div>
+                                    <div class="col-auto pt-1 pl-0">
+                                        Нет в наличии
+                                    </div>
+                                </div>
+                    </div>
+                        <?php
+                            } else {
+                                ?>
+                                <div class="row mt-4" style="font-size: 18px">
+                                    <div class="col-auto">
+                                        <img src="/View/Image/Ok.png" alt="ok">
+                                    </div>
+                                    <div class="col-auto pt-1 pl-0">
+                                        В наличии
+                                    </div>
+                                </div>
                     </div>
                     <div class="col-md-5 col-lg-4 col-xl-3">
                         <input class="btn btn-success btn-lg btn-block" type="button" name="btn_logout" value="Купить">
                         <a class='btn btn-warning btn-lg text-white btn-block pl-1 mt-2' onclick="AjaxAddInCart(<?=$data['info_product'][0]['id'];?>, 'amount_products_in_cart')"><img class="mr-2" src='/View/Image/add_cart.png'>Добавить</a>
                     </div>
+                        <?php
+                            }
+                        ?>
                 </div>
                 <div class="row">
                     <ul class="nav nav-tabs mt-4" id="myTab" role="tablist">
@@ -355,7 +381,7 @@
                                                 if($_SESSION['user_id'] == $data['comments'][$i]['client_id']) {
                                                     ?>
                                                 <div class="col-auto">
-                                                    <a href="javascript:AjaxRemoveComment(<?= $data['comments'][$i]['id']?>)" class="badge badge-warning">Delete own comment</a>
+                                                    <a onclick="AjaxRemoveComment(<?= $data['comments'][$i]['id']?>)" class="badge badge-warning btn">Delete own comment</a>
                                                 </div>
                                             <?php
                                                 }

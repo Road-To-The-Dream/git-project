@@ -87,14 +87,31 @@
                                             <div class="col-6 text-center text-primary"><p style="font-weight: bold; font-size: 25px"><?=$value["price"]?></p></div>
                                             <div class="col-3 p-0 mt-2" style="font-size: 18px"><?=$value["unit"]?></div>
                                         </div>
-                                        <div class="row justify-content-center">
-                                            <div class="col-4 p-0 mr-2">
-                                                <input class="btn btn-success btn-block mt-2" type="submit" name="btn_login" value="Купить">
-                                            </div>
-                                            <div class="col-6 p-0">
-                                                <a class='btn btn-warning text-white pl-1 mt-2' onclick="AjaxAddInCart(<?=$value["id"];?>, 'amount_products_in_cart')"><img class="mr-2" src='/View/Image/add_cart.png'>Добавить</a>
-                                            </div>
-                                        </div>
+                                        <?php
+                                            if($value["amount"] > 0) {
+                                                ?>
+                                                <div class="row justify-content-center">
+                                                    <div class="col-4 p-0 mr-2">
+                                                        <input class="btn btn-success btn-block mt-2" type="submit" name="btn_login" value="Купить">
+                                                    </div>
+                                                    <div class="col-6 p-0">
+                                                        <a class='btn btn-warning text-white pl-1 mt-2' onclick="AjaxAddInCart(<?=$value["id"];?>, 'amount_products_in_cart')"><img class="mr-2" src='/View/Image/add_cart.png'>Добавить</a>
+                                                    </div>
+                                                </div>
+                                        <?php
+                                            } else {
+                                                ?>
+                                                <div class="row justify-content-center mt-3">
+                                                    <div class="col-auto">
+                                                        <img src="/View/Image/No.png" alt="no">
+                                                    </div>
+                                                    <div class="col-auto pt-1 pl-0">
+                                                        Нет в наличии
+                                                    </div>
+                                                </div>
+                                        <?php
+                                            }
+                                        ?>
                                     </div>
                                 </div>
                             </div>

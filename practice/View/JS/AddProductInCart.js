@@ -6,7 +6,7 @@ function AjaxAddInCart(id, amount_product) {
         dataType: "json",
         cache: false,
         success: function(response) {
-            ShowWindow(response[0], response[1]);
+            ShowWindowAddComment(response[0], response[1]);
             if(response[2] != "") {
                 document.getElementById(amount_product).innerHTML = response[2];
             }
@@ -14,7 +14,7 @@ function AjaxAddInCart(id, amount_product) {
     });
 }
 
-function ShowWindow(title, icon) {
+function ShowWindowAddComment(title, icon) {
     swal({
         title: title,
         icon: icon

@@ -37,6 +37,12 @@
             $this->CountingTheAmountOfErrors();
 
             if($this->amount_empty_errors == 0) {
+                $last_name = $this->CleanFields($last_name);
+                $first_name = $this->CleanFields($first_name);
+                $patronymic = $this->CleanFields($patronymic);
+                $email = $this->CleanFields($email);
+                $phone = $this->CleanFields($phone);
+                $password = $this->CleanFields($password);
                 $this->CheckExistenceEmailAndAddUser($last_name, $first_name, $patronymic, $email, $phone, $password);
             }
         }
@@ -159,5 +165,14 @@
             foreach ($this->errors_register as $value)
                 if($value != "")
                     $this->amount_empty_errors++;
+        }
+
+        function CleanFields($value_field = "") {
+            $value_field = trim($value_field);
+            $value_field = stripslashes($value_field);
+            $value_field = strip_tags($value_field);
+            $value_field = htmlspecialchars($value_field);
+
+            return $value_field;
         }
     }
