@@ -18,31 +18,42 @@ class Product extends Model
         $this->db = $this->ConnectionDB();
     }
 
-    public function select($sorting = 0)
+    public function select($sorting = 0, $category = 0)
     {
         if($this->id_product == 0) {
             if($sorting == 1) {
-                return $this->db->ExecutionQuery('SELECT id, name, price, unit FROM product ORDER BY price DESC');
+                return $this->db->ExecutionQuery("SELECT p.id, p.name, p.description, p.price, p.unit, p.amount, (SELECT img FROM images i JOIN images_in_product ip ON ip.images_id = i.id WHERE ip.product_id = p.id LIMIT 1) as image 
+                                                        FROM product p 
+                                                        JOIN categories c ON c.id = p.category_id 
+                                                        WHERE c.id = $category ORDER BY price DESC");
+            } else if($sorting == 2) {
+                return $this->db->ExecutionQuery("SELECT p.id, p.name, p.description, p.price, p.unit, p.amount, (SELECT img FROM images i JOIN images_in_product ip ON ip.images_id = i.id WHERE ip.product_id = p.id LIMIT 1) as image 
+                                                        FROM product p ORDER BY price ASC");
             }
-            else if($sorting == 2) {
-                return $this->db->ExecutionQuery('SELECT id, name, price, unit  FROM product ORDER BY price ASC');
-            }
-        }
-        else {
-            $sql_comment = $this->db->ExecutionQuery("SELECT cl.first_name, com.id, com.content, date_added, com.client_id FROM comments com JOIN client cl ON cl.id = com.client_id JOIN product pr ON pr.id = com.product_id WHERE pr.id = ".$this->id_product." ORDER BY com.date_added DESC");
+        } else {
+            $sql_comment = $this->db->ExecutionQuery("SELECT cl.first_name, com.id, com.content, date_added, com.client_id 
+                                                            FROM comments com 
+                                                            JOIN client cl ON cl.id = com.client_id 
+                                                            JOIN product pr ON pr.id = com.product_id 
+                                                            WHERE pr.id = ".$this->id_product." ORDER BY com.date_added DESC");
 
             $sql_product = $this->db->ExecutionQuery("SELECT id, name, description, price, unit, amount FROM product WHERE id = ".$this->id_product);
             $sql_images = $this->db->ExecutionQuery("SELECT i.img FROM images i JOIN images_in_product ip ON i.id = ip.images_id JOIN product p ON p.id = ip.product_id WHERE p.id = ".$this->id_product);
 
-            $all = array (
+            $all_info = array (
               'info_product' => $sql_product,
               'images' => $sql_images,
               'comments' => $sql_comment
             );
 
-            return $all;
+            return $all_info;
         }
-        return $this->db->ExecutionQuery("SELECT p.id, p.name, p.description, p.price, p.unit, p.amount, (SELECT img FROM images i JOIN images_in_product ip ON ip.images_id = i.id WHERE ip.product_id = p.id LIMIT 1) as image FROM product p");
+        if($category == 0) {
+            return $this->db->ExecutionQuery("SELECT p.id, p.name, p.description, p.price, p.unit, p.amount, (SELECT img FROM images i JOIN images_in_product ip ON ip.images_id = i.id WHERE ip.product_id = p.id LIMIT 1) as image FROM product p");
+        } else {
+            return $this->db->ExecutionQuery("SELECT p.id, p.name, p.description, p.price, p.unit, p.amount, (SELECT img FROM images i JOIN images_in_product ip ON ip.images_id = i.id WHERE ip.product_id = p.id LIMIT 1) as image 
+                                                    FROM product p JOIN categories c ON c.id = p.category_id WHERE c.id = ".$category);
+        }
     }
     
     public function CheckExistSessionAndSelectProduct($id_client)

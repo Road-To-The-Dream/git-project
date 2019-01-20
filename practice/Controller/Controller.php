@@ -11,12 +11,12 @@ class Controller
         $this->objectGenerateView = new View();
     }
 
-    public function show_all($view_name, $sorting = 0)
+    public function show_all($view_name, $sorting = 0, $category = 'all')
     {
         $this->checkSessionAndStart();
 
         $product = new \practice\Model\Product();
-        $DBdata = $product->select($sorting);
+        $DBdata = $product->select($sorting, $category);
 
         $this->objectGenerateView->generate($view_name, $DBdata);
     }

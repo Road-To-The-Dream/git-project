@@ -8,7 +8,9 @@
         {
             $action_name = 'show_main';
             $view_name= 'main';
+
             $id = 0;
+            $category = $_GET['category'];
 
             $routes = explode('/', $url);
 
@@ -27,7 +29,11 @@
             $controller = new \practice\Controller\Controller();
 
             if(method_exists($controller, $action_name)) {  // call action controller
-                $controller->$action_name($view_name, $id);
+                if(!empty($category)) {
+                    $controller->$action_name($view_name, $id, $category);
+                } else {
+                    $controller->$action_name($view_name, $id);
+                }
             }
             else {
                 header('Location: http://practice/404/show_404');
