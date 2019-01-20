@@ -42,9 +42,9 @@ class Cart extends Model
         } else {
             return "";
         }
-        $d = $this->db->ExecutionQuery($query);
+        $DBdata = $this->db->ExecutionQuery($query);
 
-        return $d;
+        return $DBdata;
     }
 
     public function insert(){}

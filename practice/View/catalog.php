@@ -13,7 +13,7 @@
         <div class="container">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="http://practice/main/show_main">Главная</a></li>
+                    <li class="breadcrumb-item"><a href="http://practice/main">Главная</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Ноутбуки</li>
                 </ol>
             </nav>
@@ -61,8 +61,8 @@
                                             Сортировка
                                         </button>
                                         <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="http://practice/catalog/show_all/1/?category=<?=$_GET['category']?>">от дорогих к дешёвым</a>
-                                            <a class="dropdown-item" href="http://practice/catalog/show_all/2/?category=<?=$_GET['category']?>">от дешёвых к дорогим</a>
+                                            <a class="dropdown-item" href="http://practice/catalog/index/1">от дорогих к дешёвым</a>
+                                            <a class="dropdown-item" href="http://practice/catalog/index/2">от дешёвых к дорогим</a>
                                         </div>
                                     </div>
                                 </form>
@@ -77,7 +77,7 @@
                                 <div class="card-deck h-100">
                                     <div class="card p-3">
                                         <div class="card-body p-0">
-                                            <a href="http://practice/product/show_product/<?=$value["id"];?>"><img class="card-img-top" src="/View/Image/<?=$value["image"]?>" alt="Card image cap"></a>
+                                            <a href="http://practice/product/index/<?=$value["id"];?>"><img class="card-img-top" src="/View/Image/<?=$value["image"]?>" alt="Card image cap"></a>
                                             <div class="row justify-content-center mt-3">
                                                 <a class="card-text f-size-name h-100 text-dark" href="http://practice/product/show_product/<?=$value["id"];?>"><?=$value["name"]?></a>
                                             </div>

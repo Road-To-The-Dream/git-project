@@ -12,8 +12,8 @@
     <div class="container">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="http://practice/main/show_main">Главная</a></li>
-                <li class="breadcrumb-item"><a href="http://practice/catalog/show_all">Ноутбуки</a></li>
+                <li class="breadcrumb-item"><a href="http://practice/main">Главная</a></li>
+                <li class="breadcrumb-item"><a href="http://practice/catalog">Ноутбуки</a></li>
                 <li class="breadcrumb-item active" aria-current="page"><?= $data['info_product'][0]['name']?></li>
             </ol>
         </nav>

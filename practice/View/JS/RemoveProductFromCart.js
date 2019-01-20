@@ -1,6 +1,6 @@
 function RemoveProduct(id) {
     $.ajax({
-        url:  'http://practice//RemoveProductForCart',
+        url:  'http://practice/cart/RemoveProductForCart',
         type: "POST",
         data: "IDProduct=" + id,
         cache: false,

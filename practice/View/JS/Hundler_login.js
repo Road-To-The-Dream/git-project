@@ -1,6 +1,6 @@
 function AjaxFormLogin(message1, message2, message3) {
     $.ajax({
-        url:     'http://practice//ValidateIsLogin',
+        url:     'http://practice/main/ValidateIsLogin',
         type:     "POST",
         dataType: "json",
         data: $("#formMain1").serialize(),

@@ -1,6 +1,6 @@
 function AjaxAddComment(text_comment, id_product) {
     $.ajax({
-        url:  'http://practice//AddingComments',
+        url:  'http://practice/comments/AddingComments',
         type: "POST",
         data: { "TextComment" : $('#' + text_comment).val(),
                 "IDProduct" : id_product},

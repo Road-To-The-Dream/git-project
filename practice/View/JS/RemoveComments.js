@@ -1,6 +1,6 @@
 function AjaxRemoveComment(id_comment) {
     $.ajax({
-        url:  'http://practice//RemoveComments',
+        url:  'http://practice/comments/RemoveComments',
         type: "POST",
         data: "id_comment=" + id_comment,
         cache: false,

@@ -1,6 +1,6 @@
 function AjaxFormRegister(message1, message2, message3, message4, message5, message6, message7, message8) {
     $.ajax({
-        url:     'http://practice//ValidateIsRegister',
+        url:     'http://practice/main/ValidateIsRegister',
         type:     "POST",
         dataType: "json",
         data: $("#formMain2").serialize(),
@@ -27,7 +27,7 @@ function AjaxFormRegister(message1, message2, message3, message4, message5, mess
                     button: "OK"
                 }).then(function() {
                     setTimeout(function() {
-                        location.href = "http://practice/main/show_main"
+                        location.href = "http://practice/main"
                     }, 200);
                 });
             }
