@@ -61,8 +61,8 @@
                                             Сортировка
                                         </button>
                                         <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="http://practice/catalog/index/1">от дорогих к дешёвым</a>
-                                            <a class="dropdown-item" href="http://practice/catalog/index/2">от дешёвых к дорогим</a>
+                                            <a class="dropdown-item" href="http://practice/catalog/index/1/?category=<?=$_GET['category']?>">от дорогих к дешёвым</a>
+                                            <a class="dropdown-item" href="http://practice/catalog/index/2/?category=<?=$_GET['category']?>">от дешёвых к дорогим</a>
                                         </div>
                                     </div>
                                 </form>

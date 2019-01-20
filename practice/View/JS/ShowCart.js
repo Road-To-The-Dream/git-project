@@ -2,11 +2,14 @@ function AjaxShowCart() {
     $.ajax({
         url:  'http://practice/cart/CheckProductInCart',
         type: "POST",
+        contentType: "application/json; charset=utf-8",
         dataType: "json",
         cache: false,
         success: function(response) {
-            alert(response);
-            ShowWindowCart(response[0], response[1]);
+
+        },
+        error: function (response) {
+            alert(response[0]);
         }
     });
 }

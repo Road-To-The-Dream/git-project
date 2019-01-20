@@ -5,7 +5,7 @@
     <title>Shop - LAPTOP</title>
 </head>
 <body>
-    <div class="container">
+    <div class="container mb-3">
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="2000">
             <ol class="carousel-indicators">
                 <li class="active" data-target="#carouselExampleIndicators" data-slide-to="0"></li>
@@ -35,7 +35,7 @@
         <div class="container">
             <div class="row text-center justify-content-center mt-3 ml-4">
                 <div class="col-3">
-                    <a href="http://practice/catalog">
+                    <a href="http://practice/catalog/index/?category=1">
                         <div class="card h-100" style="width: 12rem;">
                             <img class="card-img-top" src="/View/Image/main/Card_image1.jpg" alt="Card image cap">
                             <div class="card-body">

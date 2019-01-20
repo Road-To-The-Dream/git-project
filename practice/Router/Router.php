@@ -8,7 +8,9 @@ class Router
     {
         $controller_name= 'Main';
         $action_name = 'index';
+
         $id = 0;
+        $category = $_GET['category'];
 
         $routes = explode('/', $url);
 
@@ -29,7 +31,11 @@ class Router
         $controller = new $controller_name;
 
         if(method_exists($controller, $action_name)) {  // call action controller
-            $controller->$action_name($id);
+            if(!empty($category)) {
+                $controller->$action_name($id, $category);
+            } else {
+                $controller->$action_name($id);
+            }
         }
         else {
             header('Location: http://practice/404');

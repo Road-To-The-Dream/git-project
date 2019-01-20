@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
+    <link rel="shortcut icon" href="/View/Image/header/favicon.ico" type="image/x-icon"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <link rel="stylesheet" href="/View/CSS/header_cart.css">
     <link rel="stylesheet" href="/View/CSS/MoveArrowTop.css">
@@ -81,7 +82,7 @@
         <div class="row">
             <div class="col-9"></div>
             <div class="col-3 text-right">
-                <a class="cart" onclick="AjaxShowCart()">
+                <a class="cart" href="http://practice/cart/CheckProductInCart">
                     <button type="button" class="btn btn-dark mb-1 p-1">
                         <img src="/View/Image/header/Cart.png" alt="Image cart">
                         <span class="amount rounded-circle pl-2 pr-2" style="background: red" id="amount_products_in_cart"><?php echo count($_SESSION['product_id']) ?></span>

@@ -11,12 +11,12 @@ namespace practice\Controller;
 
 class Controller_Catalog extends Controller
 {
-    public function index($sorting = 0)
+    public function index($sorting = 0, $category = 'all')
     {
         $this->checkSessionAndStart();
 
         $product = new \practice\Model\Product();
-        $DBdata = $product->select($sorting);
+        $DBdata = $product->select_all($sorting, $category);
 
         $this->objectView->generate('catalog', $DBdata);
     }

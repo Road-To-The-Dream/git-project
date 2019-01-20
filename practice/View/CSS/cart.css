@@ -1,5 +1,22 @@
-body{
+* {
+    margin:0;
+}
+body {
+    height: 100%;
+    min-width:900px;
     background-image: url("../Image/main/main_bg.jpg");
+}
+html {
+    position:relative;
+    min-height:85%;
+}
+
+#footer {
+    height: 50px;
+    background: #f7f7f7;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 }
 
 .row-border {
@@ -46,4 +63,13 @@ body{
 .cart-container {
     display: none;
     height: 100%;
+}
+
+.rating span {
+    font-size: 25px;
+    cursor: pointer;
+    float: right; //remove 'float right' for right to left
+}
+.rating span:hover, .rating span:hover ~ span{
+    color: red; //gold or any other color
 }

@@ -104,13 +104,13 @@ class Cart extends Model
 
         if($_POST['btn_value'] == '+') {
             $amount_units++;
-            $price_all_products += $total_price_product;
+            $price_all_products += $price_product;
             $total_price_product = $amount_units * $price_product;
         } else {
             if($amount_units > 1) {
                 $amount_units--;
                 $total_price_product = $amount_units * $price_product;
-                $price_all_products -= $total_price_product;
+                $price_all_products -= $price_product;
             }
         }
         $price[0] = $amount_units;

@@ -17,7 +17,7 @@ class Controller_Product extends Controller
 
         $product = new \practice\Model\Product();
         $product->id_product = $id;
-        $DBdata = $product->select();
+        $DBdata = $product->select_product();
 
         $this->objectView->generate('product', $DBdata);
     }

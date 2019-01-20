@@ -13,7 +13,7 @@ class Controller_Cart extends Controller
 {
     public function index()
     {
-        $this->checkSessionAndStart();
+        //$this->checkSessionAndStart();
 
         $cart = new \practice\Model\Cart();
         $DBdata = $cart->select($_SESSION['product_id']);
@@ -28,12 +28,12 @@ class Controller_Cart extends Controller
         if(!empty($_SESSION['product_id'])) {
             $message[0] = 'Yes';
             $message[1] = 'success';
+            $this->index();
         } else {
             $message[0] = 'No';
             $message[1] = 'error';
         }
-
-        echo json_encode($message);
+       // echo json_encode($message);
     }
 
     public function AddingProductsInCart()

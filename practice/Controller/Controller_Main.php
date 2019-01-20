@@ -35,4 +35,22 @@ class Controller_Main extends Controller
         $objRegistrationValidation = new \practice\Model\RegistrationValidation();
         echo $objRegistrationValidation->CheckRegistration();
     }
+
+    public function Send()
+    {
+        //$set = $_POST['email'];
+
+        $transport = (new \Swift_SmtpTransport('smtp.gmail.com', 587, 'tls'))
+            ->setUsername('rpz14.sergey@gmail.com')
+            ->setPassword('fhlbc2012');
+
+        $mailer = new \Swift_Mailer($transport);
+
+        $message = (new \Swift_Message('Wonderful Subject'))
+            ->setFrom(['fhlbc2012@gmail.com'])
+            ->setTo(['rpz14.sergey@gmail.com'])
+            ->setBody('Here is the message itself');
+
+        $result = $mailer->send($message);
+    }
 }
