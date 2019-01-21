@@ -4,14 +4,12 @@
 
     class Model
     {
-
         protected function ConnectionDB()
         {
-            $config = require 'DBconfiguration.php';
-            return $db = new ConnectionManager($config);
+            ConnectionManager::getInstance();
         }
 
-        protected function ChangePriceProduct($data_select, $name_column)
+        protected function AddSpaceToPriceProduct($data_select, $name_column)
         {
             for($i = 0; $i < count($data_select); $i++) {
                 switch (strlen($data_select[$i][$name_column])) {

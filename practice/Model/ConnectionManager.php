@@ -10,44 +10,44 @@ namespace practice\Model;
 
 class ConnectionManager
 {
-    private $pdo;
-    private $isConnected;
-    private $statement;
-    protected $settings = [];
+    private static $instance = null;
 
-    public function __construct(array $settings)
+    private function __construct()
     {
-        $this->settings = $settings;
-        $this->Connect();
     }
 
-    private function Connect()
+    private function __clone()
     {
-        $dsn = 'mysql:dbname=' . $this->settings['dbname'] . ';host=' . $this->settings['host'];
-        try {
-            $this->pdo = new \PDO($dsn, $this->settings['user'], $this->settings['password'], [\PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES ' .$this->settings['charset']]);
+    }
 
-            $this->pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
-            $this->pdo->setAttribute(\PDO::ATTR_EMULATE_PREPARES, false);
-            $this->isConnected = true;
+    private function __wakeup()
+    {
+    }
+
+    public static function getInstance()
+    {
+        if(self::$instance === null) {
+            self::Connect();
+        }
+        return self::$instance;
+    }
+
+    private static function Connect()
+    {
+        $config = require 'DBconfiguration.php';
+
+        $dsn = 'mysql:dbname=' . $config['dbname'] . ';host=' . $config['host'];
+        try {
+            self::$instance = new \PDO($dsn, $config['user'], $config['password'], [\PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES '.$config['charset']]);
+
+            self::$instance->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+            self::$instance->setAttribute(\PDO::ATTR_EMULATE_PREPARES, false);
         } catch (\PDOException $e) {
             exit($e->getMessage());
         }
     }
 
-//    private function init($sql, $parameters)
-//    {
-//        if(!$this->isConnected()) {
-//            $this->Connect();
-//        }
-//
-//        try {
-//            $this->statement = $this->pdo->prepare($sql);
-//
-//        }
-//    }
-
-    public function ExecutionQuery($query, $parameters = [], $mode = \PDO::FETCH_ASSOC)
+    public static function ExecutionQuery($query, $parameters = [], $mode = \PDO::FETCH_ASSOC)
     {
         try {
             $query = trim(str_replace('\r', '', $query));
@@ -55,11 +55,11 @@ class ConnectionManager
             $statement = strtolower($rawStatement[0]);
 
             if ($statement === 'select') {
-                $this->statement = $this->pdo->query($query);
-                return $this->statement->fetchAll($mode);
+                $statement = self::$instance->query($query);
+                return $statement->fetchAll($mode);
             } else if ($statement === 'insert' || $statement === 'update' || $statement === 'delete') {
-                $this->statement = $this->pdo->prepare($query);
-                $this->statement->execute($parameters);
+                $statement = self::$instance->prepare($query);
+                $statement->execute($parameters);
             } else {
                 return null;
             }
@@ -68,9 +68,9 @@ class ConnectionManager
         }
     }
 
-    public function closeConnection()
+    public static function closeConnection()
     {
-        $this->pdo = null;
+        self::$instance = null;
     }
 }
 

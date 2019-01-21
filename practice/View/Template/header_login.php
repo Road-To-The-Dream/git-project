@@ -22,7 +22,7 @@
     <a href="#" class="scrollup">Наверх</a>
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
         <div class="container">
-            <a href="http://practice/main/show_main"><img src="/View/Image/header/logo_head.png" alt="logo_head"></a>
+            <a href="http://practice/main"><img src="/View/Image/header/logo_head.png" alt="logo_head"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>

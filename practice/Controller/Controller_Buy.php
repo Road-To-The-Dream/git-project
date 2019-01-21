@@ -28,6 +28,6 @@ class Controller_Buy extends Controller
         $product->id_product = $_POST['IDProduct'];
         $DBdata = $product->CheckExistSessionAndSelectProduct($_SESSION['user_id']);
 
-        $this->objectView->generate($view_name, $DBdata);
+        $this->objectView->generate('buy', $DBdata);
     }
 }

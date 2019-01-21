@@ -11,12 +11,11 @@ namespace practice\Model;
 
 class Cart extends Model
 {
-    private $db;
     private $message_about_adding_product = array("", "", "");
 
     public function __construct()
     {
-        $this->db = $this->ConnectionDB();
+        $this->ConnectionDB();
     }
 
     private function RemoveSpacesInPrice($price)
@@ -27,7 +26,7 @@ class Cart extends Model
     public function GetTotalPriceProducts($array_products)
     {
         $DBdata = $this->SelectTotalPriceProducts($array_products);
-        $total_price_products = $this->ChangePriceProduct($DBdata, 'total_price');
+        $total_price_products = $this->AddSpaceToPriceProduct($DBdata, 'total_price');
         $total_price_products = $total_price_products[0]['total_price'];
         echo $total_price_products;
     }
@@ -42,7 +41,8 @@ class Cart extends Model
         } else {
             return "";
         }
-        $DBdata = $this->db->ExecutionQuery($query);
+        $DBdata = ConnectionManager::ExecutionQuery($query);
+        $DBdata = $this->AddSpaceToPriceProduct($DBdata, 'price');
 
         return $DBdata;
     }
@@ -62,7 +62,7 @@ class Cart extends Model
     public function SelectTotalPriceProducts($array_products)
     {
         $query = "Select SUM(price) AS total_price FROM product where id IN(".implode(",", $array_products).")";
-        $d = $this->db->ExecutionQuery($query);
+        $d = ConnectionManager::ExecutionQuery($query);
         return $d;
     }
 

@@ -10,25 +10,24 @@ namespace practice\Model;
 
 class Product extends Model
 {
-    private $db;
     public $id_product = 0;
 
     public function __construct()
     {
-        $this->db = $this->ConnectionDB();
+        $this->ConnectionDB();
     }
 
     public function select_product()
     {
-        $sql_comment = $this->db->ExecutionQuery("SELECT cl.first_name, com.id, com.content, date_added, com.client_id 
+        $sql_comment = ConnectionManager::ExecutionQuery("SELECT cl.first_name, com.id, com.content, date_added, com.client_id 
                                                             FROM comments com 
                                                               JOIN client cl ON cl.id = com.client_id 
                                                               JOIN product pr ON pr.id = com.product_id 
                                                             WHERE pr.id = ".$this->id_product." ORDER BY com.date_added DESC");
 
-        $sql_product = $this->db->ExecutionQuery("SELECT id, name, description, price, unit, amount FROM product WHERE id = ".$this->id_product);
-
-        $sql_images = $this->db->ExecutionQuery("SELECT i.img FROM images i JOIN images_in_product ip ON i.id = ip.images_id JOIN product p ON p.id = ip.product_id WHERE p.id = ".$this->id_product);
+        $sql_product = ConnectionManager::ExecutionQuery("SELECT id, name, description, price, unit, amount FROM product WHERE id = ".$this->id_product);
+        $sql_product = $this->AddSpaceToPriceProduct($sql_product, "price");
+        $sql_images = ConnectionManager::ExecutionQuery("SELECT i.img FROM images i JOIN images_in_product ip ON i.id = ip.images_id JOIN product p ON p.id = ip.product_id WHERE p.id = ".$this->id_product);
 
         $all_info_product = array (
             'info_product' => $sql_product,
@@ -42,36 +41,39 @@ class Product extends Model
     public function select_all($sorting = 0, $category = 0)
     {
         if($sorting == 1) {
-            return $this->db->ExecutionQuery("SELECT p.id, p.name, p.description, p.price, p.unit, p.amount, (SELECT img FROM images i JOIN images_in_product ip ON ip.images_id = i.id WHERE ip.product_id = p.id LIMIT 1) as image 
-                                                        FROM product p 
-                                                          JOIN categories c ON c.id = p.category_id 
-                                                        WHERE c.id = $category ORDER BY price DESC");
+            return ConnectionManager::ExecutionQuery("SELECT p.id, p.name, p.description, p.price, p.unit, p.amount, (SELECT img FROM images i JOIN images_in_product ip ON ip.images_id = i.id WHERE ip.product_id = p.id LIMIT 1) as image 
+                                                            FROM product p 
+                                                              JOIN categories c ON c.id = p.category_id 
+                                                            WHERE c.id = $category ORDER BY price DESC");
         } else if($sorting == 2) {
-            return $this->db->ExecutionQuery("SELECT p.id, p.name, p.description, p.price, p.unit, p.amount, (SELECT img FROM images i JOIN images_in_product ip ON ip.images_id = i.id WHERE ip.product_id = p.id LIMIT 1) as image 
-                                                        FROM product p 
-                                                          JOIN categories c ON c.id = p.category_id 
-                                                        WHERE c.id = $category ORDER BY price ASC");
+            return ConnectionManager::ExecutionQuery("SELECT p.id, p.name, p.description, p.price, p.unit, p.amount, (SELECT img FROM images i JOIN images_in_product ip ON ip.images_id = i.id WHERE ip.product_id = p.id LIMIT 1) as image 
+                                                            FROM product p 
+                                                              JOIN categories c ON c.id = p.category_id 
+                                                            WHERE c.id = $category ORDER BY price ASC");
         }
 
         if($category == 0) {
-            return $this->db->ExecutionQuery("SELECT p.id, p.name, p.description, p.price, p.unit, p.amount, (SELECT img FROM images i 
-                                                      JOIN images_in_product ip ON ip.images_id = i.id 
-                                                    WHERE ip.product_id = p.id LIMIT 1) as image 
-                                                    FROM product p");
+            return ConnectionManager::ExecutionQuery("SELECT p.id, p.name, p.description, p.price, p.unit, p.amount, (SELECT img FROM images i 
+                                                              JOIN images_in_product ip ON ip.images_id = i.id 
+                                                            WHERE ip.product_id = p.id LIMIT 1) as image 
+                                                            FROM product p");
         } else {
-            return $this->db->ExecutionQuery("SELECT p.id, p.name, p.description, p.price, p.unit, p.amount, (SELECT img FROM images i 
-                                                      JOIN images_in_product ip ON ip.images_id = i.id 
-                                                    WHERE ip.product_id = p.id LIMIT 1) as image 
-                                                    FROM product p JOIN categories c ON c.id = p.category_id WHERE c.id = ".$category);
+            $sql = ConnectionManager::ExecutionQuery("SELECT p.id, p.name, p.description, p.price, p.unit, p.amount, (SELECT img FROM images i 
+                                                              JOIN images_in_product ip ON ip.images_id = i.id 
+                                                            WHERE ip.product_id = p.id LIMIT 1) as image 
+                                                            FROM product p JOIN categories c ON c.id = p.category_id WHERE c.id = ".$category);
+
+            $sql = $this->AddSpaceToPriceProduct($sql, 'price');
+            return $sql;
         }
     }
 
     public function CheckExistSessionAndSelectProduct($id_client)
     {
-        $data = $this->db->ExecutionQuery("SELECT id, name, price, unit FROM product WHERE id = ".$this->id_product);
+        $data = ConnectionManager::ExecutionQuery("SELECT id, name, price, unit FROM product WHERE id = ".$this->id_product);
 
         if(isset($_SESSION['user_id'])) {
-            $sql_client = $this->db->ExecutionQuery("SELECT first_name, last_name, email, phone FROM client WHERE id = ".$id_client);
+            $sql_client = ConnectionManager::ExecutionQuery("SELECT first_name, last_name, email, phone FROM client WHERE id = ".$id_client);
             $data = array_merge((array)$data, (array)$sql_client);
         }
 

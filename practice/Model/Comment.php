@@ -10,8 +10,6 @@ namespace practice\Model;
 
 class Comment extends Model
 {
-    private $db;
-
     public $content;
     public $date_added;
     public $create_at;
@@ -21,12 +19,11 @@ class Comment extends Model
 
     public function __construct()
     {
-        $this->db = $this->ConnectionDB();
+        $this->ConnectionDB();
     }
 
     public function select()
     {
-
     }
 
     public function insert()
@@ -35,7 +32,7 @@ class Comment extends Model
         $parameters = array(
             ':content' => $this->content
         );
-        $this->db->ExecutionQuery($sql, $parameters);
+        ConnectionManager::ExecutionQuery($sql, $parameters);
     }
 
     public function update(){}
@@ -43,6 +40,6 @@ class Comment extends Model
     public function delete($id)
     {
         $sql = "DELETE FROM comments WHERE id = ".$id;
-        $this->db->ExecutionQuery($sql);
+        ConnectionManager::ExecutionQuery($sql);
     }
 }
