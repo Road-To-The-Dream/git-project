@@ -8,8 +8,7 @@
 
 namespace practice\Controller;
 
-
-class Controller_Main extends Controller
+class ControllerMain extends Controller
 {
     public function index()
     {
@@ -17,29 +16,27 @@ class Controller_Main extends Controller
         $this->objectView->generate('main');
     }
 
-    public function Logout()
+    public function logout()
     {
         $auth = new \practice\Model\Authentication();
-        $auth->CleanAndDestroySession();
+        $auth->cleanAndDestroySession();
         header('Location: http://practice/main');
     }
 
-    public function ValidateIsLogin()
+    public function validateIsLogin()
     {
         $objLoginValidation = new \practice\Model\LoginValidation();
-        echo $objLoginValidation->CheckLogin();
+        echo $objLoginValidation->checkLogin();
     }
 
-    public function ValidateIsRegister()
+    public function validateIsRegister()
     {
         $objRegistrationValidation = new \practice\Model\RegistrationValidation();
-        echo $objRegistrationValidation->CheckRegistration();
+        echo $objRegistrationValidation->checkRegistration();
     }
 
-    public function Send()
+    public function send()
     {
-        //$set = $_POST['email'];
-
         $transport = (new \Swift_SmtpTransport('smtp.gmail.com', 587, 'tls'))
             ->setUsername('rpz14.sergey@gmail.com')
             ->setPassword('fhlbc2012');
@@ -51,6 +48,6 @@ class Controller_Main extends Controller
             ->setTo(['rpz14.sergey@gmail.com'])
             ->setBody('Here is the message itself');
 
-        $result = $mailer->send($message);
+        $mailer->send($message);
     }
 }

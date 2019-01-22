@@ -6,7 +6,10 @@
  * Time: 08:00
  */
 
-namespace practice\Model;
+namespace practice\Model\ActiveRecord;
+
+use practice\Model\Model;
+use practice\Model\ConnectionManager;
 
 
 class Order extends Model
@@ -19,7 +22,7 @@ class Order extends Model
 
     public function __construct()
     {
-        $this->ConnectionDB();
+        $this->connectionDB();
     }
 
     public function select(){}

@@ -6,58 +6,73 @@
  * Time: 17:04
  */
 
-    namespace practice\Model;
+namespace practice\Model;
 
-    class LoginValidation
+class LoginValidation
+{
+    private $errors_login = array("", "", "");
+
+    /**
+     * @return string
+     */
+    public function checkLogin()
     {
-        private $errors_login = array("", "", "");
+        $count_empty_errors = 0;
+        $this->checkFieldsForEmptinessAndWriteErrors();
 
-        public function CheckLogin()
-        {
-            $count_empty_errors = 0;
-            $this->CheckFieldsForEmptinessAndWriteErrors();
-
-            foreach ($this->errors_login as $value)
-                if($value != "")
-                    $count_empty_errors++;
-
-            if($count_empty_errors == 0) {
-                $email = $this->CleanFields($_POST['email_login']);
-                $password = $this->CleanFields($_POST['password_login']);
-
-                $this->CheckLoginAndPasswordInDatabase($email, $password);
-            }
-            return json_encode($this->errors_login);
-        }
-
-        private function CheckLoginAndPasswordInDatabase($email, $password)
-        {
-            $auth = new Authentication();
-            if(!$auth->CheckPasswordAndLoginAndStartSession($email, $password)) {
-                $this->errors_login[2] = 'Invalid password or login';
+        foreach ($this->errors_login as $value) {
+            if ($value != "") {
+                $count_empty_errors++;
             }
         }
 
-        private function CheckFieldsForEmptinessAndWriteErrors() {
-            if(empty($_POST['email_login']) && empty($_POST['password_login'])) {
-                $this->errors_login[2] = 'Empty fields form';
-            }
-            else {
-                if (empty($_POST['email_login'])) {
-                    $this->errors_login[0] = 'Please enter email !';
-                }
-                if (empty($_POST['password_login'])) {
-                    $this->errors_login[1] = 'Please enter password !';
-                }
-            }
+        if ($count_empty_errors == 0) {
+            $email = $this->cleanFields($_POST['email_login']);
+            $password = $this->cleanFields($_POST['password_login']);
+
+            $this->checkLoginAndPasswordInDatabase($email, $password);
         }
 
-        function CleanFields($value_field = "") {
-            $value_field = trim($value_field);
-            $value_field = stripslashes($value_field);
-            $value_field = strip_tags($value_field);
-            $value_field = htmlspecialchars($value_field);
+        return json_encode($this->errors_login);
+    }
 
-            return $value_field;
+    /**
+     * @param $email
+     * @param $password
+     */
+    private function checkLoginAndPasswordInDatabase($email, $password)
+    {
+        $auth = new Authentication();
+        if (!$auth->checkPasswordAndLoginAndStartSession($email, $password)) {
+            $this->errors_login[2] = 'Invalid password or login';
         }
     }
+
+    private function checkFieldsForEmptinessAndWriteErrors()
+    {
+        if (empty($_POST['email_login']) && empty($_POST['password_login'])) {
+            $this->errors_login[2] = 'Empty fields form';
+        } else {
+            if (empty($_POST['email_login'])) {
+                $this->errors_login[0] = 'Please enter email !';
+            }
+            if (empty($_POST['password_login'])) {
+                $this->errors_login[1] = 'Please enter password !';
+            }
+        }
+    }
+
+    /**
+     * @param string $value_field
+     * @return string
+     */
+    private function cleanFields($value_field = "")
+    {
+        $value_field = trim($value_field);
+        $value_field = stripslashes($value_field);
+        $value_field = strip_tags($value_field);
+        $value_field = htmlspecialchars($value_field);
+
+        return $value_field;
+    }
+}

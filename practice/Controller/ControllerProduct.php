@@ -8,16 +8,20 @@
 
 namespace practice\Controller;
 
+use practice\Model\ActiveRecord\Product;
 
-class Controller_Product extends Controller
+class ControllerProduct extends Controller
 {
+    /**
+     * @param int $id
+     */
     public function index($id = 1)
     {
         $this->checkSessionAndStart();
 
-        $product = new \practice\Model\Product();
+        $product = new Product();
         $product->id_product = $id;
-        $DBdata = $product->select_product();
+        $DBdata = $product->selectProduct();
 
         $this->objectView->generate('product', $DBdata);
     }

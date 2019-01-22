@@ -8,7 +8,11 @@ body {
 }
 html {
     position:relative;
-    min-height:85%;
+    min-height:100%;
+}
+
+#content {
+    padding-bottom: 90px;
 }
 
 #footer {
@@ -63,13 +67,4 @@ html {
 .cart-container {
     display: none;
     height: 100%;
-}
-
-.rating span {
-    font-size: 25px;
-    cursor: pointer;
-    float: right; //remove 'float right' for right to left
-}
-.rating span:hover, .rating span:hover ~ span{
-    color: red; //gold or any other color
 }

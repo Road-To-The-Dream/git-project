@@ -8,15 +8,20 @@
 
 namespace practice\Controller;
 
+use practice\Model\ActiveRecord\Product;
 
-class Controller_Catalog extends Controller
+class ControllerCatalog extends Controller
 {
+    /**
+     * @param int $sorting
+     * @param string $category
+     */
     public function index($sorting = 0, $category = 'all')
     {
         $this->checkSessionAndStart();
 
-        $product = new \practice\Model\Product();
-        $DBdata = $product->select_all($sorting, $category);
+        $product = new Product();
+        $DBdata = $product->selectAll($sorting, $category);
 
         $this->objectView->generate('catalog', $DBdata);
     }

@@ -1,6 +1,6 @@
 function TotalPriceProducts() {
     $.ajax({
-        url:  'http://practice/cart/GetTotalPriceProducts',
+        url:  'http://practice/cart/getTotalPriceProducts',
         type: "POST",
         dataType: "html",
         cache: false,

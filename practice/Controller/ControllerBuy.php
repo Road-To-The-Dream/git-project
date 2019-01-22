@@ -8,8 +8,9 @@
 
 namespace practice\Controller;
 
+use practice\Model\ActiveRecord\Product;
 
-class Controller_Buy extends Controller
+class ControllerBuy extends Controller
 {
     public function index()
     {
@@ -17,16 +18,16 @@ class Controller_Buy extends Controller
         $this->objectView->generate('buy');
     }
 
-    public function show_buy($view_name)
+    public function showBuy()
     {
         $this->checkSessionAndStart();
 
-//            $order = new \practice\Model\Order();
-//            $order->insert();
+        //            $order = new \practice\Model\Order();
+        //            $order->insert();
 
-        $product = new \practice\Model\Product();
+        $product = new Product();
         $product->id_product = $_POST['IDProduct'];
-        $DBdata = $product->CheckExistSessionAndSelectProduct($_SESSION['user_id']);
+        $DBdata = $product->checkExistSessionAndSelectProduct($_SESSION['user_id']);
 
         $this->objectView->generate('buy', $DBdata);
     }

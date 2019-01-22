@@ -12,4 +12,3 @@
         'password' => '',
         'charset' => 'utf8'
     ];
-

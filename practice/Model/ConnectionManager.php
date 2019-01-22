@@ -26,13 +26,13 @@ class ConnectionManager
 
     public static function getInstance()
     {
-        if(self::$instance === null) {
-            self::Connect();
+        if (self::$instance === null) {
+            self::connection();
         }
         return self::$instance;
     }
 
-    private static function Connect()
+    private static function connection()
     {
         $config = require 'DBconfiguration.php';
 
@@ -47,7 +47,13 @@ class ConnectionManager
         }
     }
 
-    public static function ExecutionQuery($query, $parameters = [], $mode = \PDO::FETCH_ASSOC)
+    /**
+     * @param $query
+     * @param array $parameters
+     * @param int $mode
+     * @return null
+     */
+    public static function executionQuery($query, $parameters = [], $mode = \PDO::FETCH_ASSOC)
     {
         try {
             $query = trim(str_replace('\r', '', $query));
@@ -57,7 +63,7 @@ class ConnectionManager
             if ($statement === 'select') {
                 $statement = self::$instance->query($query);
                 return $statement->fetchAll($mode);
-            } else if ($statement === 'insert' || $statement === 'update' || $statement === 'delete') {
+            } elseif ($statement === 'insert' || $statement === 'update' || $statement === 'delete') {
                 $statement = self::$instance->prepare($query);
                 $statement->execute($parameters);
             } else {
@@ -67,10 +73,4 @@ class ConnectionManager
             exit($ex->getMessage());
         }
     }
-
-    public static function closeConnection()
-    {
-        self::$instance = null;
-    }
 }
-

@@ -1,6 +1,6 @@
 function AjaxFormRegister(message1, message2, message3, message4, message5, message6, message7, message8) {
     $.ajax({
-        url:     'http://practice/main/ValidateIsRegister',
+        url:     'http://practice/main/validateIsRegister',
         type:     "POST",
         dataType: "json",
         data: $("#formMain2").serialize(),

@@ -6,7 +6,10 @@
  * Time: 12:28
  */
 
-namespace practice\Model;
+namespace practice\Model\ActiveRecord;
+
+use practice\Model\Model;
+use practice\Model\ConnectionManager;
 
 class Comment extends Model
 {
@@ -19,7 +22,7 @@ class Comment extends Model
 
     public function __construct()
     {
-        $this->ConnectionDB();
+        $this->connectionDB();
     }
 
     public function select()
@@ -28,18 +31,22 @@ class Comment extends Model
 
     public function insert()
     {
-        $sql = "INSERT INTO comments (content, date_added, create_at, client_id, product_id) VALUES (:content,$this->date_added,$this->create_at, $this->client_id, $this->product_id)";
+        $sql = "INSERT INTO comments (content, date_added, create_at, client_id, product_id) 
+                VALUES (:content,$this->date_added,$this->create_at, $this->client_id, $this->product_id)";
         $parameters = array(
             ':content' => $this->content
         );
-        ConnectionManager::ExecutionQuery($sql, $parameters);
+        ConnectionManager::executionQuery($sql, $parameters);
     }
 
     public function update(){}
 
+    /**
+     * @param $id
+     */
     public function delete($id)
     {
         $sql = "DELETE FROM comments WHERE id = ".$id;
-        ConnectionManager::ExecutionQuery($sql);
+        ConnectionManager::executionQuery($sql);
     }
 }

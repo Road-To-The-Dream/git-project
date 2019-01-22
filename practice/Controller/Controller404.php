@@ -8,8 +8,7 @@
 
 namespace practice\Controller;
 
-
-class Controller_404 extends Controller
+class Controller404 extends Controller
 {
     public function index()
     {
