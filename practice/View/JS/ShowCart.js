@@ -5,11 +5,14 @@ function AjaxShowCart() {
         dataType: "json",
         cache: false,
         success: function(response) {
-            alert(response);
-        },
-        error: function (response) {
-            alert("sdfsdf");
-            alert(response[0]);
+            if (response['icon'] == 'error') {
+                swal({
+                    title: response['message'],
+                    icon:  response['icon']
+                })
+            } else {
+                location.href = 'http://practice/cart';
+            }
         }
     });
 }

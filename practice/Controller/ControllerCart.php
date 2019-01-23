@@ -23,16 +23,18 @@ class ControllerCart extends Controller
 
     public function checkProductInCart()
     {
-        $this->index();
-        //echo $this->checkSessionAndStart();
-//            if(!empty($_SESSION['product_id'])) {
-//
-//                //$this->index();
-//            } else {
-//                $message[0] = 'No';
-//                $message[1] = 'error';
-//            }
-//           echo json_encode($message);
+        $message = [
+            'message' => '',
+            'icon' => ''
+        ];
+
+        session_start();
+        if (empty($_SESSION['product_id'])) {
+            $message['message'] = 'В корзине нет товаров!';
+            $message['icon'] = 'error';
+        }
+
+        echo json_encode($message);
     }
 
     public function addingProductsInCart()
@@ -57,6 +59,6 @@ class ControllerCart extends Controller
     public function removeProductForCart()
     {
         $cart = new Cart();
-        $cart->delete($_POST['IDProduct']);
+        echo $cart->delete($_POST['IDProduct']);
     }
 }

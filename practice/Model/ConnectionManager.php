@@ -12,6 +12,9 @@ class ConnectionManager
 {
     private static $instance = null;
 
+    /**
+     * ConnectionManager constructor.
+     */
     private function __construct()
     {
     }
@@ -24,6 +27,9 @@ class ConnectionManager
     {
     }
 
+    /**
+     * @return null
+     */
     public static function getInstance()
     {
         if (self::$instance === null) {

@@ -2,6 +2,8 @@
 
 namespace practice\Router;
 
+use practice\Model\Redirect;
+
 class Router
 {
     public function routing($url)
@@ -37,7 +39,7 @@ class Router
                 $controller->$action_name($id);
             }
         } else {
-            header('Location: http://practice/404');
+            Redirect::redirect('http://practice/404');
         }
     }
 }

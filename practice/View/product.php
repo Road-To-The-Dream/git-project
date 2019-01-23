@@ -72,7 +72,7 @@
                             </div>
                         </div>
                         <?php
-                            if($data['info_product'][0]['amount'] == 0) {
+                            if ($data['info_product'][0]['amount'] == 0) {
                                 ?>
                                 <div class="row mt-4" style="font-size: 18px">
                                     <div class="col-auto">
@@ -366,8 +366,8 @@
                     </div>
                     <!--ADDED COMMENT-->
                     <?php
-                    for($i = 0; $i < count($data['comments']); $i++) {
-                            ?>
+                    for ($i = 0; $i < count($data['comments']); $i++) {
+                        ?>
                         <div class="shadow mb-5 bg-white rounded">
                             <div class="card bg-border mb-4">
                                 <div class="card-header bg">
@@ -378,7 +378,7 @@
                                         </div>
                                         <div class="row d-flex justify-content-end">
                                             <?php
-                                                if($_SESSION['user_id'] == $data['comments'][$i]['client_id']) {
+                                                if ($_SESSION['user_id'] == $data['comments'][$i]['client_id']) {
                                                     ?>
                                                 <div class="col-auto">
                                                     <a onclick="AjaxRemoveComment(<?= $data['comments'][$i]['id']?>)" class="badge badge-warning btn">Delete own comment</a>

@@ -8,6 +8,8 @@
 
 namespace practice\Controller;
 
+use practice\Model\Redirect;
+
 class ControllerMain extends Controller
 {
     public function index()
@@ -20,7 +22,8 @@ class ControllerMain extends Controller
     {
         $auth = new \practice\Model\Authentication();
         $auth->cleanAndDestroySession();
-        header('Location: http://practice/main');
+
+        Redirect::redirect('http://practice/main');
     }
 
     public function validateIsLogin()

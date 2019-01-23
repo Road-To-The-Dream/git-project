@@ -8,6 +8,9 @@ class Authentication
 {
     private $client;
 
+    /**
+     * Authentication constructor.
+     */
     public function __construct()
     {
         $this->client = new Client();

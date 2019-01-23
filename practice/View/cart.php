@@ -7,6 +7,11 @@
     <script src="/View/JS/ShowTotalPriceProduct.js"></script>
     <script src="/View/JS/ShowTotalPriceProducts.js"></script>
     <script src="/View/JS/RemoveProductFromCart.js"></script>
+    <script>
+        jQuery(document).ready(function() {
+            $('input[name="amount"]').val(1)
+        });
+    </script>
 </head>
 <body>
     <div class="cart-container">
@@ -42,7 +47,7 @@
             </div>
             <div class="container">
                 <?php
-                foreach ($data as $value){
+                foreach ($data as $value) {
                     ?>
                     <div class="container">
                         <div class="row mt-3">
@@ -85,7 +90,7 @@
                                                         <img src='/View/Image/Cart/Minus.png'></a>
                                                 </div>
                                                 <div class="col-4 p-0">
-                                                    <input type="text" class="form-control text-center" name="amount" id="amount<?php echo $value["id"]?>" aria-describedby="emailHelp" value="1" />
+                                                    <input type="text" class="form-control text-center" name="amount" id="amount<?php echo $value["id"]?>" aria-describedby="emailHelp"/>
                                                 </div>
                                                 <div class="col-auto ml-1 p-0 text-right">
                                                     <a class='btn btn-secondary' data-toggle="tooltip" title="Увеличить" onclick="AjaxCountTotalPriceProduct('+',

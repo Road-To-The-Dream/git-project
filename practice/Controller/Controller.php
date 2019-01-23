@@ -2,8 +2,6 @@
 
 namespace practice\Controller;
 
-use practice\Model\ActiveRecord\Product;
-
 class Controller
 {
     public $objectView;
@@ -11,12 +9,6 @@ class Controller
     public function __construct()
     {
         $this->objectView = new View();
-    }
-
-    public function correct()
-    {
-        $arr = array('Acer', 'Apple', 'Lenovo', 'Prestigio');
-        echo json_encode($arr);
     }
 
     /**
@@ -30,9 +22,6 @@ class Controller
                 $_SESSION['product_id'] = [];
             }
             include "View\Template\header_logout.php";
-
-            $arr = array('Acer', 'Apple', 'Lenovo', 'Prestigio');
-            return json_encode($arr);
         } else {
             session_destroy();
             include "View\Template\header_login.php";

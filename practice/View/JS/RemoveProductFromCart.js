@@ -3,9 +3,15 @@ function RemoveProduct(id) {
         url:  'http://practice/cart/removeProductForCart',
         type: "POST",
         data: "IDProduct=" + id,
+        dataType: 'html',
         cache: false,
         success: function(response) {
-            location.reload();
+            alert(response);
+            if(response == 'empty') {
+                location.href = 'http://practice/catalog';
+            } else {
+                location.reload();
+            }
         }
     });
 }

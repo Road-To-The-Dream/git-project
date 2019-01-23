@@ -74,6 +74,7 @@ class Cart extends Model
 
     /**
      * @param $id
+     * @return string
      */
     public function delete($id)
     {
@@ -81,6 +82,21 @@ class Cart extends Model
         if (($key = array_search($id, $_SESSION['product_id'])) !== false) {
             unset($_SESSION['product_id'][$key]);
         }
+
+        return $this->checkArrayProductsInSession();
+    }
+
+    /**
+     * @return string
+     */
+    private function checkArrayProductsInSession()
+    {
+        $line_info = "no_empty";
+        if (empty($_SESSION['product_id'])) {
+            $line_info = 'empty';
+        }
+
+        return $line_info;
     }
 
     /**
