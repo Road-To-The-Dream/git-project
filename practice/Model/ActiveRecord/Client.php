@@ -155,19 +155,17 @@ class Client extends Model
         $this->connectionDB();
     }
 
-    public function select()
-    {
-        $sql = "SELECT last_name, first_name, patronymic, email, phone, password, role FROM client";
-        ConnectionManager::executionQuery($sql);
-    }
-
-    public function selectFirstNameClient($array_id)
+    /**
+     * @param $array_id_clients
+     * @return array
+     */
+    public function selectFirstNameClient($array_id_clients)
     {
         $info_client = array();
-        for ($i = 0; $i < count($array_id); $i++) {
-            $sql = "Select first_name FROM client WHERE id = ".$array_id[$i];
-            $w = ConnectionManager::executionQuery($sql);
-            array_push($info_client, $w[0]['first_name']);
+        for ($i = 0; $i < count($array_id_clients); $i++) {
+            $sql = "Select first_name FROM client WHERE id = ".$array_id_clients[$i];
+            $data_first_name = ConnectionManager::executionQuery($sql);
+            array_push($info_client, $data_first_name[0]['first_name']);
         }
 
         $firstNameClient = array();

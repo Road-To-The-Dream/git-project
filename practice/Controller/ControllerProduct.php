@@ -40,6 +40,10 @@ class ControllerProduct extends Controller
         $this->objectView->generate('product', $DBdata);
     }
 
+    /**
+     * @param $id
+     * @return array
+     */
     private function getProducts($id)
     {
         $product = new Product();
@@ -47,6 +51,10 @@ class ControllerProduct extends Controller
         return $data_product = $product->selectProduct();
     }
 
+    /**
+     * @param $id
+     * @return array
+     */
     private function getComments($id)
     {
         $comments = new Comment();
@@ -54,17 +62,25 @@ class ControllerProduct extends Controller
         return $data_comments = $comments->selectAll();
     }
 
+    /**
+     * @param $data_comments
+     * @return array
+     */
     private function getFirstName($data_comments)
     {
-        $id_client = array();
+        $array_id_clients = array();
         for ($i = 0; $i < count($data_comments); $i++) {
-            array_push($id_client, $data_comments[$i]->getClientId());
+            array_push($array_id_clients, $data_comments[$i]->getClientId());
         }
 
         $client = new Client();
-        return $data_client = $client->selectFirstNameClient($id_client);
+        return $data_client = $client->selectFirstNameClient($array_id_clients);
     }
 
+    /**
+     * @param $id
+     * @return array
+     */
     private function getAllImages($id)
     {
         $images = new Images();

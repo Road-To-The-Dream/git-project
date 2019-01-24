@@ -138,6 +138,9 @@ class Comment extends Model
         $this->product_id = $product_id;
     }
 
+    /**
+     * @return array
+     */
     public function selectAll()
     {
         $sql = "SELECT com.id, com.content, com.date_added, com.client_id 

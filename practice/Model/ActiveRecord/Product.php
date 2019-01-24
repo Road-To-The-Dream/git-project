@@ -131,65 +131,51 @@ class Product extends Model
         $info_product = ConnectionManager::executionQuery($sql);
         $info_product = $this->addSpaceToPriceProduct($info_product, "price");
 
-        $productList = array();
-
-        $objProduct = new Product();
-        $objProduct->setId($info_product[0]['id']);
-        $objProduct->setName($info_product[0]['name']);
-        $objProduct->setDescription($info_product[0]['description']);
-        $objProduct->setPrice($info_product[0]['price']);
-        $objProduct->setUnit($info_product[0]['unit']);
-        $objProduct->setAmount($info_product[0]['amount']);
-        $productList['info_product'] = $objProduct;
+        $productList = $this->addedProductsInObject($info_product);
 
         return $productList;
+    }
+
+    private function addedProductsInObject($info_products)
+    {
+        $productsList = array();
+
+        for ($i = 0; $i < count($info_products); $i++) {
+            $objProduct = new Product();
+            $objProduct->setId($info_products[$i]['id']);
+            $objProduct->setName($info_products[$i]['name']);
+            $objProduct->setDescription($info_products[$i]['description']);
+            $objProduct->setPrice($info_products[$i]['price']);
+            $objProduct->setUnit($info_products[$i]['unit']);
+            $objProduct->setAmount($info_products[$i]['amount']);
+            $productsList[$i] = $objProduct;
+        }
+
+        return $productsList;
     }
 
     /**
      * @param int $sorting
      * @param int $category
-     * @return mixed|null
+     * @return array|mixed|null
      */
     public function selectAll($sorting = 0, $category = 0)
     {
         if ($sorting == 1) {
-            $sql_catalog = "SELECT p.id, p.name, p.description, p.price, p.unit, p.amount, 
-                                                                  (SELECT img FROM images i 
-                                                                    JOIN images_in_product ip ON ip.images_id = i.id 
-                                                                   WHERE ip.product_id = p.id LIMIT 1) as image 
-                                                            FROM product p 
-                                                              JOIN categories c ON c.id = p.category_id 
-                                                            WHERE c.id = $category ORDER BY price DESC";
-            return ConnectionManager::executionQuery($sql_catalog);
+            $sql = "SELECT p.id, p.name, p.description, p.price, p.unit, p.amount FROM product p JOIN categories c ON c.id = p.category_id WHERE c.id = $category ORDER BY price DESC";
         } elseif ($sorting == 2) {
-            return ConnectionManager::executionQuery("SELECT p.id, p.name, p.description, p.price, p.unit, p.amount, 
-                                                                  (SELECT img FROM images i 
-                                                                    JOIN images_in_product ip ON ip.images_id = i.id 
-                                                                   WHERE ip.product_id = p.id LIMIT 1) as image 
-                                                            FROM product p 
-                                                              JOIN categories c ON c.id = p.category_id 
-                                                            WHERE c.id = $category ORDER BY price ASC");
+            $sql ="SELECT p.id, p.name, p.description, p.price, p.unit, p.amount FROM product p JOIN categories c ON c.id = p.category_id WHERE c.id = $category ORDER BY price ASC";
         }
 
-        if ($category == 0) {
-            return ConnectionManager::executionQuery("SELECT p.id, p.name, p.description, p.price, p.unit, p.amount, 
-                                                                  (SELECT img FROM images i 
-                                                                    JOIN images_in_product ip ON ip.images_id = i.id 
-                                                                   WHERE ip.product_id = p.id LIMIT 1) as image 
-                                                            FROM product p");
-        } else {
-            $sql = "SELECT p.id, p.name, p.description, p.price, p.unit, p.amount, 
-                                                                  (SELECT img FROM images i 
-                                                                    JOIN images_in_product ip ON ip.images_id = i.id 
-                                                                   WHERE ip.product_id = p.id LIMIT 1) as image 
-                                                            FROM product p 
-                                                              JOIN categories c ON c.id = p.category_id 
-                                                            WHERE c.id = ".$category;
-
-            $sql = $this->addSpaceToPriceProduct(ConnectionManager::executionQuery($sql), 'price');
-
-            return $sql;
+        if ($category != 0) {
+            $sql = "SELECT p.id, p.name, p.description, p.price, p.unit, p.amount FROM product p JOIN categories c ON c.id = p.category_id WHERE c.id = ".$category;
         }
+
+        $info_products = ConnectionManager::executionQuery($sql);
+        $info_products = $this->addSpaceToPriceProduct($info_products, "price");
+        $info_products = $this->addedProductsInObject($info_products);
+
+        return $info_products;
     }
 
     /**
