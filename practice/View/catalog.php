@@ -29,13 +29,12 @@
                             </div>
                             <ul class="list-group list-group-flush">
                                 <?php
-                                $arr = array('Acer', 'Apple', 'Lenovo', 'Prestigio');
-                                foreach ($arr as $a) {
+                                foreach ($data['vendors'] as $vendor) {
                                     ?>
                                     <li class="list-group-item">
                                         <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="<?php echo $a; ?>" name="vendor[]" value="<?php echo $a; ?>">
-                                            <label class="custom-control-label" id="message1" for="<?php echo $a; ?>"><?php echo $a; ?></label>
+                                            <input type="checkbox" class="custom-control-input" id="<?php echo $vendor['name']; ?>" name="vendor[]" value="<?php echo $vendor['name']; ?>">
+                                            <label class="custom-control-label" id="message1" for="<?php echo $vendor['name']; ?>"><?php echo $vendor['name']; ?></label>
                                         </div>
                                     </li>
                                     <?php
@@ -71,31 +70,31 @@
                     </div>
                     <div class="row text-center justify-content-left mt-4">
                         <?php
-                        foreach ($data as $value){
+                        foreach ($data['products'] as $products){
                             ?>
                             <div class="col-xl-4 col-lg-4 col-md-6 mb-3">
                                 <div class="card-deck h-100">
                                     <div class="card p-3">
                                         <div class="card-body p-0">
-                                            <a href="http://practice/product/index/<?=$value["id"];?>"><img class="card-img-top" src="/View/Image/<?=$value["image"]?>" alt="Card image cap"></a>
+                                            <a href="http://practice/product/index/<?=$products["id"];?>"><img class="card-img-top" src="/View/Image/<?=$products["image"]?>" alt="Card image cap"></a>
                                             <div class="row justify-content-center mt-3">
-                                                <a class="card-text f-size-name h-100 text-dark" href="http://practice/product/show_product/<?=$value["id"];?>"><?=$value["name"]?></a>
+                                                <a class="card-text f-size-name h-100 text-dark" href="http://practice/product/show_product/<?=$products["id"];?>"><?=$products["name"]?></a>
                                             </div>
                                         </div>
                                         <div class="row mt-3">
                                             <div class="col-3 p-0 mt-2" style="font-size: 18px">Цена:</div>
-                                            <div class="col-6 text-center text-primary"><p style="font-weight: bold; font-size: 25px"><?=$value["price"]?></p></div>
-                                            <div class="col-3 p-0 mt-2" style="font-size: 18px"><?=$value["unit"]?></div>
+                                            <div class="col-6 text-center text-primary"><p style="font-weight: bold; font-size: 25px"><?=$products["price"]?></p></div>
+                                            <div class="col-3 p-0 mt-2" style="font-size: 18px"><?=$products["unit"]?></div>
                                         </div>
                                         <?php
-                                            if($value["amount"] > 0) {
+                                            if($products["amount"] > 0) {
                                                 ?>
                                                 <div class="row justify-content-center">
                                                     <div class="col-4 p-0 mr-2">
                                                         <input class="btn btn-success btn-block mt-2" type="submit" name="btn_login" value="Купить">
                                                     </div>
                                                     <div class="col-6 p-0">
-                                                        <a class='btn btn-warning text-white pl-1 mt-2' onclick="AjaxAddInCart(<?=$value["id"];?>, 'amount_products_in_cart')"><img class="mr-2" src='/View/Image/add_cart.png'>Добавить</a>
+                                                        <a class='btn btn-warning text-white pl-1 mt-2' onclick="AjaxAddInCart(<?=$products["id"];?>, 'amount_products_in_cart')"><img class="mr-2" src='/View/Image/add_cart.png'>Добавить</a>
                                                     </div>
                                                 </div>
                                         <?php

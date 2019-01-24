@@ -6,7 +6,6 @@ function RemoveProduct(id) {
         dataType: 'html',
         cache: false,
         success: function(response) {
-            alert(response);
             if(response == 'empty') {
                 location.href = 'http://practice/catalog';
             } else {

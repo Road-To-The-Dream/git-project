@@ -1,6 +1,6 @@
 function AjaxFiltrationProducts(message1) {
     $.ajax({
-        url:     'http://practice//correct',
+        url:     'http://practice/catalog/filtrationProducts',
         type:     "POST",
         dataType: "json",
         data: $("#formFiltration").serialize(),

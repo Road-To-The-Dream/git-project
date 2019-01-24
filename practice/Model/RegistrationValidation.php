@@ -106,12 +106,13 @@ class RegistrationValidation
 
         $client = new Client();
 
-        $client->last_name = $last_name;
-        $client->first_name = $first_name;
-        $client->patronymic = $patronymic;
-        $client->email = $email;
-        $client->phone = $phone;
-        $client->password = $password;
+        $client->setLastName($last_name);
+        $client->setFirstName($first_name);
+        $client->setPatronymic($patronymic);
+        $client->setEmail($email);
+        $client->setPhone($phone);
+        $client->setPassword($password);
+        $client->setCreateAt('\''.date("Y-m-d H:i:s").'\'');
 
         $client->insert();
     }

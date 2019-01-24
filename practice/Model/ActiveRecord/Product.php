@@ -13,7 +13,12 @@ use practice\Model\ConnectionManager;
 
 class Product extends Model
 {
-    public $id_product = 0;
+    private $id;
+    private $name;
+    private $description;
+    private $price;
+    private $unit;
+    private $amount;
 
     public function __construct()
     {
@@ -21,33 +26,123 @@ class Product extends Model
     }
 
     /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id): void
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param mixed $name
+     */
+    public function setName($name): void
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param mixed $description
+     */
+    public function setDescription($description): void
+    {
+        $this->description = $description;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    /**
+     * @param mixed $price
+     */
+    public function setPrice($price): void
+    {
+        $this->price = $price;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUnit()
+    {
+        return $this->unit;
+    }
+
+    /**
+     * @param mixed $unit
+     */
+    public function setUnit($unit): void
+    {
+        $this->unit = $unit;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAmount()
+    {
+        return $this->amount;
+    }
+
+    /**
+     * @param mixed $amount
+     */
+    public function setAmount($amount): void
+    {
+        $this->amount = $amount;
+    }
+
+    /**
      * @return array
      */
     public function selectProduct()
     {
-        $sql_comment = ConnectionManager::executionQuery("SELECT cl.first_name, com.id, com.content, date_added, com.client_id 
-                                                                FROM comments com 
-                                                                  JOIN client cl ON cl.id = com.client_id 
-                                                                  JOIN product pr ON pr.id = com.product_id 
-                                                                WHERE pr.id = ".$this->id_product." ORDER BY com.date_added DESC");
+        $sql = "SELECT id, name, description, price, unit, amount FROM product WHERE id = ".$this->id;
 
-        $sql_product = ConnectionManager::executionQuery("SELECT id, name, description, price, unit, amount 
-                                                                FROM product 
-                                                                WHERE id = ".$this->id_product);
-        $sql_product = $this->addSpaceToPriceProduct($sql_product, "price");
-        $sql_images = ConnectionManager::executionQuery("SELECT i.img 
-                                                               FROM images i 
-                                                                JOIN images_in_product ip ON i.id = ip.images_id 
-                                                                JOIN product p ON p.id = ip.product_id 
-                                                               WHERE p.id = ".$this->id_product);
+        $info_product = ConnectionManager::executionQuery($sql);
+        $info_product = $this->addSpaceToPriceProduct($info_product, "price");
 
-        $all_info_product = array (
-            'info_product' => $sql_product,
-            'images' => $sql_images,
-            'comments' => $sql_comment
-        );
+        $productList = array();
 
-        return $all_info_product;
+        $objProduct = new Product();
+        $objProduct->setId($info_product[0]['id']);
+        $objProduct->setName($info_product[0]['name']);
+        $objProduct->setDescription($info_product[0]['description']);
+        $objProduct->setPrice($info_product[0]['price']);
+        $objProduct->setUnit($info_product[0]['unit']);
+        $objProduct->setAmount($info_product[0]['amount']);
+        $productList['info_product'] = $objProduct;
+
+        return $productList;
     }
 
     /**
@@ -58,13 +153,14 @@ class Product extends Model
     public function selectAll($sorting = 0, $category = 0)
     {
         if ($sorting == 1) {
-            return ConnectionManager::executionQuery("SELECT p.id, p.name, p.description, p.price, p.unit, p.amount, 
+            $sql_catalog = "SELECT p.id, p.name, p.description, p.price, p.unit, p.amount, 
                                                                   (SELECT img FROM images i 
                                                                     JOIN images_in_product ip ON ip.images_id = i.id 
                                                                    WHERE ip.product_id = p.id LIMIT 1) as image 
                                                             FROM product p 
                                                               JOIN categories c ON c.id = p.category_id 
-                                                            WHERE c.id = $category ORDER BY price DESC");
+                                                            WHERE c.id = $category ORDER BY price DESC";
+            return ConnectionManager::executionQuery($sql_catalog);
         } elseif ($sorting == 2) {
             return ConnectionManager::executionQuery("SELECT p.id, p.name, p.description, p.price, p.unit, p.amount, 
                                                                   (SELECT img FROM images i 
@@ -82,15 +178,16 @@ class Product extends Model
                                                                    WHERE ip.product_id = p.id LIMIT 1) as image 
                                                             FROM product p");
         } else {
-            $sql = ConnectionManager::executionQuery("SELECT p.id, p.name, p.description, p.price, p.unit, p.amount, 
+            $sql = "SELECT p.id, p.name, p.description, p.price, p.unit, p.amount, 
                                                                   (SELECT img FROM images i 
                                                                     JOIN images_in_product ip ON ip.images_id = i.id 
                                                                    WHERE ip.product_id = p.id LIMIT 1) as image 
                                                             FROM product p 
                                                               JOIN categories c ON c.id = p.category_id 
-                                                            WHERE c.id = ".$category);
+                                                            WHERE c.id = ".$category;
 
-            $sql = $this->addSpaceToPriceProduct($sql, 'price');
+            $sql = $this->addSpaceToPriceProduct(ConnectionManager::executionQuery($sql), 'price');
+
             return $sql;
         }
     }
@@ -113,6 +210,17 @@ class Product extends Model
         $data[0]['total_price'] = $_POST['amount'] * $data[0]['price'];
 
         return $data;
+    }
+
+    public function filtration($array_vendors, $category)
+    {
+        $sql = "SELECT p.id, p.name, p.description, p.price, p.unit, p.amount, (SELECT img FROM images i 
+                                                                    JOIN images_in_product ip ON ip.images_id = i.id 
+                                                                   WHERE ip.product_id = p.id LIMIT 1) as image  FROM vendor v 
+JOIN product p ON p.vendor_id = v.id
+JOIN categories c ON p.category_id = c.id WHERE c.id = 1 AND v.id = 1";
+$w = ConnectionManager::executionQuery($sql);
+        return $w;
     }
 
     public function insert(){}

@@ -10,7 +10,7 @@ namespace practice\Controller;
 
 use practice\Model\ActiveRecord\Comment;
 
-class ControllerComments extends Controller
+class ControllerComments
 {
     public function addingComments()
     {

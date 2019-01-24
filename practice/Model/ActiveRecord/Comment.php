@@ -13,20 +13,152 @@ use practice\Model\ConnectionManager;
 
 class Comment extends Model
 {
-    public $content;
-    public $date_added;
-    public $create_at;
-    public $update_at;
-    public $client_id;
-    public $product_id;
+    private $id;
+    private $content;
+    private $date_added;
+    private $create_at;
+    private $update_at;
+    private $client_id;
+    private $product_id;
 
     public function __construct()
     {
         $this->connectionDB();
     }
 
-    public function select()
+    /**
+     * @return mixed
+     */
+    public function getId()
     {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id): void
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getContent()
+    {
+        return $this->content;
+    }
+
+    /**
+     * @param mixed $content
+     */
+    public function setContent($content): void
+    {
+        $this->content = $content;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDateAdded()
+    {
+        return $this->date_added;
+    }
+
+    /**
+     * @param mixed $date_added
+     */
+    public function setDateAdded($date_added): void
+    {
+        $this->date_added = $date_added;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCreateAt()
+    {
+        return $this->create_at;
+    }
+
+    /**
+     * @param mixed $create_at
+     */
+    public function setCreateAt($create_at): void
+    {
+        $this->create_at = $create_at;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUpdateAt()
+    {
+        return $this->update_at;
+    }
+
+    /**
+     * @param mixed $update_at
+     */
+    public function setUpdateAt($update_at): void
+    {
+        $this->update_at = $update_at;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getClientId()
+    {
+        return $this->client_id;
+    }
+
+    /**
+     * @param mixed $client_id
+     */
+    public function setClientId($client_id): void
+    {
+        $this->client_id = $client_id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProductId()
+    {
+        return $this->product_id;
+    }
+
+    /**
+     * @param mixed $product_id
+     */
+    public function setProductId($product_id): void
+    {
+        $this->product_id = $product_id;
+    }
+
+    public function selectAll()
+    {
+        $sql = "SELECT com.id, com.content, com.date_added, com.client_id 
+                FROM comments com
+                  JOIN product pr ON pr.id = com.product_id 
+                WHERE pr.id = ".$this->product_id." ORDER BY com.date_added DESC";
+
+        $info_comments = ConnectionManager::executionQuery($sql);
+
+        $commentsList = array();
+
+        for ($i = 0; $i < count($info_comments); $i++) {
+            $objComments = new Comment();
+            $objComments->setId($info_comments[$i]['id']);
+            $objComments->setContent($info_comments[$i]['content']);
+            $objComments->setDateAdded($info_comments[$i]['date_added']);
+            $objComments->setClientId($info_comments[$i]['client_id']);
+            $commentsList[$i] = $objComments;
+        }
+
+        return $commentsList;
     }
 
     public function insert()
@@ -39,7 +171,9 @@ class Comment extends Model
         ConnectionManager::executionQuery($sql, $parameters);
     }
 
-    public function update(){}
+    public function update()
+    {
+    }
 
     /**
      * @param $id

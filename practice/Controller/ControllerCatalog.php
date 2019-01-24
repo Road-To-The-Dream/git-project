@@ -9,6 +9,7 @@
 namespace practice\Controller;
 
 use practice\Model\ActiveRecord\Product;
+use practice\Model\ActiveRecord\Vendor;
 
 class ControllerCatalog extends Controller
 {
@@ -21,8 +22,22 @@ class ControllerCatalog extends Controller
         $this->checkSessionAndStart();
 
         $product = new Product();
-        $DBdata = $product->selectAll($sorting, $category);
+        $product = $product->selectAll($sorting, $category);
+
+        $vendor = new Vendor();
+        $vendor = $vendor->select();
+
+        $DBdata = array (
+            'vendors' => $vendor,
+            'products' => $product
+        );
 
         $this->objectView->generate('catalog', $DBdata);
+    }
+
+    public function filtrationProducts()
+    {
+        $product = new Product();
+        return $product->filtration($_POST['vendor'], 1);
     }
 }

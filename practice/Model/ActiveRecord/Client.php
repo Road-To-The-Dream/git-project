@@ -13,13 +13,142 @@ use practice\Model\ConnectionManager;
 
 class Client extends Model
 {
-    public $last_name;
-    public $first_name;
-    public $patronymic;
-    public $phone;
-    public $email;
-    public $password;
-    public $role = '\''.'user'.'\'';
+    private $id;
+    private $last_name;
+    private $first_name;
+    private $patronymic;
+    private $phone;
+    private $email;
+    private $password;
+    private $create_at;
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id): void
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLastName()
+    {
+        return $this->last_name;
+    }
+
+    /**
+     * @param mixed $last_name
+     */
+    public function setLastName($last_name): void
+    {
+        $this->last_name = $last_name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFirstName()
+    {
+        return $this->first_name;
+    }
+
+    /**
+     * @param mixed $first_name
+     */
+    public function setFirstName($first_name): void
+    {
+        $this->first_name = $first_name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPatronymic()
+    {
+        return $this->patronymic;
+    }
+
+    /**
+     * @param mixed $patronymic
+     */
+    public function setPatronymic($patronymic): void
+    {
+        $this->patronymic = $patronymic;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPhone()
+    {
+        return $this->phone;
+    }
+
+    /**
+     * @param mixed $phone
+     */
+    public function setPhone($phone): void
+    {
+        $this->phone = $phone;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param mixed $email
+     */
+    public function setEmail($email): void
+    {
+        $this->email = $email;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    /**
+     * @param mixed $password
+     */
+    public function setPassword($password): void
+    {
+        $this->password = $password;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCreateAt()
+    {
+        return $this->create_at;
+    }
+
+    /**
+     * @param mixed $create_at
+     */
+    public function setCreateAt($create_at): void
+    {
+        $this->create_at = $create_at;
+    }
 
     public function __construct()
     {
@@ -32,41 +161,24 @@ class Client extends Model
         ConnectionManager::executionQuery($sql);
     }
 
-    public function insert()
+    public function selectFirstNameClient($array_id)
     {
-        $date_added = '\''.date("Y-m-d H:i:s").'\'';
-        $sql = "INSERT INTO client (last_name,first_name,patronymic,email,phone,password,role,create_at) 
-                VALUES (:last_name,:first_name,:patronymic,:email,:phone,:password,$this->role,$date_added)";
-        $parameters = array(
-            ':last_name' => $this->last_name,
-            ':first_name' => $this->first_name,
-            ':patronymic' => $this->patronymic,
-            ':email' => $this->email,
-            ':phone' => $this->phone,
-            ':password' => $this->password
-        );
-        ConnectionManager::executionQuery($sql, $parameters);
-    }
+        $info_client = array();
+        for ($i = 0; $i < count($array_id); $i++) {
+            $sql = "Select first_name FROM client WHERE id = ".$array_id[$i];
+            $w = ConnectionManager::executionQuery($sql);
+            array_push($info_client, $w[0]['first_name']);
+        }
 
-    /**
-     * @param $password
-     * @param $email
-     */
-    public function updatePassword($password, $email)
-    {
-        $date_of_change = '\''.date("Y-m-d H:i:s").'\'';
-        $sql = "UPDATE client SET password = ".'\''.$password.'\''.", update_at = ".$date_of_change." 
-                WHERE email = ".'\''.$email.'\'';
-        ConnectionManager::executionQuery($sql);
-    }
+        $firstNameClient = array();
 
-    /**
-     * @param $id
-     */
-    public function delete($id)
-    {
-        $sql = "DELETE FROM client WHERE id = ".$id;
-        ConnectionManager::executionQuery($sql);
+        for ($i = 0; $i < count($info_client); $i++) {
+            $objClient = new Client();
+            $objClient->setFirstName($info_client[$i]);
+            $firstNameClient[$i] = $objClient;
+        }
+
+        return $firstNameClient;
     }
 
     /**
@@ -97,5 +209,41 @@ class Client extends Model
     {
         $sql = "SELECT id, first_name FROM client WHERE email = ".'\''.$email.'\'';
         return ConnectionManager::executionQuery($sql);
+    }
+
+    public function insert()
+    {
+        $sql = "INSERT INTO client (last_name,first_name,patronymic,email,phone,password,create_at) 
+                VALUES (:last_name,:first_name,:patronymic,:email,:phone,:password,$this->create_at)";
+        $parameters = array(
+            ':last_name' => $this->last_name,
+            ':first_name' => $this->first_name,
+            ':patronymic' => $this->patronymic,
+            ':email' => $this->email,
+            ':phone' => $this->phone,
+            ':password' => $this->password
+        );
+        ConnectionManager::executionQuery($sql, $parameters);
+    }
+
+    /**
+     * @param $password
+     * @param $email
+     */
+    public function updatePassword($password, $email)
+    {
+        $date_of_change = '\''.date("Y-m-d H:i:s").'\'';
+        $sql = "UPDATE client SET password = ".'\''.$password.'\''.", update_at = ".$date_of_change." 
+                WHERE email = ".'\''.$email.'\'';
+        ConnectionManager::executionQuery($sql);
+    }
+
+    /**
+     * @param $id
+     */
+    public function delete($id)
+    {
+        $sql = "DELETE FROM client WHERE id = ".$id;
+        ConnectionManager::executionQuery($sql);
     }
 }
