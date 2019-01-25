@@ -155,6 +155,24 @@ class Client extends Model
         $this->connectionDB();
     }
 
+    public function selectClient()
+    {
+        $sql = "SELECT first_name, last_name, email, phone FROM client WHERE id = ".$this->getId();
+
+        $info_client = ConnectionManager::executionQuery($sql);
+
+        $objClient = new Client();
+        $objClient->setFirstName($info_client[0]['first_name']);
+        $objClient->setLastName($info_client[0]['last_name']);
+        $objClient->setEmail($info_client[0]['email']);
+        $objClient->setPhone($info_client[0]['phone']);
+
+        $ClientList = array();
+        $ClientList[0] = $objClient;
+
+        return $ClientList;
+    }
+
     /**
      * @param $array_id_clients
      * @return array
@@ -181,32 +199,23 @@ class Client extends Model
 
     /**
      * @param $email
-     * @return null
+     * @return array
      */
-    public function selectEmailUser($email)
+    public function selectIdFirstNamePasswordUser($email)
     {
-        $sql = "SELECT id FROM client WHERE email = ".'\''.$email.'\'';
-        return ConnectionManager::executionQuery($sql);
-    }
+        $sql = "SELECT id, first_name, password FROM client WHERE email = ".'\''.$email.'\'';
 
-    /**
-     * @param $email
-     * @return null
-     */
-    public function selectPasswordUser($email)
-    {
-        $sql = "SELECT password FROM client WHERE email = ".'\''.$email.'\'';
-        return ConnectionManager::executionQuery($sql);
-    }
+        $info_client = ConnectionManager::executionQuery($sql);
 
-    /**
-     * @param $email
-     * @return null
-     */
-    public function selectIdAndFirstNameUser($email)
-    {
-        $sql = "SELECT id, first_name FROM client WHERE email = ".'\''.$email.'\'';
-        return ConnectionManager::executionQuery($sql);
+        $objClient = new Client();
+        $objClient->setId($info_client[0]['id']);
+        $objClient->setFirstName($info_client[0]['first_name']);
+        $objClient->setPassword($info_client[0]['password']);
+
+        $ClientList = array();
+        $ClientList[0] = $objClient;
+
+        return $ClientList;
     }
 
     public function insert()
@@ -231,8 +240,7 @@ class Client extends Model
     public function updatePassword($password, $email)
     {
         $date_of_change = '\''.date("Y-m-d H:i:s").'\'';
-        $sql = "UPDATE client SET password = ".'\''.$password.'\''.", update_at = ".$date_of_change." 
-                WHERE email = ".'\''.$email.'\'';
+        $sql = "UPDATE client SET password = ".'\''.$password.'\''.", update_at = ".$date_of_change." WHERE email = ".'\''.$email.'\'';
         ConnectionManager::executionQuery($sql);
     }
 

@@ -7,6 +7,7 @@ use practice\Model\ActiveRecord\Client;
 class Authentication
 {
     private $client;
+    private $info_client;
 
     /**
      * Authentication constructor.
@@ -26,10 +27,9 @@ class Authentication
         if ($this->checkExistenceEmailInDataBase($email)) {
             $obj_pass = new Password($email);
             if ($obj_pass->verifyPasswords($password, $email)) {
-                $first_name = $this->client->selectIdAndFirstNameUser($email);
                 session_start();
-                $_SESSION['isAuth'] = $first_name[0]['first_name'];
-                $_SESSION['user_id'] = $first_name[0]['id'];
+                $_SESSION['isAuth'] = $this->info_client[0]->getFirstName();
+                $_SESSION['user_id'] = $this->info_client[0]->getId();
                 return 1;
             }
         }
@@ -42,8 +42,9 @@ class Authentication
      */
     private function checkExistenceEmailInDataBase($email)
     {
-        $data_select = $this->client->selectEmailUser($email);
-        if (!empty($data_select)) {
+        $this->info_client = $this->client->selectIdFirstNamePasswordUser($email);
+
+        if (!empty($this->info_client[0]->getId())) {
             return 1;
         } else {
             return 0;

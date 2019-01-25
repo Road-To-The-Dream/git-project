@@ -10,6 +10,7 @@ function AjaxCountTotalPriceProduct(btn_value, amount, price_product, total_pric
         dataType: "json",
         cache: false,
         success: function(response) {
+            $('#price_product').val(response[1]);
             $('#' + amount).val(response[0]);
             document.getElementById(total_price_product).innerHTML = response[1];
             document.getElementById(price_all_products).innerHTML = response[2];

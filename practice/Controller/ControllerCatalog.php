@@ -24,9 +24,9 @@ class ControllerCatalog extends Controller
 
         $data_products = $this->getProducts($sorting, $category);
 
-        $data_images = $this->getImage($data_products);
+        $data_images = $this->getImageFromProduct($data_products);
 
-        $data_vendors = $this->getVendor();
+        $data_vendors = $this->getVendors();
 
         $DBdata = [
             'products' => $data_products,
@@ -43,7 +43,7 @@ class ControllerCatalog extends Controller
         return $data_products = $products->selectAll($sorting, $category);
     }
 
-    private function getImage($data_products)
+    private function getImageFromProduct($data_products)
     {
         $id_products = array();
         for ($i = 0; $i < count($data_products); $i++) {
@@ -55,7 +55,7 @@ class ControllerCatalog extends Controller
         return $data_image = $image->selectImageForProduct($id_products);
     }
 
-    private function getVendor()
+    private function getVendors()
     {
         $vendor = new Vendor();
         return $data_vendor = $vendor->selectAll();

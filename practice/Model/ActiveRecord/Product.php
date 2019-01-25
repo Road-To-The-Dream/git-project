@@ -126,7 +126,7 @@ class Product extends Model
      */
     public function selectProduct()
     {
-        $sql = "SELECT id, name, description, price, unit, amount FROM product WHERE id = ".$this->id;
+        $sql = "SELECT id, name, description, price, unit, amount FROM product WHERE id = ".$this->getId();
 
         $info_product = ConnectionManager::executionQuery($sql);
         $info_product = $this->addSpaceToPriceProduct($info_product, "price");
@@ -178,26 +178,6 @@ class Product extends Model
         return $info_products;
     }
 
-    /**
-     * @param $id_client
-     * @return array|null
-     */
-    public function checkExistSessionAndSelectProduct($id_client)
-    {
-        $data = ConnectionManager::executionQuery("SELECT id, name, price, unit FROM product WHERE id = ".$this->id_product);
-
-        if (isset($_SESSION['user_id'])) {
-            $query = "SELECT first_name, last_name, email, phone FROM client WHERE id = ".$id_client;
-            $sql_client = ConnectionManager::executionQuery($query);
-            $data = array_merge((array)$data, (array)$sql_client);
-        }
-
-        $data[0]['amount'] = $_POST['amount'];
-        $data[0]['total_price'] = $_POST['amount'] * $data[0]['price'];
-
-        return $data;
-    }
-
     public function filtration($array_vendors, $category)
     {
         $sql = "SELECT p.id, p.name, p.description, p.price, p.unit, p.amount, (SELECT img FROM images i 
@@ -209,9 +189,15 @@ $w = ConnectionManager::executionQuery($sql);
         return $w;
     }
 
-    public function insert(){}
+    public function insert()
+    {
+    }
 
-    public function update(){}
+    public function update()
+    {
+    }
 
-    public function delete(){}
+    public function delete()
+    {
+    }
 }

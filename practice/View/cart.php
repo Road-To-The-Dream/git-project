@@ -51,7 +51,7 @@
                     ?>
                     <div class="container">
                         <div class="row mt-3">
-                            <form action="http://practice/buy/showBuy" method="POST">
+                            <form action="http://practice/buy" method="POST">
                                 <div class="shadow mb-4 bg-white rounded border border-primary p-2">
                                     <div class="container">
                                         <div class="row border-bottom border-dark mb-3">
@@ -74,10 +74,10 @@
                                     </div>
                                     <div class="row justify-content-center">
                                         <div class="col-2">
-                                            <a href="http://practice/product/show_product/<?=$value["id"];?>"><img class="card-img-top" src="/View/Image/<?=$value["image"]?>" alt="Card image cap"></a>
+                                            <a href="http://practice/product/index/<?=$value["id"];?>"><img class="card-img-top" src="/View/Image/<?=$value["image"]?>" alt="Card image cap"></a>
                                         </div>
                                         <div class="col-4 align-self-center">
-                                            <a href="http://practice/product/show_product/<?=$value["id"];?>" class="text-dark"><p class="f-size-title font-weight-bold"><?php echo $value["name"]?></p></a>
+                                            <a href="http://practice/product/index/<?=$value["id"];?>" class="text-dark"><p class="f-size-title font-weight-bold"><?php echo $value["name"]?></p></a>
                                         </div>
                                         <div class="col-2 align-self-center">
                                             <div class="row justify-content-center">
@@ -119,6 +119,7 @@
                                             Итого:
                                         </div>
                                         <input name="IDProduct" type="text" hidden value="<?php echo $value["id"]?>">
+                                        <input name="price_product" id="price_product" type="text" hidden value="<?php echo $value["price"]?>">
                                         <div class="col-auto p-0 text-primary font-weight-bold f-size-title align-self-end">
                                             <p class="m-0" id="total_price_product<?php echo $value["id"]?>"><?php echo $value["price"]?></p>
                                         </div>

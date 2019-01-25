@@ -22,7 +22,8 @@ class Password
     public function __construct($email)
     {
         $this->client = new Client();
-        $this->hash_password = $this->client->selectPasswordUser($email);
+        $password = $this->client->selectIdFirstNamePasswordUser($email);
+        $this->hash_password = $password[0]->getPassword();
     }
 
     /**
@@ -32,8 +33,8 @@ class Password
      */
     public function verifyPasswords($password, $email)
     {
-        if (password_verify($password, $this->hash_password[0]['password'])) {
-            if (password_needs_rehash($this->hash_password[0]['password'], PASSWORD_DEFAULT)) {
+        if (password_verify($password, $this->hash_password)) {
+            if (password_needs_rehash($this->hash_password, PASSWORD_DEFAULT)) {
                 $this->reHashingPassword($password);
                 $this->updatePasswordInDatabase($this->hash_password, $email);
             }
