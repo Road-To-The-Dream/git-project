@@ -89,7 +89,7 @@ class Images extends Model
         return $imagesList;
     }
 
-    public function selectImageForProduct($array_id_products)
+    public function selectAllImageForProduct($array_id_products)
     {
         $info_images = array();
         for ($i = 0; $i < count($array_id_products); $i++) {
@@ -110,5 +110,17 @@ class Images extends Model
         }
 
         return $img;
+    }
+
+    public function selectImageForProduct()
+    {
+        $sql = "SELECT img FROM images i 
+                        JOIN images_in_product ip ON ip.images_id = i.id
+                        JOIN product p ON ip.product_id = p.id
+                    WHERE ip.product_id = {$this->getProductId()} LIMIT 1";
+        $data_image = ConnectionManager::executionQuery($sql);
+        $objImages = new Images();
+        $objImages->setImg($data_image[0]['img']);
+        return $objImages;
     }
 }

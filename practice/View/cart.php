@@ -47,7 +47,7 @@
             </div>
             <div class="container">
                 <?php
-                foreach ($data as $value) {
+                for ($i = 0; $i < count($data['products']); $i++) {
                     ?>
                     <div class="container">
                         <div class="row mt-3">
@@ -66,7 +66,7 @@
                                                 Цена
                                             </div>
                                             <div class="col-2 text-right p-0">
-                                                <a data-toggle="tooltip" title="Удалить товар" onclick="RemoveProduct(<?php echo $value["id"]?>)" style="cursor: pointer">
+                                                <a data-toggle="tooltip" title="Удалить товар" onclick="RemoveProduct(<?= $data['products'][$i]->getProductId() ?>)" style="cursor: pointer">
                                                     <img class="pb-2" src="/View/Image/Cart/Delete_product.png" alt="Delete product">
                                                 </a>
                                             </div>
@@ -74,29 +74,29 @@
                                     </div>
                                     <div class="row justify-content-center">
                                         <div class="col-2">
-                                            <a href="http://practice/product/index/<?=$value["id"];?>"><img class="card-img-top" src="/View/Image/<?=$value["image"]?>" alt="Card image cap"></a>
+                                            <a href="http://practice/product/index/<?= $data['image'][$i]->getImg() ?>"><img class="card-img-top" src="/View/Image/<?= $data['image'][$i]->getImg() ?>" alt="Card image cap"></a>
                                         </div>
                                         <div class="col-4 align-self-center">
-                                            <a href="http://practice/product/index/<?=$value["id"];?>" class="text-dark"><p class="f-size-title font-weight-bold"><?php echo $value["name"]?></p></a>
+                                            <a href="http://practice/product/index/<?= $data['products'][$i]->getProductId() ?>" class="text-dark"><p class="f-size-title font-weight-bold"><?= $data['name_products'][$i]->getName() ?></p></a>
                                         </div>
                                         <div class="col-2 align-self-center">
                                             <div class="row justify-content-center">
                                                 <div class="col-auto mr-1 p-0">
                                                     <a class='btn btn-secondary' data-toggle="tooltip" title="Уменьшить" onclick="AjaxCountTotalPriceProduct('-',
-                                                            'amount<?php echo $value["id"]?>',
-                                                            'price_product<?php echo $value["id"]?>',
-                                                            'total_price_product<?php echo $value["id"]?>',
+                                                            'amount<?= $data['products'][$i]->getProductId() ?>',
+                                                            'price_product<?= $data['products'][$i]->getProductId() ?>',
+                                                            'total_price_product<?= $data['products'][$i]->getProductId() ?>',
                                                             'price_all_products')">
                                                         <img src='/View/Image/Cart/Minus.png'></a>
                                                 </div>
                                                 <div class="col-4 p-0">
-                                                    <input type="text" class="form-control text-center" name="amount" id="amount<?php echo $value["id"]?>" aria-describedby="emailHelp"/>
+                                                    <input type="text" class="form-control text-center" name="amount" id="amount<?= $data['products'][$i]->getProductId() ?>" aria-describedby="emailHelp"/>
                                                 </div>
                                                 <div class="col-auto ml-1 p-0 text-right">
                                                     <a class='btn btn-secondary' data-toggle="tooltip" title="Увеличить" onclick="AjaxCountTotalPriceProduct('+',
-                                                            'amount<?php echo $value["id"]?>',
-                                                            'price_product<?php echo $value["id"]?>',
-                                                            'total_price_product<?php echo $value["id"]?>',
+                                                            'amount<?= $data['products'][$i]->getProductId() ?>',
+                                                            'price_product<?= $data['products'][$i]->getProductId() ?>',
+                                                            'total_price_product<?= $data['products'][$i]->getProductId() ?>',
                                                             'price_all_products')">
                                                         <img src='/View/Image/Cart/Added.png'></a>
                                                 </div>
@@ -105,7 +105,7 @@
                                         <div class="col-2 align-self-center text-center p-0 pl-5">
                                             <div class="row d-flex justify-content-center">
                                                 <div class="col-auto p-0 text-success f-size-title">
-                                                    <p class="m-0" id="price_product<?php echo $value["id"]?>"><?php echo $value["price"]?></p>
+                                                    <p class="m-0" id="price_product<?= $data['products'][$i]->getProductId() ?>"><?= $data['products'][$i]->getPrice() ?></p>
                                                 </div>
                                                 <div class="col-auto text-right font-weight-bold f-size-title m-0">
                                                     <p class="m-0"> грн</p>
@@ -118,10 +118,10 @@
                                         <div class="col-auto f-size-total align-self-end">
                                             Итого:
                                         </div>
-                                        <input name="IDProduct" type="text" hidden value="<?php echo $value["id"]?>">
-                                        <input name="price_product" id="price_product" type="text" hidden value="<?php echo $value["price"]?>">
+                                        <input name="IDProduct" type="text" hidden value="<?= $data['products'][$i]->getProductId() ?>">
+                                        <input name="price_product" id="price_product" type="text" hidden value="<?= $data['products'][$i]->getPrice() ?>">
                                         <div class="col-auto p-0 text-primary font-weight-bold f-size-title align-self-end">
-                                            <p class="m-0" id="total_price_product<?php echo $value["id"]?>"><?php echo $value["price"]?></p>
+                                            <p class="m-0" id="total_price_product<?= $data['products'][$i]->getProductId() ?>"><?= $data['products'][$i]->getPrice() ?></p>
                                         </div>
                                         <div class="col-auto text-right font-weight-bold f-size-title m-0 align-self-end">
                                             <p class="m-0"> грн</p>

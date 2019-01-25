@@ -18,9 +18,6 @@ class Controller
     {
         session_start();
         if (isset($_SESSION['isAuth'])) {
-            if (!isset($_SESSION['product_id'])) {
-                $_SESSION['product_id'] = [];
-            }
             include "View\Template\header_logout.php";
         } else {
             session_destroy();

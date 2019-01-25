@@ -3,6 +3,7 @@
 namespace practice\Model;
 
 use practice\Model\ActiveRecord\Client;
+use practice\Model\ActiveRecord\Orders;
 
 class Authentication
 {
@@ -30,10 +31,18 @@ class Authentication
                 session_start();
                 $_SESSION['isAuth'] = $this->info_client[0]->getFirstName();
                 $_SESSION['user_id'] = $this->info_client[0]->getId();
+                $_SESSION['count_product_in_cart'] = $this->amountProductsInCart();
                 return 1;
             }
         }
         return 0;
+    }
+
+    private function amountProductsInCart()
+    {
+        $orders = new Orders();
+        $amount_products = $orders->selectIdProduct();
+        return $amount_products->getAmountProducts();
     }
 
     /**

@@ -87,7 +87,7 @@
                                             <div class="col-3 p-0 mt-2" style="font-size: 18px"><?= $data['products'][$i]->getUnit() ?></div>
                                         </div>
                                         <?php
-                                            if($data['products'][$i]->getAmount() > 0) {
+                                            if ($data['products'][$i]->getAmount() > 0) {
                                                 ?>
                                                 <div class="row justify-content-center">
                                                     <div class="col-4 p-0 mr-2">

@@ -16,9 +16,9 @@ class ControllerCatalog extends Controller
 {
     /**
      * @param int $sorting
-     * @param string $category
+     * @param int $category
      */
-    public function index($sorting = 0, $category = 'all')
+    public function index($sorting = 0, $category = 0)
     {
         $this->checkSessionAndStart();
 
@@ -51,8 +51,7 @@ class ControllerCatalog extends Controller
         }
 
         $image = new Images();
-        $image->setProductId($id_products);
-        return $data_image = $image->selectImageForProduct($id_products);
+        return $data_image = $image->selectAllImageForProduct($id_products);
     }
 
     private function getVendors()

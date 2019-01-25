@@ -9,8 +9,8 @@
 <div class="container">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="http://practice/main/show_main">Главная</a></li>
-            <li class="breadcrumb-item"><a href="http://practice/catalog/show_all">Ноутбуки</a></li>
+            <li class="breadcrumb-item"><a href="http://practice/main">Главная</a></li>
+            <li class="breadcrumb-item"><a href="http://practice/catalog">Ноутбуки</a></li>
             <li class="breadcrumb-item active" aria-current="page">Оформление заказа</li>
         </ol>
     </nav>
@@ -45,7 +45,7 @@
                                     <div class="form-group row">
                                         <label for="first_name" class="col-3 col-form-label">First Name</label>
                                         <div class="col">
-                                            <input type="text" class="form-control form-control-md" name="first_name" id="first_name" placeholder="Имя" value="<?= $data['client'][0]->getFirstName();; ?>">
+                                            <input type="text" class="form-control form-control-md" name="first_name" id="first_name" placeholder="Имя" value="<?= $data['client'][0]->getFirstName(); ?>">
                                             <p class="text-danger ml-2" id="messageFirstName"></p>
                                         </div>
                                     </div>
@@ -85,7 +85,7 @@
                                     <div class="shadow mb-4 bg-white rounded border border-primary p-2">
                                         <div class="row">
                                             <div class="col-3">
-                                                <a href="http://practice/product/index/<?= $data['product'][0]->getId(); ?>"><img class="card-img-top" src="/View/Image/HP%20EliteBook%20830%20G5%20(3ZG02ES)%20(1).jpg" alt="Card image cap"></a>
+                                                <a href="http://practice/product/index/<?= $data['product'][0]->getId(); ?>"><img class="card-img-top" src="/View/Image/<?= $data['image']->getImg(); ?>" alt="Card image cap"></a>
                                             </div>
                                             <div class="col-8">
                                                 <div class="row">

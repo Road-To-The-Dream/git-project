@@ -99,7 +99,7 @@
                 <a class="cart" onclick="AjaxShowCart()">
                     <button type="button" class="btn btn-dark mb-1 p-1">
                         <img src="/View/Image/header/Cart.png" alt="Image cart">
-                        <span class="amount rounded-circle pl-2 pr-2" style="background: red" id="amount_products_in_cart"><?php echo count($_SESSION['product_id']) ?></span>
+                        <span class="amount rounded-circle pl-2 pr-2" style="background: red" id="amount_products_in_cart"><?php echo $_SESSION['count_product_in_cart'] ?></span>
                     </button>
                 </a>
             </div>

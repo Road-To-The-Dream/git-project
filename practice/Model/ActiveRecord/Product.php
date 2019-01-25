@@ -136,6 +136,10 @@ class Product extends Model
         return $productList;
     }
 
+    /**
+     * @param $info_products
+     * @return array
+     */
     private function addedProductsInObject($info_products)
     {
         $productsList = array();
@@ -161,14 +165,18 @@ class Product extends Model
      */
     public function selectAll($sorting = 0, $category = 0)
     {
-        if ($sorting == 1) {
-            $sql = "SELECT p.id, p.name, p.description, p.price, p.unit, p.amount FROM product p JOIN categories c ON c.id = p.category_id WHERE c.id = $category ORDER BY price DESC";
-        } elseif ($sorting == 2) {
-            $sql ="SELECT p.id, p.name, p.description, p.price, p.unit, p.amount FROM product p JOIN categories c ON c.id = p.category_id WHERE c.id = $category ORDER BY price ASC";
-        }
-
         if ($category != 0) {
-            $sql = "SELECT p.id, p.name, p.description, p.price, p.unit, p.amount FROM product p JOIN categories c ON c.id = p.category_id WHERE c.id = ".$category;
+            if ($sorting == 1) {
+                $sql = "SELECT p.id, p.name, p.description, p.price, p.unit, p.amount FROM product p JOIN categories c ON c.id = p.category_id WHERE c.id = $category ORDER BY price DESC";
+            } else {
+                $sql = "SELECT p.id, p.name, p.description, p.price, p.unit, p.amount FROM product p JOIN categories c ON c.id = p.category_id WHERE c.id = $category ORDER BY price ASC";
+            }
+        } else {
+            if ($sorting == 1) {
+                $sql = "SELECT p.id, p.name, p.description, p.price, p.unit, p.amount FROM product p JOIN categories c ON c.id = p.category_id ORDER BY price DESC";
+            } else {
+                $sql = "SELECT p.id, p.name, p.description, p.price, p.unit, p.amount FROM product p JOIN categories c ON c.id = p.category_id ORDER BY price ASC";
+            }
         }
 
         $info_products = ConnectionManager::executionQuery($sql);
@@ -178,15 +186,34 @@ class Product extends Model
         return $info_products;
     }
 
+    public function selectName($array_id_products)
+    {
+        $info_names = array();
+        for ($i = 0; $i < count($array_id_products); $i++) {
+            $sql = "SELECT id, name FROM product WHERE id = $array_id_products[$i]";
+            $data_names = ConnectionManager::executionQuery($sql);
+            array_push($info_names, $data_names[0]['name']);
+        }
+
+        $name = array();
+
+        for ($i = 0; $i < count($info_names); $i++) {
+            $objProduct = new Product();
+            $objProduct->setName($info_names[$i]);
+            $name[$i] = $objProduct;
+        }
+
+        return $name;
+    }
+
+    public function selectPriceProduct()
+    {
+        $sql = "SELECT price FROM product WHERE id = " . $this->getId();
+        return $price = ConnectionManager::executionQuery($sql);
+    }
+
     public function filtration($array_vendors, $category)
     {
-        $sql = "SELECT p.id, p.name, p.description, p.price, p.unit, p.amount, (SELECT img FROM images i 
-                                                                    JOIN images_in_product ip ON ip.images_id = i.id 
-                                                                   WHERE ip.product_id = p.id LIMIT 1) as image  FROM vendor v 
-JOIN product p ON p.vendor_id = v.id
-JOIN categories c ON p.category_id = c.id WHERE c.id = 1 AND v.id = 1";
-$w = ConnectionManager::executionQuery($sql);
-        return $w;
     }
 
     public function insert()

@@ -21,6 +21,10 @@ class Orders extends Model
     private $create_at;
     private $update_at;
     private $client_id;
+    private $product_id;
+    private $order_id;
+    private $amountProducts;
+    private $message_about_adding_product = array("", "", "");
 
     /**
      * @return mixed
@@ -51,7 +55,7 @@ class Orders extends Model
      */
     public function setStatus($status): void
     {
-        $this->status = $status;
+        $this->status = '\'' . $status . '\'';
     }
 
     /**
@@ -134,25 +138,261 @@ class Orders extends Model
         $this->client_id = $client_id;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getProductId()
+    {
+        return $this->product_id;
+    }
+
+    /**
+     * @param mixed $product_id
+     */
+    public function setProductId($product_id): void
+    {
+        $this->product_id = $product_id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getOrderId()
+    {
+        return $this->order_id;
+    }
+
+    /**
+     * @param mixed $order_id
+     */
+    public function setOrderId($order_id): void
+    {
+        $this->order_id = $order_id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAmountProducts()
+    {
+        return $this->amountProducts;
+    }
+
+    /**
+     * @param mixed $amountProducts
+     */
+    public function setAmountProducts($amountProducts): void
+    {
+        $this->amountProducts = $amountProducts;
+    }
+
     public function __construct()
     {
         $this->connectionDB();
     }
 
-    public function select()
+    private function addedProductsInObject($products_cart)
     {
+        $productsList = array();
+
+        for ($i = 0; $i < count($products_cart); $i++) {
+            $objCart = new Orders();
+            $objCart->setProductId($products_cart[$i]['product_id']);
+            $objCart->setPrice($products_cart[$i]['price']);
+            $objCart->setAmount($products_cart[$i]['amount']);
+            $productsList[$i] = $objCart;
+        }
+
+        return $productsList;
+    }
+
+    /**
+     * @return Orders
+     */
+    public function selectIdProduct()
+    {
+        $sql = "SELECT id FROM orders";
+        $amount =  ConnectionManager::executionQuery($sql);
+        $orders = new Orders();
+        $orders->setAmountProducts(count($amount));
+
+        return $orders;
+    }
+
+    /**
+     * @return array|int|null
+     */
+    public function selectProductsForCart()
+    {
+        $sql = "SELECT po.product_id, o.price, o.amount, o.client_id FROM orders o
+                JOIN product_in_orders po ON po.order_id = o.id 
+                JOIN product p ON po.product_id = p.id WHERE o.status = " . $this->getStatus();
+        $products_cart = ConnectionManager::executionQuery($sql);
+        if ($products_cart == null) {
+            return 0;
+        } else {
+            $products_cart = $this->addedProductsInObject($products_cart);
+            return $products_cart;
+        }
+    }
+
+    /**
+     * @param $price
+     * @return mixed
+     */
+    private function removeSpacesInPrice($price)
+    {
+        return str_replace(' ', '', $price);
+    }
+
+    public function getTotalPriceProducts()
+    {
+        $DBdata = $this->selectTotalPriceProducts();
+        $total_price_products = $this->addSpaceToPriceProduct($DBdata, 'total_price');
+        $total_price_products = $total_price_products[0]['total_price'];
+        echo $total_price_products;
+    }
+
+    /**
+     * @return string
+     */
+    private function checkArrayProductsInSession()
+    {
+        $line_info = "no_empty";
+        $sql = "SELECT COUNT(id) FROM orders WHERE status = " . $this->getStatus();
+        $DBdata = ConnectionManager::executionQuery($sql);
+        if ($DBdata == null) {
+            $line_info = 'empty';
+        }
+
+        return $line_info;
+    }
+
+    /**
+     * @return null
+     */
+    private function selectTotalPriceProducts()
+    {
+        $sql = "Select SUM(price) AS total_price FROM orders WHERE status = " . $this->getStatus();
+        $DBdata = ConnectionManager::executionQuery($sql);
+        return $DBdata;
+    }
+
+    private function selectIdProductInCart()
+    {
+        $sql = "SELECT po.product_id FROM orders o
+                JOIN product_in_orders po ON po.order_id = o.id 
+                JOIN product p ON po.product_id = p.id WHERE o.status = " . $this->getStatus();
+        return $products_cart = ConnectionManager::executionQuery($sql);
+    }
+
+    private function selectIdOrder()
+    {
+        $sql = "SELECT order_id FROM product_in_orders WHERE product_id = " . $this->getProductId();
+        $id_order = ConnectionManager::executionQuery($sql);
+        $this->setId($id_order[0]['order_id']);
+    }
+
+    private function checkExistProductInCartAndAddingInDataBaseAndSession()
+    {
+        $amount_products = $this->selectIdProductInCart();
+        if ($amount_products != null) {
+            foreach ($amount_products as $amount) {
+                if ($amount['product_id'] == $_POST['IDProduct']) {
+                    $this->message_about_adding_product[0] = "Товар уже имеется в корзине ! Перейдите в корзину для покупки.";
+                    $this->message_about_adding_product[1] = "error";
+                    return;
+                }
+            }
+        }
+        $this->setCreateAt('\''.date("Y-m-d H:i:s").'\'');
+        $this->setClientId($_SESSION['user_id']);
+        $this->insert();
+        $this->message_about_adding_product[0] = "Товар добавлен в корзину !";
+        $this->message_about_adding_product[1] = "success";
+        $_SESSION['count_product_in_cart'] += 1;
+        $this->message_about_adding_product[2] = $_SESSION['count_product_in_cart'];
+    }
+
+    public function addingProductInCart()
+    {
+        session_start();
+        if (isset($_SESSION['isAuth'])) {
+            $this->checkExistProductInCartAndAddingInDataBaseAndSession();
+        } else {
+            session_destroy();
+            $this->message_about_adding_product[0] = "Для добавления товара в корзину требуется войти в аккаунт!";
+            $this->message_about_adding_product[1] = "error";
+        }
+
+        echo json_encode($this->message_about_adding_product);
+    }
+
+    public function countTotalPriceProduct()
+    {
+        $price = array("", "", "");
+
+        $amount_units = $_POST['amount_units'];
+        $price_product = $this->removeSpacesInPrice($_POST['price_product']);
+        $total_price_product = $this->removeSpacesInPrice($_POST['total_price_product']);
+        $price_all_products = $this->removeSpacesInPrice($_POST['price_all_products']);
+
+        if ($_POST['btn_value'] == '+') {
+            $amount_units++;
+            $price_all_products += $price_product;
+            $total_price_product = $amount_units * $price_product;
+        } else {
+            if ($amount_units > 1) {
+                $amount_units--;
+                $total_price_product = $amount_units * $price_product;
+                $price_all_products -= $price_product;
+            }
+        }
+        $price[0] = $amount_units;
+        $price[1] = $total_price_product;
+        $price[2] = $price_all_products;
+
+        echo json_encode($price);
     }
 
     public function insert()
     {
-        //$sql = ;
+        $product = new Product();
+        $product->setId($_POST['IDProduct']);
+        $price_product = $product->selectPriceProduct();
+
+        $sql = "INSERT INTO orders (price, create_at, client_id) VALUE ({$price_product[0]['price']},  {$this->getCreateAt()}, {$this->getClientId()})";
+        ConnectionManager::executionQuery($sql);
+
+        $sql = "SELECT MAX(id) AS id FROM orders";
+        $id = ConnectionManager::executionQuery($sql);
+
+        $sql = "INSERT INTO product_in_orders (product_id, order_id, create_at) VALUES ({$this->getProductId()}, {$id[0]['id']}, {$this->getCreateAt()})";
+        ConnectionManager::executionQuery($sql);
+
+        $this->updateDecreaseAmountProduct();
     }
 
-    public function update()
+    public function updateDecreaseAmountProduct()
     {
+        $sql = "UPDATE product SET amount = amount - 1 WHERE id = " . $this->getProductId();
+        ConnectionManager::executionQuery($sql);
+    }
+
+    public function updateIncreaseAmountProduct()
+    {
+        $sql = "UPDATE product SET amount = amount + 1 WHERE id = " . $this->getProductId();
+        ConnectionManager::executionQuery($sql);
     }
 
     public function delete()
     {
+        $this->selectIdOrder();
+        $sql = "DELETE FROM product_in_orders WHERE product_id = " . $this->getProductId();
+        ConnectionManager::executionQuery($sql);
+        $sql = "DELETE FROM orders WHERE id = " . $this->getId();
+        ConnectionManager::executionQuery($sql);
+
+        $this->updateIncreaseAmountProduct();
     }
 }
