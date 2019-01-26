@@ -15,12 +15,7 @@ class Images extends Model
 {
     private $img;
     private $product_id;
-
-    /**
-     * @return mixed
-     */
-    private $create_at;
-
+    
     /**
      * @return mixed
      */
@@ -35,22 +30,6 @@ class Images extends Model
     public function setImg($img): void
     {
         $this->img = $img;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getCreateAt()
-    {
-        return $this->create_at;
-    }
-
-    /**
-     * @param mixed $create_at
-     */
-    public function setCreateAt($create_at): void
-    {
-        $this->create_at = $create_at;
     }
 
     public function getProductId()
