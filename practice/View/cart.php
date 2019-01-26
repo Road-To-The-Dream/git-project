@@ -39,7 +39,7 @@
                     <div class="col align-self-end">
                         <div class="row d-flex justify-content-end">
                             <div class="col-auto">
-                                <a class='btn btn-primary text-white pl-1 mt-2'><img class="mr-2" src='/View/Image/Cart/Buy.png'>Оформить заказ</a>
+                                <a class='btn btn-primary text-white pl-1 mt-2'><img class="mr-2" src='/View/Image/Cart/Buy.png'>Clean cart</a>
                             </div>
                         </div>
                     </div>
@@ -129,7 +129,7 @@
                                             <p class="m-0"> грн</p>
                                         </div>
                                         <div class="col-auto align-self-end">
-                                            <button type="submit" class='btn btn-primary text-white'><img class="mr-2" src='/View/Image/Cart/Buy.png'>Купить</button>
+                                            <button type="submit" class='btn btn-primary text-white'><img class="mr-2" src='/View/Image/Cart/Buy.png'>Buy</button>
                                         </div>
                                     </div>
                                 </div>

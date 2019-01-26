@@ -36,7 +36,7 @@
             <div class="row text-center justify-content-center mt-3 ml-4">
                 <div class="col-3">
                     <div class="card h-100" style="width: 12rem;">
-                        <a href="http://practice/catalog?category=1"><img class="card-img-top" src="/View/Image/main/Card_image7.jpg" alt="Card image cap"></a>
+                        <a href="http://practice/catalog"><img class="card-img-top" src="/View/Image/main/Card_image7.jpg" alt="Card image cap"></a>
                         <div class="card-body">
                             <a href=""><h6>Все ноутбуки</h6></a>
                         </div>
