@@ -18,13 +18,12 @@ class Orders extends Model
     private $status;
     private $price;
     private $amount;
-    private $create_at;
-    private $update_at;
     private $client_id;
     private $product_id;
     private $order_id;
     private $amountProducts;
     private $message_about_adding_product = array("", "", "");
+    private $info_price = array("", "", "");
 
     /**
      * @return mixed
@@ -88,38 +87,6 @@ class Orders extends Model
     public function setAmount($amount): void
     {
         $this->amount = $amount;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getCreateAt()
-    {
-        return $this->create_at;
-    }
-
-    /**
-     * @param mixed $create_at
-     */
-    public function setCreateAt($create_at): void
-    {
-        $this->create_at = $create_at;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getUpdateAt()
-    {
-        return $this->update_at;
-    }
-
-    /**
-     * @param mixed $update_at
-     */
-    public function setUpdateAt($update_at): void
-    {
-        $this->update_at = $update_at;
     }
 
     /**
@@ -293,6 +260,12 @@ class Orders extends Model
         $this->setId($id_order[0]['order_id']);
     }
 
+    private function selectAmountProduct()
+    {
+        $sql = "SELECT amount FROM product WHERE id = " . $this->getProductId();
+        return ConnectionManager::executionQuery($sql);
+    }
+
     private function checkExistProductInCartAndAddingInDataBaseAndSession()
     {
         $amount_products = $this->selectIdProductInCart();
@@ -310,6 +283,7 @@ class Orders extends Model
         $this->insert();
         $this->message_about_adding_product[0] = "Товар добавлен в корзину !";
         $this->message_about_adding_product[1] = "success";
+
         $_SESSION['count_product_in_cart'] += 1;
         $this->message_about_adding_product[2] = $_SESSION['count_product_in_cart'];
     }
@@ -328,31 +302,52 @@ class Orders extends Model
         echo json_encode($this->message_about_adding_product);
     }
 
-    public function countTotalPriceProduct()
+    private function increaseAmountProduct($amount_units, $price_product, $total_price_product, $price_all_products)
     {
-        $price = array("", "", "");
+        $amount = $this->selectAmountProduct();
 
+        if ($amount[0]['amount'] != 0) {
+            $amount_units++;
+            $this->updateDecreaseAmountProduct();
+            $price_all_products += $price_product;
+            $total_price_product = $amount_units * $price_product;
+        }
+
+        $this->info_price[0] = $amount_units;
+        $this->info_price[1] = $total_price_product;
+        $this->info_price[2] = $price_all_products;
+
+        return json_encode($this->info_price);
+    }
+
+    private function decreaseAmountProduct($amount_units, $price_product, $price_all_products)
+    {
+        $amount_units--;
+        $this->updateIncreaseAmountProduct();
+        $total_price_product = $amount_units * $price_product;
+        $price_all_products -= $price_product;
+
+        $this->info_price[0] = $amount_units;
+        $this->info_price[1] = $total_price_product;
+        $this->info_price[2] = $price_all_products;
+
+        return json_encode($this->info_price);
+    }
+
+    public function countTotalPriceProductAndChangeAmountInDataBase()
+    {
         $amount_units = $_POST['amount_units'];
         $price_product = $this->removeSpacesInPrice($_POST['price_product']);
         $total_price_product = $this->removeSpacesInPrice($_POST['total_price_product']);
         $price_all_products = $this->removeSpacesInPrice($_POST['price_all_products']);
 
         if ($_POST['btn_value'] == '+') {
-            $amount_units++;
-            $price_all_products += $price_product;
-            $total_price_product = $amount_units * $price_product;
+            echo $this->increaseAmountProduct($amount_units, $price_product, $total_price_product, $price_all_products);
         } else {
             if ($amount_units > 1) {
-                $amount_units--;
-                $total_price_product = $amount_units * $price_product;
-                $price_all_products -= $price_product;
+                echo $this->decreaseAmountProduct($amount_units, $price_product, $price_all_products);
             }
         }
-        $price[0] = $amount_units;
-        $price[1] = $total_price_product;
-        $price[2] = $price_all_products;
-
-        echo json_encode($price);
     }
 
     public function insert()

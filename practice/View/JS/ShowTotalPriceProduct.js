@@ -1,8 +1,9 @@
-function AjaxCountTotalPriceProduct(btn_value, amount, price_product, total_price_product, price_all_products) {
+function AjaxCountTotalPriceProduct(btn_value, id_product, amount, price_product, total_price_product, price_all_products) {
     $.ajax({
         url:  'http://practice/cart/countTotalPriceProduct',
         type: "POST",
         data: {"btn_value" : btn_value,
+                "IDProduct" : id_product,
                 "amount_units" : $('#' + amount).val(),
                 "price_product" : document.getElementById(price_product).textContent,
                 "total_price_product" : document.getElementById(total_price_product).textContent,

@@ -16,8 +16,6 @@ class Comment extends Model
     private $id;
     private $content;
     private $date_added;
-    private $create_at;
-    private $update_at;
     private $client_id;
     private $product_id;
 
@@ -72,38 +70,6 @@ class Comment extends Model
     public function setDateAdded($date_added): void
     {
         $this->date_added = $date_added;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getCreateAt()
-    {
-        return $this->create_at;
-    }
-
-    /**
-     * @param mixed $create_at
-     */
-    public function setCreateAt($create_at): void
-    {
-        $this->create_at = $create_at;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getUpdateAt()
-    {
-        return $this->update_at;
-    }
-
-    /**
-     * @param mixed $update_at
-     */
-    public function setUpdateAt($update_at): void
-    {
-        $this->update_at = $update_at;
     }
 
     /**

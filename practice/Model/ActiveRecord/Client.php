@@ -20,7 +20,6 @@ class Client extends Model
     private $phone;
     private $email;
     private $password;
-    private $create_at;
 
     /**
      * @return mixed
@@ -132,22 +131,6 @@ class Client extends Model
     public function setPassword($password): void
     {
         $this->password = $password;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getCreateAt()
-    {
-        return $this->create_at;
-    }
-
-    /**
-     * @param mixed $create_at
-     */
-    public function setCreateAt($create_at): void
-    {
-        $this->create_at = $create_at;
     }
 
     public function __construct()

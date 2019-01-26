@@ -24,7 +24,7 @@ class ControllerCart extends Controller
 
         $data_name_products = $this->getNameProducts($array_id_products);
 
-        $data_images = $this->getImageFromProduct($array_id_products);
+        $data_images = $this->getImageProduct($array_id_products);
 
         $DBdata = [
             'products' => $data_products,
@@ -48,7 +48,7 @@ class ControllerCart extends Controller
         return $data_name_products = $products->selectName($array_id_products);
     }
 
-    private function getImageFromProduct($id_products)
+    private function getImageProduct($id_products)
     {
         $image = new Images();
         return $data_image = $image->selectAllImageForProduct($id_products);
@@ -114,5 +114,12 @@ class ControllerCart extends Controller
             $line_info = 'empty';
         }
         return $line_info;
+    }
+
+    public function countTotalPriceProduct()
+    {
+        $orders = new Orders();
+        $orders->setProductId($_POST['IDProduct']);
+        $orders->countTotalPriceProductAndChangeAmountInDataBase();
     }
 }

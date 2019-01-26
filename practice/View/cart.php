@@ -83,6 +83,7 @@
                                             <div class="row justify-content-center">
                                                 <div class="col-auto mr-1 p-0">
                                                     <a class='btn btn-secondary' data-toggle="tooltip" title="Уменьшить" onclick="AjaxCountTotalPriceProduct('-',
+                                                            '<?= $data['products'][$i]->getProductId() ?>',
                                                             'amount<?= $data['products'][$i]->getProductId() ?>',
                                                             'price_product<?= $data['products'][$i]->getProductId() ?>',
                                                             'total_price_product<?= $data['products'][$i]->getProductId() ?>',
@@ -94,6 +95,7 @@
                                                 </div>
                                                 <div class="col-auto ml-1 p-0 text-right">
                                                     <a class='btn btn-secondary' data-toggle="tooltip" title="Увеличить" onclick="AjaxCountTotalPriceProduct('+',
+                                                            '<?= $data['products'][$i]->getProductId() ?>',
                                                             'amount<?= $data['products'][$i]->getProductId() ?>',
                                                             'price_product<?= $data['products'][$i]->getProductId() ?>',
                                                             'total_price_product<?= $data['products'][$i]->getProductId() ?>',

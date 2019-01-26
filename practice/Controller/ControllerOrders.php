@@ -20,10 +20,4 @@ class ControllerOrders extends Controller
         $DBdata = $orders->selectProductForOrders();
         $this->objectView->generate('orders', $DBdata);
     }
-
-    public function countTotalPriceProduct()
-    {
-        $orders = new Orders();
-        $orders->countTotalPriceProduct();
-    }
 }

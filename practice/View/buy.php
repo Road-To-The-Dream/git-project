@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Buy - LAPTOP</title>
     <link rel="stylesheet" href="/View/CSS/cart.css">
+    <script src="/View/JS/AcceptOrder.js"></script>
 </head>
 <body>
 <div class="container">
@@ -56,7 +57,7 @@
                                                 <div class="input-group-prepend">
                                                     <div class="input-group-text">@</div>
                                                 </div>
-                                                <input type="email" class="form-control form-control-md" name="email_register" id="email" placeholder="Email" value="<?= $data['client'][0]->getEmail(); ?>">
+                                                <input type="email" class="form-control form-control-md" name="email" id="email" placeholder="Email" value="<?= $data['client'][0]->getEmail(); ?>">
                                             </div>
                                             <p class="text-danger ml-2" id="messageEmail"></p>
                                         </div>
@@ -71,13 +72,14 @@
                                     <div class="form-group row">
                                         <label for="city" class="col-3 col-form-label">City</label>
                                         <div class="col">
-                                            <input type="text" class="form-control form-control-md" name="city" id="first_name" placeholder="Город" value="">
+                                            <input type="text" class="form-control form-control-md" name="city" id="city" placeholder="Город" value="">
                                             <p class="text-danger ml-2" id="messageCity"></p>
                                         </div>
                                     </div>
+                                    <p class="text-danger ml-2" id="messageAll"></p>
                                     <div class="row d-flex justify-content-end">
                                         <div class="col-auto">
-                                            <button type="button" class="btn btn-success">Продолжить</button>
+                                            <button type="button" class="btn btn-success" onclick="AjaxAcceptBuy('messageLastName', 'messageFirstName', 'messageEmail', 'messagePhone', 'messageCity', 'messageAll')">Продолжить</button>
                                         </div>
                                     </div>
                                 </div>

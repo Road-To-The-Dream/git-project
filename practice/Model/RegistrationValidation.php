@@ -131,13 +131,13 @@ class RegistrationValidation
 
         if ($this->errors_register[7] == '') {
             if (empty($_POST['last_name'])) {
-                $this->errors_register[0] = 'Please enter last name name !';
+                $this->errors_register[0] = 'Please enter last name !';
             }
             if (empty($_POST['first_name'])) {
-                $this->errors_register[1] = 'Please enter first name name !';
+                $this->errors_register[1] = 'Please enter first name !';
             }
             if (empty($_POST['patronymic'])) {
-                $this->errors_register[2] = 'Please enter patronymic name !';
+                $this->errors_register[2] = 'Please enter patronymic !';
             }
             if (empty($_POST['email_register'])) {
                 $this->errors_register[3] = 'Please enter email !';

@@ -62,4 +62,10 @@ class ControllerBuy extends Controller
 //
 //        return $data;
     }
+
+    public function validateBuy()
+    {
+        $objBuyValidation = new \practice\Model\BuyValidation();
+        echo $objBuyValidation->checkBuy();
+    }
 }
