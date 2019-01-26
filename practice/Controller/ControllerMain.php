@@ -46,11 +46,13 @@ class ControllerMain extends Controller
 
         $mailer = new \Swift_Mailer($transport);
 
-        $message = (new \Swift_Message('Wonderful Subject'))
-            ->setFrom(['fhlbc2012@gmail.com'])
+        $message = (new \Swift_Message('Shop - LAPTOP'))
+            ->setFrom(['rpz14.sergey@gmail.com'])
             ->setTo(['rpz14.sergey@gmail.com'])
-            ->setBody('Here is the message itself');
+            ->setBody($_POST['email'].' '.$_POST['text_message']);
 
         $mailer->send($message);
+
+        echo "success";
     }
 }

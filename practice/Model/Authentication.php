@@ -30,6 +30,7 @@ class Authentication
             if ($obj_pass->verifyPasswords($password, $email)) {
                 session_start();
                 $_SESSION['isAuth'] = $this->info_client[0]->getFirstName();
+                $_SESSION['Email'] = $this->info_client[0]->getEmail();
                 $_SESSION['user_id'] = $this->info_client[0]->getId();
                 $_SESSION['count_product_in_cart'] = $this->amountProductsInCart();
                 return 1;
@@ -51,7 +52,7 @@ class Authentication
      */
     private function checkExistenceEmailInDataBase($email)
     {
-        $this->info_client = $this->client->selectIdFirstNamePasswordUser($email);
+        $this->info_client = $this->client->selectIdFirstNameEmailPasswordUser($email);
 
         if (!empty($this->info_client[0]->getId())) {
             return 1;

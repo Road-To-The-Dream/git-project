@@ -83,7 +83,7 @@ class RegistrationValidation
     private function checkExistenceEmailAndAddUser($last_name, $first_name, $patronymic, $email, $phone, $password)
     {
         $client = new Client();
-        $id_client = $client->selectIdFirstNamePasswordUser($email);
+        $id_client = $client->selectIdFirstNameEmailPasswordUser($email);
 
         if (empty($id_client[0]->getId())) {
             $this->addingNewUser($last_name, $first_name, $patronymic, $email, $phone, $password);

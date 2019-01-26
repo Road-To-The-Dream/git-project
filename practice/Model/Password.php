@@ -22,7 +22,7 @@ class Password
     public function __construct($email)
     {
         $this->client = new Client();
-        $password = $this->client->selectIdFirstNamePasswordUser($email);
+        $password = $this->client->selectIdFirstNameEmailPasswordUser($email);
         $this->hash_password = $password[0]->getPassword();
     }
 

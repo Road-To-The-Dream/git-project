@@ -143,7 +143,7 @@
         </div>
         <div id="footer">
             <?php
-                require_once 'Template/footer.html';
+                require_once 'Template/footer.php';
             ?>
         </div>
     </div>

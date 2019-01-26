@@ -184,15 +184,16 @@ class Client extends Model
      * @param $email
      * @return array
      */
-    public function selectIdFirstNamePasswordUser($email)
+    public function selectIdFirstNameEmailPasswordUser($email)
     {
-        $sql = "SELECT id, first_name, password FROM client WHERE email = ".'\''.$email.'\'';
+        $sql = "SELECT id, first_name, email, password FROM client WHERE email = ".'\''.$email.'\'';
 
         $info_client = ConnectionManager::executionQuery($sql);
 
         $objClient = new Client();
         $objClient->setId($info_client[0]['id']);
         $objClient->setFirstName($info_client[0]['first_name']);
+        $objClient->setEmail($info_client[0]['email']);
         $objClient->setPassword($info_client[0]['password']);
 
         $ClientList = array();
