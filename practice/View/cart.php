@@ -39,7 +39,7 @@
                     <div class="col align-self-end">
                         <div class="row d-flex justify-content-end">
                             <div class="col-auto">
-                                <a class='btn btn-primary text-white pl-1 mt-2'><img class="mr-2" src='/View/Image/Cart/Buy.png'>Clean cart</a>
+                                <a href="http://practice/catalog" class='btn btn-primary text-white pl-1 mt-2'><img class="mr-2" src='/View/Image/Cart/Buy.png'>Clean cart</a>
                             </div>
                         </div>
                     </div>
@@ -66,7 +66,7 @@
                                                 Цена
                                             </div>
                                             <div class="col-2 text-right p-0">
-                                                <a data-toggle="tooltip" title="Удалить товар" onclick="RemoveProduct(<?= $data['products'][$i]->getProductId() ?>)" style="cursor: pointer">
+                                                <a data-toggle="tooltip" title="Удалить товар" onclick="RemoveProduct(<?= $data['products'][$i]->getProductId() ?>, 'amount<?= $data['products'][$i]->getProductId() ?>')" style="cursor: pointer">
                                                     <img class="pb-2" src="/View/Image/Cart/Delete_product.png" alt="Delete product">
                                                 </a>
                                             </div>

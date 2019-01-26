@@ -42,7 +42,7 @@ class Authentication
     {
         $orders = new Orders();
         $amount_products = $orders->selectIdProduct();
-        return $amount_products->getAmountProducts();
+        return $amount_products->getAmount();
     }
 
     /**

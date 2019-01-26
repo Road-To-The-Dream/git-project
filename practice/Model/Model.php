@@ -49,7 +49,7 @@ class Model
      * @param $name_column
      * @return mixed
      */
-    protected function addSpaceToPriceProduct($data_select, $name_column)
+    public function addSpaceToPriceProduct($data_select, $name_column)
     {
         for ($i = 0; $i < count($data_select); $i++) {
             switch (strlen($data_select[$i][$name_column])) {

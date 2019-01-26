@@ -21,7 +21,6 @@ class Orders extends Model
     private $client_id;
     private $product_id;
     private $order_id;
-    private $amountProducts;
     private $message_about_adding_product = array("", "", "");
     private $info_price = array("", "", "");
 
@@ -137,22 +136,6 @@ class Orders extends Model
         $this->order_id = $order_id;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getAmountProducts()
-    {
-        return $this->amountProducts;
-    }
-
-    /**
-     * @param mixed $amountProducts
-     */
-    public function setAmountProducts($amountProducts): void
-    {
-        $this->amountProducts = $amountProducts;
-    }
-
     public function __construct()
     {
         $this->connectionDB();
@@ -181,7 +164,7 @@ class Orders extends Model
         $sql = "SELECT id FROM orders";
         $amount =  ConnectionManager::executionQuery($sql);
         $orders = new Orders();
-        $orders->setAmountProducts(count($amount));
+        $orders->setAmount(count($amount));
 
         return $orders;
     }
@@ -198,6 +181,7 @@ class Orders extends Model
         if ($products_cart == null) {
             return 0;
         } else {
+            $products_cart = $this->addSpaceToPriceProduct($products_cart, "price");
             $products_cart = $this->addedProductsInObject($products_cart);
             return $products_cart;
         }
@@ -218,21 +202,6 @@ class Orders extends Model
         $total_price_products = $this->addSpaceToPriceProduct($DBdata, 'total_price');
         $total_price_products = $total_price_products[0]['total_price'];
         echo $total_price_products;
-    }
-
-    /**
-     * @return string
-     */
-    private function checkArrayProductsInSession()
-    {
-        $line_info = "no_empty";
-        $sql = "SELECT COUNT(id) FROM orders WHERE status = " . $this->getStatus();
-        $DBdata = ConnectionManager::executionQuery($sql);
-        if ($DBdata == null) {
-            $line_info = 'empty';
-        }
-
-        return $line_info;
     }
 
     /**
@@ -302,7 +271,7 @@ class Orders extends Model
         echo json_encode($this->message_about_adding_product);
     }
 
-    private function increaseAmountProduct($amount_units, $price_product, $total_price_product, $price_all_products)
+    private function increaseAmountProductAndUpdateInDataBase($amount_units, $price_product, $total_price_product, $price_all_products)
     {
         $amount = $this->selectAmountProduct();
 
@@ -314,22 +283,40 @@ class Orders extends Model
         }
 
         $this->info_price[0] = $amount_units;
-        $this->info_price[1] = $total_price_product;
-        $this->info_price[2] = $price_all_products;
+
+        $total_price_product = $this->addSpaceInPrice($total_price_product);
+        $price_all_products = $this->addSpaceInPrice($price_all_products);
+
+        $this->info_price[1] = $total_price_product[0]['price'];
+        $this->info_price[2] = $price_all_products[0]['price'];
 
         return json_encode($this->info_price);
     }
 
-    private function decreaseAmountProduct($amount_units, $price_product, $price_all_products)
+    private function addSpaceInPrice($total_price_product)
+    {
+        $total_price_product = array(
+            0 => [
+                'price' => $total_price_product
+            ]
+        );
+
+        return $total_price_product = $this->addSpaceToPriceProduct($total_price_product, 'price');
+    }
+
+    private function decreaseAmountProductAndUpdateInDataBase($amount_units, $price_product, $price_all_products)
     {
         $amount_units--;
         $this->updateIncreaseAmountProduct();
         $total_price_product = $amount_units * $price_product;
         $price_all_products -= $price_product;
 
+        $total_price_product = $this->addSpaceInPrice($total_price_product);
+        $price_all_products = $this->addSpaceInPrice($price_all_products);
+
         $this->info_price[0] = $amount_units;
-        $this->info_price[1] = $total_price_product;
-        $this->info_price[2] = $price_all_products;
+        $this->info_price[1] = $total_price_product[0]['price'];
+        $this->info_price[2] = $price_all_products[0]['price'];
 
         return json_encode($this->info_price);
     }
@@ -342,10 +329,10 @@ class Orders extends Model
         $price_all_products = $this->removeSpacesInPrice($_POST['price_all_products']);
 
         if ($_POST['btn_value'] == '+') {
-            echo $this->increaseAmountProduct($amount_units, $price_product, $total_price_product, $price_all_products);
+            echo $this->increaseAmountProductAndUpdateInDataBase($amount_units, $price_product, $total_price_product, $price_all_products);
         } else {
             if ($amount_units > 1) {
-                echo $this->decreaseAmountProduct($amount_units, $price_product, $price_all_products);
+                echo $this->decreaseAmountProductAndUpdateInDataBase($amount_units, $price_product, $price_all_products);
             }
         }
     }
@@ -376,7 +363,7 @@ class Orders extends Model
 
     public function updateIncreaseAmountProduct()
     {
-        $sql = "UPDATE product SET amount = amount + 1 WHERE id = " . $this->getProductId();
+        $sql = "UPDATE product SET amount = amount + {$this->getAmount()} WHERE id = " . $this->getProductId();
         ConnectionManager::executionQuery($sql);
     }
 

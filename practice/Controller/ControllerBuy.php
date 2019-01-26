@@ -11,6 +11,7 @@ namespace practice\Controller;
 use practice\Model\ActiveRecord\Client;
 use practice\Model\ActiveRecord\Product;
 use practice\Model\ActiveRecord\Images;
+use practice\Model\Model;
 
 class ControllerBuy extends Controller
 {
@@ -24,12 +25,21 @@ class ControllerBuy extends Controller
 
         $data_client = $this->checkExistSessionAndSelectInfoClient();
 
+        $price_product = array(
+          0 => [
+              'price' => $_POST['price_product']
+          ]
+        );
+
+        $model = new Model();
+        $price_product = $model->addSpaceToPriceProduct($price_product, 'price');
+
         $DBdata = [
             'product' => $data_product,
             'client' => $data_client,
             'image' => $data_image,
             'amount' => $_POST['amount'],
-            'total_price' => $_POST['price_product']
+            'total_price' => $price_product[0]['price']
         ];
 
         $this->objectView->generate('buy', $DBdata);

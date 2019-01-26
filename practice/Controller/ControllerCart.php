@@ -100,6 +100,7 @@ class ControllerCart extends Controller
     {
         $orders = new Orders();
         $orders->setProductId($_POST['IDProduct']);
+        $orders->setAmount($_POST['Amount']);
         session_start();
         $_SESSION['count_product_in_cart'] -= 1;
         $orders->delete();
