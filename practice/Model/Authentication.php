@@ -42,6 +42,7 @@ class Authentication
     private function amountProductsInCart()
     {
         $orders = new Orders();
+        $orders->setClientId($_SESSION['user_id']);
         $amount_products = $orders->selectIdProduct();
         return $amount_products->getAmount();
     }

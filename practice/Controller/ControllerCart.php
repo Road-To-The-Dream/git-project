@@ -11,6 +11,7 @@ namespace practice\Controller;
 use practice\Model\ActiveRecord\Orders;
 use practice\Model\ActiveRecord\Images;
 use practice\Model\ActiveRecord\Product;
+use practice\Model\Redirect;
 
 class ControllerCart extends Controller
 {
@@ -37,8 +38,10 @@ class ControllerCart extends Controller
 
     private function getProducts()
     {
+        session_start();
         $orders = new Orders();
         $orders->setStatus('cart');
+        $orders->setClientId($_SESSION['user_id']);
         return $data_products = $orders->selectProductsForCart();
     }
 
@@ -66,13 +69,17 @@ class ControllerCart extends Controller
 
     public function getTotalPriceProducts()
     {
+        session_start();
+
         $orders = new Orders();
         $orders->setStatus('cart');
+        $orders->setClientId($_SESSION['user_id']);
         $orders->getTotalPriceProducts();
     }
 
     public function checkProductInCart()
     {
+        session_start();
         $message = [
             'message' => '',
             'icon' => ''
@@ -80,6 +87,7 @@ class ControllerCart extends Controller
 
         $orders = new Orders();
         $orders->setStatus('cart');
+        $orders->setClientId($_SESSION['user_id']);
         if (!$orders->selectProductsForCart()) {
             $message['message'] = 'В корзине нет товаров!';
             $message['icon'] = 'error';
@@ -90,9 +98,11 @@ class ControllerCart extends Controller
 
     public function addingProductsInCart()
     {
+        session_start();
         $orders = new Orders();
         $orders->setProductId($_POST['IDProduct']);
         $orders->setStatus('cart');
+        $orders->setClientId($_SESSION['user_id']);
         $orders->addingProductInCart();
     }
 
@@ -103,7 +113,7 @@ class ControllerCart extends Controller
         $orders->setAmount($_POST['Amount']);
         session_start();
         $_SESSION['count_product_in_cart'] -= 1;
-        $orders->delete();
+        $orders->deleteOne();
 
         echo $this->checkArrayProductsInSession();
     }
@@ -119,8 +129,26 @@ class ControllerCart extends Controller
 
     public function countTotalPriceProduct()
     {
+        $product = new Product();
+        $product->setId($_POST['IDProduct']);
+        $amount_product = $product->selectAmountProduct();
+
         $orders = new Orders();
         $orders->setProductId($_POST['IDProduct']);
-        $orders->countTotalPriceProductAndChangeAmountInDataBase();
+        $orders->countTotalPriceProductAndChangeAmountInDataBase($amount_product);
+    }
+
+    public function cleanCart()
+    {
+        session_start();
+        $orders = new Orders();
+        $orders->setClientId($_SESSION['user_id']);
+
+        $_SESSION['count_product_in_cart'] = 0;
+
+        $orders->setStatus('cart');
+        $orders->deleteAll();
+
+        Redirect::redirect('catalog');
     }
 }

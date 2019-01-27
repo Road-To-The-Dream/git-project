@@ -36,7 +36,7 @@
         <div class="row text-center justify-content-center mt-3 ml-4">
             <div class="col-3">
                 <div class="card h-100" style="width: 12rem;">
-                    <a href="http://practice/catalog"><img class="card-img-top" src="/View/Image/main/Card_image7.jpg"
+                    <a href="catalog"><img class="card-img-top" src="/View/Image/main/Card_image7.jpg"
                                                            alt="Card image cap"></a>
                     <div class="card-body">
                         <a href=""><h6>Все ноутбуки</h6></a>
@@ -44,7 +44,7 @@
                 </div>
             </div>
             <div class="col-3">
-                <a href="http://practice/catalog/index/?category=2">
+                <a href="catalog/index/?category=2">
                     <div class="card h-100" style="width: 12rem;">
                         <img class="card-img-top" src="/View/Image/main/Card_image1.jpg" alt="Card image cap">
                         <div class="card-body">
@@ -55,7 +55,7 @@
             </div>
             <div class="col-3">
                 <div class="card h-100" style="width: 12rem;">
-                    <a href="http://practice/catalog/index/?category=3"><img class="card-img-top"
+                    <a href="catalog/index/?category=3"><img class="card-img-top"
                                                                              src="/View/Image/main/Card_image2.jpg"
                                                                              alt="Card image cap"></a>
                     <div class="card-body">
@@ -65,7 +65,7 @@
             </div>
             <div class="col-3">
                 <div class="card h-100" style="width: 12rem;">
-                    <a href="http://practice/catalog/index/?category=4"><img class="card-img-top"
+                    <a href="catalog/index/?category=4"><img class="card-img-top"
                                                                              src="/View/Image/main/Card_image3.jpg"
                                                                              alt="Card image cap"></a>
                     <div class="card-body">
@@ -77,7 +77,7 @@
         <div class="row text-center justify-content-center mt-3 ml-4">
             <div class="col-3">
                 <div class="card h-100" style="width: 12rem;">
-                    <a href="http://practice/catalog/index/?category=5"><img class="card-img-top"
+                    <a href="catalog/index/?category=5"><img class="card-img-top"
                                                                              src="/View/Image/main/Card_image5.jpg"
                                                                              alt="Card image cap"></a>
                     <div class="card-body">
@@ -87,7 +87,7 @@
             </div>
             <div class="col-3">
                 <div class="card h-100" style="width: 12rem;">
-                    <a href="http://practice/catalog/index/?category=6"><img class="card-img-top"
+                    <a href="catalog/index/?category=6"><img class="card-img-top"
                                                                              src="/View/Image/main/Card_image6.jpg"
                                                                              alt="Card image cap"></a>
                     <div class="card-body">
@@ -97,7 +97,7 @@
             </div>
             <div class="col-3">
                 <div class="card h-100" style="width: 12rem;">
-                    <a href="http://practice/catalog/index/?category=7"><img class="card-img-top"
+                    <a href="catalog/index/?category=7"><img class="card-img-top"
                                                                              src="/View/Image/main/Card_image8.jpg"
                                                                              alt="Card image cap"></a>
                     <div class="card-body">
@@ -107,7 +107,7 @@
             </div>
             <div class="col-3">
                 <div class="card h-100" style="width: 12rem;">
-                    <a href="http://practice/catalog/index/?category=8"><img class="card-img-top"
+                    <a href="catalog/index/?category=8"><img class="card-img-top"
                                                                              src="/View/Image/main/Card_image4.jpg"
                                                                              alt="Card image cap"></a>
                     <div class="card-body">

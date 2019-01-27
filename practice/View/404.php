@@ -6,7 +6,7 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700&subset=latin,cyrillic'
           rel='stylesheet' type='text/css'>
     <link rel="shortcut icon" href="/View/Image/header/tab_icon.ico" type="image/png">
-    <link rel="stylesheet" href="CSS/404.css">
+    <link rel="stylesheet" href="/View/CSS/404.css">
 </head>
 <body>
 <div class="content">

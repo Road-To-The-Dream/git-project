@@ -39,7 +39,7 @@
                 <div class="col align-self-end">
                     <div class="row d-flex justify-content-end">
                         <div class="col-auto">
-                            <a href="http://practice/catalog" class='btn btn-primary text-white pl-1 mt-2'><img
+                            <a href="http://practice/cart/cleanCart" class='btn btn-primary text-white pl-1 mt-2'><img
                                         class="mr-2" src='/View/Image/Cart/Buy.png'>Clean cart</a>
                         </div>
                     </div>

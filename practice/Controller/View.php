@@ -11,7 +11,7 @@ class View
         if (file_exists('View/' . $content_view . '.php')) {
             require_once 'View/' . $content_view . '.php';
         } else {
-            Redirect::redirect('http://practice/404');
+            Redirect::redirect('404');
         }
     }
 }

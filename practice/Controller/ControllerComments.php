@@ -10,12 +10,14 @@ namespace practice\Controller;
 
 use practice\Model\ActiveRecord\Comment;
 
+use practice\Model\CommentValidation;
+
 class ControllerComments
 {
     public function addingComments()
     {
-        $validate_comment = new \practice\Model\ValidateComment();
-        echo $validate_comment->validateTextComment($_POST['TextComment']);
+        $objCommentValidation = new CommentValidation();
+        echo $objCommentValidation->validateTextComment($_POST['TextComment']);
     }
 
     public function removeComments()

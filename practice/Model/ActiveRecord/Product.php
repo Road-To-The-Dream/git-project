@@ -212,6 +212,12 @@ class Product extends Model
         return $price = ConnectionManager::executionQuery($sql);
     }
 
+    public function selectAmountProduct()
+    {
+        $sql = "SELECT amount FROM product WHERE id = " . $this->getId();
+        return ConnectionManager::executionQuery($sql);
+    }
+
     public function filtration($array_vendors, $category)
     {
     }

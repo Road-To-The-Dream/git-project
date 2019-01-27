@@ -9,6 +9,10 @@
 namespace practice\Controller;
 
 use practice\Model\Redirect;
+use practice\Model\Authentication;
+use practice\Model\LoginValidation;
+use practice\Model\RegistrationValidation;
+use practice\Model\SendValidate;
 
 class ControllerMain extends Controller
 {
@@ -20,39 +24,27 @@ class ControllerMain extends Controller
 
     public function logout()
     {
-        $auth = new \practice\Model\Authentication();
+        $auth = new Authentication();
         $auth->cleanAndDestroySession();
 
-        Redirect::redirect('http://practice/main');
+        Redirect::redirect('main');
     }
 
     public function validateIsLogin()
     {
-        $objLoginValidation = new \practice\Model\LoginValidation();
+        $objLoginValidation = new LoginValidation();
         echo $objLoginValidation->checkLogin();
     }
 
     public function validateIsRegister()
     {
-        $objRegistrationValidation = new \practice\Model\RegistrationValidation();
+        $objRegistrationValidation = new RegistrationValidation();
         echo $objRegistrationValidation->checkRegistration();
     }
 
-    public function send()
+    public function validateSend()
     {
-        $transport = (new \Swift_SmtpTransport('smtp.gmail.com', 587, 'tls'))
-            ->setUsername('rpz14.sergey@gmail.com')
-            ->setPassword('fhlbc2012');
-
-        $mailer = new \Swift_Mailer($transport);
-
-        $message = (new \Swift_Message('Shop - LAPTOP'))
-            ->setFrom(['rpz14.sergey@gmail.com'])
-            ->setTo(['rpz14.sergey@gmail.com'])
-            ->setBody($_POST['email'] . ' ' . $_POST['text_message']);
-
-        $mailer->send($message);
-
-        echo "success";
+        $objSendValidation = new SendValidate();
+        echo $objSendValidation->checkSend($_POST['email'], $_POST['text_message']);
     }
 }

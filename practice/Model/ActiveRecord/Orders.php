@@ -161,7 +161,7 @@ class Orders extends Model
      */
     public function selectIdProduct()
     {
-        $sql = "SELECT id FROM orders";
+        $sql = "SELECT id FROM orders WHERE client_id = " . $this->getClientId();
         $amount = ConnectionManager::executionQuery($sql);
         $orders = new Orders();
         $orders->setAmount(count($amount));
@@ -176,7 +176,7 @@ class Orders extends Model
     {
         $sql = "SELECT po.product_id, o.price, o.amount, o.client_id FROM orders o
                 JOIN product_in_orders po ON po.order_id = o.id 
-                JOIN product p ON po.product_id = p.id WHERE o.status = " . $this->getStatus();
+                JOIN product p ON po.product_id = p.id WHERE o.status = " . $this->getStatus() . " AND o.client_id = " . $this->getClientId();
         $products_cart = ConnectionManager::executionQuery($sql);
         if ($products_cart == null) {
             return 0;
@@ -209,16 +209,16 @@ class Orders extends Model
      */
     private function selectTotalPriceProducts()
     {
-        $sql = "SELECT SUM(price) AS total_price FROM orders WHERE status = " . $this->getStatus();
+        $sql = "SELECT SUM(price) AS total_price FROM orders WHERE status = " . $this->getStatus() . " AND client_id = " . $this->getClientId();
         $DBdata = ConnectionManager::executionQuery($sql);
         return $DBdata;
     }
 
-    private function selectIdProductInCart()
+    private function selectIdAndAmountProductInCart()
     {
-        $sql = "SELECT po.product_id FROM orders o
+        $sql = "SELECT po.product_id, o.amount FROM orders o
                 JOIN product_in_orders po ON po.order_id = o.id 
-                JOIN product p ON po.product_id = p.id WHERE o.status = " . $this->getStatus();
+                JOIN product p ON po.product_id = p.id WHERE o.status = " . $this->getStatus() . " AND o.client_id = " . $this->getClientId();
         return $products_cart = ConnectionManager::executionQuery($sql);
     }
 
@@ -229,15 +229,9 @@ class Orders extends Model
         $this->setId($id_order[0]['order_id']);
     }
 
-    private function selectAmountProduct()
-    {
-        $sql = "SELECT amount FROM product WHERE id = " . $this->getProductId();
-        return ConnectionManager::executionQuery($sql);
-    }
-
     private function checkExistProductInCartAndAddingInDataBaseAndSession()
     {
-        $amount_products = $this->selectIdProductInCart();
+        $amount_products = $this->selectIdAndAmountProductInCart();
         if ($amount_products != null) {
             foreach ($amount_products as $amount) {
                 if ($amount['product_id'] == $_POST['IDProduct']) {
@@ -247,6 +241,7 @@ class Orders extends Model
                 }
             }
         }
+
         $this->setCreateAt('\'' . date("Y-m-d H:i:s") . '\'');
         $this->setClientId($_SESSION['user_id']);
         $this->insert();
@@ -271,11 +266,9 @@ class Orders extends Model
         echo json_encode($this->message_about_adding_product);
     }
 
-    private function increaseAmountProductAndUpdateInDataBase($amount_units, $price_product, $total_price_product, $price_all_products)
+    private function increaseAmountProductAndUpdateInDataBase($amount_units, $price_product, $total_price_product, $price_all_products, $amount_product)
     {
-        $amount = $this->selectAmountProduct();
-
-        if ($amount[0]['amount'] != 0) {
+        if ($amount_product[0]['amount'] != 0) {
             $amount_units++;
             $this->updateDecreaseAmountProduct();
             $price_all_products += $price_product;
@@ -307,6 +300,7 @@ class Orders extends Model
     private function decreaseAmountProductAndUpdateInDataBase($amount_units, $price_product, $price_all_products)
     {
         $amount_units--;
+        $this->setAmount($amount_units);
         $this->updateIncreaseAmountProduct();
         $total_price_product = $amount_units * $price_product;
         $price_all_products -= $price_product;
@@ -321,7 +315,7 @@ class Orders extends Model
         return json_encode($this->info_price);
     }
 
-    public function countTotalPriceProductAndChangeAmountInDataBase()
+    public function countTotalPriceProductAndChangeAmountInDataBase($amount_product)
     {
         $amount_units = $_POST['amount_units'];
         $price_product = $this->removeSpacesInPrice($_POST['price_product']);
@@ -329,7 +323,7 @@ class Orders extends Model
         $price_all_products = $this->removeSpacesInPrice($_POST['price_all_products']);
 
         if ($_POST['btn_value'] == '+') {
-            echo $this->increaseAmountProductAndUpdateInDataBase($amount_units, $price_product, $total_price_product, $price_all_products);
+            echo $this->increaseAmountProductAndUpdateInDataBase($amount_units, $price_product, $total_price_product, $price_all_products, $amount_product);
         } else {
             if ($amount_units > 1) {
                 echo $this->decreaseAmountProductAndUpdateInDataBase($amount_units, $price_product, $price_all_products);
@@ -367,7 +361,7 @@ class Orders extends Model
         ConnectionManager::executionQuery($sql);
     }
 
-    public function delete()
+    public function deleteOne()
     {
         $this->selectIdOrder();
         $sql = "DELETE FROM product_in_orders WHERE product_id = " . $this->getProductId();
@@ -376,5 +370,11 @@ class Orders extends Model
         ConnectionManager::executionQuery($sql);
 
         $this->updateIncreaseAmountProduct();
+    }
+
+    public function deleteAll()
+    {
+        $sql = "DELETE FROM orders WHERE status = " . $this->getStatus() . " AND client_id = " . $this->getClientId();
+        ConnectionManager::executionQuery($sql);
     }
 }

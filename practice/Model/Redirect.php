@@ -15,7 +15,7 @@ class Redirect
      */
     public static function redirect($url)
     {
-        header('Location: ' . $url);
+        header('Location: http://practice/' . $url);
         exit();
     }
 }

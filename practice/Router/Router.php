@@ -39,7 +39,7 @@ class Router
                 $controller->$action_name($id);
             }
         } else {
-            Redirect::redirect('http://practice/404');
+            Redirect::redirect('404');
         }
     }
 }
