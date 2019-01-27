@@ -8,7 +8,7 @@ class Router
 {
     public function routing($url)
     {
-        $controller_name= 'Main';
+        $controller_name = 'Main';
         $action_name = 'index';
 
         $id = 0;
@@ -28,7 +28,7 @@ class Router
             $id = $routes[3];
         }
 
-        $controller_name = '\practice\Controller\Controller'.$controller_name;
+        $controller_name = '\practice\Controller\Controller' . $controller_name;
 
         $controller = new $controller_name;
 

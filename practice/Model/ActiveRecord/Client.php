@@ -140,7 +140,7 @@ class Client extends Model
 
     public function selectClient()
     {
-        $sql = "SELECT first_name, last_name, email, phone FROM client WHERE id = ".$this->getId();
+        $sql = "SELECT first_name, last_name, email, phone FROM client WHERE id = " . $this->getId();
 
         $info_client = ConnectionManager::executionQuery($sql);
 
@@ -164,7 +164,7 @@ class Client extends Model
     {
         $info_client = array();
         for ($i = 0; $i < count($array_id_clients); $i++) {
-            $sql = "Select first_name FROM client WHERE id = ".$array_id_clients[$i];
+            $sql = "SELECT first_name FROM client WHERE id = " . $array_id_clients[$i];
             $data_first_name = ConnectionManager::executionQuery($sql);
             array_push($info_client, $data_first_name[0]['first_name']);
         }
@@ -186,7 +186,7 @@ class Client extends Model
      */
     public function selectIdFirstNameEmailPasswordUser($email)
     {
-        $sql = "SELECT id, first_name, email, password FROM client WHERE email = ".'\''.$email.'\'';
+        $sql = "SELECT id, first_name, email, password FROM client WHERE email = " . '\'' . $email . '\'';
 
         $info_client = ConnectionManager::executionQuery($sql);
 
@@ -223,8 +223,8 @@ class Client extends Model
      */
     public function updatePassword($password, $email)
     {
-        $date_of_change = '\''.date("Y-m-d H:i:s").'\'';
-        $sql = "UPDATE client SET password = ".'\''.$password.'\''.", update_at = ".$date_of_change." WHERE email = ".'\''.$email.'\'';
+        $date_of_change = '\'' . date("Y-m-d H:i:s") . '\'';
+        $sql = "UPDATE client SET password = " . '\'' . $password . '\'' . ", update_at = " . $date_of_change . " WHERE email = " . '\'' . $email . '\'';
         ConnectionManager::executionQuery($sql);
     }
 
@@ -233,7 +233,7 @@ class Client extends Model
      */
     public function delete($id)
     {
-        $sql = "DELETE FROM client WHERE id = ".$id;
+        $sql = "DELETE FROM client WHERE id = " . $id;
         ConnectionManager::executionQuery($sql);
     }
 }

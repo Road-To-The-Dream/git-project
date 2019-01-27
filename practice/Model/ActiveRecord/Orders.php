@@ -162,7 +162,7 @@ class Orders extends Model
     public function selectIdProduct()
     {
         $sql = "SELECT id FROM orders";
-        $amount =  ConnectionManager::executionQuery($sql);
+        $amount = ConnectionManager::executionQuery($sql);
         $orders = new Orders();
         $orders->setAmount(count($amount));
 
@@ -209,7 +209,7 @@ class Orders extends Model
      */
     private function selectTotalPriceProducts()
     {
-        $sql = "Select SUM(price) AS total_price FROM orders WHERE status = " . $this->getStatus();
+        $sql = "SELECT SUM(price) AS total_price FROM orders WHERE status = " . $this->getStatus();
         $DBdata = ConnectionManager::executionQuery($sql);
         return $DBdata;
     }
@@ -247,7 +247,7 @@ class Orders extends Model
                 }
             }
         }
-        $this->setCreateAt('\''.date("Y-m-d H:i:s").'\'');
+        $this->setCreateAt('\'' . date("Y-m-d H:i:s") . '\'');
         $this->setClientId($_SESSION['user_id']);
         $this->insert();
         $this->message_about_adding_product[0] = "Товар добавлен в корзину !";

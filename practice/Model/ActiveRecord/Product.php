@@ -126,7 +126,7 @@ class Product extends Model
      */
     public function selectProduct()
     {
-        $sql = "SELECT id, name, description, price, unit, amount FROM product WHERE id = ".$this->getId();
+        $sql = "SELECT id, name, description, price, unit, amount FROM product WHERE id = " . $this->getId();
 
         $info_product = ConnectionManager::executionQuery($sql);
         $info_product = $this->addSpaceToPriceProduct($info_product, "price");

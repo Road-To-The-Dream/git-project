@@ -17,9 +17,10 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-formhelpers/2.3.0/js/bootstrap-formhelpers.js"></script>
-    <script type="text/javascript">$(window).on('load', function () {
+    <script type="text/javascript">
+        $(window).on('load', function () {
             var $preloader = $('#p_prldr'),
-                $svg_anm   = $preloader.find('.svg_anm');
+                $svg_anm = $preloader.find('.svg_anm');
             $preloader.delay(500).fadeOut('slow');
         });
     </script>
@@ -35,15 +36,19 @@
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark pb-0">
     <div class="container">
         <a href="http://practice/main"><img src="/View/Image/header/logo_head.png" alt="logo_head"></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+                aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="mt-1">
             <ul class="nav navbar-nav">
                 <li class="nav-item">
-                    <a href="" class="nav-link" data-toggle="modal" data-target="#exampleModalCenter"><img class="mb-2" src="/View/Image/header/Phone.png"> Контакты</a>
+                    <a href="" class="nav-link" data-toggle="modal" data-target="#exampleModalCenter"><img class="mb-2"
+                                                                                                           src="/View/Image/header/Phone.png">
+                        Контакты</a>
                 </li>
-                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -85,7 +90,8 @@
                     <a class="nav-link">Hello, <?php echo $_SESSION['isAuth'] ?></a>
                 </li>
                 <li class="nav-item">
-                    <a href="http://practice/main/logout" class="nav-link mr-1" data-target="#exampleModalCenter"><img class="mb-2" src="/View/Image/header/Login.png"> выйти</a>
+                    <a href="http://practice/main/logout" class="nav-link mr-1" data-target="#exampleModalCenter"><img
+                                class="mb-2" src="/View/Image/header/Login.png"> выйти</a>
                 </li>
             </ul>
         </div>
@@ -99,7 +105,8 @@
                 <a class="cart" onclick="AjaxShowCart()">
                     <button type="button" class="btn btn-dark mb-1 p-1">
                         <img src="/View/Image/header/Cart.png" alt="Image cart">
-                        <span class="amount rounded-circle pl-2 pr-2" style="background: red" id="amount_products_in_cart"><?php echo $_SESSION['count_product_in_cart'] ?></span>
+                        <span class="amount rounded-circle pl-2 pr-2" style="background: red"
+                              id="amount_products_in_cart"><?php echo $_SESSION['count_product_in_cart'] ?></span>
                     </button>
                 </a>
             </div>

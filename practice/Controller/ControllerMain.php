@@ -49,7 +49,7 @@ class ControllerMain extends Controller
         $message = (new \Swift_Message('Shop - LAPTOP'))
             ->setFrom(['rpz14.sergey@gmail.com'])
             ->setTo(['rpz14.sergey@gmail.com'])
-            ->setBody($_POST['email'].' '.$_POST['text_message']);
+            ->setBody($_POST['email'] . ' ' . $_POST['text_message']);
 
         $mailer->send($message);
 

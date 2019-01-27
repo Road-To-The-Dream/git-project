@@ -44,7 +44,7 @@ class ConnectionManager
 
         $dsn = 'mysql:dbname=' . $config['dbname'] . ';host=' . $config['host'];
         try {
-            self::$instance = new \PDO($dsn, $config['user'], $config['password'], [\PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES '.$config['charset']]);
+            self::$instance = new \PDO($dsn, $config['user'], $config['password'], [\PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES ' . $config['charset']]);
 
             self::$instance->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
             self::$instance->setAttribute(\PDO::ATTR_EMULATE_PREPARES, false);

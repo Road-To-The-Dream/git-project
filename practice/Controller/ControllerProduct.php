@@ -31,10 +31,10 @@ class ControllerProduct extends Controller
         $data_images = $this->getAllImages($id);
 
         $DBdata = [
-          'images' => $data_images,
-          'product' => $data_product,
-          'comments' => $data_comments,
-          'client' => $data_client
+            'images' => $data_images,
+            'product' => $data_product,
+            'comments' => $data_comments,
+            'client' => $data_client
         ];
 
         $this->objectView->generate('product', $DBdata);

@@ -26,9 +26,9 @@ class ControllerBuy extends Controller
         $data_client = $this->checkExistSessionAndSelectInfoClient();
 
         $price_product = array(
-          0 => [
-              'price' => $_POST['price_product']
-          ]
+            0 => [
+                'price' => $_POST['price_product']
+            ]
         );
 
         $model = new Model();

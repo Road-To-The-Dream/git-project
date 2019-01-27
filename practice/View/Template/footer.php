@@ -20,14 +20,19 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="basic-addon1">@</span>
                                         </div>
-                                        <input type="text" class="form-control" id="email" placeholder="Email" aria-label="email" aria-describedby="basic-addon1" value="<?= $_SESSION['Email'] ?>">
+                                        <input type="text" class="form-control" id="email" placeholder="Email"
+                                               aria-label="email" aria-describedby="basic-addon1"
+                                               value="<?= $_SESSION['Email'] ?>">
                                     </div>
                                 </div>
                             </div>
-                            <textarea class="form-control" id="text_message" rows="4" placeholder="Отправить письмо администратору!"></textarea>
+                            <textarea class="form-control" id="text_message" rows="4"
+                                      placeholder="Отправить письмо администратору!"></textarea>
                             <div class="row d-flex justify-content-end">
                                 <div class="col-auto">
-                                    <a onclick="AjaxSendMessage('email', 'text_message')" class='btn btn-warning mt-2 text-white'><img class="mr-2" src='/View/Image/Send_Email.png'>Send Mail</a>
+                                    <a onclick="AjaxSendMessage('email', 'text_message')"
+                                       class='btn btn-warning mt-2 text-white'><img class="mr-2"
+                                                                                    src='/View/Image/Send_Email.png'>Send Mail</a>
                                 </div>
                             </div>
                         </div>

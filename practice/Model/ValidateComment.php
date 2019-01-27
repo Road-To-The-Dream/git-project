@@ -45,8 +45,8 @@ class ValidateComment
     {
         $comment = new Comment();
         $comment->setContent($_POST['TextComment']);
-        $comment->setDateAdded('\''.date("Y-m-d H:i:s").'\'');
-        $comment->setCreateAt('\''.date("Y-m-d H:i:s").'\'');
+        $comment->setDateAdded('\'' . date("Y-m-d H:i:s") . '\'');
+        $comment->setCreateAt('\'' . date("Y-m-d H:i:s") . '\'');
         $comment->setClientId($_SESSION['user_id']);
         $comment->setProductId($_POST['IDProduct']);
 

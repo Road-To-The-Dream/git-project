@@ -113,7 +113,7 @@ class RegistrationValidation
         $client->setEmail($email);
         $client->setPhone($phone);
         $client->setPassword($password);
-        $client->setCreateAt('\''.date("Y-m-d H:i:s").'\'');
+        $client->setCreateAt('\'' . date("Y-m-d H:i:s") . '\'');
 
         $client->insert();
     }
@@ -164,7 +164,7 @@ class RegistrationValidation
             $this->errors_register[7] = ' В имени, фамилии и отчестве не допускаются цифры';
         } else {
             if (strlen($value) > 50) {
-                $this->errors_register[0] = ' Длина '.$piece.' должна быть не больше 50 символов';
+                $this->errors_register[0] = ' Длина ' . $piece . ' должна быть не больше 50 символов';
             }
         }
     }

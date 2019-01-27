@@ -112,7 +112,7 @@ class Comment extends Model
         $sql = "SELECT com.id, com.content, com.date_added, com.client_id 
                 FROM comments com
                   JOIN product pr ON pr.id = com.product_id 
-                WHERE pr.id = ".$this->product_id." ORDER BY com.date_added DESC";
+                WHERE pr.id = " . $this->product_id . " ORDER BY com.id DESC";
 
         $info_comments = ConnectionManager::executionQuery($sql);
 
@@ -149,7 +149,7 @@ class Comment extends Model
      */
     public function delete($id)
     {
-        $sql = "DELETE FROM comments WHERE id = ".$id;
+        $sql = "DELETE FROM comments WHERE id = " . $id;
         ConnectionManager::executionQuery($sql);
     }
 }

@@ -15,7 +15,7 @@ class Images extends Model
 {
     private $img;
     private $product_id;
-    
+
     /**
      * @return mixed
      */
@@ -53,7 +53,7 @@ class Images extends Model
         $sql = "SELECT i.img FROM images i 
                     JOIN images_in_product ip ON i.id = ip.images_id 
                     JOIN product p ON p.id = ip.product_id 
-                WHERE p.id = ".$this->product_id;
+                WHERE p.id = " . $this->product_id;
 
         $info_images = ConnectionManager::executionQuery($sql);
 

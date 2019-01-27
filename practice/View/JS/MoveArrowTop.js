@@ -1,5 +1,5 @@
-$(document).ready(function(){
-    $(window).scroll(function(){
+$(document).ready(function () {
+    $(window).scroll(function () {
         if ($(this).scrollTop() > 100) {
             $('.scrollup').fadeIn();
         } else {
@@ -7,8 +7,8 @@ $(document).ready(function(){
         }
     });
 
-    $('.scrollup').click(function(){
-        $("html, body").animate({ scrollTop: 0 }, 600);
+    $('.scrollup').click(function () {
+        $("html, body").animate({scrollTop: 0}, 600);
         return false;
     });
 });
