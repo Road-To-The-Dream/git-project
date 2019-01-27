@@ -103,16 +103,22 @@ class ControllerCart extends Controller
         $orders->setProductId($_POST['IDProduct']);
         $orders->setStatus('cart');
         $orders->setClientId($_SESSION['user_id']);
+        $orders->setCreateAt('\'' . date("Y-m-d H:i:s") . '\'');
+
         $orders->addingProductInCart();
     }
 
     public function removeProductForCart()
     {
+        session_start();
+
         $orders = new Orders();
         $orders->setProductId($_POST['IDProduct']);
         $orders->setAmount($_POST['Amount']);
-        session_start();
+        $orders->setClientId($_SESSION['user_id']);
+
         $_SESSION['count_product_in_cart'] -= 1;
+
         $orders->deleteOne();
 
         echo $this->checkArrayProductsInSession();
@@ -129,12 +135,15 @@ class ControllerCart extends Controller
 
     public function countTotalPriceProduct()
     {
+        session_start();
         $product = new Product();
         $product->setId($_POST['IDProduct']);
         $amount_product = $product->selectAmountProduct();
 
         $orders = new Orders();
         $orders->setProductId($_POST['IDProduct']);
+        $orders->setClientId($_SESSION['user_id']);
+        $orders->setUpdateAt('\'' . date("Y-m-d H:i:s") . '\'');
         $orders->countTotalPriceProductAndChangeAmountInDataBase($amount_product);
     }
 
@@ -143,10 +152,10 @@ class ControllerCart extends Controller
         session_start();
         $orders = new Orders();
         $orders->setClientId($_SESSION['user_id']);
+        $orders->setStatus('cart');
 
         $_SESSION['count_product_in_cart'] = 0;
 
-        $orders->setStatus('cart');
         $orders->deleteAll();
 
         Redirect::redirect('catalog');

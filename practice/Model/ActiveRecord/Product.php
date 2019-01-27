@@ -226,8 +226,16 @@ class Product extends Model
     {
     }
 
-    public function update()
+    public function updateDecreaseAmount()
     {
+        $sql = "UPDATE product SET amount = amount - 1 WHERE id = " . $this->getId();
+        ConnectionManager::executionQuery($sql);
+    }
+
+    public function updateIncreaseAmount()
+    {
+        $sql = "UPDATE product SET amount = amount + {$this->getAmount()} WHERE id = " . $this->getId();
+        ConnectionManager::executionQuery($sql);
     }
 
     public function delete()

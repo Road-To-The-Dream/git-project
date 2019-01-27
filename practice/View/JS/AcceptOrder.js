@@ -1,9 +1,9 @@
-function AjaxAcceptBuy(message1, message2, message3, message4, message5, message6) {
+function AjaxAcceptBuy(message1, message2, message3, message4, message5, message6, IdProduct) {
     $.ajax({
         url: 'http://practice/buy/validateBuy',
         type: "POST",
         dataType: "json",
-        data: $("#formMain").serialize(),
+        data: $("#formMain").serialize()+"&IDProduct="+IdProduct,
         cache: false,
         success: function (response) {
             document.getElementById(message1).innerHTML = response[0];
@@ -32,7 +32,7 @@ function CountError(response) {
     });
 
     if (count_errors == 0) {
-        location.reload();
+        location.href = 'success';
     }
 
 }

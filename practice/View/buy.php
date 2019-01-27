@@ -22,7 +22,6 @@
     <p class="mt-4 mb-1">Информация о заказе</p>
     <div class="shadow mb-4 bg-white rounded border border-primary p-2">
         <div class="container">
-
             <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                 <li class="nav-item">
                     <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#contact" role="tab"
@@ -91,7 +90,7 @@
                                 <div class="row d-flex justify-content-end">
                                     <div class="col-auto">
                                         <button type="button" class="btn btn-success"
-                                                onclick="AjaxAcceptBuy('messageLastName', 'messageFirstName', 'messageEmail', 'messagePhone', 'messageCity', 'messageAll')">
+                                                onclick="AjaxAcceptBuy('messageLastName', 'messageFirstName', 'messageEmail', 'messagePhone', 'messageCity', 'messageAll', <?= $data['product'][0]->getId(); ?>)">
                                             Продолжить
                                         </button>
                                     </div>

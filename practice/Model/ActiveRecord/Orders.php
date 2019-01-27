@@ -187,6 +187,11 @@ class Orders extends Model
         }
     }
 
+    public function selectIdOrderStatusOrdered()
+    {
+        $sql = "";
+    }
+
     /**
      * @param $price
      * @return mixed
@@ -222,13 +227,6 @@ class Orders extends Model
         return $products_cart = ConnectionManager::executionQuery($sql);
     }
 
-    private function selectIdOrder()
-    {
-        $sql = "SELECT order_id FROM product_in_orders WHERE product_id = " . $this->getProductId();
-        $id_order = ConnectionManager::executionQuery($sql);
-        $this->setId($id_order[0]['order_id']);
-    }
-
     private function checkExistProductInCartAndAddingInDataBaseAndSession()
     {
         $amount_products = $this->selectIdAndAmountProductInCart();
@@ -242,8 +240,6 @@ class Orders extends Model
             }
         }
 
-        $this->setCreateAt('\'' . date("Y-m-d H:i:s") . '\'');
-        $this->setClientId($_SESSION['user_id']);
         $this->insert();
         $this->message_about_adding_product[0] = "Товар добавлен в корзину !";
         $this->message_about_adding_product[1] = "success";
@@ -270,7 +266,8 @@ class Orders extends Model
     {
         if ($amount_product[0]['amount'] != 0) {
             $amount_units++;
-            $this->updateDecreaseAmountProduct();
+            $this->updateDecreaseAmountProductInTableProduct();
+            $this->updateIncreaseAmountInTableOrder();
             $price_all_products += $price_product;
             $total_price_product = $amount_units * $price_product;
         }
@@ -301,7 +298,8 @@ class Orders extends Model
     {
         $amount_units--;
         $this->setAmount($amount_units);
-        $this->updateIncreaseAmountProduct();
+        $this->updateIncreaseAmountProductInTableProduct();
+        $this->updateDecreaseAmountProductInTableOrder();
         $total_price_product = $amount_units * $price_product;
         $price_all_products -= $price_product;
 
@@ -346,30 +344,52 @@ class Orders extends Model
         $sql = "INSERT INTO product_in_orders (product_id, order_id, create_at) VALUES ({$this->getProductId()}, {$id[0]['id']}, {$this->getCreateAt()})";
         ConnectionManager::executionQuery($sql);
 
-        $this->updateDecreaseAmountProduct();
+        $this->updateDecreaseAmountProductInTableProduct();
     }
 
-    public function updateDecreaseAmountProduct()
+    public function updateDecreaseAmountProductInTableProduct()
     {
-        $sql = "UPDATE product SET amount = amount - 1 WHERE id = " . $this->getProductId();
+        $product = new Product();
+        $product->setId($this->getProductId());
+        $product->updateDecreaseAmount();
+    }
+
+    private function updateIncreaseAmountInTableOrder()
+    {
+        $sql = "UPDATE orders o JOIN product_in_orders po ON po.order_id = o.id SET o.amount = o.amount + 1, o.update_at = {$this->getUpdateAt()} 
+                WHERE po.product_id = {$this->getProductId()} AND o.client_id = {$this->getClientId()}";
         ConnectionManager::executionQuery($sql);
     }
 
-    public function updateIncreaseAmountProduct()
+    public function updateIncreaseAmountProductInTableProduct()
     {
-        $sql = "UPDATE product SET amount = amount + {$this->getAmount()} WHERE id = " . $this->getProductId();
+        $product = new Product();
+        $product->setId($this->getProductId());
+        $product->setAmount($this->getAmount());
+        $product->updateIncreaseAmount();
+    }
+
+    private function updateDecreaseAmountProductInTableOrder()
+    {
+        $sql = "UPDATE orders o JOIN product_in_orders po ON po.order_id = o.id SET o.amount = o.amount - 1, o.update_at = {$this->getUpdateAt()} 
+                WHERE po.product_id = {$this->getProductId()} AND o.client_id = {$this->getClientId()}";
+        ConnectionManager::executionQuery($sql);
+    }
+
+    public function updateStatusOrder()
+    {
+        $sql = "UPDATE orders o JOIN product_in_orders po ON po.order_id = o.id SET o.status = 'done'
+                WHERE po.product_id = " . $this->getProductId() . " AND o.client_id = " . $this->getClientId();
         ConnectionManager::executionQuery($sql);
     }
 
     public function deleteOne()
     {
-        $this->selectIdOrder();
-        $sql = "DELETE FROM product_in_orders WHERE product_id = " . $this->getProductId();
-        ConnectionManager::executionQuery($sql);
-        $sql = "DELETE FROM orders WHERE id = " . $this->getId();
+        $sql = "DELETE o FROM orders o JOIN product_in_orders po ON o.id = po.order_id 
+                WHERE po.product_id = " . $this->getProductId() . " AND o.client_id = " . $this->getClientId();
         ConnectionManager::executionQuery($sql);
 
-        $this->updateIncreaseAmountProduct();
+        $this->updateIncreaseAmountProductInTableProduct();
     }
 
     public function deleteAll()

@@ -8,6 +8,8 @@
 
 namespace practice\Model;
 
+use practice\Model\ActiveRecord\Orders;
+
 class BuyValidation
 {
     private $errors_buy = array("", "", "", "", "", "");
@@ -26,7 +28,20 @@ class BuyValidation
             }
         }
 
+        if ($count_empty_errors == 0) {
+            $this->updateOrderInDataBase();
+        }
+
         return json_encode($this->errors_buy);
+    }
+
+    private function updateOrderInDataBase()
+    {
+        $order = new Orders();
+        $order->setProductId($_POST['IDProduct']);
+        $order->setClientId($_SESSION['user_id']);
+        $_SESSION['count_product_in_cart'] -= 1;
+        $order->updateStatusOrder();
     }
 
     private function checkFieldsForEmptinessAndWriteErrors()
