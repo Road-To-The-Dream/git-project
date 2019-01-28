@@ -8,6 +8,7 @@
 
 namespace practice\Controller;
 
+use practice\Model\ActiveRecord\Category;
 use practice\Model\ActiveRecord\Images;
 use practice\Model\ActiveRecord\Product;
 use practice\Model\ActiveRecord\Vendor;
@@ -18,7 +19,7 @@ class ControllerCatalog extends Controller
      * @param int $sorting
      * @param int $category
      */
-    public function index($sorting = 0, $category = 0)
+    public function index($sorting = 0, $category = 1)
     {
         $this->checkSessionAndStart();
 
@@ -28,10 +29,13 @@ class ControllerCatalog extends Controller
 
         $data_vendors = $this->getVendors();
 
+        $data_category = $this->getCategory($category);
+
         $DBdata = [
             'products' => $data_products,
             'image' => $data_images,
-            'vendors' => $data_vendors
+            'vendors' => $data_vendors,
+            'category' => $data_category
         ];
 
         $this->objectView->generate('catalog', $DBdata);
@@ -72,6 +76,20 @@ class ControllerCatalog extends Controller
         return $data_vendor = $vendor->selectAll();
     }
 
+    /**
+     * @param $id_category
+     * @return array
+     */
+    private function getCategory($id_category)
+    {
+        $category = new Category();
+        $category->setId($id_category);
+        return $name_category = $category->selectName();
+    }
+
+    /**
+     * @return array|mixed|null
+     */
     public function filtrationProducts()
     {
         $product = new Product();

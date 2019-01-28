@@ -15,7 +15,7 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="http://practice/main">Главная</a></li>
                 <li class="breadcrumb-item"><a href="http://practice/catalog">Ноутбуки</a></li>
-                <li class="breadcrumb-item"></li>
+                <li class="breadcrumb-item"><?= $data['category'][0]->getName(); ?></li>
             </ol>
         </nav>
     </div>

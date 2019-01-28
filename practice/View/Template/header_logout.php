@@ -47,7 +47,7 @@
                                                                                                            src="/View/Image/header/Phone.png">Контакты</a>
                 </li>
                 <li class="nav-item">
-                    <a href="orders" class="nav-link"><img class="mb-2" src="/View/Image/header/Orders.png">Заказы</a>
+                    <a href="http://practice/orders" class="nav-link"><img class="mb-2" src="/View/Image/header/Orders.png">Заказы</a>
                 </li>
                 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
                      aria-labelledby="exampleModalCenterTitle" aria-hidden="true">

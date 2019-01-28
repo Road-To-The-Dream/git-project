@@ -187,9 +187,12 @@ class Orders extends Model
         }
     }
 
-    public function selectIdOrderStatusOrdered()
+    public function selectProductsForOrders()
     {
-        $sql = "";
+        $sql = "SELECT po.product_id, o.price, o.amount, o.client_id FROM orders o
+                JOIN product_in_orders po ON po.order_id = o.id 
+                JOIN product p ON po.product_id = p.id WHERE o.status = " . $this->getStatus() . " AND o.client_id = " . $this->getClientId();
+        ConnectionManager::executionQuery($sql);
     }
 
     /**

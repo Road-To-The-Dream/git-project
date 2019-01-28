@@ -17,7 +17,9 @@ class ControllerOrders extends Controller
         $this->checkSessionAndStart();
 
         $orders = new Orders();
-        $DBdata = $orders->selectProductForOrders();
+        $orders->setStatus('done');
+        $orders->setClientId($_SESSION['user_id']);
+        $DBdata = $orders->selectProductsForOrders();
         $this->objectView->generate('orders', $DBdata);
     }
 }
