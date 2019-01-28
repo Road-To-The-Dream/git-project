@@ -171,7 +171,7 @@ class Product extends Model
                         WHERE c.id = $category ORDER BY price DESC";
             } else {
                 $sql = "SELECT p.id, p.name, p.description, p.price, p.unit, p.amount, c.name AS catname FROM product p JOIN categories c ON c.id = p.category_id 
-                        WHERE c.id = $category ORDER BY price ASC";
+                        WHERE c.id = $category ORDER BY p.price ASC";
             }
         } else {
             if ($sorting == 1) {

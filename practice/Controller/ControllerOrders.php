@@ -51,4 +51,23 @@ class ControllerOrders extends Controller
         $orders->setClientId($_SESSION['user_id']);
         $orders->getTotalPriceProducts();
     }
+
+    public function checkProductInOrders()
+    {
+        session_start();
+        $message = [
+            'message' => '',
+            'icon' => ''
+        ];
+
+        $orders = new Orders();
+        $orders->setStatus('done');
+        $orders->setClientId($_SESSION['user_id']);
+        if (!$orders->selectProducts()) {
+            $message['message'] = 'У вас ещё нет заказов!';
+            $message['icon'] = 'error';
+        }
+
+        echo json_encode($message);
+    }
 }

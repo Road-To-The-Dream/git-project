@@ -142,9 +142,6 @@
                         </div>
                     </form>
                 </div>
-                <div class="tab-pane fade" id="order" role="tabpanel" aria-labelledby="pills-contact-tab">
-
-                </div>
             </div>
         </div>
     </div>

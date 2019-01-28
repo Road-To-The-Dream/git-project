@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="/View/CSS/MoveArrowTop.css">
     <link rel="stylesheet" href="/View/CSS/proloader.css">
     <script type="text/javascript" src="/View/JS/ShowCart.js"></script>
+    <script type="text/javascript" src="/View/JS/ShowOrders.js"></script>
     <script type="text/javascript" src="//web-ptica.ru/VRV-files/jquery-2.1.3.min.js"></script>
     <script type="text/javascript" src="/View/JS/MoveArrowTop.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -47,7 +48,7 @@
                                                                                                            src="/View/Image/header/Phone.png">Контакты</a>
                 </li>
                 <li class="nav-item">
-                    <a href="http://practice/orders" class="nav-link"><img class="mb-2" src="/View/Image/header/Orders.png">Заказы</a>
+                    <a href="javascript:AjaxShowOrders()" class="nav-link"><img class="mb-2" src="/View/Image/header/Orders.png">Заказы</a>
                 </li>
                 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
                      aria-labelledby="exampleModalCenterTitle" aria-hidden="true">

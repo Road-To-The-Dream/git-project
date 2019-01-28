@@ -218,8 +218,14 @@ class Orders extends Model
 
     public function getTotalPriceProducts()
     {
-        $DBdata = $this->selectTotalPriceProducts();
-        $total_price_products = $this->addSpaceToPriceProduct($DBdata, 'total_price');
+        $DBdata = $this->selectTotalPriceAndAmountProducts();
+
+        $price = [0]['total_price'];
+        for ($i = 0; $i < count($DBdata); $i++) {
+            $price[0]['total_price'] += $DBdata[$i]['price'] * $DBdata[$i]['amount'];
+        }
+
+        $total_price_products = $this->addSpaceToPriceProduct($price, 'total_price');
         $total_price_products = $total_price_products[0]['total_price'];
         echo $total_price_products;
     }
@@ -227,9 +233,9 @@ class Orders extends Model
     /**
      * @return null
      */
-    private function selectTotalPriceProducts()
+    private function selectTotalPriceAndAmountProducts()
     {
-        $sql = "SELECT SUM(price) AS total_price FROM orders WHERE status = " . $this->getStatus() . " AND client_id = " . $this->getClientId();
+        $sql = "SELECT price, amount FROM orders WHERE status = " . $this->getStatus() . " AND client_id = " . $this->getClientId();
         $DBdata = ConnectionManager::executionQuery($sql);
         return $DBdata;
     }
@@ -312,7 +318,7 @@ class Orders extends Model
     private function decreaseAmountProductAndUpdateInDataBase($amount_units, $price_product, $price_all_products)
     {
         $amount_units--;
-        $this->setAmount($amount_units);
+        $this->setAmount(1);
         $this->updateIncreaseAmountProductInTableProduct();
         $this->updateDecreaseAmountProductInTableOrder();
         $total_price_product = $amount_units * $price_product;
@@ -414,8 +420,8 @@ class Orders extends Model
         $product = new Product();
         $product->setUpdateAt('\'' . date("Y-m-d H:i:s") . '\'');
         for ($i = 0; $i < count($amount_product); $i++) {
-            $product->setAmount($amount_product[$i]['amount']);
             $product->setId($amount_product[$i]['product_id']);
+            $product->setAmount($amount_product[$i]['amount']);
             $product->updateIncreaseAmount();
         }
         $sql = "DELETE FROM orders WHERE status = " . $this->getStatus() . " AND client_id = " . $this->getClientId();

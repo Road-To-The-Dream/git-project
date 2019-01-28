@@ -93,6 +93,7 @@ class ControllerCart extends Controller
         $orders->setProductId($_POST['IDProduct']);
         $orders->setAmount($_POST['Amount']);
         $orders->setClientId($_SESSION['user_id']);
+        $orders->setUpdateAt('\'' . date("Y-m-d H:i:s") . '\'');
 
         $_SESSION['count_product_in_cart'] -= 1;
 

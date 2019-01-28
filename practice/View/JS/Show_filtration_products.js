@@ -1,25 +1,22 @@
-function AjaxFiltrationProducts(message1) {
-    $.ajax({
-        url: 'http://practice/catalog/index',
-        type: "POST",
-        dataType: "html",
-        data: $("#formFiltration").serialize(),
-        cache: false,
-        beforeSend: function () {
-            document.getElementById(message1).innerHTML = "Ожидание данных...";
-        },
-        success: function (response) {
-            // if (response == "empty") {
-            //     location.href = "catalog";
-            // }
-            // var i = 0;
-            // var str = "message" + (i + 1);
-            // alert(str);
-            // document.getElementById(str).innerHTML = response[i];
-            // location.reload();
-        },
-        error: function (response) {
-            document.getElementById(message1).innerHTML = "Возникла ошибка при отправке формы. Попробуйте еще раз";
+$(document).ready(function () {
+    var btn = document.getElementById("showBtn");
+    $('input[type=checkbox]').click(function (e) {
+        document.getElementById('showBtn').disabled = false;
+        var brands = '', tempArray = [];
+        $('input[name="brands[]"]:checked').each(function(){
+            tempArray.push($(this).val());
+        });
+        if(tempArray.length !== 0){
+            brands+='brands='+tempArray.toString();
+            tempArray = [];
         }
+        // window.location ='example.com?seasoning='+seasoning;
+        btn.onclick = function(e)
+        {
+            window.location = '/'+brands;
+        }
+        console.log('example.com?'+brands);
+
     });
-}
+
+});

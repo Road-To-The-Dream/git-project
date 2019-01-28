@@ -19,7 +19,7 @@ class ControllerCatalog extends Controller
      * @param int $sorting
      * @param int $category
      */
-    public function index($sorting = 0, $category = 1)
+    public function index($sorting = 0, $category = 0)
     {
         $this->checkSessionAndStart();
 
