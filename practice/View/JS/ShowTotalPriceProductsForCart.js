@@ -1,4 +1,4 @@
-function TotalPriceProducts() {
+function TotalPriceProductsForCart() {
     $.ajax({
         url: 'http://practice/cart/getTotalPriceProducts',
         type: "POST",
@@ -11,4 +11,4 @@ function TotalPriceProducts() {
     });
 }
 
-TotalPriceProducts();
+TotalPriceProductsForCart();

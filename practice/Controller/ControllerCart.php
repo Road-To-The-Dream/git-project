@@ -9,7 +9,6 @@
 namespace practice\Controller;
 
 use practice\Model\ActiveRecord\Orders;
-use practice\Model\ActiveRecord\Images;
 use practice\Model\ActiveRecord\Product;
 use practice\Model\Redirect;
 
@@ -19,7 +18,7 @@ class ControllerCart extends Controller
     {
         $this->checkSessionAndStart();
 
-        $data_products = $this->getProducts();
+        $data_products = $this->getProducts('cart');
 
         $array_id_products = $this->getArrayIdProducts($data_products);
 
@@ -36,35 +35,13 @@ class ControllerCart extends Controller
         $this->objectView->generate('cart', $DBdata);
     }
 
-    private function getProducts()
+    protected function getProducts()
     {
         session_start();
         $orders = new Orders();
         $orders->setStatus('cart');
         $orders->setClientId($_SESSION['user_id']);
-        return $data_products = $orders->selectProductsForCart();
-    }
-
-    private function getNameProducts($array_id_products)
-    {
-        $products = new Product();
-        return $data_name_products = $products->selectName($array_id_products);
-    }
-
-    private function getImageProduct($id_products)
-    {
-        $image = new Images();
-        return $data_image = $image->selectAllImageForProduct($id_products);
-    }
-
-    private function getArrayIdProducts($data_products)
-    {
-        $id_products = array();
-        for ($i = 0; $i < count($data_products); $i++) {
-            array_push($id_products, $data_products[$i]->getProductId());
-        }
-
-        return $id_products;
+        return $data_products = $orders->selectProducts();
     }
 
     public function getTotalPriceProducts()
@@ -88,7 +65,7 @@ class ControllerCart extends Controller
         $orders = new Orders();
         $orders->setStatus('cart');
         $orders->setClientId($_SESSION['user_id']);
-        if (!$orders->selectProductsForCart()) {
+        if (!$orders->selectProducts()) {
             $message['message'] = 'В корзине нет товаров!';
             $message['icon'] = 'error';
         }

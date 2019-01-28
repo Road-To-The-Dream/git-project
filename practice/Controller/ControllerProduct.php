@@ -44,7 +44,7 @@ class ControllerProduct extends Controller
      * @param $id
      * @return array
      */
-    private function getProducts($id)
+    protected function getProducts($id)
     {
         $product = new Product();
         $product->setId($id);

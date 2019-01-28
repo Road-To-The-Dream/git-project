@@ -16,10 +16,39 @@ class ControllerOrders extends Controller
     {
         $this->checkSessionAndStart();
 
+        $data_products = $this->getProducts('done');
+
+        $array_id_products = $this->getArrayIdProducts($data_products);
+
+        $data_name_products = $this->getNameProducts($array_id_products);
+
+        $data_images = $this->getImageProduct($array_id_products);
+
+        $DBdata = [
+            'products' => $data_products,
+            'name_products' => $data_name_products,
+            'image' => $data_images
+        ];
+
+        $this->objectView->generate('orders', $DBdata);
+    }
+
+    protected function getProducts()
+    {
+        session_start();
         $orders = new Orders();
         $orders->setStatus('done');
         $orders->setClientId($_SESSION['user_id']);
-        $DBdata = $orders->selectProductsForOrders();
-        $this->objectView->generate('orders', $DBdata);
+        return $data_products = $orders->selectProducts();
+    }
+
+    public function getTotalPriceProducts()
+    {
+        session_start();
+
+        $orders = new Orders();
+        $orders->setStatus('done');
+        $orders->setClientId($_SESSION['user_id']);
+        $orders->getTotalPriceProducts();
     }
 }

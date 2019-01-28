@@ -38,9 +38,9 @@ class Password
                 $this->reHashingPassword($password);
                 $this->updatePasswordInDatabase($this->hash_password, $email);
             }
-            return 1;
+            return true;
         }
-        return 0;
+        return false;
     }
 
     /**

@@ -23,6 +23,23 @@ class Orders extends Model
     private $order_id;
     private $message_about_adding_product = array("", "", "");
     private $info_price = array("", "", "");
+    private $total_price;
+
+    /**
+     * @return mixed
+     */
+    public function getTotalPrice()
+    {
+        return $this->total_price;
+    }
+
+    /**
+     * @param mixed $total_price
+     */
+    public function setTotalPrice($total_price): void
+    {
+        $this->total_price = $total_price;
+    }
 
     /**
      * @return mixed
@@ -150,6 +167,7 @@ class Orders extends Model
             $objCart->setProductId($products_cart[$i]['product_id']);
             $objCart->setPrice($products_cart[$i]['price']);
             $objCart->setAmount($products_cart[$i]['amount']);
+            $objCart->setTotalPrice($products_cart[0]['total_price']);
             $productsList[$i] = $objCart;
         }
 
@@ -161,7 +179,7 @@ class Orders extends Model
      */
     public function selectIdProduct()
     {
-        $sql = "SELECT id FROM orders WHERE client_id = " . $this->getClientId();
+        $sql = "SELECT id FROM orders WHERE status = 'cart' AND client_id = " . $this->getClientId();
         $amount = ConnectionManager::executionQuery($sql);
         $orders = new Orders();
         $orders->setAmount(count($amount));
@@ -172,7 +190,7 @@ class Orders extends Model
     /**
      * @return array|int|null
      */
-    public function selectProductsForCart()
+    public function selectProducts()
     {
         $sql = "SELECT po.product_id, o.price, o.amount, o.client_id FROM orders o
                 JOIN product_in_orders po ON po.order_id = o.id 
@@ -181,18 +199,12 @@ class Orders extends Model
         if ($products_cart == null) {
             return 0;
         } else {
+            $products_cart[0]['total_price'] = $products_cart[0]['price'] * $products_cart[0]['amount'];
             $products_cart = $this->addSpaceToPriceProduct($products_cart, "price");
+            $products_cart = $this->addSpaceToPriceProduct($products_cart, "total_price");
             $products_cart = $this->addedProductsInObject($products_cart);
             return $products_cart;
         }
-    }
-
-    public function selectProductsForOrders()
-    {
-        $sql = "SELECT po.product_id, o.price, o.amount, o.client_id FROM orders o
-                JOIN product_in_orders po ON po.order_id = o.id 
-                JOIN product p ON po.product_id = p.id WHERE o.status = " . $this->getStatus() . " AND o.client_id = " . $this->getClientId();
-        ConnectionManager::executionQuery($sql);
     }
 
     /**
@@ -369,6 +381,7 @@ class Orders extends Model
         $product = new Product();
         $product->setId($this->getProductId());
         $product->setAmount($this->getAmount());
+        $product->setUpdateAt($this->getUpdateAt());
         $product->updateIncreaseAmount();
     }
 

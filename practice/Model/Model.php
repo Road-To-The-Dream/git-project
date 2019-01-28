@@ -119,10 +119,5 @@ class Model
             $objClient->setId($_SESSION['user_id']);
             return $objClient->selectClient();
         }
-
-//        $data[0]['amount'] = $_POST['amount'];
-//        $data[0]['total_price'] = $_POST['amount'] * $data[0]['price'];
-//
-//        return $data;
     }
 }

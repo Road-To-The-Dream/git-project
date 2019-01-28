@@ -5,7 +5,7 @@
     <title>Cart - LAPTOP</title>
     <link rel="stylesheet" href="/View/CSS/cart.css">
     <script src="/View/JS/ShowTotalPriceProduct.js"></script>
-    <script src="/View/JS/ShowTotalPriceProducts.js"></script>
+    <script src="/View/JS/ShowTotalPriceProductsForCart.js"></script>
     <script src="/View/JS/RemoveProductFromCart.js"></script>
     <script>
         jQuery(document).ready(function () {
