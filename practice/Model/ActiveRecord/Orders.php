@@ -394,6 +394,14 @@ class Orders extends Model
 
     public function deleteAll()
     {
+        $amount_product = $this->selectIdAndAmountProductInCart();
+        $product = new Product();
+        $product->setUpdateAt('\'' . date("Y-m-d H:i:s") . '\'');
+        for ($i = 0; $i < count($amount_product); $i++) {
+            $product->setAmount($amount_product[$i]['amount']);
+            $product->setId($amount_product[$i]['product_id']);
+            $product->updateIncreaseAmount();
+        }
         $sql = "DELETE FROM orders WHERE status = " . $this->getStatus() . " AND client_id = " . $this->getClientId();
         ConnectionManager::executionQuery($sql);
     }

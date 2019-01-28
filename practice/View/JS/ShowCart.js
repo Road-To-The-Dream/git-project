@@ -11,7 +11,7 @@ function AjaxShowCart() {
                     icon: response['icon']
                 })
             } else {
-                location.href = 'cart';
+                location.href = 'http://practice/cart';
             }
         }
     });

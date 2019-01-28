@@ -234,7 +234,8 @@ class Product extends Model
 
     public function updateIncreaseAmount()
     {
-        $sql = "UPDATE product SET amount = amount + {$this->getAmount()} WHERE id = " . $this->getId();
+        $sql = "UPDATE product SET amount = amount + {$this->getAmount()}, update_at = {$this->getUpdateAt()} 
+                WHERE id = " . $this->getId();
         ConnectionManager::executionQuery($sql);
     }
 

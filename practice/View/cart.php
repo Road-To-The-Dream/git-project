@@ -78,7 +78,7 @@
                                 </div>
                                 <div class="row justify-content-center">
                                     <div class="col-2">
-                                        <a href="http://practice/product/index/<?= $data['image'][$i]->getImg() ?>"><img
+                                        <a href="http://practice/product/index/<?= $data['products'][$i]->getProductId() ?>"><img
                                                     class="card-img-top"
                                                     src="/View/Image/<?= $data['image'][$i]->getImg() ?>"
                                                     alt="Card image cap"></a>
