@@ -14,7 +14,8 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="http://practice/main">Главная</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Ноутбуки</li>
+                <li class="breadcrumb-item"><a href="http://practice/catalog">Ноутбуки</a></li>
+                <li class="breadcrumb-item"></li>
             </ol>
         </nav>
     </div>
@@ -36,7 +37,7 @@
                                         <input type="checkbox" class="custom-control-input"
                                                id="<?php echo $vendors->getName(); ?>" name="vendor[]"
                                                value="<?php echo $vendors->getname(); ?>">
-                                        <label class="custom-control-label" id="message1"
+                                        <label class="custom-control-label"
                                                for="<?php echo $vendors->getname(); ?>"><?php echo $vendors->getname(); ?></label>
                                     </div>
                                 </li>
@@ -44,6 +45,7 @@
                             }
                             ?>
                             <li class="list-group-item text-center p-1">
+                                <p class="text-warning" id="message1"></p>
                                 <input class="btn btn-outline-success btn-sm" type="button" name="btn_login"
                                        value="Show" onclick="AjaxFiltrationProducts('message1')">
                             </li>

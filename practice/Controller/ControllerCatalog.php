@@ -37,12 +37,21 @@ class ControllerCatalog extends Controller
         $this->objectView->generate('catalog', $DBdata);
     }
 
+    /**
+     * @param $sorting
+     * @param $category
+     * @return array|mixed|null
+     */
     private function getProducts($sorting, $category)
     {
         $products = new Product();
         return $data_products = $products->selectAll($sorting, $category);
     }
 
+    /**
+     * @param $data_products
+     * @return array
+     */
     private function getImageFromProduct($data_products)
     {
         $id_products = array();
@@ -54,15 +63,15 @@ class ControllerCatalog extends Controller
         return $data_image = $image->selectAllImageForProduct($id_products);
     }
 
+    /**
+     * @return mixed
+     */
     private function getVendors()
     {
         $vendor = new Vendor();
         return $data_vendor = $vendor->selectAll();
     }
 
-    /**
-     * @return null
-     */
     public function filtrationProducts()
     {
         $product = new Product();

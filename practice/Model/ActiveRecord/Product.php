@@ -167,15 +167,19 @@ class Product extends Model
     {
         if ($category != 0) {
             if ($sorting == 1) {
-                $sql = "SELECT p.id, p.name, p.description, p.price, p.unit, p.amount FROM product p JOIN categories c ON c.id = p.category_id WHERE c.id = $category ORDER BY price DESC";
+                $sql = "SELECT p.id, p.name, p.description, p.price, p.unit, p.amount, c.name AS catname FROM product p JOIN categories c ON c.id = p.category_id 
+                        WHERE c.id = $category ORDER BY price DESC";
             } else {
-                $sql = "SELECT p.id, p.name, p.description, p.price, p.unit, p.amount FROM product p JOIN categories c ON c.id = p.category_id WHERE c.id = $category ORDER BY price ASC";
+                $sql = "SELECT p.id, p.name, p.description, p.price, p.unit, p.amount, c.name AS catname FROM product p JOIN categories c ON c.id = p.category_id 
+                        WHERE c.id = $category ORDER BY price ASC";
             }
         } else {
             if ($sorting == 1) {
-                $sql = "SELECT p.id, p.name, p.description, p.price, p.unit, p.amount FROM product p JOIN categories c ON c.id = p.category_id ORDER BY price DESC";
+                $sql = "SELECT p.id, p.name, p.description, p.price, p.unit, p.amount, c.name AS catname FROM product p JOIN categories c ON c.id = p.category_id 
+                        ORDER BY price DESC";
             } else {
-                $sql = "SELECT p.id, p.name, p.description, p.price, p.unit, p.amount FROM product p JOIN categories c ON c.id = p.category_id ORDER BY price ASC";
+                $sql = "SELECT p.id, p.name, p.description, p.price, p.unit, p.amount, c.name AS catname FROM product p JOIN categories c ON c.id = p.category_id 
+                        ORDER BY price ASC";
             }
         }
 
@@ -220,6 +224,16 @@ class Product extends Model
 
     public function filtration($array_vendors, $category)
     {
+        $vendors = "'" . implode("','", $array_vendors) . "'";
+
+        $sql = "SELECT p.id, p.name, p.description, p.price, p.unit, p.amount FROM product p JOIN vendor v ON p.vendor_id = v.id 
+                WHERE v.name IN ($vendors)";
+
+        $info_products = ConnectionManager::executionQuery($sql);
+        $info_products = $this->addSpaceToPriceProduct($info_products, "price");
+        $info_products = $this->addedProductsInObject($info_products);
+
+        return $info_products;
     }
 
     public function insert()
