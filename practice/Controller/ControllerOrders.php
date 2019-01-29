@@ -16,7 +16,7 @@ class ControllerOrders extends Controller
     {
         $this->checkSessionAndStart();
 
-        $data_products = $this->getProducts('done');
+        $data_products = $this->getProducts();
 
         $array_id_products = $this->getArrayIdProducts($data_products);
 
@@ -40,16 +40,6 @@ class ControllerOrders extends Controller
         $orders->setStatus('done');
         $orders->setClientId($_SESSION['user_id']);
         return $data_products = $orders->selectProducts();
-    }
-
-    public function getTotalPriceProducts()
-    {
-        session_start();
-
-        $orders = new Orders();
-        $orders->setStatus('done');
-        $orders->setClientId($_SESSION['user_id']);
-        $orders->getTotalPriceProducts();
     }
 
     public function checkProductInOrders()

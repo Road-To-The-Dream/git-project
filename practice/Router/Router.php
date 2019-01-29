@@ -30,13 +30,17 @@ class Router
 
         $controller_name = '\practice\Controller\Controller' . $controller_name;
 
-        $controller = new $controller_name;
+        if (class_exists($controller_name)) {
+            $controller = new $controller_name;
 
-        if (method_exists($controller, $action_name)) {  // call action controller
-            if (!empty($category)) {
-                $controller->$action_name($id, $category);
+            if (method_exists($controller, $action_name)) {  // call action controller
+                if (!empty($category)) {
+                    $controller->$action_name($id, $category);
+                } else {
+                    $controller->$action_name($id);
+                }
             } else {
-                $controller->$action_name($id);
+                Redirect::redirect('404');
             }
         } else {
             Redirect::redirect('404');

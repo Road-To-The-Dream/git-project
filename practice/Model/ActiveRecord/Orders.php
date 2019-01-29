@@ -167,7 +167,7 @@ class Orders extends Model
             $objCart->setProductId($products_cart[$i]['product_id']);
             $objCart->setPrice($products_cart[$i]['price']);
             $objCart->setAmount($products_cart[$i]['amount']);
-            $objCart->setTotalPrice($products_cart[0]['total_price']);
+            $objCart->setTotalPrice($products_cart[$i]['total_price']);
             $productsList[$i] = $objCart;
         }
 
@@ -199,7 +199,9 @@ class Orders extends Model
         if ($products_cart == null) {
             return 0;
         } else {
-            $products_cart[0]['total_price'] = $products_cart[0]['price'] * $products_cart[0]['amount'];
+            for ($i = 0; $i < count($products_cart); $i++) {
+                $products_cart[$i]['total_price'] = $products_cart[$i]['price'] * $products_cart[$i]['amount'];
+            }
             $products_cart = $this->addSpaceToPriceProduct($products_cart, "price");
             $products_cart = $this->addSpaceToPriceProduct($products_cart, "total_price");
             $products_cart = $this->addedProductsInObject($products_cart);

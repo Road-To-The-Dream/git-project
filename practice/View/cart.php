@@ -141,7 +141,7 @@
                                            value="<?= $data['products'][$i]->getPrice() ?>">
                                     <div class="col-auto p-0 text-primary font-weight-bold f-size-title align-self-end">
                                         <p class="m-0"
-                                           id="total_price_product<?= $data['products'][$i]->getProductId() ?>"><?= $data['products'][$i]->getPrice() ?></p>
+                                           id="total_price_product<?= $data['products'][$i]->getProductId() ?>"><?= $data['products'][$i]->getTotalPrice() ?></p>
                                     </div>
                                     <div class="col-auto text-right font-weight-bold f-size-title m-0 align-self-end">
                                         <p class="m-0"> грн</p>

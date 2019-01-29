@@ -18,7 +18,7 @@ class ControllerCart extends Controller
     {
         $this->checkSessionAndStart();
 
-        $data_products = $this->getProducts('cart');
+        $data_products = $this->getProducts();
 
         $array_id_products = $this->getArrayIdProducts($data_products);
 
