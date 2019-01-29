@@ -121,6 +121,28 @@ class Product extends Model
         $this->amount = $amount;
     }
 
+    public static function selectAllProductForAdmin()
+    {
+        ConnectionManager::getInstance();
+        $sql = "SELECT id, name, description, price, unit, amount FROM product";
+
+        $info_client = ConnectionManager::executionQuery($sql);
+
+        $ProductList = array();
+        for ($i = 0; $i < count($info_client); $i++) {
+            $objProduct = new Product();
+            $objProduct->setId($info_client[$i]['id']);
+            $objProduct->setName($info_client[$i]['name']);
+            $objProduct->setDescription($info_client[$i]['description']);
+            $objProduct->setPrice($info_client[$i]['price']);
+            $objProduct->setUnit($info_client[$i]['unit']);
+            $objProduct->setAmount($info_client[$i]['amount']);
+            $ProductList[$i] = $objProduct;
+        }
+
+        return $ProductList;
+    }
+
     /**
      * @return array
      */

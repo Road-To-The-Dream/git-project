@@ -20,6 +20,7 @@ class Client extends Model
     private $phone;
     private $email;
     private $password;
+    private $role;
 
     /**
      * @return mixed
@@ -133,9 +134,49 @@ class Client extends Model
         $this->password = $password;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getRole()
+    {
+        return $this->role;
+    }
+
+    /**
+     * @param mixed $role
+     */
+    public function setRole($role): void
+    {
+        $this->role = $role;
+    }
+
     public function __construct()
     {
         $this->connectionDB();
+    }
+
+    public static function selectAllClientForAdmin()
+    {
+        ConnectionManager::getInstance();
+        $sql = "SELECT id, last_name, first_name, patronymic, email, phone, password, role FROM client";
+
+        $info_client = ConnectionManager::executionQuery($sql);
+
+        $ClientList = array();
+        for ($i = 0; $i < count($info_client); $i++) {
+            $objClient = new Client();
+            $objClient->setId($info_client[$i]['id']);
+            $objClient->setLastName($info_client[$i]['last_name']);
+            $objClient->setFirstName($info_client[$i]['first_name']);
+            $objClient->setPatronymic($info_client[$i]['patronymic']);
+            $objClient->setEmail($info_client[$i]['email']);
+            $objClient->setPhone($info_client[$i]['phone']);
+            $objClient->setPassword($info_client[$i]['password']);
+            $objClient->setRole($info_client[$i]['role']);
+            $ClientList[$i] = $objClient;
+        }
+
+        return $ClientList;
     }
 
     public function selectClient()
@@ -186,7 +227,7 @@ class Client extends Model
      */
     public function selectIdFirstNameEmailPasswordUser($email)
     {
-        $sql = "SELECT id, first_name, email, password FROM client WHERE email = " . '\'' . $email . '\'';
+        $sql = "SELECT id, first_name, email, password, role FROM client WHERE email = " . '\'' . $email . '\'';
 
         $info_client = ConnectionManager::executionQuery($sql);
 
@@ -195,6 +236,7 @@ class Client extends Model
         $objClient->setFirstName($info_client[0]['first_name']);
         $objClient->setEmail($info_client[0]['email']);
         $objClient->setPassword($info_client[0]['password']);
+        $objClient->setRole($info_client[0]['role']);
 
         $ClientList = array();
         $ClientList[0] = $objClient;

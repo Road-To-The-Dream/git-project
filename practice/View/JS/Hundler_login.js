@@ -13,7 +13,10 @@ function AjaxFormLogin(message1, message2, message3) {
             document.getElementById(message2).innerHTML = response[1];
             document.getElementById(message3).innerHTML = response[2];
             $('.reset').val('');
-            if (response[0] == "" && response[1] == "" && response[2] == "") {
+            if(response[3] == 'admin') {
+                location.href = 'http://practice/admin/client';
+            }
+            if (response[0] == "" && response[1] == "" && response[2] == "" && response[3] == "") {
                 $('#exampleModalCenter1').modal('toggle');
                 swal({
                     title: "Вход в аккаунт выполнен !",

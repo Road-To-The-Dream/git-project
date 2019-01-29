@@ -9,6 +9,7 @@ class Authentication
 {
     private $client;
     private $info_client;
+    private $role;
 
     /**
      * Authentication constructor.
@@ -21,45 +22,54 @@ class Authentication
     /**
      * @param $email
      * @param $password
-     * @return int
+     * @return bool
      */
     public function checkPasswordAndLoginAndStartSession($email, $password)
     {
-        if ($this->checkExistenceEmailInDataBase($email)) {
+        if ($this->checkExistenceEmailInDataBaseAndWriteRole($email)) {
             $obj_pass = new Password($email);
             if ($obj_pass->verifyPasswords($password, $email)) {
                 session_start();
-                $_SESSION['isAuth'] = $this->info_client[0]->getFirstName();
-                $_SESSION['Email'] = $this->info_client[0]->getEmail();
-                $_SESSION['user_id'] = $this->info_client[0]->getId();
-                $_SESSION['count_product_in_cart'] = $this->amountProductsInCart();
-                return 1;
+                $this->setValueInSession();
+                return $this->role;
             }
         }
-        return 0;
+        return false;
     }
 
+    /**
+     * @param $email
+     * @return bool
+     */
+    private function checkExistenceEmailInDataBaseAndWriteRole($email)
+    {
+        $this->info_client = $this->client->selectIdFirstNameEmailPasswordUser($email);
+
+        if (!empty($this->info_client[0]->getId())) {
+            $this->role = $this->info_client[0]->getRole();
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private function setValueInSession()
+    {
+        $_SESSION['isAuth'] = $this->info_client[0]->getFirstName();
+        $_SESSION['Email'] = $this->info_client[0]->getEmail();
+        $_SESSION['user_id'] = $this->info_client[0]->getId();
+        $_SESSION['count_product_in_cart'] = $this->amountProductsInCart();
+    }
+
+    /**
+     * @return mixed
+     */
     private function amountProductsInCart()
     {
         $orders = new Orders();
         $orders->setClientId($_SESSION['user_id']);
         $amount_products = $orders->selectIdProduct();
         return $amount_products->getAmount();
-    }
-
-    /**
-     * @param $email
-     * @return int
-     */
-    private function checkExistenceEmailInDataBase($email)
-    {
-        $this->info_client = $this->client->selectIdFirstNameEmailPasswordUser($email);
-
-        if (!empty($this->info_client[0]->getId())) {
-            return 1;
-        } else {
-            return 0;
-        }
     }
 
     public function cleanAndDestroySession()

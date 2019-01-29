@@ -10,7 +10,7 @@ namespace practice\Model;
 
 class LoginValidation
 {
-    private $errors_login = array("", "", "");
+    private $errors_login = array("", "", "", "");
 
     /**
      * @return string
@@ -43,8 +43,13 @@ class LoginValidation
     private function checkLoginAndPasswordInDatabase($email, $password)
     {
         $auth = new Authentication();
-        if (!$auth->checkPasswordAndLoginAndStartSession($email, $password)) {
+        $role = $auth->checkPasswordAndLoginAndStartSession($email, $password);
+        if (!$role) {
             $this->errors_login[2] = 'Invalid password or login';
+        } else {
+            if ($role == 'admin') {
+                $this->errors_login[3] = 'admin';
+            }
         }
     }
 
