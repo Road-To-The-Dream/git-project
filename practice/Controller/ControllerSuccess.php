@@ -17,11 +17,13 @@ class ControllerSuccess extends Controller
     {
         $this->checkSessionAndStart();
 
-        $orders = new Orders();
-        $orders->selectIdOrderStatusOrdered();
+        $order = new Orders();
+        $order->setClientId($_SESSION['user_id']);
+        $id_order = $order->selectIdOrder();
+        $order->setId($id_order);
+        $id_product = $order->selectIdProductForOrder();
 
-        $model = new Model();
-        $DBdata = $model->getData();
+        $DBdata = Model::getData('done', $id_product->getProductId());
 
         $this->objectView->generate('success', $DBdata);
     }

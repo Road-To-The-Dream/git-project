@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Success - LAPTOP</title>
+    <link rel="stylesheet" href="/View/CSS/cart.css">
 </head>
 <body>
 <div class="container">
@@ -15,28 +16,32 @@
     </nav>
 </div>
 <div class="container">
-    <p class="mt-5">Спасибо, ваш заказ принят</p>
-    <p class="mt-4 mb-1 text-secondary">Заказ № <?= 111 ?></p>
+    <p>
+    <div class="row ml-1">
+        <img src="/View/Image/Success/Success.png" alt="success">
+        <div class="col-auto align-self-end f-size-total">Спасибо, ваш заказ принят</div>
+    </div>
+    </p>
+    <p class="mt-4 mb-1 text-secondary f-size-title">Заказ № <?= $data['order']->getId() ?></p>
     <div class="shadow mb-4 bg-white rounded border border-primary p-2">
         <div class="row">
             <div class="col-3">
                 <a href="http://practice/product/index/<?= $data['product'][0]->getId(); ?>"><img
-                        class="card-img-top"
-                        src="/View/Image/<?= $data['image']->getImg(); ?>"
-                        alt="Card image cap"></a>
+                            class="card-img-top"
+                            src="/View/Image/<?= $data['image']->getImg(); ?>"
+                            alt="Card image cap"></a>
             </div>
             <div class="col-8">
                 <div class="row">
                     <div class="col">
-                        <a href="http://practice/product/index/<?= $data['product'][0]->getId(); ?>"
-                           class="text-dark"><p
-                                class="f-size-name"></p><?= $data['product'][0]->getName(); ?>
+                        <a href="http://practice/product/index/<?= $data['product'][0]->getId(); ?>" class="text-dark">
+                            <p class="f-size-title"><?= $data['product'][0]->getName(); ?></p>
                         </a>
                     </div>
                 </div>
                 <div class="row f-size-name mt-2">
                     <div class="col-6">
-                        <p><?= $data['amount']; ?> шт.</p>
+                        <p><?= $data['order']->getAmount(); ?> шт.</p>
                     </div>
                     <div class="col-6">
                         <p><?= $data['product'][0]->getPrice(); ?> грн</p>

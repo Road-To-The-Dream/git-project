@@ -18,7 +18,7 @@ class ControllerBuy extends Controller
         $this->checkSessionAndStart();
 
         $model = new Model();
-        $DBdata = $model->getData();
+        $DBdata = $model->getData('cart', $_POST['IDProduct']);
 
         $this->objectView->generate('buy', $DBdata);
     }

@@ -177,7 +177,18 @@ class Orders extends Model
     /**
      * @return Orders
      */
-    public function selectIdProduct()
+    public function selectIdOrder()
+    {
+        $sql = "SELECT MAX(id) AS id FROM orders WHERE status = 'done' AND client_id = " . $this->getClientId();
+        $id = ConnectionManager::executionQuery($sql);
+
+        return $id[0]['id'];
+    }
+
+    /**
+     * @return Orders
+     */
+    public function selectAmountProductsInCart()
     {
         $sql = "SELECT id FROM orders WHERE status = 'cart' AND client_id = " . $this->getClientId();
         $amount = ConnectionManager::executionQuery($sql);
@@ -185,6 +196,31 @@ class Orders extends Model
         $orders->setAmount(count($amount));
 
         return $orders;
+    }
+
+    public function selectIdProductForOrder()
+    {
+        $sql = "SELECT pio.product_id FROM orders o JOIN product_in_orders pio ON o.id = pio.order_id WHERE o.id = " . $this->getId();
+        $id_product = ConnectionManager::executionQuery($sql);
+        $orders = new Orders();
+        $orders->setProductId($id_product[0]['product_id']);
+
+        return $orders;
+    }
+
+    public function selectPriceAndAmount()
+    {
+        $sql = "SELECT o.id, o.price, o.amount FROM orders o 
+                JOIN product_in_orders po ON o.id = po.order_id 
+                WHERE o.client_id = " . $this->getClientId() . " AND o.status = " . $this->getStatus() . " AND po.product_id = " . $this->getProductId();
+        $info_order = ConnectionManager::executionQuery($sql);
+
+        $objCart = new Orders();
+        $objCart->setId($info_order[0]['id']);
+        $objCart->setPrice($info_order[0]['price']);
+        $objCart->setAmount($info_order[0]['amount']);
+
+        return $objCart;
     }
 
     /**
@@ -202,8 +238,8 @@ class Orders extends Model
             for ($i = 0; $i < count($products_cart); $i++) {
                 $products_cart[$i]['total_price'] = $products_cart[$i]['price'] * $products_cart[$i]['amount'];
             }
-            $products_cart = $this->addSpaceToPriceProduct($products_cart, "price");
-            $products_cart = $this->addSpaceToPriceProduct($products_cart, "total_price");
+            $products_cart = self::addSpaceToPriceProduct($products_cart, "price");
+            $products_cart = self::addSpaceToPriceProduct($products_cart, "total_price");
             $products_cart = $this->addedProductsInObject($products_cart);
             return $products_cart;
         }
@@ -227,7 +263,7 @@ class Orders extends Model
             $price[0]['total_price'] += $DBdata[$i]['price'] * $DBdata[$i]['amount'];
         }
 
-        $total_price_products = $this->addSpaceToPriceProduct($price, 'total_price');
+        $total_price_products = self::addSpaceToPriceProduct($price, 'total_price');
         $total_price_products = $total_price_products[0]['total_price'];
         echo $total_price_products;
     }
@@ -314,7 +350,7 @@ class Orders extends Model
             ]
         );
 
-        return $total_price_product = $this->addSpaceToPriceProduct($total_price_product, 'price');
+        return $total_price_product = self::addSpaceToPriceProduct($total_price_product, 'price');
     }
 
     private function decreaseAmountProductAndUpdateInDataBase($amount_units, $price_product, $price_all_products)

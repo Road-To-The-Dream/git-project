@@ -151,7 +151,7 @@ class Product extends Model
         $sql = "SELECT id, name, description, price, unit, amount FROM product WHERE id = " . $this->getId();
 
         $info_product = ConnectionManager::executionQuery($sql);
-        $info_product = $this->addSpaceToPriceProduct($info_product, "price");
+        $info_product = self::addSpaceToPriceProduct($info_product, "price");
 
         $productList = $this->addedProductsInObject($info_product);
 
@@ -206,7 +206,7 @@ class Product extends Model
         }
 
         $info_products = ConnectionManager::executionQuery($sql);
-        $info_products = $this->addSpaceToPriceProduct($info_products, "price");
+        $info_products = self::addSpaceToPriceProduct($info_products, "price");
         $info_products = $this->addedProductsInObject($info_products);
 
         return $info_products;
@@ -252,7 +252,7 @@ class Product extends Model
                 WHERE v.name IN ($vendors)";
 
         $info_products = ConnectionManager::executionQuery($sql);
-        $info_products = $this->addSpaceToPriceProduct($info_products, "price");
+        $info_products = self::addSpaceToPriceProduct($info_products, "price");
         $info_products = $this->addedProductsInObject($info_products);
 
         return $info_products;

@@ -68,7 +68,7 @@ class Authentication
     {
         $orders = new Orders();
         $orders->setClientId($_SESSION['user_id']);
-        $amount_products = $orders->selectIdProduct();
+        $amount_products = $orders->selectAmountProductsInCart();
         return $amount_products->getAmount();
     }
 

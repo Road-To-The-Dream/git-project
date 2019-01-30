@@ -17,9 +17,8 @@
     </nav>
 </div>
 <div class="container">
-    <p>Оформление заказа</p>
-    <p>Сушко Сергей, +380 (96) 69-98-368</p>
-    <p class="mt-4 mb-1">Информация о заказе</p>
+    <p class="f-size-total mt-3">Оформление заказа</p>
+    <p class="mt-4 mb-1 f-size-name text-secondary">Информация о заказе</p>
     <div class="shadow mb-4 bg-white rounded border border-primary p-2">
         <div class="container">
             <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
@@ -116,7 +115,7 @@
                                             </div>
                                             <div class="row f-size-name mt-2">
                                                 <div class="col-6">
-                                                    <p><?= $data['amount']; ?> шт.</p>
+                                                    <p><?= $data['order']->getAmount() ?> шт.</p>
                                                 </div>
                                                 <div class="col-6">
                                                     <p><?= $data['product'][0]->getPrice(); ?> грн</p>

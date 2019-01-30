@@ -3,6 +3,7 @@
 namespace practice\Model;
 
 use practice\Model\ActiveRecord\Client;
+use practice\Model\ActiveRecord\Orders;
 use practice\Model\ActiveRecord\Product;
 use practice\Model\ActiveRecord\Images;
 
@@ -53,7 +54,7 @@ class Model
      * @param $name_column
      * @return mixed
      */
-    public function addSpaceToPriceProduct($data_select, $name_column)
+    public static function addSpaceToPriceProduct($data_select, $name_column)
     {
         for ($i = 0; $i < count($data_select); $i++) {
             switch (strlen($data_select[$i][$name_column])) {
@@ -72,47 +73,57 @@ class Model
         return $data_select;
     }
 
-    public function getData()
+    public static function getData($status, $id_product)
     {
-        $data_product = $this->getProducts($_POST['IDProduct']);
+        $data_product = self::getProducts($id_product);
 
-        $data_image = $this->getImage($_POST['IDProduct']);
+        $data_image = self::getImage($id_product);
 
-        $data_client = $this->checkExistSessionAndSelectInfoClient();
+        $data_order = self::getOrder($id_product, $_SESSION['user_id'], $status);
 
-        $price_product = array(
-            0 => [
-                'price' => $_POST['price_product']
-            ]
-        );
+        $data_client = self::checkExistSessionAndSelectInfoClient();
 
-        $model = new Model();
-        $price_product = $model->addSpaceToPriceProduct($price_product, 'price');
+        $total_price = $data_order->getPrice() * $data_order->getAmount();
+
+        $total_price = array([
+            'total_price' => $total_price
+        ]);
+
+        $total_price = self::addSpaceToPriceProduct($total_price, 'total_price');
 
         return $DBdata = [
             'product' => $data_product,
             'client' => $data_client,
             'image' => $data_image,
-            'amount' => $_POST['amount'],
-            'total_price' => $price_product[0]['price']
+            'order' => $data_order,
+            'total_price' => $total_price[0]['total_price']
         ];
     }
 
-    private function getProducts($id)
+    private static function getProducts($id)
     {
         $product = new Product();
         $product->setId($id);
         return $data_product = $product->selectProduct();
     }
 
-    private function getImage($id)
+    private static function getImage($id)
     {
         $images = new Images();
         $images->setProductId($id);
         return $data_images = $images->selectImageForProduct();
     }
 
-    private function checkExistSessionAndSelectInfoClient()
+    private static function getOrder($id_product, $id_client, $status)
+    {
+        $order = new Orders();
+        $order->setProductId($id_product);
+        $order->setClientId($id_client);
+        $order->setStatus($status);
+        return $data_order = $order->selectPriceAndAmount();
+    }
+
+    private static function checkExistSessionAndSelectInfoClient()
     {
         if (isset($_SESSION['user_id'])) {
             $objClient = new Client();

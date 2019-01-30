@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <script src="/View/JS/Show_filtration_products.js"></script>
     <script src="/View/JS/AddProductInCart.js"></script>
+    <script src="/View/JS/ShowTotalPriceProduct.js"></script>
+    <script src="/View/JS/ShowTotalPriceProductsForCart.js"></script>
 </head>
 <body>
 <div class="container-fluid">
@@ -110,8 +112,45 @@
                                         <div class="row justify-content-center">
                                             <div class="col-4 p-0 mr-2">
                                                 <input class="btn btn-success btn-block mt-2" type="submit"
-                                                       name="btn_login" value="Купить">
+                                                       name="btn_login" value="Купить" data-toggle="modal" data-target=".bd-example-modal-sm" readonly>
                                             </div>
+                                            <!-- MODAL -->
+                                            <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+                                                 aria-hidden="true">
+                                                <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalCenterTitle">Выберите кол-во товара</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="row justify-content-center">
+                                                                <div class="col-auto mr-1 p-0">
+                                                                    <a class='btn btn-secondary' data-toggle="tooltip" title="Уменьшить"
+                                                                       onclick="AjaxCountTotalPriceProduct()">
+                                                                        <img src='/View/Image/Cart/Minus.png'></a>
+                                                                </div>
+                                                                <div class="col-4 p-0">
+                                                                    <input type="text" class="form-control text-center" name="amount"
+                                                                           id="amount"
+                                                                           aria-describedby="emailHelp" value="1">
+                                                                </div>
+                                                                <div class="col-auto ml-1 p-0 text-right">
+                                                                    <a class='btn btn-secondary' data-toggle="tooltip" title="Увеличить"
+                                                                       onclick="AjaxCountTotalPriceProduct()">
+                                                                        <img src='/View/Image/Cart/Added.png'></a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-primary">Ok</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- MODAL -->
                                             <div class="col-6 p-0">
                                                 <a class='btn btn-warning text-white pl-1 mt-2'
                                                    onclick="AjaxAddInCart(<?= $data['products'][$i]->getId(); ?>, 'amount_products_in_cart')"><img

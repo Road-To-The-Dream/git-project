@@ -102,9 +102,9 @@
                                                     <img src='/View/Image/Cart/Minus.png'></a>
                                             </div>
                                             <div class="col-4 p-0">
-                                                <input type="text" class="form-control text-center" name="amount<?= $data['products'][$i]->getProductId() ?>"
+                                                <input type="text" class="form-control text-center"
                                                        id="amount<?= $data['products'][$i]->getProductId() ?>"
-                                                       aria-describedby="emailHelp" value="<?= $data['products'][$i]->getAmount() ?>">
+                                                       aria-describedby="emailHelp" value="<?= $data['products'][$i]->getAmount() ?>" readonly>
                                             </div>
                                             <div class="col-auto ml-1 p-0 text-right">
                                                 <a class='btn btn-secondary' data-toggle="tooltip" title="Увеличить"
