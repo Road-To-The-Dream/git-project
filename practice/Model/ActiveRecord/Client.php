@@ -244,6 +244,22 @@ class Client extends Model
         return $ClientList;
     }
 
+    public static function insertClientForAdmin()
+    {
+        $date = '\'' . date("Y-m-d H:i:s") . '\'';
+        $sql = "INSERT INTO client (last_name,first_name,patronymic,email,phone,password,create_at) 
+                VALUES (:last_name,:first_name,:patronymic,:email,:phone,:password,$date)";
+        $parameters = array(
+            ':last_name' => $_POST['last_name'],
+            ':first_name' => $_POST['first_name'],
+            ':patronymic' => $_POST['patronymic'],
+            ':email' => $_POST['email'],
+            ':phone' => $_POST['phone'],
+            ':password' => $_POST['password']
+        );
+        ConnectionManager::executionQuery($sql, $parameters);
+    }
+
     public function insert()
     {
         $sql = "INSERT INTO client (last_name,first_name,patronymic,email,phone,password,create_at) 
@@ -259,6 +275,21 @@ class Client extends Model
         ConnectionManager::executionQuery($sql, $parameters);
     }
 
+    public static function updateClientForAdmin()
+    {
+        $date = '\'' . date("Y-m-d H:i:s") . '\'';
+        $sql = "UPDATE client SET 
+                                    last_name = '{$_POST['last_name']}', 
+                                    first_name = '{$_POST['first_name']}', 
+                                    patronymic = '{$_POST['patronymic']}',
+                                    email = '{$_POST['email']}',
+                                    phone = '{$_POST['phone']}',
+                                    password = '{$_POST['password']}',
+                                    role = '{$_POST['role']}',
+                                    update_at = " . $date . " WHERE id = " . $_POST['id'];
+        ConnectionManager::executionQuery($sql);
+    }
+
     /**
      * @param $password
      * @param $email
@@ -267,6 +298,12 @@ class Client extends Model
     {
         $date_of_change = '\'' . date("Y-m-d H:i:s") . '\'';
         $sql = "UPDATE client SET password = " . '\'' . $password . '\'' . ", update_at = " . $date_of_change . " WHERE email = " . '\'' . $email . '\'';
+        ConnectionManager::executionQuery($sql);
+    }
+
+    public static function deleteClientForAdmin()
+    {
+        $sql = "DELETE FROM client WHERE id = " . $_POST['id'];
         ConnectionManager::executionQuery($sql);
     }
 

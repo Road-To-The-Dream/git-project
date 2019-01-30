@@ -10,12 +10,12 @@ namespace practice\Controller;
 
 use practice\Model\ActiveRecord\Client;
 use practice\Model\ActiveRecord\Product;
+use practice\Model\ConnectionManager;
 
 class ControllerAdmin extends Controller
 {
-    public function index($view, $DBdata = 0)
+    public function index($DBdata = 0, $view)
     {
-        require_once 'View/Template/header_admin.php';
         $this->objectView->generate('Admin/admin', $view, $DBdata);
     }
 
@@ -41,6 +41,25 @@ class ControllerAdmin extends Controller
     {
         $DBdata = Client::selectAllClientForAdmin();
         $this->index('client', $DBdata);
+    }
+
+    public function addClient()
+    {
+        ConnectionManager::getInstance();
+        Client::insertClientForAdmin();
+        $this->client();
+    }
+
+    public function saveClient()
+    {
+        ConnectionManager::getInstance();
+        if (isset($_POST['checkbox'])) {
+            Client::deleteClientForAdmin();
+        } else {
+            Client::updateClientForAdmin();
+        }
+
+        $this->client();
     }
 
     public function comments()
