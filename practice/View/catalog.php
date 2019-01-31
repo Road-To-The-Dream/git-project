@@ -7,8 +7,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <script src="/View/JS/Show_filtration_products.js"></script>
     <script src="/View/JS/AddProductInCart.js"></script>
-    <script src="/View/JS/ShowTotalPriceProduct.js"></script>
-    <script src="/View/JS/ShowTotalPriceProductsForCart.js"></script>
+    <script src="/View/JS/IncreaseAmountInCatalog.js"></script>
+    <script src="/View/JS/DecreaseAmountInCatalog.js"></script>
 </head>
 <body>
 <div class="container-fluid">
@@ -100,8 +100,8 @@
                                     </div>
                                     <div class="row mt-3">
                                         <div class="col-3 p-0 mt-2" style="font-size: 18px">Цена:</div>
-                                        <div class="col-6 text-center text-primary"><p
-                                                    style="font-weight: bold; font-size: 25px"><?= $data['products'][$i]->getPrice() ?></p>
+                                        <div class="col-6 text-center text-primary">
+                                            <p style="font-weight: bold; font-size: 25px" id="price<?= $data['products'][$i]->getId() ?>"><?= $data['products'][$i]->getPrice() ?></p>
                                         </div>
                                         <div class="col-3 p-0 mt-2"
                                              style="font-size: 18px"><?= $data['products'][$i]->getUnit() ?></div>
@@ -112,44 +112,54 @@
                                         <div class="row justify-content-center">
                                             <div class="col-4 p-0 mr-2">
                                                 <input class="btn btn-success btn-block mt-2" type="submit"
-                                                       name="btn_login" value="Купить" data-toggle="modal" data-target=".bd-example-modal-sm" readonly>
+                                                       name="btnOk<?= $data['products'][$i]->getId() ?>" value="Купить" data-toggle="modal" data-target=".bd-example-modal-sm<?= $data['products'][$i]->getId() ?>">
                                             </div>
                                             <!-- MODAL -->
-                                            <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
-                                                 aria-hidden="true">
-                                                <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="exampleModalCenterTitle">Выберите кол-во товара</h5>
-                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <div class="row justify-content-center">
-                                                                <div class="col-auto mr-1 p-0">
-                                                                    <a class='btn btn-secondary' data-toggle="tooltip" title="Уменьшить"
-                                                                       onclick="AjaxCountTotalPriceProduct()">
-                                                                        <img src='/View/Image/Cart/Minus.png'></a>
-                                                                </div>
-                                                                <div class="col-4 p-0">
-                                                                    <input type="text" class="form-control text-center" name="amount"
-                                                                           id="amount"
-                                                                           aria-describedby="emailHelp" value="1">
-                                                                </div>
-                                                                <div class="col-auto ml-1 p-0 text-right">
-                                                                    <a class='btn btn-secondary' data-toggle="tooltip" title="Увеличить"
-                                                                       onclick="AjaxCountTotalPriceProduct()">
-                                                                        <img src='/View/Image/Cart/Added.png'></a>
+                                            <form action="http://practice/orders/addOrder" method="post">
+                                                <div class="modal fade bd-example-modal-sm<?= $data['products'][$i]->getId() ?>" id="mySmallModalLabel" data-backdrop='static' tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+                                                     aria-hidden="true">
+                                                    <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="mySmallModalLabel">Выберите кол-во товара</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <div class="row justify-content-center">
+                                                                    <div class="col-auto mr-1 p-0">
+                                                                        <a class='btn btn-secondary' data-toggle="tooltip" title="Уменьшить"
+                                                                           onclick="AjaxDecreaseAmount('-',
+                                                                                   '<?= $data['products'][$i]->getId() ?>',
+                                                                                   'amount<?= $data['products'][$i]->getId() ?>',
+                                                                                   'price<?= $data['products'][$i]->getId() ?>')">
+                                                                            <img src='/View/Image/Cart/Minus.png'></a>
+                                                                    </div>
+                                                                    <div class="col-4 p-0">
+                                                                        <input type="text" class="form-control text-center" name="amount<?= $data['products'][$i]->getId() ?>"
+                                                                               id="amount<?= $data['products'][$i]->getId() ?>"
+                                                                               aria-describedby="emailHelp" value="1">
+                                                                    </div>
+                                                                    <div class="col-auto ml-1 p-0 text-right">
+                                                                        <a class='btn btn-secondary' data-toggle="tooltip" title="Увеличить"
+                                                                           onclick="AjaxIncreaseAmount('+',
+                                                                                   '<?= $data['products'][$i]->getId() ?>',
+                                                                                   'amount<?= $data['products'][$i]->getId() ?>',
+                                                                                   'price<?= $data['products'][$i]->getId() ?>')">
+                                                                            <img src='/View/Image/Cart/Added.png'></a>
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-primary">Ok</button>
+                                                            <div class="modal-footer">
+                                                                <input type="text" name="price" value="<?= $data['products'][$i]->getPrice(); ?>" hidden>
+                                                                <input type="text" name="IDProduct" value="<?= $data['products'][$i]->getId(); ?>" hidden>
+                                                                <input type="submit" class="btn btn-primary" value="Ok">
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </form>
                                             <!-- MODAL -->
                                             <div class="col-6 p-0">
                                                 <a class='btn btn-warning text-white pl-1 mt-2'

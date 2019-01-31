@@ -32,7 +32,7 @@ function CountError(response) {
     });
 
     if (count_errors == 0) {
-        location.href = 'success';
+        location.href = 'http://practice/success';
     }
 
 }

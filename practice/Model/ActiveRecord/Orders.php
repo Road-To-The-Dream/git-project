@@ -254,6 +254,7 @@ class Orders extends Model
         return str_replace(' ', '', $price);
     }
 
+
     public function getTotalPriceProducts()
     {
         $DBdata = $this->selectTotalPriceAndAmountProducts();
@@ -299,7 +300,10 @@ class Orders extends Model
             }
         }
 
+        $this->setAmount(1);
         $this->insert();
+        $this->updateDecreaseAmountProductInTableProduct();
+
         $this->message_about_adding_product[0] = "Товар добавлен в корзину !";
         $this->message_about_adding_product[1] = "success";
 
@@ -394,7 +398,7 @@ class Orders extends Model
         $product->setId($_POST['IDProduct']);
         $price_product = $product->selectPriceProduct();
 
-        $sql = "INSERT INTO orders (price, create_at, client_id) VALUE ({$price_product[0]['price']},  {$this->getCreateAt()}, {$this->getClientId()})";
+        $sql = "INSERT INTO orders (price, amount, create_at, client_id) VALUE ({$price_product[0]['price']}, {$this->getAmount()}, {$this->getCreateAt()}, {$this->getClientId()})";
         ConnectionManager::executionQuery($sql);
 
         $sql = "SELECT MAX(id) AS id FROM orders";
@@ -402,8 +406,6 @@ class Orders extends Model
 
         $sql = "INSERT INTO product_in_orders (product_id, order_id, create_at) VALUES ({$this->getProductId()}, {$id[0]['id']}, {$this->getCreateAt()})";
         ConnectionManager::executionQuery($sql);
-
-        $this->updateDecreaseAmountProductInTableProduct();
     }
 
     public function updateDecreaseAmountProductInTableProduct()
