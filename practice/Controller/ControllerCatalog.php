@@ -18,12 +18,17 @@ class ControllerCatalog extends Controller
     /**
      * @param int $sorting
      * @param int $category
+     * @param string $vendor
      */
-    public function index($sorting = 0, $category = 0)
+    public function index($sorting = 0, $category = 1, $vendor = "")
     {
         $this->checkSessionAndStart();
 
-        $data_products = $this->getProducts($sorting, $category);
+        if (!empty($vendor)) {
+            $data_products = $this->getProducts($sorting, $category, $vendor);
+        } else {
+            $data_products = $this->getProducts($sorting, $category);
+        }
 
         $data_images = $this->getImageFromProduct($data_products);
 
@@ -46,10 +51,10 @@ class ControllerCatalog extends Controller
      * @param $category
      * @return array|mixed|null
      */
-    private function getProducts($sorting, $category)
+    private function getProducts($sorting, $category, $vendor = "")
     {
         $products = new Product();
-        return $data_products = $products->selectAll($sorting, $category);
+        return $data_products = $products->selectAll($sorting, $category, $vendor);
     }
 
     /**
@@ -85,14 +90,5 @@ class ControllerCatalog extends Controller
         $category = new Category();
         $category->setId($id_category);
         return $name_category = $category->selectName();
-    }
-
-    /**
-     * @return array|mixed|null
-     */
-    public function filtrationProducts()
-    {
-        $product = new Product();
-        return $product->filtration($_POST['vendor'], 1);
     }
 }

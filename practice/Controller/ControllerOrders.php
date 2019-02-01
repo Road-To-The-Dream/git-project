@@ -92,13 +92,16 @@ class ControllerOrders extends Controller
     public function modalButtonBuy()
     {
         $product = new Product();
+        $product->setId($_POST['IDProduct']);
         $product->updateDecreaseAmount();
     }
 
     public function modalButtonClose()
     {
         $product = new Product();
-        $product->setAmount($_POST['amount']);
+        $product->setId($_POST['IDProduct']);
+        $product->setAmount($_POST['Amount']);
+        $product->setUpdateAt('\'' . date("Y-m-d H:i:s") . '\'');
         $product->updateIncreaseAmount();
     }
 }

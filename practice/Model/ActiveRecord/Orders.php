@@ -330,7 +330,11 @@ class Orders extends Model
         if ($amount_product[0]['amount'] != 0) {
             $amount_units++;
             $this->updateDecreaseAmountProductInTableProduct();
-            $this->updateIncreaseAmountInTableOrder();
+
+            if (isset($_SESSION['isAuth'])) {
+                $this->updateIncreaseAmountInTableOrder();
+            }
+
             $price_all_products += $price_product;
             $total_price_product = $amount_units * $price_product;
         }

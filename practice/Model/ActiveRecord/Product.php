@@ -183,26 +183,31 @@ class Product extends Model
     /**
      * @param int $sorting
      * @param int $category
+     * @param string $array_vendors
      * @return array|mixed|null
      */
-    public function selectAll($sorting = 0, $category = 0)
+    public function selectAll($sorting = 0, $category = 1, $array_vendors = "")
     {
-        if ($category != 0) {
-            if ($sorting == 1) {
-                $sql = "SELECT p.id, p.name, p.description, p.price, p.unit, p.amount, c.name AS catname FROM product p JOIN categories c ON c.id = p.category_id 
-                        WHERE c.id = $category ORDER BY price DESC";
+        $sql = "SELECT p.id, p.name, p.description, p.price, p.unit, p.amount, c.name AS catname FROM product p JOIN categories c ON c.id = p.category_id";
+
+        if (!empty($array_vendors)) {
+            $vendors = explode(" ", $array_vendors);
+            $vendors = "'" . implode("','", $vendors) . "'";
+            $sql .= " JOIN vendor v ON p.vendor_id = v.id WHERE v.name IN ($vendors)";
+        }
+
+        if ($category != 1) {
+            if (!empty($array_vendors)) {
+                $sql .= " AND c.id = $category";
             } else {
-                $sql = "SELECT p.id, p.name, p.description, p.price, p.unit, p.amount, c.name AS catname FROM product p JOIN categories c ON c.id = p.category_id 
-                        WHERE c.id = $category ORDER BY p.price ASC";
+                $sql .= " WHERE c.id = $category";
             }
+        }
+
+        if ($sorting == 1) {
+            $sql .= " ORDER BY price DESC";
         } else {
-            if ($sorting == 1) {
-                $sql = "SELECT p.id, p.name, p.description, p.price, p.unit, p.amount, c.name AS catname FROM product p JOIN categories c ON c.id = p.category_id 
-                        ORDER BY price DESC";
-            } else {
-                $sql = "SELECT p.id, p.name, p.description, p.price, p.unit, p.amount, c.name AS catname FROM product p JOIN categories c ON c.id = p.category_id 
-                        ORDER BY price ASC";
-            }
+            $sql .= " ORDER BY price ASC";
         }
 
         $info_products = ConnectionManager::executionQuery($sql);
@@ -242,20 +247,6 @@ class Product extends Model
     {
         $sql = "SELECT amount FROM product WHERE id = " . $this->getId();
         return ConnectionManager::executionQuery($sql);
-    }
-
-    public function filtration($array_vendors, $category)
-    {
-        $vendors = "'" . implode("','", $array_vendors) . "'";
-
-        $sql = "SELECT p.id, p.name, p.description, p.price, p.unit, p.amount FROM product p JOIN vendor v ON p.vendor_id = v.id 
-                WHERE v.name IN ($vendors)";
-
-        $info_products = ConnectionManager::executionQuery($sql);
-        $info_products = self::addSpaceToPriceProduct($info_products, "price");
-        $info_products = $this->addedProductsInObject($info_products);
-
-        return $info_products;
     }
 
     public function insert()

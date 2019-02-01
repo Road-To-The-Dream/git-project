@@ -5,10 +5,12 @@
     <title>Catalog - LAPTOP</title>
     <link rel="stylesheet" href="/View/CSS/cart.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-    <script src="/View/JS/Show_filtration_products.js"></script>
     <script src="/View/JS/AddProductInCart.js"></script>
     <script src="/View/JS/IncreaseAmountInCatalog.js"></script>
     <script src="/View/JS/DecreaseAmountInCatalog.js"></script>
+    <script src="/View/JS/ModalButtonBuy.js"></script>
+    <script src="/View/JS/ModalButtonClose.js"></script>
+    <script src="/View/JS/FiltrationVendors.js"></script>
 </head>
 <body>
 <div class="container-fluid">
@@ -16,7 +18,7 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="http://practice/main">Главная</a></li>
-                <li class="breadcrumb-item"><a href="http://practice/catalog">Ноутбуки</a></li>
+                <li class="breadcrumb-item"><a href="http://practice/catalog/index/?category=1">Ноутбуки</a></li>
                 <li class="breadcrumb-item"><?= $data['category'][0]->getName(); ?></li>
             </ol>
         </nav>
@@ -25,35 +27,33 @@
         <div class="row">
             <div class="col-3 mt-2">
                 <p>Подбор по параметрам</p>
-                <form method="post" action="" id="formFiltration" name="formFiltration">
-                    <div class="card bg-light mb-3">
-                        <div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-list"></i>
-                            Производитель
-                        </div>
-                        <ul class="list-group list-group-flush">
-                            <?php
-                            foreach ($data['vendors'] as $vendors) {
-                                ?>
-                                <li class="list-group-item">
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input"
-                                               id="<?php echo $vendors->getName(); ?>" name="vendor[]"
-                                               value="<?php echo $vendors->getname(); ?>">
-                                        <label class="custom-control-label"
-                                               for="<?php echo $vendors->getname(); ?>"><?php echo $vendors->getname(); ?></label>
-                                    </div>
-                                </li>
-                                <?php
-                            }
-                            ?>
-                            <li class="list-group-item text-center p-1">
-                                <p class="text-warning" id="message1"></p>
-                                <input class="btn btn-outline-success btn-sm" type="button" name="btn_login"
-                                       value="Show" onclick="AjaxFiltrationProducts('message1')">
-                            </li>
-                        </ul>
+                <div class="card bg-light mb-3">
+                    <div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-list"></i>
+                        Производитель
                     </div>
-                </form>
+                    <ul class="list-group list-group-flush">
+                        <?php
+                        foreach ($data['vendors'] as $vendors) {
+                            ?>
+                            <li class="list-group-item">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input"
+                                           id="<?php echo $vendors->getName(); ?>" name="vendor[]"
+                                           value="<?php echo $vendors->getname(); ?>">
+                                    <label class="custom-control-label"
+                                           for="<?php echo $vendors->getname(); ?>"><?php echo $vendors->getname(); ?></label>
+                                </div>
+                            </li>
+                            <?php
+                        }
+                        ?>
+                        <li class="list-group-item text-center p-1">
+                            <p class="text-warning" id="message1"></p>
+                            <input class="btn btn-outline-success btn-sm" type="button" onclick="infoCheckBox()" name="btn_login"
+                                   value="Show">
+                        </li>
+                    </ul>
+                </div>
             </div>
             <div class="col-9">
                 <div class="row">
@@ -70,10 +70,10 @@
                                     </button>
                                     <div class="dropdown-menu">
                                         <a class="dropdown-item"
-                                           href="http://practice/catalog/index/1/?category=<?= $_GET['category'] ?>">от
+                                           href="http://practice/catalog/index/1/?category=<?= $_GET['category'] ?>&vendor=<?= $_GET['vendor'] ?>">от
                                             дорогих к дешёвым</a>
                                         <a class="dropdown-item"
-                                           href="http://practice/catalog/index/2/?category=<?= $_GET['category'] ?>">от
+                                           href="http://practice/catalog/index/2/?category=<?= $_GET['category'] ?>&vendor=<?= $_GET['vendor'] ?>">от
                                             дешёвых к дорогим</a>
                                     </div>
                                 </div>
@@ -111,7 +111,7 @@
                                         ?>
                                         <div class="row justify-content-center">
                                             <div class="col-4 p-0 mr-2">
-                                                <input class="btn btn-success btn-block mt-2" type="submit"
+                                                <input class="btn btn-success btn-block mt-2" type="submit" onclick="AjaxModalButtonBuy('<?= $data['products'][$i]->getId() ?>')"
                                                        name="btnOk<?= $data['products'][$i]->getId() ?>" value="Купить" data-toggle="modal" data-target=".bd-example-modal-sm<?= $data['products'][$i]->getId() ?>">
                                             </div>
                                             <!-- MODAL -->
@@ -122,7 +122,7 @@
                                                         <div class="modal-content">
                                                             <div class="modal-header">
                                                                 <h5 class="modal-title" id="mySmallModalLabel">Выберите кол-во товара</h5>
-                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="AjaxModalButtonClose('<?= $data['products'][$i]->getId() ?>', 'amount<?= $data['products'][$i]->getId() ?>')">
                                                                     <span aria-hidden="true">&times;</span>
                                                                 </button>
                                                             </div>
