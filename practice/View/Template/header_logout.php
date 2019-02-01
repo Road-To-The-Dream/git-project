@@ -32,7 +32,6 @@
         <div class="spinner-border"></div>
     </div>
 </div>
-
 <a href="#" class="scrollup">Наверх</a>
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark pb-0">
     <div class="container">
