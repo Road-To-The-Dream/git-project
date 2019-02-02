@@ -8,6 +8,9 @@
 
 namespace practice\Controller;
 
+use practice\Model\ActiveRecord\CharacteristicChild;
+use practice\Model\ActiveRecord\CharacteristicParent;
+use practice\Model\ActiveRecord\CharacteristicValue;
 use practice\Model\ActiveRecord\Comment;
 use practice\Model\ActiveRecord\Product;
 use practice\Model\ActiveRecord\Client;
@@ -30,11 +33,18 @@ class ControllerProduct extends Controller
 
         $data_images = $this->getAllImages($id);
 
+        $data_characteristicParent = $this->getCharacteristicParent();
+        $data_characteristicChild = $this->getCharacteristicChild(count($data_characteristicParent));
+        $data_characteristicValue = $this->getCharacteristicValue($id, count($data_characteristicParent));
+
         $DBdata = [
             'images' => $data_images,
             'product' => $data_product,
             'comments' => $data_comments,
-            'client' => $data_client
+            'client' => $data_client,
+            'characteristic_parent' => $data_characteristicParent,
+            'characteristic_child' => $data_characteristicChild,
+            'characteristic_value' => $data_characteristicValue
         ];
 
         $this->objectView->generate('product', $DBdata);
@@ -86,5 +96,31 @@ class ControllerProduct extends Controller
         $images = new Images();
         $images->setProductId($id);
         return $data_images = $images->selectAll();
+    }
+
+    /**
+     * @return array
+     */
+    private function getCharacteristicParent()
+    {
+        $parent = new CharacteristicParent();
+        return $data_parent = $parent->selectName();
+    }
+
+    /**
+     * @param $count_parent
+     * @return array
+     */
+    private function getCharacteristicChild($count_parent)
+    {
+        $child = new CharacteristicChild();
+        return $data_child = $child->selectName($count_parent);
+    }
+
+    private function getCharacteristicValue($id, $count_parent)
+    {
+        $value = new CharacteristicValue();
+        $value->setProductId($id);
+        return $data_value = $value->selectName($count_parent);
     }
 }

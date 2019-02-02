@@ -205,173 +205,36 @@
         <div class="container f-size-character">
             <div class="row">
                 <!--LEFT COL-->
-                <div class="col-6">
-                    <div class="row">
-                        <p class="text-secondary f-size-name ml-1 mb-2">Система</p>
-                    </div>
-                    <div class="row">
-                        <div class="shadow mb-4 bg-white rounded" style="width: 98%">
-                            <div>
-                                <ul class="list-group">
-                                    <li class="list-group-item list-group-item-action">
-                                        <div class="row">
-                                            <div class="col-5 font-weight-bold">Тип</div>
-                                            <div class="col-7 text-right">ноутбук</div>
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item list-group-item-action">
-                                        <div class="row">
-                                            <div class="col-5 font-weight-bold">Тип.конфиг.</div>
-                                            <div class="col-7 text-right">AMD A8 / 2 ГГц / 4 Гб / 500 Гб / DVD</div>
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item list-group-item-action">
-                                        <div class="row">
-                                            <div class="col-7 font-weight-bold">Макс. объем оперативной памяти</div>
-                                            <div class="col-5 text-right">16 Гб</div>
-                                        </div>
-                                    </li>
-                                </ul>
+                <div class="col-7">
+                    <?php
+                    for ($i = 0; $i < count($data['characteristic_parent']); $i++) {
+                        ?>
+                        <div class="row">
+                            <p class="text-secondary f-size-name ml-1 mb-2"><?= $data['characteristic_parent'][$i]->getName() ?></p>
+                        </div>
+                        <div class="row">
+                            <div class="shadow mb-4 bg-white rounded" style="width: 98%">
+                                <div>
+                                    <ul class="list-group">
+                                        <?php
+                                        for ($j = 0; $j < count($data['characteristic_child'][$i + 1]); $j++) {
+                                            ?>
+                                            <li class="list-group-item list-group-item-action">
+                                                <div class="row">
+                                                    <div class="col-6 font-weight-bold"><?= $data['characteristic_child'][$i + 1][$j]->getName() ?></div>
+                                                    <div class="col-6 text-right"><?= $data['characteristic_value'][$i + 1][$j]->getValue() . ' ' . $data['characteristic_value'][$i + 1][$j]->getUnit() ?></div>
+                                                </div>
+                                            </li>
+                                            <?php
+                                        }
+                                        ?>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <p class="text-secondary f-size-name ml-1 mb-2">Экран</p>
-                    </div>
-                    <div class="row">
-                        <div class="shadow mb-4 bg-white rounded" style="width: 98%">
-                            <div>
-                                <ul class="list-group">
-                                    <li class="list-group-item list-group-item-action">
-                                        <div class="row">
-                                            <div class="col-5 font-weight-bold">Диагональ</div>
-                                            <div class="col-7 text-right">15.6"</div>
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item list-group-item-action">
-                                        <div class="row">
-                                            <div class="col-5 font-weight-bold">Разрешение</div>
-                                            <div class="col-7 text-right">1366 x 768</div>
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item list-group-item-action">
-                                        <div class="row">
-                                            <div class="col-5 font-weight-bold">Тип экрана</div>
-                                            <div class="col-7 text-right">глянцевый</div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <p class="text-secondary f-size-name ml-1 mb-2">Подключение и интерфейсы</p>
-                    </div>
-                    <div class="row">
-                        <div class="shadow mb-4 bg-white rounded" style="width: 98%">
-                            <div>
-                                <ul class="list-group">
-                                    <li class="list-group-item list-group-item-action">
-                                        <div class="row">
-                                            <div class="col-5 font-weight-bold">Гигабитный Ethernet</div>
-                                            <div class="col-7 text-right">Есть</div>
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item list-group-item-action">
-                                        <div class="row">
-                                            <div class="col-4 font-weight-bold">Интерфейсы</div>
-                                            <div class="col-8 text-right">USB 3.0x1, USB 2.0x2, RJ-45, HDMI, VGA</div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!--LEFT COL-->
-                <!--RIGHT COL-->
-                <div class="col-6">
-                    <div class="row">
-                        <p class="text-secondary f-size-name ml-3 mb-2">Хранение данных</p>
-                    </div>
-                    <div class="row justify-content-end">
-                        <div class="shadow mb-4 bg-white rounded" style="width: 98%">
-                            <div>
-                                <ul class="list-group">
-                                    <li class="list-group-item list-group-item-action">
-                                        <div class="row">
-                                            <div class="col-5 font-weight-bold">Скорость вращения диска</div>
-                                            <div class="col-7 text-right">5400 об/мин</div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <p class="text-secondary f-size-name ml-3 mb-2">Питание</p>
-                    </div>
-                    <div class="row justify-content-end">
-                        <div class="shadow mb-4 bg-white rounded" style="width: 98%">
-                            <div>
-                                <ul class="list-group">
-                                    <li class="list-group-item list-group-item-action">
-                                        <div class="row">
-                                            <div class="col-6 font-weight-bold">Время автономной работы</div>
-                                            <div class="col-6 text-right">4.5 ч</div>
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item list-group-item-action">
-                                        <div class="row">
-                                            <div class="col-6 font-weight-bold">Кол-во ячеек аккумулятора</div>
-                                            <div class="col-6 text-right">6</div>
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item list-group-item-action">
-                                        <div class="row">
-                                            <div class="col-5 font-weight-bold">Емкость аккумулятора</div>
-                                            <div class="col-7 text-right">2500 мА*ч</div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <p class="text-secondary f-size-name ml-3 mb-2">Корпус</p>
-                    </div>
-                    <div class="row justify-content-end">
-                        <div class="shadow mb-4 bg-white rounded" style="width: 98%">
-                            <div>
-                                <ul class="list-group">
-                                    <li class="list-group-item list-group-item-action">
-                                        <div class="row">
-                                            <div class="col-5 font-weight-bold">Вес</div>
-                                            <div class="col-7 text-right">2.5 кг</div>
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item list-group-item-action">
-                                        <div class="row">
-                                            <div class="col-5 font-weight-bold">Габариты</div>
-                                            <div class="col-7 text-right">256x256x30.3 мм</div>
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item list-group-item-action">
-                                        <div class="row">
-                                            <div class="col-6 font-weight-bold">Сканер отпечатков пальцев</div>
-                                            <div class="col-6 text-right">Нет</div>
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item list-group-item-action">
-                                        <div class="row">
-                                            <div class="col-5 font-weight-bold">Подсветка клавиатуры</div>
-                                            <div class="col-7 text-right">Есть</div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+                        <?php
+                    }
+                    ?>
                 </div>
                 <!--RIGHT COL-->
             </div>

@@ -83,7 +83,7 @@ class ControllerCatalog extends Controller
 
     /**
      * @param $id_category
-     * @return array
+     * @return Category
      */
     private function getCategory($id_category)
     {

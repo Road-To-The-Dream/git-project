@@ -2,15 +2,15 @@
 /**
  * Created by PhpStorm.
  * User: Sergey
- * Date: 28.01.2019
- * Time: 15:03
+ * Date: 02.02.2019
+ * Time: 09:37
  */
 
 namespace practice\Model\ActiveRecord;
 
 use practice\Model\ConnectionManager;
 
-class Category
+class CharacteristicParent
 {
     private $id;
     private $name;
@@ -49,12 +49,16 @@ class Category
 
     public function selectName()
     {
-        $sql = "SELECT name FROM categories WHERE id = " . $this->getId();
-        $name_category = ConnectionManager::executionQuery($sql);
+        $sql = "SELECT name FROM characteristic_parent";
+        $name_parent = ConnectionManager::executionQuery($sql);
 
-        $objCategory = new Category();
-        $objCategory->setName($name_category[0]['name']);
+        $ParentList = array();
+        for ($i = 0; $i < count($name_parent); $i++) {
+            $objParent = new CharacteristicParent();
+            $objParent->setName($name_parent[$i]['name']);
+            $ParentList[$i] = $objParent;
+        }
 
-        return $objCategory;
+        return $ParentList;
     }
 }
