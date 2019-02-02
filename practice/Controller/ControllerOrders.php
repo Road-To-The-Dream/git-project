@@ -17,7 +17,7 @@ class ControllerOrders extends Controller
     {
         $this->checkSessionAndStart();
 
-        $data_products = $this->getProducts();
+        $data_products = $this->getProductsCatalog();
 
         $array_id_products = $this->getArrayIdProducts($data_products);
 
@@ -34,7 +34,7 @@ class ControllerOrders extends Controller
         $this->objectView->generate('orders', $DBdata);
     }
 
-    protected function getProducts()
+    protected function getProductsCatalog()
     {
         session_start();
         $orders = new Orders();
@@ -66,20 +66,6 @@ class ControllerOrders extends Controller
     {
         session_start();
 
-        $_SESSION['count_product_in_cart'] += 1;
-
-        if (isset($_SESSION['isAuth'])) {
-            $orders = new Orders();
-            $orders->setProductId($_POST['IDProduct']);
-            $orders->setAmount($_POST['amount'.$_POST['IDProduct']]);
-            $orders->setClientId($_SESSION['user_id']);
-            $orders->setCreateAt('\'' . date("Y-m-d H:i:s") . '\'');
-            $orders->insert();
-
-            $buy = new ControllerBuy();
-            $buy->index();
-        }
-
         if ($_POST['amount'] == 1) {
             $product = new Product();
             $product->setId($_POST['IDProduct']);
@@ -87,6 +73,19 @@ class ControllerOrders extends Controller
             $product->setUpdateAt('\'' . date("Y-m-d H:i:s") . '\'');
             $product->updateDecreaseAmount();
         }
+
+        if (isset($_SESSION['isAuth'])) {
+            $_SESSION['count_product_in_cart'] += 1;
+            $orders = new Orders();
+            $orders->setProductId($_POST['IDProduct']);
+            $orders->setAmount($_POST['amount'.$_POST['IDProduct']]);
+            $orders->setClientId($_SESSION['user_id']);
+            $orders->setCreateAt('\'' . date("Y-m-d H:i:s") . '\'');
+            $orders->insert();
+        }
+
+        $buy = new ControllerBuy();
+        $buy->index();
     }
 
     public function modalButtonBuy()

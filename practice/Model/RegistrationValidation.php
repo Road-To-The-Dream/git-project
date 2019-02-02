@@ -143,7 +143,7 @@ class RegistrationValidation
                 $this->errors_register[3] = 'Please enter email !';
             }
             if ($_POST['phone'] == '+380 ') {
-                $this->errors_register[4] = 'Please enter user name !';
+                $this->errors_register[4] = 'Please enter phone !';
             }
             if (empty($_POST['password_register'])) {
                 $this->errors_register[5] = 'Please enter password !';

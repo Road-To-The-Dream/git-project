@@ -25,9 +25,9 @@ class ControllerCatalog extends Controller
         $this->checkSessionAndStart();
 
         if (!empty($vendor)) {
-            $data_products = $this->getProducts($sorting, $category, $vendor);
+            $data_products = $this->getProductsCatalog($sorting, $category, $vendor);
         } else {
-            $data_products = $this->getProducts($sorting, $category);
+            $data_products = $this->getProductsCatalog($sorting, $category);
         }
 
         $data_images = $this->getImageFromProduct($data_products);
@@ -51,7 +51,7 @@ class ControllerCatalog extends Controller
      * @param $category
      * @return array|mixed|null
      */
-    private function getProducts($sorting, $category, $vendor = "")
+    private function getProductsCatalog($sorting, $category, $vendor = "")
     {
         $products = new Product();
         return $data_products = $products->selectAll($sorting, $category, $vendor);

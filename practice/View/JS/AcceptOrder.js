@@ -12,7 +12,6 @@ function AjaxAcceptBuy(message1, message2, message3, message4, message5, message
             document.getElementById(message4).innerHTML = response[3];
             document.getElementById(message5).innerHTML = response[4];
             document.getElementById(message6).innerHTML = response[5];
-            $('.reset').val('');
 
             CountError(response);
         },

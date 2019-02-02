@@ -18,7 +18,7 @@ class ControllerCart extends Controller
     {
         $this->checkSessionAndStart();
 
-        $data_products = $this->getProducts();
+        $data_products = $this->getProductsCatalog();
 
         $array_id_products = $this->getArrayIdProducts($data_products);
 
@@ -35,7 +35,7 @@ class ControllerCart extends Controller
         $this->objectView->generate('cart', $DBdata);
     }
 
-    protected function getProducts()
+    protected function getProductsCatalog()
     {
         session_start();
         $orders = new Orders();

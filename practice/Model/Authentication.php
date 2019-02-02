@@ -43,7 +43,8 @@ class Authentication
      */
     private function checkExistenceEmailInDataBaseAndWriteRole($email)
     {
-        $this->info_client = $this->client->selectIdFirstNameEmailPasswordUser($email);
+        $this->client->setEmail("'" . $email . "'");
+        $this->info_client = $this->client->selectAllClient();
 
         if (!empty($this->info_client[0]->getId())) {
             $this->role = $this->info_client[0]->getRole();
@@ -56,7 +57,9 @@ class Authentication
     private function setValueInSession()
     {
         $_SESSION['isAuth'] = $this->info_client[0]->getFirstName();
+        $_SESSION['LastName'] = $this->info_client[0]->getLastName();
         $_SESSION['Email'] = $this->info_client[0]->getEmail();
+        $_SESSION['Phone'] = $this->info_client[0]->getPhone();
         $_SESSION['user_id'] = $this->info_client[0]->getId();
         $_SESSION['count_product_in_cart'] = $this->amountProductsInCart();
     }

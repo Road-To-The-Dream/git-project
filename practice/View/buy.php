@@ -11,7 +11,7 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="http://practice/main">Главная</a></li>
-            <li class="breadcrumb-item"><a href="http://practice/catalog">Ноутбуки</a></li>
+            <li class="breadcrumb-item"><a href="http://practice/catalog/index/?category=1">Ноутбуки</a></li>
             <li class="breadcrumb-item active" aria-current="page">Оформление заказа</li>
         </ol>
     </nav>
@@ -26,10 +26,6 @@
                     <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#contact" role="tab"
                        aria-controls="contact" aria-selected="true">Контактные данные</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" id="pills-profile-tab" data-toggle="pill" href="#order" role="tab"
-                       aria-controls="order" aria-selected="false">Просмотр заказа</a>
-                </li>
             </ul>
             <div class="tab-content" id="pills-tabContent">
                 <div class="tab-pane fade show active" id="contact" role="tabpanel" aria-labelledby="pills-home-tab">
@@ -41,8 +37,8 @@
                                     <div class="col">
                                         <input type="text" class="form-control form-control-md" name="last_name"
                                                id="last_name" placeholder="Фамилия"
-                                               value="<?= $data['client'][0]->getLastName(); ?>" autofocus>
-                                        <p class="text-danger ml-2" id="messageLastName"></p>
+                                               value="<?= $_SESSION['LastName'] ?>" autofocus>
+                                        <p class="text-danger ml-2" id="messageLN"></p>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -50,8 +46,8 @@
                                     <div class="col">
                                         <input type="text" class="form-control form-control-md" name="first_name"
                                                id="first_name" placeholder="Имя"
-                                               value="<?= $data['client'][0]->getFirstName(); ?>">
-                                        <p class="text-danger ml-2" id="messageFirstName"></p>
+                                               value="<?= $_SESSION['isAuth'] ?>">
+                                        <p class="text-danger ml-2" id="messageFN"></p>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -63,7 +59,7 @@
                                             </div>
                                             <input type="email" class="form-control form-control-md" name="email"
                                                    id="email" placeholder="Email"
-                                                   value="<?= $data['client'][0]->getEmail(); ?>">
+                                                   value="<?= $_SESSION['Email'] ?>">
                                         </div>
                                         <p class="text-danger ml-2" id="messageEmail"></p>
                                     </div>
@@ -73,8 +69,8 @@
                                     <div class="col">
                                         <input type="text" class="form-control form-control-md bfh-phone" name="phone"
                                                id="phone" data-format="+380 (dd) dd-dd-ddd"
-                                               value="<?= $data['client'][0]->getPhone(); ?>">
-                                        <p class="text-danger ml-2" id="messagePhone"></p>
+                                               value="<?= $_SESSION['Phone'] ?>">
+                                        <p class="text-danger ml-2" id="messagePh"></p>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -85,11 +81,12 @@
                                         <p class="text-danger ml-2" id="messageCity"></p>
                                     </div>
                                 </div>
+                                <input type="text" name="amount" value="<?= $data['order']->getAmount() ?>" hidden>
                                 <p class="text-danger ml-2" id="messageAll"></p>
                                 <div class="row d-flex justify-content-end">
                                     <div class="col-auto">
                                         <button type="button" class="btn btn-success"
-                                                onclick="AjaxAcceptBuy('messageLastName', 'messageFirstName', 'messageEmail', 'messagePhone', 'messageCity', 'messageAll', <?= $data['product'][0]->getId(); ?>)">
+                                                onclick="AjaxAcceptBuy('messageLN', 'messageFN', 'messageEmail', 'messagePh', 'messageCity', 'messageAll', <?= $data['product'][0]->getId(); ?>)">
                                             Продолжить
                                         </button>
                                     </div>

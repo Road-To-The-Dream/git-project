@@ -2,7 +2,6 @@
 
 namespace practice\Controller;
 
-use practice\Model\ActiveRecord\Orders;
 use practice\Model\ActiveRecord\Images;
 use practice\Model\ActiveRecord\Product;
 
@@ -49,5 +48,19 @@ class Controller
         }
 
         return $id_products;
+    }
+
+    protected function getProducts($id)
+    {
+        $product = new Product();
+        $product->setId($id);
+        return $data_product = $product->selectProduct();
+    }
+
+    protected function getImage($id)
+    {
+        $images = new Images();
+        $images->setProductId($id);
+        return $data_images = $images->selectImageForProduct();
     }
 }

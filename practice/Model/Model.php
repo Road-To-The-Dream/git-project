@@ -2,7 +2,6 @@
 
 namespace practice\Model;
 
-use practice\Model\ActiveRecord\Client;
 use practice\Model\ActiveRecord\Orders;
 use practice\Model\ActiveRecord\Product;
 use practice\Model\ActiveRecord\Images;
@@ -81,8 +80,6 @@ class Model
 
         $data_order = self::getOrder($id_product, $_SESSION['user_id'], $status);
 
-        $data_client = self::checkExistSessionAndSelectInfoClient();
-
         $total_price = $data_order->getPrice() * $data_order->getAmount();
 
         $total_price = array([
@@ -93,7 +90,6 @@ class Model
 
         return $DBdata = [
             'product' => $data_product,
-            'client' => $data_client,
             'image' => $data_image,
             'order' => $data_order,
             'total_price' => $total_price[0]['total_price']
@@ -121,14 +117,5 @@ class Model
         $order->setClientId($id_client);
         $order->setStatus($status);
         return $data_order = $order->selectPriceAndAmount();
-    }
-
-    private static function checkExistSessionAndSelectInfoClient()
-    {
-        if (isset($_SESSION['user_id'])) {
-            $objClient = new Client();
-            $objClient->setId($_SESSION['user_id']);
-            return $objClient->selectClient();
-        }
     }
 }

@@ -155,13 +155,8 @@ class Client extends Model
         $this->connectionDB();
     }
 
-    public static function selectAllClientForAdmin()
+    private static function addInfoInObject($info_client)
     {
-        ConnectionManager::getInstance();
-        $sql = "SELECT id, last_name, first_name, patronymic, email, phone, password, role FROM client";
-
-        $info_client = ConnectionManager::executionQuery($sql);
-
         $ClientList = array();
         for ($i = 0; $i < count($info_client); $i++) {
             $objClient = new Client();
@@ -177,6 +172,26 @@ class Client extends Model
         }
 
         return $ClientList;
+    }
+
+    public static function selectAllClientForAdmin()
+    {
+        ConnectionManager::getInstance();
+        $sql = "SELECT id, last_name, first_name, patronymic, email, phone, password, role FROM client";
+
+        $info_client = ConnectionManager::executionQuery($sql);
+
+        return self::addInfoInObject($info_client);
+    }
+
+    public function selectAllClient()
+    {
+        ConnectionManager::getInstance();
+        $sql = "SELECT id, last_name, first_name, patronymic, email, phone, password, role FROM client WHERE email = ".$this->getEmail();
+
+        $info_client = ConnectionManager::executionQuery($sql);
+
+        return self::addInfoInObject($info_client);
     }
 
     public function selectClient()

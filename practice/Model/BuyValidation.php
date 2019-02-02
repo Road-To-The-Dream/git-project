@@ -28,14 +28,14 @@ class BuyValidation
             }
         }
 
-        if ($count_empty_errors == 0) {
-            $this->updateOrderInDataBase();
+        if ($count_empty_errors == 0 && isset($_SESSION['isAuth'])) {
+            $this->updateOrderInDataBaseStatusDone();
         }
 
         return json_encode($this->errors_buy);
     }
 
-    private function updateOrderInDataBase()
+    private function updateOrderInDataBaseStatusDone()
     {
         $order = new Orders();
         $order->setProductId($_POST['IDProduct']);
@@ -46,39 +46,20 @@ class BuyValidation
 
     private function checkFieldsForEmptinessAndWriteErrors()
     {
-        session_start();
-        if (isset($_SESSION['isAuth'])) {
-            if (empty($_POST['city'])) {
-                $this->errors_buy[4] = 'Please enter city !';
-                return;
-            }
-        } else {
-            foreach ($_POST as $value) {
-                if ($value == '') {
-                    $this->errors_buy[5] = 'Empty fields form';
-                } else {
-                    $this->errors_buy[5] = '';
-                    break;
-                }
-            }
+        if (empty($_POST['last_name'])) {
+            $this->errors_buy[0] = 'Please enter last name !';
         }
-
-        if ($this->errors_buy[5] == '') {
-            if (empty($_POST['last_name'])) {
-                $this->errors_buy[0] = 'Please enter last name !';
-            }
-            if (empty($_POST['first_name'])) {
-                $this->errors_buy[1] = 'Please enter first name !';
-            }
-            if (empty($_POST['email'])) {
-                $this->errors_buy[2] = 'Please enter email !';
-            }
-            if (empty($_POST['phone'])) {
-                $this->errors_buy[3] = 'Please enter phone !';
-            }
-            if (empty($_POST['city'])) {
-                $this->errors_buy[4] = 'Please enter city !';
-            }
+        if (empty($_POST['first_name'])) {
+            $this->errors_buy[1] = 'Please enter first name !';
+        }
+        if (empty($_POST['email'])) {
+            $this->errors_buy[2] = 'Please enter email !';
+        }
+        if (empty($_POST['phone']) || $_POST['phone'] == '+380 ' || strlen($_POST['phone']) < 19) {
+            $this->errors_buy[3] = 'Please enter phone !';
+        }
+        if (empty($_POST['city'])) {
+            $this->errors_buy[4] = 'Please enter city !';
         }
     }
 

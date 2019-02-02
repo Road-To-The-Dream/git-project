@@ -13,7 +13,7 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="http://practice/main">Главная</a></li>
-            <li class="breadcrumb-item"><a href="http://practice/catalog">Ноутбуки</a></li>
+            <li class="breadcrumb-item"><a href="http://practice/catalog/index/?category=1">Ноутбуки</a></li>
             <li class="breadcrumb-item active" aria-current="page"><?= $data['product'][0]->getName(); ?></li>
         </ol>
     </nav>

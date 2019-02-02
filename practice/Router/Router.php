@@ -35,15 +35,7 @@ class Router
             $controller = new $controller_name;
 
             if (method_exists($controller, $action_name)) {  // call action controller
-                if (!empty($category)) {
-                    if (!empty($vendor)) {
-                        $controller->$action_name($id, $category, $vendor);
-                    } else {
-                        $controller->$action_name($id, $category);
-                    }
-                } else {
-                    $controller->$action_name($id);
-                }
+                $controller->$action_name($id, $category, $vendor);
             } else {
                 Redirect::redirect('404');
             }
