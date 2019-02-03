@@ -49,7 +49,8 @@
                         ?>
                         <li class="list-group-item text-center p-1">
                             <p class="text-warning" id="message1"></p>
-                            <input class="btn btn-outline-success btn-sm" type="button" onclick="infoCheckBox()" name="btn_login"
+                            <input class="btn btn-outline-success btn-sm" type="button" onclick="infoCheckBox()"
+                                   name="btn_login"
                                    value="Show">
                         </li>
                     </ul>
@@ -101,7 +102,8 @@
                                     <div class="row mt-3">
                                         <div class="col-3 p-0 mt-2" style="font-size: 18px">Цена:</div>
                                         <div class="col-6 text-center text-primary">
-                                            <p style="font-weight: bold; font-size: 25px" id="price<?= $data['products'][$i]->getId() ?>"><?= $data['products'][$i]->getPrice() ?></p>
+                                            <p style="font-weight: bold; font-size: 25px"
+                                               id="price<?= $data['products'][$i]->getId() ?>"><?= $data['products'][$i]->getPrice() ?></p>
                                         </div>
                                         <div class="col-3 p-0 mt-2"
                                              style="font-size: 18px"><?= $data['products'][$i]->getUnit() ?></div>
@@ -111,25 +113,35 @@
                                         ?>
                                         <div class="row justify-content-center">
                                             <div class="col-4 p-0 mr-2">
-                                                <input class="btn btn-success btn-block mt-2" type="submit" onclick="AjaxModalButtonBuy('<?= $data['products'][$i]->getId() ?>')"
-                                                       name="btnOk<?= $data['products'][$i]->getId() ?>" value="Купить" data-toggle="modal" data-target=".bd-example-modal-sm<?= $data['products'][$i]->getId() ?>">
+                                                <input class="btn btn-success btn-block mt-2" type="submit"
+                                                       onclick="AjaxModalButtonBuy('<?= $data['products'][$i]->getId() ?>')"
+                                                       name="btnOk<?= $data['products'][$i]->getId() ?>" value="Купить"
+                                                       data-toggle="modal"
+                                                       data-target=".bd-example-modal-sm<?= $data['products'][$i]->getId() ?>">
                                             </div>
                                             <!-- MODAL -->
                                             <form action="http://practice/orders/addOrder" method="post">
-                                                <div class="modal fade bd-example-modal-sm<?= $data['products'][$i]->getId() ?>" id="mySmallModalLabel" data-backdrop='static' tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+                                                <div class="modal fade bd-example-modal-sm<?= $data['products'][$i]->getId() ?>"
+                                                     id="mySmallModalLabel" data-backdrop='static' tabindex="-1"
+                                                     role="dialog" aria-labelledby="mySmallModalLabel"
                                                      aria-hidden="true">
-                                                    <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+                                                    <div class="modal-dialog modal-sm modal-dialog-centered"
+                                                         role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h5 class="modal-title" id="mySmallModalLabel">Выберите кол-во товара</h5>
-                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="AjaxModalButtonClose('<?= $data['products'][$i]->getId() ?>', 'amount<?= $data['products'][$i]->getId() ?>')">
+                                                                <h5 class="modal-title" id="mySmallModalLabel">Выберите
+                                                                    кол-во товара</h5>
+                                                                <button type="button" class="close" data-dismiss="modal"
+                                                                        aria-label="Close"
+                                                                        onclick="AjaxModalButtonClose('<?= $data['products'][$i]->getId() ?>', 'amount<?= $data['products'][$i]->getId() ?>')">
                                                                     <span aria-hidden="true">&times;</span>
                                                                 </button>
                                                             </div>
                                                             <div class="modal-body">
                                                                 <div class="row justify-content-center">
                                                                     <div class="col-auto mr-1 p-0">
-                                                                        <a class='btn btn-secondary' data-toggle="tooltip" title="Уменьшить"
+                                                                        <a class='btn btn-secondary'
+                                                                           data-toggle="tooltip" title="Уменьшить"
                                                                            onclick="AjaxDecreaseAmount('-',
                                                                                    '<?= $data['products'][$i]->getId() ?>',
                                                                                    'amount<?= $data['products'][$i]->getId() ?>',
@@ -137,12 +149,15 @@
                                                                             <img src='/View/Image/Cart/Minus.png'></a>
                                                                     </div>
                                                                     <div class="col-4 p-0">
-                                                                        <input type="text" class="form-control text-center" name="amount<?= $data['products'][$i]->getId() ?>"
+                                                                        <input type="text"
+                                                                               class="form-control text-center"
+                                                                               name="amount<?= $data['products'][$i]->getId() ?>"
                                                                                id="amount<?= $data['products'][$i]->getId() ?>"
                                                                                aria-describedby="emailHelp" value="1">
                                                                     </div>
                                                                     <div class="col-auto ml-1 p-0 text-right">
-                                                                        <a class='btn btn-secondary' data-toggle="tooltip" title="Увеличить"
+                                                                        <a class='btn btn-secondary'
+                                                                           data-toggle="tooltip" title="Увеличить"
                                                                            onclick="AjaxIncreaseAmount('+',
                                                                                    '<?= $data['products'][$i]->getId() ?>',
                                                                                    'amount<?= $data['products'][$i]->getId() ?>',
@@ -152,8 +167,12 @@
                                                                 </div>
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <input type="text" name="price" value="<?= $data['products'][$i]->getPrice(); ?>" hidden>
-                                                                <input type="text" name="IDProduct" value="<?= $data['products'][$i]->getId(); ?>" hidden>
+                                                                <input type="text" name="price"
+                                                                       value="<?= $data['products'][$i]->getPrice(); ?>"
+                                                                       hidden>
+                                                                <input type="text" name="IDProduct"
+                                                                       value="<?= $data['products'][$i]->getId(); ?>"
+                                                                       hidden>
                                                                 <input type="submit" class="btn btn-primary" value="Ok">
                                                             </div>
                                                         </div>
@@ -192,26 +211,20 @@
         </div>
         <div>
             <ul class="pagination pagination-lg pagination justify-content-end" style="margin: 50px 0 50px">
-                <li class="page-item disabled">
-                    <a class="page-link" href="#">&laquo;</a>
+                <li class="page-item <? if ($_GET['page'] == 1) { ?> disabled <? } ?>">
+                    <a class="page-link" href="http://practice/catalog/index/1/?category=<?= $_GET['category'] ?>&page=1">&laquo;</a>
                 </li>
-                <li class="page-item active">
-                    <a class="page-link" href="#">1</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="#">2</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="#">3</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="#">4</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="#">5</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="#">&raquo;</a>
+                <?php
+                for ($i = 0; $i < $data['pagination']['pageAmount']; $i++) {
+                    ?>
+                    <li class="page-item <? if ($_GET['page'] == $i + 1) { ?> disabled <? } ?>">
+                        <a class="page-link" href="http://practice/catalog/index/1/?category=<?= $_GET['category'] ?>&page=<?= $i+1 ?>"><?= $i+1 ?></a>
+                    </li>
+                    <?php
+                }
+                ?>
+                <li class="page-item <? if ($_GET['page'] == $data['pagination']['pageAmount']) { ?> disabled <? } ?>">
+                    <a class="page-link" href="http://practice/catalog/index/1/?category=<?= $_GET['category'] ?>&page=<?= $data['pagination']['pageAmount'] ?>">&raquo;</a>
                 </li>
             </ul>
         </div>

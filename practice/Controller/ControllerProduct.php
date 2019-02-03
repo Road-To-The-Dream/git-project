@@ -117,6 +117,11 @@ class ControllerProduct extends Controller
         return $data_child = $child->selectName($count_parent);
     }
 
+    /**
+     * @param $id
+     * @param $count_parent
+     * @return array
+     */
     private function getCharacteristicValue($id, $count_parent)
     {
         $value = new CharacteristicValue();

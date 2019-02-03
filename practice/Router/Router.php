@@ -14,6 +14,7 @@ class Router
         $id = 0;
         $category = $_GET['category'];
         $vendor = $_GET['vendor'];
+        $page = $_GET['page'];
 
         $routes = explode('/', $url);
 
@@ -35,7 +36,7 @@ class Router
             $controller = new $controller_name;
 
             if (method_exists($controller, $action_name)) {  // call action controller
-                $controller->$action_name($id, $category, $vendor);
+                $controller->$action_name($id, $category, $vendor, $page);
             } else {
                 Redirect::redirect('404');
             }

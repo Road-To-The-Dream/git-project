@@ -15,6 +15,6 @@ class SendValidateTest extends TestCase
     public function testCheckSend()
     {
         $obj = new SendValidate();
-        $this->assertEmpty($obj->checkSend('fhlbc2012@gmail.com', 'dd'));
+        $this->assertEmpty($obj->checkSend('', ''));
     }
 }

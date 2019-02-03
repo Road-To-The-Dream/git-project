@@ -121,43 +121,6 @@ class Product extends Model
         $this->amount = $amount;
     }
 
-    public static function selectAllProductForAdmin()
-    {
-        ConnectionManager::getInstance();
-        $sql = "SELECT id, name, description, price, unit, amount FROM product";
-
-        $info_client = ConnectionManager::executionQuery($sql);
-
-        $ProductList = array();
-        for ($i = 0; $i < count($info_client); $i++) {
-            $objProduct = new Product();
-            $objProduct->setId($info_client[$i]['id']);
-            $objProduct->setName($info_client[$i]['name']);
-            $objProduct->setDescription($info_client[$i]['description']);
-            $objProduct->setPrice($info_client[$i]['price']);
-            $objProduct->setUnit($info_client[$i]['unit']);
-            $objProduct->setAmount($info_client[$i]['amount']);
-            $ProductList[$i] = $objProduct;
-        }
-
-        return $ProductList;
-    }
-
-    /**
-     * @return array
-     */
-    public function selectProduct()
-    {
-        $sql = "SELECT id, name, description, price, unit, amount FROM product WHERE id = " . $this->getId();
-
-        $info_product = ConnectionManager::executionQuery($sql);
-        $info_product = self::addSpaceToPriceProduct($info_product, "price");
-
-        $productList = $this->addedProductsInObject($info_product);
-
-        return $productList;
-    }
-
     /**
      * @param $info_products
      * @return array
@@ -181,12 +144,53 @@ class Product extends Model
     }
 
     /**
+     * @return array
+     */
+    public static function selectAllProductForAdmin()
+    {
+        ConnectionManager::getInstance();
+        $sql = "SELECT id, name, description, price, unit, amount FROM product";
+
+        $info_product = ConnectionManager::executionQuery($sql);
+
+        $Obj = new self;
+        $productList = $Obj->addedProductsInObject($info_product);
+
+        return $productList;
+    }
+
+    public static function getAmountProducts()
+    {
+        ConnectionManager::getInstance();
+        $sql = "SELECT COUNT(id) as amt FROM product";
+
+        $amount = ConnectionManager::executionQuery($sql);
+
+        return $amount;
+    }
+
+    /**
+     * @return array
+     */
+    public function selectProduct()
+    {
+        $sql = "SELECT id, name, description, price, unit, amount FROM product WHERE id = " . $this->getId();
+
+        $info_product = ConnectionManager::executionQuery($sql);
+        $info_product = self::addSpaceToPriceProduct($info_product, "price");
+
+        $productList = $this->addedProductsInObject($info_product);
+
+        return $productList;
+    }
+
+    /**
      * @param int $sorting
      * @param int $category
      * @param string $array_vendors
      * @return array|mixed|null
      */
-    public function selectAll($sorting = 0, $category = 1, $array_vendors = "")
+    public function selectAll($sorting = 0, $category = 1, $array_vendors = "", $offset = 1)
     {
         $sql = "SELECT p.id, p.name, p.description, p.price, p.unit, p.amount, c.name AS catname FROM product p JOIN categories c ON c.id = p.category_id";
 
@@ -210,6 +214,8 @@ class Product extends Model
             $sql .= " ORDER BY price ASC";
         }
 
+        $sql .= " LIMIT 3 OFFSET $offset";
+
         $info_products = ConnectionManager::executionQuery($sql);
         $info_products = self::addSpaceToPriceProduct($info_products, "price");
         $info_products = $this->addedProductsInObject($info_products);
@@ -217,6 +223,10 @@ class Product extends Model
         return $info_products;
     }
 
+    /**
+     * @param $array_id_products
+     * @return array
+     */
     public function selectName($array_id_products)
     {
         $info_names = array();
@@ -237,12 +247,18 @@ class Product extends Model
         return $name;
     }
 
+    /**
+     * @return null
+     */
     public function selectPriceProduct()
     {
         $sql = "SELECT price FROM product WHERE id = " . $this->getId();
         return $price = ConnectionManager::executionQuery($sql);
     }
 
+    /**
+     * @return null
+     */
     public function selectAmountProduct()
     {
         $sql = "SELECT amount FROM product WHERE id = " . $this->getId();

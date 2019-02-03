@@ -136,6 +136,6 @@ class ControllerCart extends Controller
 
         $orders->deleteAll();
 
-        Redirect::redirect('catalog');
+        Redirect::redirect('catalog/index/?category=1');
     }
 }
