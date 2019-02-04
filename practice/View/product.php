@@ -7,6 +7,10 @@
     <script src="/View/JS/AddProductInCart.js"></script>
     <script src="/View/JS/AddingComments.js"></script>
     <script src="/View/JS/RemoveComments.js"></script>
+    <script src="/View/JS/IncreaseAmountInCatalog.js"></script>
+    <script src="/View/JS/DecreaseAmountInCatalog.js"></script>
+    <script src="/View/JS/ModalButtonBuy.js"></script>
+    <script src="/View/JS/ModalButtonClose.js"></script>
 </head>
 <body>
 <div class="container">
@@ -66,7 +70,7 @@
                             Цена :
                         </div>
                         <div class="col-auto p-0 m-0 text-primary align-self-end">
-                            <p class="m-0" id="total_price_product"
+                            <p class="m-0" id="price<?= $data['product'][0]->getId() ?>"
                                style="font-weight: bold; font-size: 30px"><?= $data['product'][0]->getPrice(); ?></p>
                         </div>
                         <div class="col-auto text-primary m-0 pl-1 pt-1 align-self-start">
@@ -98,11 +102,74 @@
                 </div>
             </div>
             <div class="col-md-5 col-lg-4 col-xl-3">
-                <input class="btn btn-success btn-lg btn-block" type="button" name="btn_logout" value="Купить">
+                <input class="btn btn-success btn-lg btn-block" type="button" name="btnOk<?= $data['product'][0]->getId() ?>" value="Купить"
+                       onclick="AjaxModalButtonBuy('<?= $data['product'][0]->getId() ?>')" data-toggle="modal"
+                       data-target=".bd-example-modal-sm<?= $data['product'][0]->getId() ?>">
                 <a class='btn btn-warning btn-lg text-white btn-block pl-1 mt-2'
                    onclick="AjaxAddInCart(<?= $data['product'][0]->getId(); ?>, 'amount_products_in_cart')"><img
                             class="mr-2" src='/View/Image/add_cart.png'>Добавить</a>
             </div>
+            <!-- MODAL -->
+            <form action="http://practice/orders/addOrder" method="post">
+                <div class="modal fade bd-example-modal-sm<?= $data['product'][0]->getId() ?>"
+                     id="mySmallModalLabel" data-backdrop='static' tabindex="-1"
+                     role="dialog" aria-labelledby="mySmallModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog modal-sm modal-dialog-centered"
+                         role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="mySmallModalLabel">Выберите
+                                    кол-во товара</h5>
+                                <button type="button" class="close" data-dismiss="modal"
+                                        aria-label="Close"
+                                        onclick="AjaxModalButtonClose('<?= $data['product'][0]->getId() ?>', 'amount<?= $data['product'][0]->getId() ?>')">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row justify-content-center">
+                                    <div class="col-auto mr-1 p-0">
+                                        <a class='btn btn-secondary'
+                                           data-toggle="tooltip" title="Уменьшить"
+                                           onclick="AjaxDecreaseAmount('-',
+                                                   '<?= $data['product'][0]->getId() ?>',
+                                                   'amount<?= $data['product'][0]->getId() ?>',
+                                                   'price<?= $data['product'][0]->getId() ?>')">
+                                            <img src='/View/Image/Cart/Minus.png'></a>
+                                    </div>
+                                    <div class="col-4 p-0">
+                                        <input type="text"
+                                               class="form-control text-center"
+                                               name="amount<?= $data['product'][0]->getId() ?>"
+                                               id="amount<?= $data['product'][0]->getId() ?>"
+                                               aria-describedby="emailHelp" value="1">
+                                    </div>
+                                    <div class="col-auto ml-1 p-0 text-right">
+                                        <a class='btn btn-secondary'
+                                           data-toggle="tooltip" title="Увеличить"
+                                           onclick="AjaxIncreaseAmount('+',
+                                                   '<?= $data['product'][0]->getId() ?>',
+                                                   'amount<?= $data['product'][0]->getId() ?>',
+                                                   'price<?= $data['product'][0]->getId() ?>')">
+                                            <img src='/View/Image/Cart/Added.png'></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <input type="text" name="price"
+                                       value="<?= $data['product'][0]->getPrice(); ?>"
+                                       hidden>
+                                <input type="text" name="IDProduct"
+                                       value="<?= $data['product'][0]->getId(); ?>"
+                                       hidden>
+                                <input type="submit" class="btn btn-primary" value="Ok">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <!-- MODAL -->
             <?php
             }
             ?>
@@ -222,7 +289,9 @@
                                             <li class="list-group-item list-group-item-action">
                                                 <div class="row">
                                                     <div class="col-6 font-weight-bold"><?= $data['characteristic_child'][$i + 1][$j]->getName() ?></div>
-                                                    <div class="col-6 text-right"><?= $data['characteristic_value'][$i + 1][$j]->getValue() . ' ' . $data['characteristic_value'][$i + 1][$j]->getUnit() ?></div>
+                                                    <div class="row text-right">
+                                                        <div class="col-auto"><?= $data['characteristic_value'][$i + 1][$j]->getValue() . ' ' . $data['characteristic_value'][$i + 1][$j]->getUnit() ?></div>
+                                                    </div>
                                                 </div>
                                             </li>
                                             <?php

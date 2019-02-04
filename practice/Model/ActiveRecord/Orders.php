@@ -366,7 +366,11 @@ class Orders extends Model
         $amount_units--;
         $this->setAmount(1);
         $this->updateIncreaseAmountProductInTableProduct();
-        $this->updateDecreaseAmountProductInTableOrder();
+
+        if (isset($_SESSION['isAuth'])) {
+            $this->updateDecreaseAmountProductInTableOrder();
+        }
+
         $total_price_product = $amount_units * $price_product;
         $price_all_products -= $price_product;
 

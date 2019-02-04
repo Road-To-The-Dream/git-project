@@ -71,10 +71,10 @@
                                     </button>
                                     <div class="dropdown-menu">
                                         <a class="dropdown-item"
-                                           href="http://practice/catalog/index/1/?category=<?= $_GET['category'] ?>&vendor=<?= $_GET['vendor'] ?>">от
+                                           href="http://practice/catalog/index/1/?category=<?= $_GET['category'] ?>&vendor=<?= $_GET['vendor'] ?>&page=<?= $_GET['page'] ?>">от
                                             дорогих к дешёвым</a>
                                         <a class="dropdown-item"
-                                           href="http://practice/catalog/index/2/?category=<?= $_GET['category'] ?>&vendor=<?= $_GET['vendor'] ?>">от
+                                           href="http://practice/catalog/index/2/?category=<?= $_GET['category'] ?>&vendor=<?= $_GET['vendor'] ?>&page=<?= $_GET['page'] ?>">от
                                             дешёвых к дорогим</a>
                                     </div>
                                 </div>
@@ -218,7 +218,7 @@
                 for ($i = 0; $i < $data['pagination']['pageAmount']; $i++) {
                     ?>
                     <li class="page-item <? if ($_GET['page'] == $i + 1) { ?> disabled <? } ?>">
-                        <a class="page-link" href="http://practice/catalog/index/1/?category=<?= $_GET['category'] ?>&page=<?= $i+1 ?>"><?= $i+1 ?></a>
+                        <a class="page-link" href="http://practice/catalog/index/?category=<?= $_GET['category'] ?>&page=<?= $i+1 ?>&vendor=<?= $_GET['vendor'] ?>"><?= $i+1 ?></a>
                     </li>
                     <?php
                 }

@@ -27,10 +27,10 @@ class ControllerCatalog extends Controller
     {
         $this->checkSessionAndStart();
 
-        $pagination = $this->pagination($page);
+        $pagination = $this->pagination($page, $category, $vendor);
 
         if (!empty($vendor)) {
-            $data_products = $this->getProductsCatalog($sorting, $category, $pagination['offset'], self::AMOUNTPRODUCT,$vendor);
+            $data_products = $this->getProductsCatalog($sorting, $category, $pagination['offset'], $vendor);
         } else {
             $data_products = $this->getProductsCatalog($sorting, $category, $pagination['offset']);
         }
@@ -57,10 +57,10 @@ class ControllerCatalog extends Controller
      * @param $category
      * @return array|mixed|null
      */
-    private function getProductsCatalog($sorting, $category, $offset = 0, $limit = self::AMOUNTPRODUCT, $vendor = "")
+    private function getProductsCatalog($sorting, $category, $offset = 0, $vendor = "")
     {
         $products = new Product();
-        return $data_products = $products->selectAll($sorting, $category, $vendor, $offset, $limit);
+        return $data_products = $products->selectAll($sorting, $category, $vendor, self::AMOUNTPRODUCT, $offset);
     }
 
     /**
@@ -100,11 +100,13 @@ class ControllerCatalog extends Controller
 
     /**
      * @param $page
+     * @param $category
+     * @param $vendor
      * @return array
      */
-    private function pagination($page)
+    private function pagination($page, $category, $vendor)
     {
-        $amount_product = Product::getAmountProducts();
+        $amount_product = Product::getAmountProducts($category, $vendor);
 
         $paginator = array();
         $paginator['amountProduct'] = self::AMOUNTPRODUCT;
