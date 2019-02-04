@@ -29,14 +29,20 @@ class BuyValidation
         }
 
         if ($count_empty_errors == 0 && isset($_SESSION['isAuth'])) {
-            $this->updateOrderInDataBaseStatusDone();
+            $this->cleanFieldsAndUpdateOrderInDataBaseStatusDone();
         }
 
         return json_encode($this->errors_buy);
     }
 
-    private function updateOrderInDataBaseStatusDone()
+    private function cleanFieldsAndUpdateOrderInDataBaseStatusDone()
     {
+        $this->cleanFields($_POST['last_name']);
+        $this->cleanFields($_POST['first_name']);
+        $this->cleanFields($_POST['email']);
+        $this->cleanFields($_POST['phone']);
+        $this->cleanFields($_POST['city']);
+
         $order = new Orders();
         $order->setProductId($_POST['IDProduct']);
         $order->setClientId($_SESSION['user_id']);

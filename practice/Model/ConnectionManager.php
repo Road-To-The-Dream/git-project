@@ -72,6 +72,7 @@ class ConnectionManager
             } elseif ($statement === 'insert' || $statement === 'update' || $statement === 'delete') {
                 $statement = self::$instance->prepare($query);
                 $statement->execute($parameters);
+                return true;
             } else {
                 return null;
             }

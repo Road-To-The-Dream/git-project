@@ -10,8 +10,10 @@ class View
     {
         if (file_exists('View/' . $content_view . '.php')) {
             require_once 'View/' . $content_view . '.php';
+            return true;
         } else {
             Redirect::redirect('404');
+            return false;
         }
     }
 }

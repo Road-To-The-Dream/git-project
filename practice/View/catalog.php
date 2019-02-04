@@ -212,7 +212,7 @@
         <div>
             <ul class="pagination pagination-lg pagination justify-content-end" style="margin: 50px 0 50px">
                 <li class="page-item <? if ($_GET['page'] == 1) { ?> disabled <? } ?>">
-                    <a class="page-link" href="http://practice/catalog/index/1/?category=<?= $_GET['category'] ?>&page=1">&laquo;</a>
+                    <a class="page-link" href="http://practice/catalog/index/1/?category=<?= $_GET['category'] ?>&page=1&vendor=<?= $_GET['vendor'] ?>">&laquo;</a>
                 </li>
                 <?php
                 for ($i = 0; $i < $data['pagination']['pageAmount']; $i++) {
@@ -224,7 +224,7 @@
                 }
                 ?>
                 <li class="page-item <? if ($_GET['page'] == $data['pagination']['pageAmount']) { ?> disabled <? } ?>">
-                    <a class="page-link" href="http://practice/catalog/index/1/?category=<?= $_GET['category'] ?>&page=<?= $data['pagination']['pageAmount'] ?>">&raquo;</a>
+                    <a class="page-link" href="http://practice/catalog/index/1/?category=<?= $_GET['category'] ?>&page=<?= $data['pagination']['pageAmount'] ?>&vendor=<?= $_GET['vendor'] ?>">&raquo;</a>
                 </li>
             </ul>
         </div>

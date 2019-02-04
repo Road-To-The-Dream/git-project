@@ -56,6 +56,10 @@ class CommentValidation
         $comment->insert();
     }
 
+    /**
+     * @param string $value_field
+     * @return string
+     */
     private function cleanField($value_field = "")
     {
         $value_field = trim($value_field);
