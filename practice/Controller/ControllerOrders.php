@@ -31,7 +31,7 @@ class ControllerOrders extends Controller
             'image' => $data_images
         ];
 
-        $this->objectView->generate('orders', $DBdata);
+        View::generate('orders', $DBdata);
     }
 
     protected function getProductsCatalog()

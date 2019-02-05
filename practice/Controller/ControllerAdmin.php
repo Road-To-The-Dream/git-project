@@ -8,69 +8,104 @@
 
 namespace practice\Controller;
 
+use practice\Controller\Services\User;
 use practice\Model\ActiveRecord\Client;
 use practice\Model\ActiveRecord\Product;
-use practice\Model\ConnectionManager;
 
 class ControllerAdmin extends Controller
 {
     public function index($DBdata = 0, $view)
     {
-        $this->objectView->generate('Admin/admin', $view, $DBdata);
+        View::generate('Admin/admin', $view, $DBdata);
     }
 
     public function product()
     {
-        $DBdata = Product::selectAllProductForAdmin();
-        $this->index('product', $DBdata);
+        switch ($_POST['btn']) {
+            case 'Add':
+                User::addClient();
+                break;
+            case 'Save':
+                User::saveClient();
+                break;
+            default:
+                $DBdata = Product::selectAllProductForAdmin();
+                $this->index('product', $DBdata);
+        }
     }
 
     public function images()
     {
-        $DBdata = Product::selectAllProductForAdmin();
-        $this->index('images', $DBdata);
+        switch ($_POST['btn']) {
+            case 'Add':
+                User::addClient();
+                break;
+            case 'Save':
+                User::saveClient();
+                break;
+            default:
+                $DBdata = Product::selectAllProductForAdmin();
+                $this->index('products', $DBdata);
+        }
     }
 
     public function orders()
     {
-        $DBdata = Product::selectAllProductForAdmin();
-        $this->index($DBdata);
+        switch ($_POST['btn']) {
+            case 'Add':
+                User::addClient();
+                break;
+            case 'Save':
+                User::saveClient();
+                break;
+            default:
+                $DBdata = Product::selectAllProductForAdmin();
+                $this->index('orders', $DBdata);
+        }
     }
 
     public function client()
     {
-        $DBdata = Client::selectAllClientForAdmin();
-        $this->index('client', $DBdata);
-    }
-
-    public function addClient()
-    {
-        ConnectionManager::getInstance();
-        Client::insertClientForAdmin();
-        $this->client();
-    }
-
-    public function saveClient()
-    {
-        ConnectionManager::getInstance();
-        if (isset($_POST['checkbox'])) {
-            Client::deleteClientForAdmin();
-        } else {
-            Client::updateClientForAdmin();
+        switch ($_POST['btn']) {
+            case 'Add':
+                User::addClient();
+                break;
+            case 'Save':
+                User::saveClient();
+                break;
+            default:
+                $DBdata = Client::selectAllClientForAdmin();
+                $this->index('client', $DBdata);
         }
-
-        $this->client();
     }
 
     public function comments()
     {
-        $DBdata = Product::selectAllProductForAdmin();
-        $this->index($DBdata);
+        switch ($_POST['btn']) {
+            case 'Add':
+                User::addClient();
+                break;
+            case 'Save':
+                User::saveClient();
+                break;
+            default:
+                $DBdata = Product::selectAllProductForAdmin();
+                $this->index('comments', $DBdata);
+        }
     }
 
     public function vendor()
     {
-        $DBdata = Product::selectAllProductForAdmin();
-        $this->index($DBdata);
+        switch ($_POST['btn']) {
+            case 'Add':
+                User::addClient();
+                break;
+            case 'Save':
+                User::saveClient();
+                break;
+            default:
+                $DBdata = Product::selectAllProductForAdmin();
+                $this->index('vendor', $DBdata);
+        }
     }
 }

@@ -19,7 +19,7 @@ class ControllerMain extends Controller
     public function index()
     {
         $this->checkSessionAndStart();
-        $this->objectView->generate('main');
+        View::generate('main');
     }
 
     public function logout()

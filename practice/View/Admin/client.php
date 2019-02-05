@@ -25,7 +25,7 @@
                 <th scope="col" class="admin_wd bg-success">Add</th>
             </tr>
             </thead>
-            <form action="http://practice/admin/addClient" method="post">
+            <form action="http://practice/admin/client" method="post">
                 <tbody>
                 <tr>
                     <td>
@@ -53,7 +53,7 @@
                         </select>
                     </td>
                     <td class="align-middle text-center bg-success">
-                        <input type="submit" value="Add">
+                        <input type="submit" name="btn" value="Add">
                     </td>
                 </tr>
                 </tbody>
@@ -81,11 +81,11 @@
                 <th scope="col" class="admin_wd bg-warning">Change</th>
             </tr>
             </thead>
-                <tbody>
-                <?php
-                for ($i = 0; $i < count($data); $i++) {
-                    ?>
-                <form action="http://practice/admin/saveClient" method="post">
+            <tbody>
+            <?php
+            for ($i = 0; $i < count($data); $i++) {
+                ?>
+                <form action="http://practice/admin/client" method="post">
                     <tr>
                         <td class="align-middle text-center">
                             <input class="text-center" type="text" readonly size="1" name="id" value="<?= $data[$i]->getId() ?>">
@@ -131,14 +131,14 @@
                             </div>
                         </td>
                         <td class="align-middle text-center bg-warning">
-                            <input type="submit" value="Save">
+                            <input type="submit" name="btn" value="Save">
                         </td>
                     </tr>
                 </form>
-                    <?php
-                }
-                ?>
-                </tbody>
+                <?php
+            }
+            ?>
+            </tbody>
         </table>
     </div>
 

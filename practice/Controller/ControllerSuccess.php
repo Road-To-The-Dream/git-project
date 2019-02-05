@@ -51,6 +51,6 @@ class ControllerSuccess extends Controller
             ];
         }
 
-        $this->objectView->generate('success', $DBdata);
+        View::generate('success', $DBdata);
     }
 }

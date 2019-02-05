@@ -7,13 +7,6 @@ use practice\Model\ActiveRecord\Product;
 
 class Controller
 {
-    public $objectView;
-
-    public function __construct()
-    {
-        $this->objectView = new View();
-    }
-
     /**
      * @return string
      */
@@ -28,18 +21,30 @@ class Controller
         }
     }
 
+    /**
+     * @param $array_id_products
+     * @return array
+     */
     protected function getNameProducts($array_id_products)
     {
         $products = new Product();
         return $data_name_products = $products->selectName($array_id_products);
     }
 
+    /**
+     * @param $id_products
+     * @return array
+     */
     protected function getImageProduct($id_products)
     {
         $image = new Images();
         return $data_image = $image->selectAllImageForProduct($id_products);
     }
 
+    /**
+     * @param $data_products
+     * @return array
+     */
     protected function getArrayIdProducts($data_products)
     {
         $id_products = array();
@@ -50,6 +55,10 @@ class Controller
         return $id_products;
     }
 
+    /**
+     * @param $id
+     * @return array
+     */
     protected function getProducts($id)
     {
         $product = new Product();
@@ -57,6 +66,10 @@ class Controller
         return $data_product = $product->selectProduct();
     }
 
+    /**
+     * @param $id
+     * @return Images
+     */
     protected function getImage($id)
     {
         $images = new Images();

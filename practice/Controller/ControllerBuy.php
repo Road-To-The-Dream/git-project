@@ -47,7 +47,7 @@ class ControllerBuy extends Controller
             ];
         }
 
-        $this->objectView->generate('buy', $DBdata);
+        View::generate('buy', $DBdata);
     }
 
     public function validateBuy()

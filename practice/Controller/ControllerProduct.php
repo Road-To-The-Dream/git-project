@@ -47,7 +47,7 @@ class ControllerProduct extends Controller
             'characteristic_value' => $data_characteristicValue
         ];
 
-        $this->objectView->generate('product', $DBdata);
+        View::generate('product', $DBdata);
     }
 
     /**

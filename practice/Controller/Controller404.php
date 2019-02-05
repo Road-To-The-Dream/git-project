@@ -12,6 +12,6 @@ class Controller404 extends Controller
 {
     public function index()
     {
-        $this->objectView->generate('404');
+        View::generate('404');
     }
 }

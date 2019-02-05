@@ -10,6 +10,7 @@ namespace practice\Model\ActiveRecord;
 
 use practice\Model\Model;
 use practice\Model\ConnectionManager;
+use practice\Model\Password;
 
 class Client extends Model
 {

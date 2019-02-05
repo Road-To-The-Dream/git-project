@@ -32,7 +32,7 @@ class ControllerCart extends Controller
             'image' => $data_images
         ];
 
-        $this->objectView->generate('cart', $DBdata);
+        View::generate('cart', $DBdata);
     }
 
     protected function getProductsCatalog()

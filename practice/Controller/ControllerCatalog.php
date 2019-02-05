@@ -49,7 +49,7 @@ class ControllerCatalog extends Controller
             'pagination' => $pagination
         ];
 
-        $this->objectView->generate('catalog', $DBdata);
+        View::generate('catalog', $DBdata);
     }
 
     /**
