@@ -12,20 +12,9 @@ use PHPUnit\Framework\TestCase;
 
 class PasswordTest extends TestCase
 {
-    public static function setUpBeforeClass()
-    {
-
-    }
-
     public function testVerifyPasswords()
     {
         $obj = new Password('fhlbc2012@gmail.com');
-
-        $this->assertTrue($obj->verifyPasswords('$2y$10$fCO2XafidboREdj96T1iUOYxn56iAAhUpmhYrLsJzDhnoBms0u7MO', 'fhlbc2012@gmail.com'));
-    }
-
-    protected function tearDown()
-    {
-
+        $this->assertTrue($obj->verifyPasswords('fhlbc2012', '$2y$10$.IFifnamxVMSsSbDlSPsyO6Lg0PccwO9rBFIwXIBMCt5ZErA/TxHu'));
     }
 }
