@@ -5,6 +5,8 @@
     <title>Catalog - LAPTOP</title>
     <link rel="stylesheet" href="/View/CSS/cart.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="/View/JS/bootstrap3-typeahead.js"></script>
+    <script src="/View/JS/Search.js"></script>
     <script src="/View/JS/AddProductInCart.js"></script>
     <script src="/View/JS/IncreaseAmountInCatalog.js"></script>
     <script src="/View/JS/DecreaseAmountInCatalog.js"></script>
@@ -24,6 +26,14 @@
         </nav>
     </div>
     <div class="container">
+        <div class="row d-flex justify-content-end mb-2">
+            <div class="col-auto text-right align-self-end">
+                <form class="form-inline my-2 my-lg-0">
+                    <input type="text" class="typeahead form-control input-lg" id="typeahead" name="s" placeholder="Search" autocomplete="off">
+                    <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
         <div class="row">
             <div class="col-3 mt-2">
                 <p>Подбор по параметрам</p>

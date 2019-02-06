@@ -8,6 +8,7 @@
 
 namespace practice\Controller;
 
+use practice\Model\ActiveRecord\Product;
 use practice\Model\Redirect;
 use practice\Model\Authentication;
 use practice\Model\LoginValidation;
@@ -46,5 +47,12 @@ class ControllerMain extends Controller
     {
         $objSendValidation = new SendValidate();
         echo $objSendValidation->checkSend($_POST['email'], $_POST['text_message']);
+    }
+
+    public function search()
+    {
+        $obj = new Product();
+        $obj->setName($_POST['query']);
+        echo json_encode($obj->selectProductSearch());
     }
 }

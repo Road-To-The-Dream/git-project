@@ -331,6 +331,13 @@ class Product extends Model
         return ConnectionManager::executionQuery($sql);
     }
 
+    public function selectProductSearch()
+    {
+        $name = "%".$this->getName()."%";
+        $sql = "SELECT id, name FROM product WHERE name LIKE '$name'";
+        return ConnectionManager::executionQuery($sql);
+    }
+
     public function insert()
     {
         $sql = "INSERT INTO product (name, description, price, unit, amount, create_at) 
