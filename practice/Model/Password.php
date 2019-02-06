@@ -66,7 +66,6 @@ class Password
      */
     public function updatePasswordInDatabase($password, $email)
     {
-        #Обновление данных в базе данных
         $this->client->updatePassword($password, $email);
     }
 }

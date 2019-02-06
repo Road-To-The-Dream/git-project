@@ -156,6 +156,10 @@ class Client extends Model
         $this->connectionDB();
     }
 
+    /**
+     * @param $info_client
+     * @return array
+     */
     private static function addInfoInObject($info_client)
     {
         $ClientList = array();
@@ -175,6 +179,9 @@ class Client extends Model
         return $ClientList;
     }
 
+    /**
+     * @return array
+     */
     public static function selectAllClientForAdmin()
     {
         ConnectionManager::getInstance();
@@ -185,32 +192,16 @@ class Client extends Model
         return self::addInfoInObject($info_client);
     }
 
+    /**
+     * @return array
+     */
     public function selectAllClient()
     {
-        ConnectionManager::getInstance();
         $sql = "SELECT id, last_name, first_name, patronymic, email, phone, password, role FROM client WHERE email = " . $this->getEmail();
 
         $info_client = ConnectionManager::executionQuery($sql);
 
         return self::addInfoInObject($info_client);
-    }
-
-    public function selectClient()
-    {
-        $sql = "SELECT first_name, last_name, email, phone FROM client WHERE id = " . $this->getId();
-
-        $info_client = ConnectionManager::executionQuery($sql);
-
-        $objClient = new Client();
-        $objClient->setFirstName($info_client[0]['first_name']);
-        $objClient->setLastName($info_client[0]['last_name']);
-        $objClient->setEmail($info_client[0]['email']);
-        $objClient->setPhone($info_client[0]['phone']);
-
-        $ClientList = array();
-        $ClientList[0] = $objClient;
-
-        return $ClientList;
     }
 
     /**
@@ -260,10 +251,13 @@ class Client extends Model
         return $ClientList;
     }
 
+    /**
+     * @return null
+     */
     public function insert()
     {
         $sql = "INSERT INTO client (last_name, first_name, patronymic, email, phone, password, role, create_at) 
-                VALUES (:last_name,:first_name,:patronymic,:email,:phone,:password, {$this->getRole()}, {$this->getCreateAt()})";
+                VALUES (:last_name,:first_name,:patronymic,:email,:phone,:password, '{$this->getRole()}', {$this->getCreateAt()})";
         $parameters = array(
             ':last_name' => $this->getLastName(),
             ':first_name' => $this->getFirstName(),
@@ -272,9 +266,12 @@ class Client extends Model
             ':phone' => $this->getPhone(),
             ':password' => $this->getPassword()
         );
-        ConnectionManager::executionQuery($sql, $parameters);
+        return ConnectionManager::executionQuery($sql, $parameters);
     }
 
+    /**
+     * @return null
+     */
     public function updateClientForAdmin()
     {
         $sql = "UPDATE client SET 
@@ -286,23 +283,27 @@ class Client extends Model
                                     password = '{$this->getPassword()}',
                                     role = {$this->getRole()},
                                     update_at = {$this->getUpdateAt()} WHERE id = {$this->getId()}";
-        ConnectionManager::executionQuery($sql);
+        return ConnectionManager::executionQuery($sql);
     }
 
     /**
      * @param $password
      * @param $email
+     * @return null
      */
     public function updatePassword($password, $email)
     {
         $date_of_change = '\'' . date("Y-m-d H:i:s") . '\'';
         $sql = "UPDATE client SET password = " . '\'' . $password . '\'' . ", update_at = " . $date_of_change . " WHERE email = " . '\'' . $email . '\'';
-        ConnectionManager::executionQuery($sql);
+        return ConnectionManager::executionQuery($sql);
     }
 
+    /**
+     * @return null
+     */
     public function delete()
     {
         $sql = "DELETE FROM client WHERE id = " . $this->getId();
-        ConnectionManager::executionQuery($sql);
+        return ConnectionManager::executionQuery($sql);
     }
 }
