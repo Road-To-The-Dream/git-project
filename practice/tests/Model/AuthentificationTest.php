@@ -15,6 +15,7 @@ class AuthentificationTest extends TestCase
     public function testCheckPasswordAndLoginAndStartSession()
     {
         $obj = new Authentication();
+
         $this->assertEquals($obj->checkPasswordAndLoginAndStartSession('fhlbc2012@gmail.com', 'fhlbc2012'), 'admin');
     }
 }
