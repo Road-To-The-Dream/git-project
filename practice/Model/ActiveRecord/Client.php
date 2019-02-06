@@ -188,7 +188,7 @@ class Client extends Model
     public function selectAllClient()
     {
         ConnectionManager::getInstance();
-        $sql = "SELECT id, last_name, first_name, patronymic, email, phone, password, role FROM client WHERE email = ".$this->getEmail();
+        $sql = "SELECT id, last_name, first_name, patronymic, email, phone, password, role FROM client WHERE email = " . $this->getEmail();
 
         $info_client = ConnectionManager::executionQuery($sql);
 
@@ -260,49 +260,32 @@ class Client extends Model
         return $ClientList;
     }
 
-    public static function insertClientForAdmin()
-    {
-        $date = '\'' . date("Y-m-d H:i:s") . '\'';
-        $sql = "INSERT INTO client (last_name,first_name,patronymic,email,phone,password,create_at) 
-                VALUES (:last_name,:first_name,:patronymic,:email,:phone,:password,$date)";
-        $parameters = array(
-            ':last_name' => $_POST['last_name'],
-            ':first_name' => $_POST['first_name'],
-            ':patronymic' => $_POST['patronymic'],
-            ':email' => $_POST['email'],
-            ':phone' => $_POST['phone'],
-            ':password' => $_POST['password']
-        );
-        ConnectionManager::executionQuery($sql, $parameters);
-    }
-
     public function insert()
     {
-        $sql = "INSERT INTO client (last_name,first_name,patronymic,email,phone,password,create_at) 
-                VALUES (:last_name,:first_name,:patronymic,:email,:phone,:password,$this->create_at)";
+        $sql = "INSERT INTO client (last_name, first_name, patronymic, email, phone, password, role, create_at) 
+                VALUES (:last_name,:first_name,:patronymic,:email,:phone,:password, {$this->getRole()}, {$this->getCreateAt()})";
         $parameters = array(
-            ':last_name' => $this->last_name,
-            ':first_name' => $this->first_name,
-            ':patronymic' => $this->patronymic,
-            ':email' => $this->email,
-            ':phone' => $this->phone,
-            ':password' => $this->password
+            ':last_name' => $this->getLastName(),
+            ':first_name' => $this->getFirstName(),
+            ':patronymic' => $this->getPatronymic(),
+            ':email' => $this->getEmail(),
+            ':phone' => $this->getPhone(),
+            ':password' => $this->getPassword()
         );
         ConnectionManager::executionQuery($sql, $parameters);
     }
 
-    public static function updateClientForAdmin()
+    public function updateClientForAdmin()
     {
-        $date = '\'' . date("Y-m-d H:i:s") . '\'';
         $sql = "UPDATE client SET 
-                                    last_name = '{$_POST['last_name']}', 
-                                    first_name = '{$_POST['first_name']}', 
-                                    patronymic = '{$_POST['patronymic']}',
-                                    email = '{$_POST['email']}',
-                                    phone = '{$_POST['phone']}',
-                                    password = '{$_POST['password']}',
-                                    role = '{$_POST['role']}',
-                                    update_at = " . $date . " WHERE id = " . $_POST['id'];
+                                    last_name = '{$this->getLastName()}', 
+                                    first_name = '{$this->getFirstName()}', 
+                                    patronymic = '{$this->getPatronymic()}',
+                                    email = '{$this->getEmail()}',
+                                    phone = '{$this->getPhone()}',
+                                    password = '{$this->getPassword()}',
+                                    role = {$this->getRole()},
+                                    update_at = {$this->getUpdateAt()} WHERE id = {$this->getId()}";
         ConnectionManager::executionQuery($sql);
     }
 
@@ -317,18 +300,9 @@ class Client extends Model
         ConnectionManager::executionQuery($sql);
     }
 
-    public static function deleteClientForAdmin()
+    public function delete()
     {
-        $sql = "DELETE FROM client WHERE id = " . $_POST['id'];
-        ConnectionManager::executionQuery($sql);
-    }
-
-    /**
-     * @param $id
-     */
-    public function delete($id)
-    {
-        $sql = "DELETE FROM client WHERE id = " . $id;
+        $sql = "DELETE FROM client WHERE id = " . $this->getId();
         ConnectionManager::executionQuery($sql);
     }
 }

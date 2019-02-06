@@ -67,14 +67,14 @@ class CharacteristicChild
     public function selectName($count_parent)
     {
         $ChildList = array();
-        for ($i = 1; $i <= $count_parent; $i++) {
-            $sql = "SELECT name FROM characteristic_child WHERE characteristic_parent_id = " . $i;
+        for ($characteristicParent = 1; $characteristicParent <= $count_parent; $characteristicParent++) {
+            $sql = "SELECT name FROM characteristic_child WHERE characteristic_parent_id = " . $characteristicParent;
             $name_child = ConnectionManager::executionQuery($sql);
 
-            for ($j = 0; $j < count($name_child); $j++) {
+            for ($characteristicChild = 0; $characteristicChild < count($name_child); $characteristicChild++) {
                 $objChild = new CharacteristicChild();
-                $objChild->setName($name_child[$j]['name']);
-                $ChildList[$i][$j] = $objChild;
+                $objChild->setName($name_child[$characteristicChild]['name']);
+                $ChildList[$characteristicParent][$characteristicChild] = $objChild;
             }
         }
 

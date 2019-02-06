@@ -13,7 +13,24 @@ use practice\Model\ConnectionManager;
 
 class Vendor extends Model
 {
+    private $id;
     private $name;
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id): void
+    {
+        $this->id = $id;
+    }
 
     /**
      * @return mixed
@@ -48,6 +65,17 @@ class Vendor extends Model
         }
 
         return $vendor;
+    }
+
+    public function selectNameById()
+    {
+        $sql = "SELECT name FROM vendor WHERE id = " . $this->getId();
+        $name_vendor = ConnectionManager::executionQuery($sql);
+
+        $objVendor = new Vendor();
+        $objVendor->setName($name_vendor[0]['name']);
+
+        return $objVendor;
     }
 
     public function insert()

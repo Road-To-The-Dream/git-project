@@ -113,6 +113,7 @@ class RegistrationValidation
         $client->setEmail($email);
         $client->setPhone($phone);
         $client->setPassword($password);
+        $client->setRole('user');
         $client->setCreateAt('\'' . date("Y-m-d H:i:s") . '\'');
 
         $client->insert();

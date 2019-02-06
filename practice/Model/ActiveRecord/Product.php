@@ -19,6 +19,8 @@ class Product extends Model
     private $price;
     private $unit;
     private $amount;
+    private $vendor_id;
+    private $category_id;
 
     public function __construct()
     {
@@ -122,6 +124,38 @@ class Product extends Model
     }
 
     /**
+     * @return mixed
+     */
+    public function getVendorId()
+    {
+        return $this->vendor_id;
+    }
+
+    /**
+     * @param mixed $vendor_id
+     */
+    public function setVendorId($vendor_id): void
+    {
+        $this->vendor_id = $vendor_id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCategoryId()
+    {
+        return $this->category_id;
+    }
+
+    /**
+     * @param mixed $category_id
+     */
+    public function setCategoryId($category_id): void
+    {
+        $this->category_id = $category_id;
+    }
+
+    /**
      * @param $info_products
      * @return array
      */
@@ -149,14 +183,26 @@ class Product extends Model
     public static function selectAllProductForAdmin()
     {
         ConnectionManager::getInstance();
-        $sql = "SELECT id, name, description, price, unit, amount FROM product";
+        $sql = "SELECT id, name, description, price, unit, amount, vendor_id, category_id FROM product";
 
-        $info_product = ConnectionManager::executionQuery($sql);
+        $info_products = ConnectionManager::executionQuery($sql);
 
-        $Obj = new self;
-        $productList = $Obj->addedProductsInObject($info_product);
+        $productsList = array();
 
-        return $productList;
+        for ($i = 0; $i < count($info_products); $i++) {
+            $objProduct = new Product();
+            $objProduct->setId($info_products[$i]['id']);
+            $objProduct->setName($info_products[$i]['name']);
+            $objProduct->setDescription($info_products[$i]['description']);
+            $objProduct->setPrice($info_products[$i]['price']);
+            $objProduct->setUnit($info_products[$i]['unit']);
+            $objProduct->setAmount($info_products[$i]['amount']);
+            $objProduct->setVendorId($info_products[$i]['vendor_id']);
+            $objProduct->setCategoryId($info_products[$i]['category_id']);
+            $productsList[$i] = $objProduct;
+        }
+
+        return $productsList;
     }
 
     /**
@@ -287,6 +333,16 @@ class Product extends Model
 
     public function insert()
     {
+        $sql = "INSERT INTO product (name, description, price, unit, amount, create_at) 
+                VALUES (:name,:description,:price,:unit,:amount, {$this->getCreateAt()})";
+        $parameters = array(
+            ':name' => $this->getName(),
+            ':description' => $this->getDescription(),
+            ':price' => $this->getPrice(),
+            ':unit' => $this->getUnit(),
+            ':amount' => $this->getAmount()
+        );
+        ConnectionManager::executionQuery($sql, $parameters);
     }
 
     public function updateDecreaseAmount()
@@ -302,7 +358,21 @@ class Product extends Model
         ConnectionManager::executionQuery($sql);
     }
 
+    public function updateProductForAdmin()
+    {
+        $sql = "UPDATE product SET 
+                                    name = '{$this->getName()}', 
+                                    description = '{$this->getDescription()}', 
+                                    price = '{$this->getPrice()}',
+                                    unit = '{$this->getUnit()}',
+                                    amount = '{$this->getAmount()}',
+                                    update_at = {$this->getUpdateAt()} WHERE id = {$this->getId()}";
+        ConnectionManager::executionQuery($sql);
+    }
+
     public function delete()
     {
+        $sql = "DELETE FROM product WHERE id = " . $this->getId();
+        ConnectionManager::executionQuery($sql);
     }
 }
