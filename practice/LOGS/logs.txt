@@ -1,0 +1,192 @@
+[07-Feb-2019 17:05:52 Europe/Moscow] PHP Notice:  Undefined index: category in C:\OSPanel\domains\practice\Router\Router.php on line 15
+[07-Feb-2019 17:05:52 Europe/Moscow] PHP Stack trace:
+[07-Feb-2019 17:05:52 Europe/Moscow] PHP   1. {main}() C:\OSPanel\domains\practice\index.php:0
+[07-Feb-2019 17:05:52 Europe/Moscow] PHP   2. practice\Router\Router->routing($url = *uninitialized*) C:\OSPanel\domains\practice\index.php:8
+[07-Feb-2019 17:05:52 Europe/Moscow] PHP 
+[07-Feb-2019 17:05:52 Europe/Moscow] PHP Dump $_SERVER
+[07-Feb-2019 17:05:52 Europe/Moscow] PHP    $_SERVER['REMOTE_ADDR'] = '127.0.0.1'
+[07-Feb-2019 17:05:52 Europe/Moscow] PHP    $_SERVER['REQUEST_METHOD'] = 'GET'
+[07-Feb-2019 17:05:52 Europe/Moscow] PHP Dump $_SESSION
+[07-Feb-2019 17:05:52 Europe/Moscow] PHP    $_SESSION['*'] is undefined
+[07-Feb-2019 17:05:52 Europe/Moscow] PHP Dump $_REQUEST
+[07-Feb-2019 17:05:52 Europe/Moscow] PHP 
+[07-Feb-2019 17:05:52 Europe/Moscow] PHP Notice:  Undefined index: vendor in C:\OSPanel\domains\practice\Router\Router.php on line 16
+[07-Feb-2019 17:05:52 Europe/Moscow] PHP Stack trace:
+[07-Feb-2019 17:05:52 Europe/Moscow] PHP   1. {main}() C:\OSPanel\domains\practice\index.php:0
+[07-Feb-2019 17:05:52 Europe/Moscow] PHP   2. practice\Router\Router->routing($url = *uninitialized*) C:\OSPanel\domains\practice\index.php:8
+[07-Feb-2019 17:05:52 Europe/Moscow] PHP 
+[07-Feb-2019 17:05:52 Europe/Moscow] PHP Dump $_SERVER
+[07-Feb-2019 17:05:52 Europe/Moscow] PHP    $_SERVER['REMOTE_ADDR'] = '127.0.0.1'
+[07-Feb-2019 17:05:52 Europe/Moscow] PHP    $_SERVER['REQUEST_METHOD'] = 'GET'
+[07-Feb-2019 17:05:52 Europe/Moscow] PHP Dump $_SESSION
+[07-Feb-2019 17:05:52 Europe/Moscow] PHP    $_SESSION['*'] is undefined
+[07-Feb-2019 17:05:52 Europe/Moscow] PHP Dump $_REQUEST
+[07-Feb-2019 17:05:52 Europe/Moscow] PHP 
+[07-Feb-2019 17:05:52 Europe/Moscow] PHP Notice:  Undefined index: page in C:\OSPanel\domains\practice\Router\Router.php on line 17
+[07-Feb-2019 17:05:52 Europe/Moscow] PHP Stack trace:
+[07-Feb-2019 17:05:52 Europe/Moscow] PHP   1. {main}() C:\OSPanel\domains\practice\index.php:0
+[07-Feb-2019 17:05:52 Europe/Moscow] PHP   2. practice\Router\Router->routing($url = *uninitialized*) C:\OSPanel\domains\practice\index.php:8
+[07-Feb-2019 17:05:52 Europe/Moscow] PHP 
+[07-Feb-2019 17:05:52 Europe/Moscow] PHP Dump $_SERVER
+[07-Feb-2019 17:05:52 Europe/Moscow] PHP    $_SERVER['REMOTE_ADDR'] = '127.0.0.1'
+[07-Feb-2019 17:05:52 Europe/Moscow] PHP    $_SERVER['REQUEST_METHOD'] = 'GET'
+[07-Feb-2019 17:05:52 Europe/Moscow] PHP Dump $_SESSION
+[07-Feb-2019 17:05:52 Europe/Moscow] PHP    $_SESSION['*'] is undefined
+[07-Feb-2019 17:05:52 Europe/Moscow] PHP Dump $_REQUEST
+[07-Feb-2019 17:05:52 Europe/Moscow] PHP 
+[07-Feb-2019 19:39:28 Europe/Moscow] PHP Notice:  Undefined index: category in C:\OSPanel\domains\practice\Router\Router.php on line 15
+[07-Feb-2019 19:39:28 Europe/Moscow] PHP Stack trace:
+[07-Feb-2019 19:39:28 Europe/Moscow] PHP   1. {main}() C:\OSPanel\domains\practice\index.php:0
+[07-Feb-2019 19:39:28 Europe/Moscow] PHP   2. practice\Router\Router->routing($url = *uninitialized*) C:\OSPanel\domains\practice\index.php:7
+[07-Feb-2019 19:39:28 Europe/Moscow] PHP 
+[07-Feb-2019 19:39:28 Europe/Moscow] PHP Dump $_SERVER
+[07-Feb-2019 19:39:28 Europe/Moscow] PHP    $_SERVER['REMOTE_ADDR'] = '127.0.0.1'
+[07-Feb-2019 19:39:28 Europe/Moscow] PHP    $_SERVER['REQUEST_METHOD'] = 'GET'
+[07-Feb-2019 19:39:28 Europe/Moscow] PHP Dump $_SESSION
+[07-Feb-2019 19:39:28 Europe/Moscow] PHP    $_SESSION['*'] is undefined
+[07-Feb-2019 19:39:28 Europe/Moscow] PHP Dump $_REQUEST
+[07-Feb-2019 19:39:28 Europe/Moscow] PHP 
+[07-Feb-2019 19:39:28 Europe/Moscow] PHP Notice:  Undefined index: vendor in C:\OSPanel\domains\practice\Router\Router.php on line 16
+[07-Feb-2019 19:39:28 Europe/Moscow] PHP Stack trace:
+[07-Feb-2019 19:39:28 Europe/Moscow] PHP   1. {main}() C:\OSPanel\domains\practice\index.php:0
+[07-Feb-2019 19:39:28 Europe/Moscow] PHP   2. practice\Router\Router->routing($url = *uninitialized*) C:\OSPanel\domains\practice\index.php:7
+[07-Feb-2019 19:39:28 Europe/Moscow] PHP 
+[07-Feb-2019 19:39:28 Europe/Moscow] PHP Dump $_SERVER
+[07-Feb-2019 19:39:28 Europe/Moscow] PHP    $_SERVER['REMOTE_ADDR'] = '127.0.0.1'
+[07-Feb-2019 19:39:28 Europe/Moscow] PHP    $_SERVER['REQUEST_METHOD'] = 'GET'
+[07-Feb-2019 19:39:28 Europe/Moscow] PHP Dump $_SESSION
+[07-Feb-2019 19:39:28 Europe/Moscow] PHP    $_SESSION['*'] is undefined
+[07-Feb-2019 19:39:28 Europe/Moscow] PHP Dump $_REQUEST
+[07-Feb-2019 19:39:28 Europe/Moscow] PHP 
+[07-Feb-2019 19:39:28 Europe/Moscow] PHP Notice:  Undefined index: page in C:\OSPanel\domains\practice\Router\Router.php on line 17
+[07-Feb-2019 19:39:28 Europe/Moscow] PHP Stack trace:
+[07-Feb-2019 19:39:28 Europe/Moscow] PHP   1. {main}() C:\OSPanel\domains\practice\index.php:0
+[07-Feb-2019 19:39:28 Europe/Moscow] PHP   2. practice\Router\Router->routing($url = *uninitialized*) C:\OSPanel\domains\practice\index.php:7
+[07-Feb-2019 19:39:28 Europe/Moscow] PHP 
+[07-Feb-2019 19:39:28 Europe/Moscow] PHP Dump $_SERVER
+[07-Feb-2019 19:39:28 Europe/Moscow] PHP    $_SERVER['REMOTE_ADDR'] = '127.0.0.1'
+[07-Feb-2019 19:39:28 Europe/Moscow] PHP    $_SERVER['REQUEST_METHOD'] = 'GET'
+[07-Feb-2019 19:39:28 Europe/Moscow] PHP Dump $_SESSION
+[07-Feb-2019 19:39:28 Europe/Moscow] PHP    $_SESSION['*'] is undefined
+[07-Feb-2019 19:39:28 Europe/Moscow] PHP Dump $_REQUEST
+[07-Feb-2019 19:39:28 Europe/Moscow] PHP 
+[07-Feb-2019 19:39:36 Europe/Moscow] PHP Notice:  Undefined index: category in C:\OSPanel\domains\practice\Router\Router.php on line 15
+[07-Feb-2019 19:39:36 Europe/Moscow] PHP Stack trace:
+[07-Feb-2019 19:39:36 Europe/Moscow] PHP   1. {main}() C:\OSPanel\domains\practice\index.php:0
+[07-Feb-2019 19:39:36 Europe/Moscow] PHP   2. practice\Router\Router->routing($url = *uninitialized*) C:\OSPanel\domains\practice\index.php:7
+[07-Feb-2019 19:39:36 Europe/Moscow] PHP 
+[07-Feb-2019 19:39:36 Europe/Moscow] PHP Dump $_SERVER
+[07-Feb-2019 19:39:36 Europe/Moscow] PHP    $_SERVER['REMOTE_ADDR'] = '127.0.0.1'
+[07-Feb-2019 19:39:36 Europe/Moscow] PHP    $_SERVER['REQUEST_METHOD'] = 'POST'
+[07-Feb-2019 19:39:36 Europe/Moscow] PHP Dump $_SESSION
+[07-Feb-2019 19:39:36 Europe/Moscow] PHP    $_SESSION['*'] is undefined
+[07-Feb-2019 19:39:36 Europe/Moscow] PHP Dump $_REQUEST
+[07-Feb-2019 19:39:36 Europe/Moscow] PHP    $_REQUEST['email'] = 'qwe@gmail.com'
+[07-Feb-2019 19:39:36 Europe/Moscow] PHP    $_REQUEST['text_message'] = '                       '
+[07-Feb-2019 19:39:36 Europe/Moscow] PHP 
+[07-Feb-2019 19:39:36 Europe/Moscow] PHP Notice:  Undefined index: vendor in C:\OSPanel\domains\practice\Router\Router.php on line 16
+[07-Feb-2019 19:39:36 Europe/Moscow] PHP Stack trace:
+[07-Feb-2019 19:39:36 Europe/Moscow] PHP   1. {main}() C:\OSPanel\domains\practice\index.php:0
+[07-Feb-2019 19:39:36 Europe/Moscow] PHP   2. practice\Router\Router->routing($url = *uninitialized*) C:\OSPanel\domains\practice\index.php:7
+[07-Feb-2019 19:39:36 Europe/Moscow] PHP 
+[07-Feb-2019 19:39:36 Europe/Moscow] PHP Dump $_SERVER
+[07-Feb-2019 19:39:37 Europe/Moscow] PHP    $_SERVER['REMOTE_ADDR'] = '127.0.0.1'
+[07-Feb-2019 19:39:37 Europe/Moscow] PHP    $_SERVER['REQUEST_METHOD'] = 'POST'
+[07-Feb-2019 19:39:37 Europe/Moscow] PHP Dump $_SESSION
+[07-Feb-2019 19:39:37 Europe/Moscow] PHP    $_SESSION['*'] is undefined
+[07-Feb-2019 19:39:37 Europe/Moscow] PHP Dump $_REQUEST
+[07-Feb-2019 19:39:37 Europe/Moscow] PHP    $_REQUEST['email'] = 'qwe@gmail.com'
+[07-Feb-2019 19:39:37 Europe/Moscow] PHP    $_REQUEST['text_message'] = '                       '
+[07-Feb-2019 19:39:37 Europe/Moscow] PHP 
+[07-Feb-2019 19:39:37 Europe/Moscow] PHP Notice:  Undefined index: page in C:\OSPanel\domains\practice\Router\Router.php on line 17
+[07-Feb-2019 19:39:37 Europe/Moscow] PHP Stack trace:
+[07-Feb-2019 19:39:37 Europe/Moscow] PHP   1. {main}() C:\OSPanel\domains\practice\index.php:0
+[07-Feb-2019 19:39:37 Europe/Moscow] PHP   2. practice\Router\Router->routing($url = *uninitialized*) C:\OSPanel\domains\practice\index.php:7
+[07-Feb-2019 19:39:37 Europe/Moscow] PHP 
+[07-Feb-2019 19:39:37 Europe/Moscow] PHP Dump $_SERVER
+[07-Feb-2019 19:39:37 Europe/Moscow] PHP    $_SERVER['REMOTE_ADDR'] = '127.0.0.1'
+[07-Feb-2019 19:39:37 Europe/Moscow] PHP    $_SERVER['REQUEST_METHOD'] = 'POST'
+[07-Feb-2019 19:39:37 Europe/Moscow] PHP Dump $_SESSION
+[07-Feb-2019 19:39:37 Europe/Moscow] PHP    $_SESSION['*'] is undefined
+[07-Feb-2019 19:39:37 Europe/Moscow] PHP Dump $_REQUEST
+[07-Feb-2019 19:39:37 Europe/Moscow] PHP    $_REQUEST['email'] = 'qwe@gmail.com'
+[07-Feb-2019 19:39:37 Europe/Moscow] PHP    $_REQUEST['text_message'] = '                       '
+[07-Feb-2019 19:39:37 Europe/Moscow] PHP 
+[07-Feb-2019 19:40:14 Europe/Moscow] PHP Notice:  Undefined index: category in C:\OSPanel\domains\practice\Router\Router.php on line 15
+[07-Feb-2019 19:40:14 Europe/Moscow] PHP Stack trace:
+[07-Feb-2019 19:40:14 Europe/Moscow] PHP   1. {main}() C:\OSPanel\domains\practice\index.php:0
+[07-Feb-2019 19:40:14 Europe/Moscow] PHP   2. practice\Router\Router->routing($url = *uninitialized*) C:\OSPanel\domains\practice\index.php:7
+[07-Feb-2019 19:40:14 Europe/Moscow] PHP 
+[07-Feb-2019 19:40:14 Europe/Moscow] PHP Dump $_SERVER
+[07-Feb-2019 19:40:14 Europe/Moscow] PHP    $_SERVER['REMOTE_ADDR'] = '127.0.0.1'
+[07-Feb-2019 19:40:14 Europe/Moscow] PHP    $_SERVER['REQUEST_METHOD'] = 'GET'
+[07-Feb-2019 19:40:14 Europe/Moscow] PHP Dump $_SESSION
+[07-Feb-2019 19:40:14 Europe/Moscow] PHP    $_SESSION['*'] is undefined
+[07-Feb-2019 19:40:14 Europe/Moscow] PHP Dump $_REQUEST
+[07-Feb-2019 19:40:14 Europe/Moscow] PHP 
+[07-Feb-2019 19:40:14 Europe/Moscow] PHP Notice:  Undefined index: vendor in C:\OSPanel\domains\practice\Router\Router.php on line 16
+[07-Feb-2019 19:40:14 Europe/Moscow] PHP Stack trace:
+[07-Feb-2019 19:40:14 Europe/Moscow] PHP   1. {main}() C:\OSPanel\domains\practice\index.php:0
+[07-Feb-2019 19:40:14 Europe/Moscow] PHP   2. practice\Router\Router->routing($url = *uninitialized*) C:\OSPanel\domains\practice\index.php:7
+[07-Feb-2019 19:40:14 Europe/Moscow] PHP 
+[07-Feb-2019 19:40:14 Europe/Moscow] PHP Dump $_SERVER
+[07-Feb-2019 19:40:14 Europe/Moscow] PHP    $_SERVER['REMOTE_ADDR'] = '127.0.0.1'
+[07-Feb-2019 19:40:14 Europe/Moscow] PHP    $_SERVER['REQUEST_METHOD'] = 'GET'
+[07-Feb-2019 19:40:14 Europe/Moscow] PHP Dump $_SESSION
+[07-Feb-2019 19:40:14 Europe/Moscow] PHP    $_SESSION['*'] is undefined
+[07-Feb-2019 19:40:14 Europe/Moscow] PHP Dump $_REQUEST
+[07-Feb-2019 19:40:14 Europe/Moscow] PHP 
+[07-Feb-2019 19:40:14 Europe/Moscow] PHP Notice:  Undefined index: page in C:\OSPanel\domains\practice\Router\Router.php on line 17
+[07-Feb-2019 19:40:14 Europe/Moscow] PHP Stack trace:
+[07-Feb-2019 19:40:14 Europe/Moscow] PHP   1. {main}() C:\OSPanel\domains\practice\index.php:0
+[07-Feb-2019 19:40:14 Europe/Moscow] PHP   2. practice\Router\Router->routing($url = *uninitialized*) C:\OSPanel\domains\practice\index.php:7
+[07-Feb-2019 19:40:14 Europe/Moscow] PHP 
+[07-Feb-2019 19:40:14 Europe/Moscow] PHP Dump $_SERVER
+[07-Feb-2019 19:40:14 Europe/Moscow] PHP    $_SERVER['REMOTE_ADDR'] = '127.0.0.1'
+[07-Feb-2019 19:40:14 Europe/Moscow] PHP    $_SERVER['REQUEST_METHOD'] = 'GET'
+[07-Feb-2019 19:40:14 Europe/Moscow] PHP Dump $_SESSION
+[07-Feb-2019 19:40:14 Europe/Moscow] PHP    $_SESSION['*'] is undefined
+[07-Feb-2019 19:40:14 Europe/Moscow] PHP Dump $_REQUEST
+[07-Feb-2019 19:40:14 Europe/Moscow] PHP 
+[07-Feb-2019 19:40:20 Europe/Moscow] PHP Notice:  Undefined index: category in C:\OSPanel\domains\practice\Router\Router.php on line 15
+[07-Feb-2019 19:40:20 Europe/Moscow] PHP Stack trace:
+[07-Feb-2019 19:40:20 Europe/Moscow] PHP   1. {main}() C:\OSPanel\domains\practice\index.php:0
+[07-Feb-2019 19:40:20 Europe/Moscow] PHP   2. practice\Router\Router->routing($url = *uninitialized*) C:\OSPanel\domains\practice\index.php:7
+[07-Feb-2019 19:40:20 Europe/Moscow] PHP 
+[07-Feb-2019 19:40:20 Europe/Moscow] PHP Dump $_SERVER
+[07-Feb-2019 19:40:20 Europe/Moscow] PHP    $_SERVER['REMOTE_ADDR'] = '127.0.0.1'
+[07-Feb-2019 19:40:20 Europe/Moscow] PHP    $_SERVER['REQUEST_METHOD'] = 'POST'
+[07-Feb-2019 19:40:20 Europe/Moscow] PHP Dump $_SESSION
+[07-Feb-2019 19:40:20 Europe/Moscow] PHP    $_SESSION['*'] is undefined
+[07-Feb-2019 19:40:20 Europe/Moscow] PHP Dump $_REQUEST
+[07-Feb-2019 19:40:20 Europe/Moscow] PHP    $_REQUEST['email'] = 'qwe@gmail.com'
+[07-Feb-2019 19:40:20 Europe/Moscow] PHP    $_REQUEST['text_message'] = '             '
+[07-Feb-2019 19:40:20 Europe/Moscow] PHP 
+[07-Feb-2019 19:40:20 Europe/Moscow] PHP Notice:  Undefined index: vendor in C:\OSPanel\domains\practice\Router\Router.php on line 16
+[07-Feb-2019 19:40:20 Europe/Moscow] PHP Stack trace:
+[07-Feb-2019 19:40:20 Europe/Moscow] PHP   1. {main}() C:\OSPanel\domains\practice\index.php:0
+[07-Feb-2019 19:40:20 Europe/Moscow] PHP   2. practice\Router\Router->routing($url = *uninitialized*) C:\OSPanel\domains\practice\index.php:7
+[07-Feb-2019 19:40:20 Europe/Moscow] PHP 
+[07-Feb-2019 19:40:20 Europe/Moscow] PHP Dump $_SERVER
+[07-Feb-2019 19:40:20 Europe/Moscow] PHP    $_SERVER['REMOTE_ADDR'] = '127.0.0.1'
+[07-Feb-2019 19:40:20 Europe/Moscow] PHP    $_SERVER['REQUEST_METHOD'] = 'POST'
+[07-Feb-2019 19:40:20 Europe/Moscow] PHP Dump $_SESSION
+[07-Feb-2019 19:40:20 Europe/Moscow] PHP    $_SESSION['*'] is undefined
+[07-Feb-2019 19:40:20 Europe/Moscow] PHP Dump $_REQUEST
+[07-Feb-2019 19:40:20 Europe/Moscow] PHP    $_REQUEST['email'] = 'qwe@gmail.com'
+[07-Feb-2019 19:40:20 Europe/Moscow] PHP    $_REQUEST['text_message'] = '             '
+[07-Feb-2019 19:40:20 Europe/Moscow] PHP 
+[07-Feb-2019 19:40:20 Europe/Moscow] PHP Notice:  Undefined index: page in C:\OSPanel\domains\practice\Router\Router.php on line 17
+[07-Feb-2019 19:40:20 Europe/Moscow] PHP Stack trace:
+[07-Feb-2019 19:40:20 Europe/Moscow] PHP   1. {main}() C:\OSPanel\domains\practice\index.php:0
+[07-Feb-2019 19:40:20 Europe/Moscow] PHP   2. practice\Router\Router->routing($url = *uninitialized*) C:\OSPanel\domains\practice\index.php:7
+[07-Feb-2019 19:40:21 Europe/Moscow] PHP 
+[07-Feb-2019 19:40:21 Europe/Moscow] PHP Dump $_SERVER
+[07-Feb-2019 19:40:21 Europe/Moscow] PHP    $_SERVER['REMOTE_ADDR'] = '127.0.0.1'
+[07-Feb-2019 19:40:21 Europe/Moscow] PHP    $_SERVER['REQUEST_METHOD'] = 'POST'
+[07-Feb-2019 19:40:21 Europe/Moscow] PHP Dump $_SESSION
+[07-Feb-2019 19:40:21 Europe/Moscow] PHP    $_SESSION['*'] is undefined
+[07-Feb-2019 19:40:21 Europe/Moscow] PHP Dump $_REQUEST
+[07-Feb-2019 19:40:21 Europe/Moscow] PHP    $_REQUEST['email'] = 'qwe@gmail.com'
+[07-Feb-2019 19:40:21 Europe/Moscow] PHP    $_REQUEST['text_message'] = '             '
+[07-Feb-2019 19:40:21 Europe/Moscow] PHP 
