@@ -21,8 +21,20 @@ class SendMessage
         $message = (new \Swift_Message('Shop - LAPTOP'))
             ->setFrom(['rpz14.sergey@gmail.com'])
             ->setTo(['rpz14.sergey@gmail.com'])
-            ->setBody($email . ' ' . $send);
+            ->setBody(self::prepareBody($email, $send), 'text/html')
+            ->attach(\Swift_Attachment::fromPath('C:\OSPanel\domains\practice\View\Image\Lenovo ThinkPad Edge E470 (20H1006YRT) (2).jpg'));
 
         $mailer->send($message);
+    }
+
+    private static function prepareBody($email, $send)
+    {
+        $body = '<html>' .
+                ' <body>' .
+                '<strong>' . 'My email: ' . '</strong>' . $email . '<br>' .
+                '<strong>' . 'Rest of message: ' . '</strong>' . $send .
+                ' </body>' .
+                '</html>';
+        return $body;
     }
 }
