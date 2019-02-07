@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Success - LAPTOP</title>
     <link rel="stylesheet" href="/View/CSS/cart.css">
+    <link rel="stylesheet" href="/View/CSS/success.css">
 </head>
 <body>
 <div class="container">
@@ -63,6 +64,9 @@
             </div>
         </div>
     </div>
+</div>
+<div class="content">
+    <a href="http://practice/main">Перейти к главной странице</a>
 </div>
 </body>
 </html>

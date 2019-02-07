@@ -22,7 +22,7 @@
                                         </div>
                                         <input type="text" class="form-control" id="email" placeholder="Email"
                                                aria-label="email" aria-describedby="basic-addon1"
-                                               value="<?= $_SESSION['Email'] ?>">
+                                               value="<?= isset($_SESSION['isAuth']) ? $_SESSION['Email'] : '' ?>">
                                     </div>
                                 </div>
                             </div>

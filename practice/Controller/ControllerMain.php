@@ -46,7 +46,9 @@ class ControllerMain extends Controller
     public function validateSend()
     {
         $objSendValidation = new SendValidate();
-        echo $objSendValidation->checkSend($_POST['email'], $_POST['text_message']);
+        $objSendValidation->setEmail($_POST['email']);
+        $objSendValidation->setText($_POST['text_message']);
+        echo $objSendValidation->checkSend();
     }
 
     public function search()

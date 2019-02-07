@@ -87,7 +87,7 @@
                     </div>
                 </div>
                 <li class="nav-item active">
-                    <a class="nav-link">Hello, <?php echo $_SESSION['isAuth'] ?></a>
+                    <a class="nav-link">Hello, <?= isset($_SESSION['isAuth']) ? $_SESSION['isAuth'] : ''?></a>
                 </li>
                 <li class="nav-item">
                     <a href="" class="nav-link mr-1" data-toggle="modal" data-target="#exampleModalCenter1"><img

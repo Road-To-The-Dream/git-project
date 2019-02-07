@@ -12,20 +12,88 @@ use practice\Controller\SendMessage;
 
 class SendValidate
 {
-    public function checkSend($email, $text)
+    private $message_about_send = array("", "");
+    private $email;
+    private $text;
+
+    /**
+     * @return mixed
+     */
+    public function getEmail()
     {
-        $message_about_send = array("", "");
+        return $this->email;
+    }
 
-        if ($email == "") {
-            $message_about_send[0] = "Field email empty";
+    /**
+     * @param mixed $email
+     */
+    public function setEmail($email): void
+    {
+        $this->email = $email;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getText()
+    {
+        return $this->text;
+    }
+
+    /**
+     * @param mixed $text
+     */
+    public function setText($text): void
+    {
+        $this->text = $text;
+    }
+
+    /**
+     * @return string
+     */
+    public function checkSend()
+    {
+        if ($this->getEmail() == "") {
+            $this->message_about_send[0] = "Field email empty";
         }
 
-        if ($text == "") {
-            $message_about_send[1] = "Field message empty";
+        if ($this->getText() == "") {
+            $this->message_about_send[1] = "Field message empty";
         }
 
-        SendMessage::send($email, $text);
+        $this->checkErrorsAndSendMail();
 
-        return json_encode($message_about_send);
+        return json_encode($this->message_about_send);
+    }
+
+    /**
+     * @return bool
+     */
+    private function checkErrorsAndSendMail()
+    {
+        if ($this->message_about_send[0] == "" && $this->message_about_send[1] == "") {
+            $email = $this->cleanFields($this->getEmail());
+            $text = $this->cleanFields($this->getText());
+
+            SendMessage::send($email, $text);
+
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * @param string $value_field
+     * @return string
+     */
+    private function cleanFields($value_field = "")
+    {
+        $value_field = trim($value_field);
+        $value_field = stripslashes($value_field);
+        $value_field = strip_tags($value_field);
+        $value_field = htmlspecialchars($value_field);
+
+        return $value_field;
     }
 }
