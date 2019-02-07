@@ -53,11 +53,11 @@ class SendValidate
      */
     public function checkSend()
     {
-        if ($this->getEmail() == "") {
+        if (trim($this->getEmail()) == "") {
             $this->message_about_send[0] = "Field email empty";
         }
 
-        if ($this->getText() == "") {
+        if (trim($this->getText()) == "") {
             $this->message_about_send[1] = "Field message empty";
         }
 
