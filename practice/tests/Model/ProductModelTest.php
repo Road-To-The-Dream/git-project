@@ -62,12 +62,12 @@ class ProductModelTest extends TestCase
         $this->assertEquals('Lenovo ThinkPad Edge E470 (20H1006YRT)', $result[0]['name']);
     }
 
-    public function testupdateDecreaseAmount()
+    public function testUpdateDecreaseAmount()
     {
         $this->assertEquals(true, $this->obj->updateDecreaseAmount());
     }
 
-    public function testupdateIncreaseAmount()
+    public function testUpdateIncreaseAmount()
     {
         $this->obj->setAmount(1);
         $this->obj->setUpdateAt('\'' . date("Y-m-d H:i:s") . '\'');
