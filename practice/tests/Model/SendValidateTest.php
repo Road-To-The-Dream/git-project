@@ -13,12 +13,15 @@ use PHPUnit\Framework\TestCase;
 class SendValidateTest extends TestCase
 {
     private $obj;
+    private $class;
 
     protected function setUp()
     {
         $this->obj = new SendValidate();
         $this->obj->setEmail("fhlbc2012@gmail.com");
         $this->obj->setText("Test send");
+
+        $this->class = new \ReflectionClass(SendValidate::class);
     }
 
     public function testCheckSend()
@@ -28,8 +31,7 @@ class SendValidateTest extends TestCase
 
     public function testCheckErrorsAndSendMail()
     {
-        $class = new \ReflectionClass(SendValidate::class);
-        $method = $class->getMethod('checkErrorsAndSendMail');
+        $method = $this->class->getMethod('checkErrorsAndSendMail');
         $method->setAccessible(true);
 
         $result = $method->invoke($this->obj);
@@ -38,8 +40,7 @@ class SendValidateTest extends TestCase
 
     public function testCleanFields()
     {
-        $class = new \ReflectionClass(SendValidate::class);
-        $method = $class->getMethod('cleanFields');
+        $method = $this->class->getMethod('cleanFields');
         $method->setAccessible(true);
 
         $result = $method->invoke($this->obj, "<a href='test'>Test</a>");

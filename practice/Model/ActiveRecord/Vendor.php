@@ -80,13 +80,29 @@ class Vendor extends Model
 
     public function insert()
     {
+        $sql = "INSERT INTO vendor (name, create_at) 
+                VALUES (:name, {$this->getCreateAt()})";
+        $parameters = array(
+            ':name' => $this->getName()
+        );
+        return ConnectionManager::executionQuery($sql, $parameters);
     }
 
+    /**
+     * @return null
+     */
     public function update()
     {
+        $sql = "UPDATE vendor SET name = " . '\'' . $this->getName() . '\'' . ", update_at = " . $this->getUpdateAt() . " WHERE id = " . '\'' . $this->getId() . '\'';
+        return ConnectionManager::executionQuery($sql);
     }
 
-    public function delete($id)
+    /**
+     * @return null
+     */
+    public function delete()
     {
+        $sql = "DELETE FROM vendor WHERE id = " . $this->getId();
+        return ConnectionManager::executionQuery($sql);
     }
 }
