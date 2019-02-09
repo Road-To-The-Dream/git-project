@@ -106,7 +106,7 @@ class ControllerCatalog extends Controller
      */
     private function pagination($page, $category, $vendor)
     {
-        $amount_product = Product::getAmountProducts($category, $vendor);
+        $amount_product = Product::getAmountProducts($vendor, $category);
 
         $paginator = array();
         $paginator['amountProduct'] = self::AMOUNTPRODUCT;

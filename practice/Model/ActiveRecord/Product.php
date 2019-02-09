@@ -210,7 +210,7 @@ class Product extends Model
      * @param $array_vendors
      * @return null
      */
-    public static function getAmountProducts($category = 1, $array_vendors)
+    public static function getAmountProducts($array_vendors, $category = 1)
     {
         ConnectionManager::getInstance();
 
@@ -349,20 +349,20 @@ class Product extends Model
             ':unit' => $this->getUnit(),
             ':amount' => $this->getAmount()
         );
-        ConnectionManager::executionQuery($sql, $parameters);
+        return ConnectionManager::executionQuery($sql, $parameters);
     }
 
     public function updateDecreaseAmount()
     {
         $sql = "UPDATE product SET amount = amount - 1 WHERE id = " . $this->getId();
-        ConnectionManager::executionQuery($sql);
+        return ConnectionManager::executionQuery($sql);
     }
 
     public function updateIncreaseAmount()
     {
         $sql = "UPDATE product SET amount = amount + {$this->getAmount()}, update_at = {$this->getUpdateAt()} 
                 WHERE id = " . $this->getId();
-        ConnectionManager::executionQuery($sql);
+        return ConnectionManager::executionQuery($sql);
     }
 
     public function updateProductForAdmin()
@@ -374,12 +374,12 @@ class Product extends Model
                                     unit = '{$this->getUnit()}',
                                     amount = '{$this->getAmount()}',
                                     update_at = {$this->getUpdateAt()} WHERE id = {$this->getId()}";
-        ConnectionManager::executionQuery($sql);
+        return ConnectionManager::executionQuery($sql);
     }
 
     public function delete()
     {
         $sql = "DELETE FROM product WHERE id = " . $this->getId();
-        ConnectionManager::executionQuery($sql);
+        return ConnectionManager::executionQuery($sql);
     }
 }
