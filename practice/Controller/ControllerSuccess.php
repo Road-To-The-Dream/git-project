@@ -33,9 +33,7 @@ class ControllerSuccess extends Controller
             $price = str_replace(' ', '', $data_product[0]->getPrice());
             $total_price = $price * $_SESSION['amount'];
 
-            $order = new Orders();
-            $order->setAmount($_SESSION['amount']);
-            $data_order = $order;
+            $data_order = $_SESSION['amount'];
 
             $total_price = array([
                 'total_price' => $total_price

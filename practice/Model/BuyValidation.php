@@ -28,6 +28,7 @@ class BuyValidation
             }
         }
 
+        session_start();
         if ($count_empty_errors == 0 && isset($_SESSION['isAuth'])) {
             $this->cleanFieldsAndUpdateOrderInDataBaseStatusDone();
         }

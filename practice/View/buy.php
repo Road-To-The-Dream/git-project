@@ -37,7 +37,7 @@
                                     <div class="col">
                                         <input type="text" class="form-control form-control-md" name="last_name"
                                                id="last_name" placeholder="Фамилия"
-                                               value="<?= $_SESSION['LastName'] ?>" autofocus>
+                                               value="<?= isset($_SESSION['isAuth']) ? $_SESSION['LastName'] : '' ?>" autofocus>
                                         <p class="text-danger ml-2" id="messageLN"></p>
                                     </div>
                                 </div>
@@ -46,7 +46,7 @@
                                     <div class="col">
                                         <input type="text" class="form-control form-control-md" name="first_name"
                                                id="first_name" placeholder="Имя"
-                                               value="<?= $_SESSION['isAuth'] ?>">
+                                               value="<?= isset($_SESSION['isAuth']) ? $_SESSION['isAuth'] : '' ?>">
                                         <p class="text-danger ml-2" id="messageFN"></p>
                                     </div>
                                 </div>
@@ -59,7 +59,7 @@
                                             </div>
                                             <input type="email" class="form-control form-control-md" name="email"
                                                    id="email" placeholder="Email"
-                                                   value="<?= $_SESSION['Email'] ?>">
+                                                   value="<?= isset($_SESSION['isAuth']) ? $_SESSION['Email'] : '' ?>">
                                         </div>
                                         <p class="text-danger ml-2" id="messageEmail"></p>
                                     </div>
@@ -69,7 +69,7 @@
                                     <div class="col">
                                         <input type="text" class="form-control form-control-md bfh-phone" name="phone"
                                                id="phone" data-format="+380 (dd) dd-dd-ddd"
-                                               value="<?= $_SESSION['Phone'] ?>">
+                                               value="<?= isset($_SESSION['isAuth']) ? $_SESSION['Phone'] : '' ?>">
                                         <p class="text-danger ml-2" id="messagePh"></p>
                                     </div>
                                 </div>
@@ -81,7 +81,7 @@
                                         <p class="text-danger ml-2" id="messageCity"></p>
                                     </div>
                                 </div>
-                                <input type="text" name="amount" value="<?= $data['order']->getAmount() ?>" hidden>
+                                <input type="text" name="amount" value="<?= isset($_SESSION['isAuth']) ? $data['order']->getId() : $data['order'] ?>" hidden>
                                 <p class="text-danger ml-2" id="messageAll"></p>
                                 <div class="row d-flex justify-content-end">
                                     <div class="col-auto">
@@ -112,7 +112,7 @@
                                             </div>
                                             <div class="row f-size-name mt-2">
                                                 <div class="col-6">
-                                                    <p><?= $data['order']->getAmount() ?> шт.</p>
+                                                    <p><?= isset($_SESSION['isAuth']) ? $data['order']->getAmount() : $data['order'] ?> шт.</p>
                                                 </div>
                                                 <div class="col-6">
                                                     <p><?= $data['product'][0]->getPrice(); ?> грн</p>

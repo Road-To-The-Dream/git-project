@@ -29,9 +29,7 @@ class ControllerBuy extends Controller
             $price = str_replace(' ', '', $data_product[0]->getPrice());
             $total_price = $price * $_POST['amount'.$_POST['IDProduct']];
 
-            $order = new Orders();
-            $order->setAmount($_POST['amount'.$_POST['IDProduct']]);
-            $data_order = $order;
+            $data_order = $_POST['amount'.$_POST['IDProduct']];
 
             $total_price = array([
                 'total_price' => $total_price
@@ -52,11 +50,12 @@ class ControllerBuy extends Controller
 
     public function validateBuy()
     {
+        session_start();
         if (!isset($_SESSION['isAuth'])) {
-            session_start();
             $_SESSION['IDProduct'] = $_POST['IDProduct'];
             $_SESSION['amount'] = $_POST['amount'];
         }
+
         $objBuyValidation = new BuyValidation();
         echo $objBuyValidation->checkBuy();
     }

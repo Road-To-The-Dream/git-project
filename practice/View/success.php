@@ -23,7 +23,13 @@
         <div class="col-auto align-self-end f-size-total">Спасибо, ваш заказ принят</div>
     </div>
     </p>
-    <p class="mt-4 mb-1 text-secondary f-size-title">Заказ № <?= $data['order']->getId() ?></p>
+    <?php
+    if (isset($_SESSION['isAuth'])) {
+        ?>
+        <p class="mt-4 mb-1 text-secondary f-size-title">Заказ № <?= $data['order']->getId() ?></p>
+        <?php
+    }
+    ?>
     <div class="shadow mb-4 bg-white rounded border border-primary p-2">
         <div class="row">
             <div class="col-3">
@@ -42,7 +48,7 @@
                 </div>
                 <div class="row f-size-name mt-2">
                     <div class="col-6">
-                        <p><?= $data['order']->getAmount(); ?> шт.</p>
+                        <p><?= isset($_SESSION['isAuth']) ? $data['order']->getAmount() : $data['order'] ?> шт.</p>
                     </div>
                     <div class="col-6">
                         <p><?= $data['product'][0]->getPrice(); ?> грн</p>

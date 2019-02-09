@@ -16,7 +16,6 @@ class Controller
         if (isset($_SESSION['isAuth'])) {
             include "View\Template\header_logout.php";
         } else {
-            session_destroy();
             include "View\Template\header_login.php";
         }
     }

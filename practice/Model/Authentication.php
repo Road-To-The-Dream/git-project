@@ -30,6 +30,7 @@ class Authentication
             $obj_pass = new Password($email);
             if ($obj_pass->verifyPasswords($password, $email)) {
                 session_start();
+                session_unset();
                 $this->setValueInSession();
                 return $this->role;
             }
