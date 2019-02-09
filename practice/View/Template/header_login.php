@@ -17,13 +17,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-formhelpers/2.3.0/js/bootstrap-formhelpers.js"></script>
-    <script type="text/javascript">
-        $(window).on('load', function () {
-            var $preloader = $('#p_prldr'),
-                $svg_anm = $preloader.find('.svg_anm');
-            $preloader.delay(500).fadeOut('slow');
-        });
-    </script>
+    <script src="/View/JS/loader.js"></script>
 </head>
 <body>
 <div id="p_prldr">

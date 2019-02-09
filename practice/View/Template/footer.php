@@ -11,7 +11,6 @@
         <div class="row">
             <div class="col text-center">
                 <div class="py-4">
-
                     <div class="row">
                         <div class="col-12">
                             <div class="row">
