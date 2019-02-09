@@ -331,6 +331,9 @@ class Product extends Model
         return ConnectionManager::executionQuery($sql);
     }
 
+    /**
+     * @return null
+     */
     public function selectProductSearch()
     {
         $name = "%".$this->getName()."%";
@@ -338,6 +341,9 @@ class Product extends Model
         return ConnectionManager::executionQuery($sql);
     }
 
+    /**
+     * @return null
+     */
     public function insert()
     {
         $sql = "INSERT INTO product (name, description, price, unit, amount, create_at) 
@@ -352,12 +358,18 @@ class Product extends Model
         return ConnectionManager::executionQuery($sql, $parameters);
     }
 
+    /**
+     * @return null
+     */
     public function updateDecreaseAmount()
     {
         $sql = "UPDATE product SET amount = amount - 1 WHERE id = " . $this->getId();
         return ConnectionManager::executionQuery($sql);
     }
 
+    /**
+     * @return null
+     */
     public function updateIncreaseAmount()
     {
         $sql = "UPDATE product SET amount = amount + {$this->getAmount()}, update_at = {$this->getUpdateAt()} 
@@ -365,6 +377,9 @@ class Product extends Model
         return ConnectionManager::executionQuery($sql);
     }
 
+    /**
+     * @return null
+     */
     public function updateProductForAdmin()
     {
         $sql = "UPDATE product SET 
@@ -377,6 +392,9 @@ class Product extends Model
         return ConnectionManager::executionQuery($sql);
     }
 
+    /**
+     * @return null
+     */
     public function delete()
     {
         $sql = "DELETE FROM product WHERE id = " . $this->getId();
