@@ -73,7 +73,7 @@ class ControllerCatalog extends Controller
         for ($i = 0; $i < count($data_products); $i++) {
             array_push($id_products, $data_products[$i]->getId());
         }
-        
+
         $image = new Images();
 
         return $data_image = $image->selectAllImageForProduct($id_products);
