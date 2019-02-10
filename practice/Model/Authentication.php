@@ -57,6 +57,8 @@ class Authentication
 
     private function setValueInSession()
     {
+        $_SESSION['ua'] = $_SERVER['HTTP_USER_AGENT'];
+        $_SESSION['ip'] = $_SERVER['REMOTE_ADDR'];
         $_SESSION['isAuth'] = $this->info_client[0]->getFirstName();
         $_SESSION['LastName'] = $this->info_client[0]->getLastName();
         $_SESSION['Email'] = $this->info_client[0]->getEmail();

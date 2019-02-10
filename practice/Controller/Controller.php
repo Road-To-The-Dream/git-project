@@ -13,7 +13,7 @@ class Controller
     protected function checkSessionAndStart()
     {
         session_start();
-        if (isset($_SESSION['isAuth'])) {
+        if (isset($_SESSION['isAuth']) && $_SESSION['ua'] == $_SERVER['HTTP_USER_AGENT'] && $_SESSION['ip'] = $_SERVER['REMOTE_ADDR']) {
             include "View\Template\header_logout.php";
         } else {
             include "View\Template\header_login.php";

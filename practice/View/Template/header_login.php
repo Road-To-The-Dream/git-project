@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <link rel="stylesheet" href="/View/CSS/MoveArrowTop.css">
     <link rel="stylesheet" href="/View/CSS/proloader.css">
-    <script type="text/javascript" src="//web-ptica.ru/VRV-files/jquery-2.1.3.min.js"></script>
+    <script type="text/javascript" src="https://web-ptica.ru/VRV-files/jquery-2.1.3.min.js"></script>
     <script type="text/javascript" src="/View/JS/MoveArrowTop.js"></script>
     <script src="/View/JS/Hundler_login.js"></script>
     <script src="/View/JS/Hundler_register.js"></script>
