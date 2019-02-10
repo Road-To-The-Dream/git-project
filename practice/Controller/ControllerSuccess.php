@@ -49,6 +49,21 @@ class ControllerSuccess extends Controller
             ];
         }
 
+        $this->sendEmailAdmin();
+
         View::generate('success', $DBdata);
+    }
+
+    private function sendEmailAdmin()
+    {
+        $text = '<html>' .
+                ' <body>' .
+                '<strong>' . 'Ordered product: ' . '</strong>' . 'http://practice/product/index/' . $_SESSION['IDProduct'] . '<br>' .
+                '<strong>' . 'Name: ' . '</strong>' . $_SESSION['name'] . '<br>' .
+                '<strong>' . 'Phone: ' . '</strong>' . $_SESSION['phone'] . '<br>' .
+                '<strong>' . 'City: ' . '</strong>' . $_SESSION['city'] . '<br>' .
+                ' </body>' .
+                '</html>';
+        SendMessage::send($_SESSION['email'], $text);
     }
 }

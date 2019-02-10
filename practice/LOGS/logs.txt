@@ -1,0 +1,24 @@
+[10-Feb-2019 16:57:23 Europe/Moscow] PHP Fatal error:  Uncaught Error: Call to a member function getValue() on null in C:\OSPanel\domains\practice\View\product.php:293
+Stack trace:
+#0 C:\OSPanel\domains\practice\Controller\View.php(12): require_once()
+#1 C:\OSPanel\domains\practice\Controller\ControllerProduct.php(50): practice\Controller\View::generate('product', Array)
+#2 C:\OSPanel\domains\practice\Router\Router.php(39): practice\Controller\ControllerProduct->index('4', NULL, NULL, NULL)
+#3 C:\OSPanel\domains\practice\index.php(7): practice\Router\Router->routing('/product/index/...')
+#4 {main}
+  thrown in C:\OSPanel\domains\practice\View\product.php on line 293
+[10-Feb-2019 16:58:48 Europe/Moscow] PHP Fatal error:  Uncaught Error: Call to a member function getValue() on null in C:\OSPanel\domains\practice\View\product.php:293
+Stack trace:
+#0 C:\OSPanel\domains\practice\Controller\View.php(12): require_once()
+#1 C:\OSPanel\domains\practice\Controller\ControllerProduct.php(50): practice\Controller\View::generate('product', Array)
+#2 C:\OSPanel\domains\practice\Router\Router.php(39): practice\Controller\ControllerProduct->index('4', NULL, NULL, NULL)
+#3 C:\OSPanel\domains\practice\index.php(7): practice\Router\Router->routing('/product/index/...')
+#4 {main}
+  thrown in C:\OSPanel\domains\practice\View\product.php on line 293
+[10-Feb-2019 17:19:55 Europe/Moscow] PHP Fatal error:  Uncaught Error: Call to a member function getValue() on null in C:\OSPanel\domains\practice\View\product.php:293
+Stack trace:
+#0 C:\OSPanel\domains\practice\Controller\View.php(12): require_once()
+#1 C:\OSPanel\domains\practice\Controller\ControllerProduct.php(50): practice\Controller\View::generate('product', Array)
+#2 C:\OSPanel\domains\practice\Router\Router.php(39): practice\Controller\ControllerProduct->index('8', NULL, NULL, NULL)
+#3 C:\OSPanel\domains\practice\index.php(7): practice\Router\Router->routing('/product/index/...')
+#4 {main}
+  thrown in C:\OSPanel\domains\practice\View\product.php on line 293

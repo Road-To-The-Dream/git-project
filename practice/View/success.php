@@ -48,10 +48,10 @@
                 </div>
                 <div class="row f-size-name mt-2">
                     <div class="col-6">
-                        <p><?= isset($_SESSION['isAuth']) ? $data['order']->getAmount() : $data['order'] ?> шт.</p>
+                        <p class="f-size-total"><?= isset($_SESSION['isAuth']) ? $data['order']->getAmount() : $data['order'] ?> шт.</p>
                     </div>
                     <div class="col-6">
-                        <p><?= $data['product'][0]->getPrice(); ?> грн</p>
+                        <p class="f-size-total"><?= $data['product'][0]->getPrice(); ?> грн</p>
                     </div>
                 </div>
             </div>
@@ -59,7 +59,7 @@
         <div class="container">
             <div class="row d-flex justify-content-end border-top border-secondary mt-3">
                 <div class="col-auto f-size-total align-self-end mt-2">
-                    Итого:
+                    Итого к оплате:
                 </div>
                 <div class="col-auto p-0 text-primary font-weight-bold f-size-title align-self-end">
                     <p class="m-0" id="total_price_product"><?= $data['total_price'] ?></p>
@@ -70,9 +70,16 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-10">
+            <p class="f-size-title text-center">После обработки заявки Вы получите смс уведомление либо с Вами свяжется наш менеджер для подтверждения заказа !</p>
+        </div>
+        <div class="col-1"></div>
+    </div>
 </div>
 <div class="content">
-    <a href="http://practice/main">Перейти к главной странице</a>
+    <a class="f-size-title" href="http://practice/main">Перейти к главной странице</a>
 </div>
 </body>
 </html>

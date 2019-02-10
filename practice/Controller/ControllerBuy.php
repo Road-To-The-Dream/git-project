@@ -54,6 +54,10 @@ class ControllerBuy extends Controller
         if (!isset($_SESSION['isAuth'])) {
             $_SESSION['IDProduct'] = $_POST['IDProduct'];
             $_SESSION['amount'] = $_POST['amount'];
+            $_SESSION['name'] = $_POST['first_name'];
+            $_SESSION['city'] = $_POST['city'];
+            $_SESSION['email'] = $_POST['email'];
+            $_SESSION['phone'] = $_POST['phone'];
         }
 
         $objBuyValidation = new BuyValidation();

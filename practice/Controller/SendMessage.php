@@ -12,7 +12,8 @@ class SendMessage
 {
     public static function send($email, $send)
     {
-        $transport = (new \Swift_SmtpTransport('smtp.gmail.com', 587, 'tls'))
+        $transport = (new
+        \Swift_SmtpTransport('smtp.gmail.com', 587, 'tls'))
             ->setUsername('rpz14.sergey@gmail.com')
             ->setPassword('fhlbc2012');
 
@@ -21,8 +22,7 @@ class SendMessage
         $message = (new \Swift_Message('Shop - LAPTOP'))
             ->setFrom(['rpz14.sergey@gmail.com'])
             ->setTo(['rpz14.sergey@gmail.com'])
-            ->setBody(self::prepareBody($email, $send), 'text/html')
-            ->attach(\Swift_Attachment::fromPath('C:\OSPanel\domains\practice\View\Image\Lenovo ThinkPad Edge E470 (20H1006YRT) (2).jpg'));
+            ->setBody(self::prepareBody($email, $send), 'text/html');
 
         $mailer->send($message);
     }
@@ -32,7 +32,7 @@ class SendMessage
         $body = '<html>' .
                 ' <body>' .
                 '<strong>' . 'My email: ' . '</strong>' . $email . '<br>' .
-                '<strong>' . 'Rest of message: ' . '</strong>' . $send .
+                '<strong>' . 'Body message: ' . '</strong>' . $send .
                 ' </body>' .
                 '</html>';
         return $body;
