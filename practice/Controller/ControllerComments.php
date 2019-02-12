@@ -23,6 +23,7 @@ class ControllerComments
     public function removeComments()
     {
         $comment = new Comment();
-        $comment->delete($_POST['id_comment']);
+        $comment->setId($_POST['id_comment']);
+        $comment->delete();
     }
 }

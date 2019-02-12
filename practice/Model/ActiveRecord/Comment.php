@@ -107,7 +107,7 @@ class Comment extends Model
     /**
      * @return array
      */
-    public function selectAll()
+    public function selectAllByProduct()
     {
         $sql = "SELECT com.id, com.content, com.date_added, com.client_id 
                 FROM comments com
@@ -130,10 +130,29 @@ class Comment extends Model
         return $commentsList;
     }
 
+    public static function selectAllForAdmin()
+    {
+        ConnectionManager::getInstance();
+        $sql = "SELECT id, content FROM comments";
+
+        $info_comments = ConnectionManager::executionQuery($sql);
+
+        $commentList = array();
+
+        for ($i = 0; $i < count($info_comments); $i++) {
+            $objComment = new Comment();
+            $objComment->setId($info_comments[$i]['id']);
+            $objComment->setContent($info_comments[$i]['content']);
+            $commentList[$i] = $objComment;
+        }
+
+        return $commentList;
+    }
+
     public function insert()
     {
         $sql = "INSERT INTO comments (content, date_added, create_at, client_id, product_id) 
-                VALUES (:content,$this->date_added,$this->create_at, $this->client_id, $this->product_id)";
+                VALUES (:content, {$this->getDateAdded()}, {$this->getCreateAt()}, {$this->getClientId()}, {$this->getProductId()})";
         $parameters = array(
             ':content' => $this->content
         );
@@ -142,14 +161,19 @@ class Comment extends Model
 
     public function update()
     {
+        $sql = "UPDATE comments SET content = :content WHERE id = {$this->getId()}";
+        $parameters = array(
+            ':content' => $this->getContent()
+        );
+        return ConnectionManager::executionQuery($sql, $parameters);
     }
 
     /**
-     * @param $id
+     * @return null
      */
-    public function delete($id)
+    public function delete()
     {
-        $sql = "DELETE FROM comments WHERE id = " . $id;
-        ConnectionManager::executionQuery($sql);
+        $sql = "DELETE FROM comments WHERE id = " . $this->getId();
+        return ConnectionManager::executionQuery($sql);
     }
 }

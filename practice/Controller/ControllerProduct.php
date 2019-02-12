@@ -69,7 +69,7 @@ class ControllerProduct extends Controller
     {
         $comments = new Comment();
         $comments->setProductId($id);
-        return $data_comments = $comments->selectAll();
+        return $data_comments = $comments->selectAllByProduct();
     }
 
     /**

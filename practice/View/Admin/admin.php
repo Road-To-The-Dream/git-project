@@ -34,7 +34,7 @@
                                     <a class="nav-link" href="http://practice/admin/client">Client</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="http://practice/admin/comments">Comments</a>
+                                    <a class="nav-link" href="http://practice/admin/comment">Comments</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="http://practice/admin/vendor">Vendor</a>

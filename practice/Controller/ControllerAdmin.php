@@ -8,11 +8,13 @@
 
 namespace practice\Controller;
 
+use practice\Controller\Services\AdminComment;
 use practice\Controller\Services\AdminProduct;
 use practice\Controller\Services\AdminUser;
 use practice\Controller\Services\AdminVendor;
 use practice\Model\ActiveRecord\Category;
 use practice\Model\ActiveRecord\Client;
+use practice\Model\ActiveRecord\Comment;
 use practice\Model\ActiveRecord\Product;
 use practice\Model\ActiveRecord\Vendor;
 
@@ -76,6 +78,16 @@ class ControllerAdmin extends Controller
         }
     }
 
+    public function comment()
+    {
+        if ($_POST['btn'] == "Save") {
+            AdminComment::saveComment();
+        } else {
+            $DBdata = Comment::selectAllForAdmin();
+            $this->index('comment', $DBdata);
+        }
+    }
+
     public function images()
     {
 //        switch ($_POST['btn']) {
@@ -103,21 +115,6 @@ class ControllerAdmin extends Controller
 //            default:
 //                $DBdata = Client::selectAllProductForAdmin();
 //                $this->index('orders', $DBdata);
-//        }
-    }
-
-    public function comments()
-    {
-//        switch ($_POST['btn']) {
-//            case 'Add':
-//                User::addClient();
-//                break;
-//            case 'Save':
-//                User::saveClient();
-//                break;
-//            default:
-//                $DBdata = Product::selectAllProductForAdmin();
-//                $this->index('comments', $DBdata);
 //        }
     }
 
