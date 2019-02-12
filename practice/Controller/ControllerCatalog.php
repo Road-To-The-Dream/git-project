@@ -15,7 +15,7 @@ use practice\Model\ActiveRecord\Vendor;
 
 class ControllerCatalog extends Controller
 {
-    private const AMOUNTPRODUCT = 3;
+    private const AMOUNT_PRODUCTS = 3;
 
     /**
      * @param int $sorting
@@ -60,7 +60,7 @@ class ControllerCatalog extends Controller
     private function getProductsCatalog($sorting, $category, $offset = 0, $vendor = "")
     {
         $products = new Product();
-        return $data_products = $products->selectAll($sorting, $category, $vendor, self::AMOUNTPRODUCT, $offset);
+        return $data_products = $products->selectAll($sorting, $category, $vendor, self::AMOUNT_PRODUCTS, $offset);
     }
 
     /**
@@ -84,8 +84,7 @@ class ControllerCatalog extends Controller
      */
     private function getVendors()
     {
-        $vendor = new Vendor();
-        return $data_vendor = $vendor->selectAll();
+        return $data_vendor = Vendor::selectAll();
     }
 
     /**
@@ -110,7 +109,7 @@ class ControllerCatalog extends Controller
         $amount_product = Product::getAmountProducts($vendor, $category);
 
         $paginator = array();
-        $paginator['amountProduct'] = self::AMOUNTPRODUCT;
+        $paginator['amountProduct'] = self::AMOUNT_PRODUCTS;
         $paginator['currentPage'] = $page;
         $paginator['offset'] = $page * $paginator['amountProduct'] - $paginator['amountProduct'];
         $paginator['pageAmount'] = ceil($amount_product[0]['amt'] / $paginator['amountProduct']);

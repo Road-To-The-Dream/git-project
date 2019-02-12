@@ -53,13 +53,16 @@ class Vendor extends Model
         $this->connectionDB();
     }
 
-    public function selectAll()
+    public static function selectAll()
     {
-        $sql = "SELECT name FROM vendor";
+        ConnectionManager::getInstance();
+
+        $sql = "SELECT id, name FROM vendor";
         $info_vendors = ConnectionManager::executionQuery($sql);
 
         for ($i = 0; $i < count($info_vendors); $i++) {
             $objVendor = new Vendor();
+            $objVendor->setId($info_vendors[$i]['id']);
             $objVendor->setName($info_vendors[$i]['name']);
             $vendor[$i] = $objVendor;
         }

@@ -10,6 +10,7 @@ namespace practice\Controller;
 
 use practice\Controller\Services\AdminProduct;
 use practice\Controller\Services\AdminUser;
+use practice\Controller\Services\AdminVendor;
 use practice\Model\ActiveRecord\Category;
 use practice\Model\ActiveRecord\Client;
 use practice\Model\ActiveRecord\Product;
@@ -49,7 +50,7 @@ class ControllerAdmin extends Controller
             default:
                 $data_product = Product::selectAllProductForAdmin();
                 $data_vendor = $this->getVendorForProduct($data_product);
-                $all_vendor = $this->getAllVendor();
+                $all_vendor = Vendor::selectAll();
 
                 $DBdata = [
                     'product' => $data_product,
@@ -57,6 +58,21 @@ class ControllerAdmin extends Controller
                     'all_vendor' => $all_vendor
                 ];
                 $this->index('product', $DBdata);
+        }
+    }
+
+    public function vendor()
+    {
+        switch ($_POST['btn']) {
+            case 'Add':
+                AdminVendor::addVendor();
+                break;
+            case 'Save':
+                AdminVendor::saveVendor();
+                break;
+            default:
+                $DBdata = Vendor::selectAll();
+                $this->index('vendor', $DBdata);
         }
     }
 
@@ -105,21 +121,6 @@ class ControllerAdmin extends Controller
 //        }
     }
 
-    public function vendor()
-    {
-//        switch ($_POST['btn']) {
-//            case 'Add':
-//                User::addClient();
-//                break;
-//            case 'Save':
-//                User::saveClient();
-//                break;
-//            default:
-//                $DBdata = Product::selectAllProductForAdmin();
-//                $this->index('vendor', $DBdata);
-//        }
-    }
-
     private function getVendorForProduct($data_product)
     {
         $data_vendor = array();
@@ -130,11 +131,5 @@ class ControllerAdmin extends Controller
         }
 
         return $data_vendor;
-    }
-
-    private function getAllVendor()
-    {
-        $obj = new Vendor();
-        return $obj->selectAll();
     }
 }
