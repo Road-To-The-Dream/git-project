@@ -56,6 +56,8 @@ class ControllerSuccess extends Controller
 
     private function sendEmailAdmin()
     {
+        $config = require_once __DIR__ . '\MailConfig.php';
+
         $text = '<html>' .
                 ' <body>' .
                 '<strong>' . 'Ordered product: ' . '</strong>' . 'http://practice/product/index/' . $_SESSION['IDProduct'] . '<br>' .
@@ -64,6 +66,6 @@ class ControllerSuccess extends Controller
                 '<strong>' . 'City: ' . '</strong>' . $_SESSION['city'] . '<br>' .
                 ' </body>' .
                 '</html>';
-        SendMessage::send($_SESSION['email'], $text);
+        SendMessage::send($config, $_SESSION['email'], $text);
     }
 }

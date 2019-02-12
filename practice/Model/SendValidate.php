@@ -71,11 +71,13 @@ class SendValidate
      */
     private function checkErrorsAndSendMail()
     {
+        $config = require_once __DIR__ . '\MailConfig.php';
+
         if ($this->message_about_send[0] == "" && $this->message_about_send[1] == "") {
             $email = $this->cleanFields($this->getEmail());
             $text = $this->cleanFields($this->getText());
 
-            SendMessage::send($email, $text);
+            SendMessage::send($config, $email, $text);
 
             return true;
         } else {
