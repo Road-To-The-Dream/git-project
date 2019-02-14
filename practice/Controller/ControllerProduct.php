@@ -32,7 +32,7 @@ class ControllerProduct extends Controller
 
         $this->checkSessionAndStart();
 
-        $data_product = $this->getProductsCatalog($id);
+        $data_product = $this->getInfoProduct($id);
 
         $data_comments = $this->getComments($id);
 
@@ -61,7 +61,7 @@ class ControllerProduct extends Controller
      * @param $id
      * @return array
      */
-    protected function getProductsCatalog($id)
+    protected function getInfoProduct($id)
     {
         $product = new Product();
         $product->setId($id);
