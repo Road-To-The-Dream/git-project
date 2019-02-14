@@ -154,7 +154,7 @@ class ControllerProduct extends Controller
      */
     private function checkValidateIdProduct($id)
     {
-        if (preg_match('/[A-Za-z]/', $id)) {
+        if (preg_match('/[A-Za-zА-Яа-я]/', $id)) {
             $id = intval($id);
             if ($id == 0) {
                 Redirect::redirect('product/index/1');
