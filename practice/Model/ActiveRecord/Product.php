@@ -341,6 +341,13 @@ class Product extends Model
         return ConnectionManager::executionQuery($sql);
     }
 
+    public static function selectIdProduct($id)
+    {
+        ConnectionManager::getInstance();
+        $sql = "SELECT id FROM product WHERE id = $id";
+        return ConnectionManager::executionQuery($sql);
+    }
+
     /**
      * @return null
      */

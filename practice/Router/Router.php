@@ -11,7 +11,7 @@ class Router
         $controller_name = 'Main';
         $action_name = 'index';
 
-        $id = 0;
+        $id = 1;
         $category = $_GET['category'];
         $vendor = $_GET['vendor'];
         $page = $_GET['page'];

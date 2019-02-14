@@ -15,6 +15,7 @@ use practice\Model\ActiveRecord\Comment;
 use practice\Model\ActiveRecord\Product;
 use practice\Model\ActiveRecord\Client;
 use practice\Model\ActiveRecord\Images;
+use practice\Model\Redirect;
 
 class ControllerProduct extends Controller
 {
@@ -23,6 +24,12 @@ class ControllerProduct extends Controller
      */
     public function index($id = 1)
     {
+        $this->checkValidateIdProduct($id);
+
+        if (!$this->checkExistsIdProductInDataBase($id)) {
+            Redirect::redirect('product/index/1');
+        }
+
         $this->checkSessionAndStart();
 
         $data_product = $this->getProductsCatalog($id);
@@ -127,5 +134,34 @@ class ControllerProduct extends Controller
         $value = new CharacteristicValue();
         $value->setProductId($id);
         return $data_value = $value->selectName($count_parent);
+    }
+
+    /**
+     * @param $id
+     * @return bool
+     */
+    private function checkExistsIdProductInDataBase($id)
+    {
+        if (Product::selectIdProduct($id)) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * @param $id
+     * @return bool
+     */
+    private function checkValidateIdProduct($id)
+    {
+        if (preg_match('/[A-Za-z]/', $id)) {
+            $id = intval($id);
+            if ($id == 0) {
+                Redirect::redirect('product/index/1');
+            } else {
+                Redirect::redirect('product/index/' . $id);
+            }
+        }
+        return true;
     }
 }
