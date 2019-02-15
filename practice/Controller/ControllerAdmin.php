@@ -12,17 +12,22 @@ use practice\Controller\Services\AdminComment;
 use practice\Controller\Services\AdminProduct;
 use practice\Controller\Services\AdminUser;
 use practice\Controller\Services\AdminVendor;
-use practice\Model\ActiveRecord\Category;
 use practice\Model\ActiveRecord\Client;
 use practice\Model\ActiveRecord\Comment;
 use practice\Model\ActiveRecord\Product;
 use practice\Model\ActiveRecord\Vendor;
+use practice\Model\Redirect;
 
 class ControllerAdmin extends Controller
 {
     public function index($DBdata = 0, $view)
     {
-        View::generate('Admin/admin', $view, $DBdata);
+        session_start();
+        if ($_SESSION['role'] == 'admin') {
+            View::generate('Admin/admin', $view, $DBdata);
+        } else {
+            Redirect::redirect('main');
+        }
     }
 
     public function client()
